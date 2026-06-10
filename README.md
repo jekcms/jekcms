@@ -2,7 +2,7 @@
 
 # jekcms
 
-**Self-hosted blog CMS for content teams** — fast, SEO-first, automation-ready.
+**A self-hosted CMS — the plugin-free WordPress alternative.** Fast, SEO-first, automation-ready.
 
 [![Website](https://img.shields.io/badge/site-jekcms.com-2563EB)](https://jekcms.com)
 [![Changelog](https://img.shields.io/badge/changelog-live-059669)](https://jekcms.com/changelog)
@@ -12,9 +12,11 @@
 
 ---
 
-jekcms is a production CMS that runs real content sites — multi-site from one
-codebase, built-in SEO (schema, sitemap, hreflang, AVIF pipeline), n8n
-automation, and a one-time license model. It powers 14+ live sites today.
+jekcms is a self-hosted content management system (CMS): a lightweight,
+modern alternative to WordPress. The things you would normally buy and
+maintain plugins for — SEO, automatic internal linking, an AVIF/WebP media
+pipeline, bulk import, AI-assisted publishing — are built into the core.
+Runs on your own PHP + MySQL hosting, one-time license.
 
 > **Source code is private.** This repository is the public face of the
 > project: product overview + release history. The engine is licensed
@@ -22,18 +24,22 @@ automation, and a one-time license model. It powers 14+ live sites today.
 
 ## Why jekcms
 
-- **One codebase, many sites** — central core, per-site config, isolated data
-- **SEO built in** — Schema.org, multilingual hreflang/canonical, XML sitemaps,
-  AVIF/WebP media pipeline, soft-404-safe routing
-- **Automation-ready** — full REST API + n8n webhook workflows for AI-assisted
-  publishing (Gemini / GPT / Groq)
+- **Plugin-free core** — SEO, media optimization, security and automation are
+  built in, not bolted on with a stack of paid plugins to maintain
+- **SEO built in** — Schema.org/JSON-LD, multilingual hreflang/canonical, XML
+  sitemaps, automatic internal linking, AVIF/WebP media pipeline
+- **Automation-ready** — full REST API + n8n webhook workflows for
+  AI-assisted publishing (Gemini / GPT), plus JSON bulk import
 - **14+ professional themes** — travel, recipes, health, finance, news, tech…
-  fully customizable from the admin panel
+  customizable from the admin panel
+- **Self-hosted & portable** — your code and data on your own hosting, in a
+  standard exportable database; existing WordPress content can be imported
 - **One-time pricing** — no subscription, lifetime updates, runs on your server
 
 ## Live
 
 - Product & pricing — **https://jekcms.com**
+- WordPress alternative — **https://jekcms.com/wordpress-alternative**
 - Demo — **https://jekcms.com/demo**
 - Documentation — **https://jekcms.com/docs**
 - **Release history** — see [`CHANGELOG.md`](./CHANGELOG.md) or the always-current
@@ -44,7 +50,7 @@ automation, and a one-time license model. It powers 14+ live sites today.
 `CHANGELOG.md` in this repository mirrors the live changelog. Both are generated
 from a single source of truth, so they never drift. Every release is committed
 here with its date — this repo's commit history doubles as the project's
-public, timestamped activity log.
+public, timestamped activity log, synced on each release.
 
 ---
 
