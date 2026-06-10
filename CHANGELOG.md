@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.16.24] - 2026-06-10  ·  _Patch_
+**Clearer Product Positioning Copy**
+
+### Improved
+- jekcms is now described the same way everywhere — a next-gen smart CMS that installs on any PHP + MySQL hosting. The vague "self-hosted" label (which could read as if hosting were included) and the inaccurate "plugin-free" label were removed from the homepage, the WordPress-alternative page, site metadata and structured data.
+
+---
+
 ## [2.16.23] - 2026-06-10  ·  _Patch_
 **Category Archive Filter Fix**
 
