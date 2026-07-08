@@ -8,6 +8,825 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.24.0] - 2026-07-08  ·  _Minor_
+**Setup Wizard 2.0: WordPress Migration at Scale & Smart Recovery**
+
+### Added
+- Resumable WordPress migration: progress is saved on the server after every batch — if your browser closes or the connection drops mid-migration, reopening the wizard offers to continue exactly where it left off.
+- Same-server fast path: when WordPress lives on the same hosting account, images are copied directly from disk instead of downloaded over HTTP — large media libraries migrate in a fraction of the time.
+- Smarter server pre-check: disk space, memory limit, upload size and next-gen image support are now verified up front, with plain-language guidance for anything that needs attention — required items block, optional ones just warn.
+- Full WordPress fidelity: pending, private and scheduled posts keep their status, comment reply threads are preserved, comment author links are carried over, and your site logo is localized automatically.
+
+### Improved
+- Wizard actions are protected with a per-session token, and the legacy parameter that allowed re-running installation on an already-installed site has been removed.
+
+### Fixed
+- In-place migrations (same domain) now migrate images correctly: previously same-domain image URLs were skipped as "already local", and removing the old WordPress files afterwards broke every image in your content.
+- Large sites no longer risk server timeouts: imports run in time-budgeted batches with keyset pagination, and comments are imported in batches too — sites with tens of thousands of posts and comments migrate reliably on shared hosting.
+- Tag and category names containing commas are no longer split into separate terms, and long tag lists are no longer truncated.
+- Your existing .htaccess is backed up before installation replaces it, featured images resolve from WordPress metadata instead of unreliable legacy URLs, and stale responsive image attributes pointing at the old site are cleaned up.
+- The setup wizard now speaks your language end to end — every server-side message is available in English and Turkish, and unrecoverable server errors return a readable explanation instead of a blank response.
+
+---
+
+## [2.23.1] - 2026-07-08  ·  _Patch_
+**Managed-Install Indicator Hardening**
+
+### Fixed
+- Centrally-managed installations without the license enforcement stack no longer show a dead-end "Update Available" banner and sidebar badge — the managed-install marker is now honored everywhere the update UI is rendered.
+
+---
+
+## [2.23.0] - 2026-07-08  ·  _Minor_
+**Commerce Core: Updates, License Portability, Plan Upgrades & Support**
+
+### Added
+- License portability from the customer panel: see every site bound to your license, remove one to free the slot, add a new domain, and activate there — moving a license between sites takes a minute and needs no support ticket.
+- Theme and plugin updates now flow through the same signed channel as core: RSA-signed manifest covers every package, one-click theme/plugin updates work in the admin panel, and a publish pipeline ships them (package → verified upload → catalog).
+- Plan upgrades from the customer panel: pay only the difference, your license key stays the same, and your site limit rises the moment payment completes — no re-activation on your sites.
+- Support hardening: ticket confirmation emails to customers, staff notifications on replies, customer file attachments, priority support wired to your plan (Pro+ can open urgent tickets), and contact-form messages now land in the support queue instead of a write-only table.
+
+### Improved
+- Core update notes in the admin panel now show the real release changelog instead of a generic package label.
+- Update access tier is now read from the license record, so plan upgrades take effect on the update channel instantly.
+
+### Fixed
+- License seat operations no longer depend on the execution context — the customer panel, admin, and API all use the same database seam (previously the panel path could fail fatally).
+- Support tables are now guaranteed with self-healing schema (including legacy installs), so the customer portal cannot hit a missing-table error.
+
+---
+
+## [2.22.0] - 2026-07-08  ·  _Minor_
+**Site-Wide SEO Hardening**
+
+### Added
+- Archive pages (category, tag, author, search) now generate their own unique titles, meta descriptions, and Open Graph tags — no more duplicate-title clusters across archives, on every theme, with no theme changes required.
+- Optional tag archives: a new SEO setting turns /tag/ pages into real, sitemap-listed archives (thin tags stay auto-noindexed). Off by default, matching modern crawl-budget guidance.
+- Feeds now declare a WebSub hub, so feed readers and discovery services get real-time update pushes; uploaded images receive an automatic humanized alt text when none is provided.
+
+### Improved
+- The first large content image on each page is now promoted to eager loading with high fetch priority — a direct LCP (Core Web Vitals) win on image-led pages.
+- Meta descriptions no longer cut words in half: automatic descriptions now end on word boundaries with clean punctuation.
+- Retired Google/Bing sitemap-ping calls were removed from the publish path (they only added seconds of dead waiting), and duplicate IndexNow submissions were deduplicated to a single ping per publish.
+- Sitemap accuracy: real last-modified dates in the index, paginated post sitemaps are announced above 50k URLs, and video sitemaps join the index when video posts exist.
+
+### Fixed
+- Structured data is now hardened against content that contains script-closing sequences (JSON_HEX_TAG across all emitters) — schemas can no longer be broken or exploited by post content.
+- Open Graph URLs on archive pages pointed to the homepage; they now match the canonical URL. og:locale now always agrees with the html lang attribute.
+- On subdirectory installs the og:image check failed silently and social cards shipped without an image; the base path is now resolved correctly.
+- Non-existent category and author URLs returned an empty page with HTTP 200 (soft-404); they now return a real 404. Duplicate Recipe/FAQ schema emissions are prevented page-wide.
+
+---
+
+## [2.21.2] - 2026-07-08  ·  _Patch_
+**Stories: Consistent Emoji Art, Reaction Switching & Live Reaction Stream**
+
+### Improved
+- Reactions now use embedded SVG emoji art (Twemoji) instead of OS emojis — the same crisp, modern look on every device and browser, with no external requests.
+- You can now change your reaction: tap a different emoji and the previous one is replaced, with counts adjusted correctly behind the scenes.
+- Earlier reactions are now visible to every viewer as a subtle ambient stream — tiny emojis float up the story while it plays, proportional to how many reactions the slide collected.
+- The Statistics page was redesigned: KPI tiles on top, per-slide view bars, CTR column, emoji-by-emoji reaction breakdowns, inline poll result bars, and a visual completion meter per story.
+
+---
+
+## [2.21.1] - 2026-07-08  ·  _Patch_
+**Instagram-Style Story Reactions**
+
+### Improved
+- Story reactions were redesigned in Instagram's quick-reaction language: six bare emojis (❤️ 😂 😮 😢 🔥 👏) with a springy pop on tap and a shower of emojis floating up the story — no button chrome, no grey chips.
+
+---
+
+## [2.21.0] - 2026-07-08  ·  _Minor_
+**Stories v1.1 — Auto-Stories, Polls, Reactions & Analytics**
+
+### Added
+- Auto-stories: when you publish a post, a story is created automatically from its featured image, title, and link — and retires on its own after a configurable lifetime. Your story strip stays fresh with zero manual work.
+- Poll slides: ask a question with 2–4 answers; visitors tap to vote and instantly see live percentage bars. One vote per visitor, no login required.
+- Emoji reactions (🔥 ❤️ 👏) on every slide — a single tap, cookie-free, one reaction per slide, with a satisfying burst animation.
+- Statistics tab: per-slide views with a 7-day column, link clicks with CTR, reactions, poll result breakdowns, and a completion rate showing how many viewers reach the last slide.
+
+---
+
+## [2.20.2] - 2026-07-08  ·  _Patch_
+**Stories Cache Fix & Cleaner Admin**
+
+### Improved
+- The Stories admin was decluttered: slide editing is now collapsed behind an Edit toggle, add-slide tools are grouped into tidy accordions, and settings use aligned rows with inline inputs.
+
+### Fixed
+- The Stories viewer script is now served with a server-cache bypass, so viewer fixes reach visitors immediately after an update instead of being pinned to a stale cached copy.
+- Closing the viewer is hardened at the style level as well — the close button, Escape, and swipe-down work even if a theme stylesheet interferes.
+
+---
+
+## [2.20.1] - 2026-07-08  ·  _Patch_
+**Stories Viewer Fixes & Inline Links**
+
+### Fixed
+- The story viewer close button (and Escape / swipe-down) now reliably closes the overlay.
+- Slide links are now clickable text instead of a separate button: the caption or card text itself opens the link, and inline links can be placed on any word with [visible text](url) syntax.
+- The story-age indicator in the viewer header now shows explicit units (e.g. "3 h"), so it can no longer be mistaken for the slide duration.
+
+---
+
+## [2.20.0] - 2026-07-08  ·  _Minor_
+**Stories — Instagram-Style Stories for Your Site**
+
+### Added
+- New Stories plugin: a tappable story strip with a full-screen viewer — image, video (MP4/WebM), and text-card slides with auto-advancing progress bars, swipe/keyboard navigation, and hold-to-pause. Mobile-first, dependency-free, and zero page weight when no story is live.
+- Every slide can carry a caption, a custom duration, and a call-to-action link with its own label — turn announcements into traffic.
+- Scheduling and auto-expiry: stories go live and retire on their own; permanent "Highlight" stories pin to the end of the strip. View counts are tracked per story, cookie-free.
+- Placement is yours: choose the strip position (below header, top of content, top of page, above footer, or a custom CSS selector) and target pages from settings — saved per theme, works on every theme without touching theme files.
+- Appearance controls with live preview: circle or vertical-card shape, three sizes, classic gradient / solid / no ring, alignment, optional strip heading, and automatic gray rings for already-watched stories.
+
+---
+
+## [2.19.4] - 2026-07-08  ·  _Patch_
+**License Enforcement Gap-Closing**
+
+### Improved
+- The managed-install marker is now cryptographically signed and domain-bound, so it can no longer be forged to bypass license enforcement. Legitimate managed installs are unaffected.
+- Operators now receive automatic alerts (email digest) for suspected redistribution, license clones, and installs that stopped verifying — detection no longer depends on manually opening a dashboard.
+
+---
+
+## [2.19.3] - 2026-07-08  ·  _Patch_
+**License Enforcement & EULA Hardening**
+
+### Improved
+- License verification now reports the copy's distribution origin, so unauthorized redistribution of a licensed copy is detected automatically and surfaced in the operator's installs dashboard. Legitimate installs are unaffected.
+- The End User License Agreement (EULA) was strengthened with explicit clauses on embedded copy-tracking, its evidentiary value, liquidated damages, and reverse-engineering/rebranding bans; checkout now records EULA acceptance.
+
+---
+
+## [2.19.2] - 2026-07-08  ·  _Patch_
+**Install Integrity Hardening**
+
+### Improved
+- The install-integrity subsystem was strengthened so unauthorized modification or redistribution of a licensed copy is detected and traceable more reliably. Legitimate installs are unaffected.
+
+---
+
+## [2.19.1] - 2026-07-08  ·  _Patch_
+**Traffic & Distribution: Web Push Repair, Single IndexNow Key and Outreach Pacing**
+
+### Improved
+- The weekly opportunity limit in the backlink workspace is now actually enforced: once the week's quota is used, new additions are paused with a clear message — keeping outreach deliberate, exactly as the screen promises.
+- Traffic Health now includes a Web Push row: service-worker reachability, subscriber count and the last send at a glance.
+
+### Fixed
+- Web Push now works end-to-end. The public endpoints the browser needs (service worker, key, subscribe) were never wired into the router, so enabling push could not deliver a single notification. They are now first-class routes, subscriptions are validated before being stored, and sending respects a time budget so a large subscriber list can never stall publishing.
+- One IndexNow key per site. The plugin and the core search pinger each generated their own key, leaving two key files in the site root and duplicate submissions. Both layers now share a single key; changing or regenerating it updates everything and removes the stale key file.
+- Saving a setting after a test or an error no longer shows a generic "Saved." — the real result (test outcome, error detail) is now displayed.
+- If VAPID keys could not be generated during activation, Web Push stayed permanently broken with no way to recover; the settings screen now regenerates them automatically and reports failures clearly.
+
+---
+
+## [2.19.0] - 2026-07-08  ·  _Minor_
+**Social Auto-Publish: Instagram Stories, Discord, Evergreen Re-sharing and Reliability**
+
+### Added
+- Instagram Stories. Every new post can now also be shared as a 9:16 story a few minutes after the feed post — the image is prepared automatically from the featured image. On by default, one toggle in settings.
+- Discord channel publishing. Zero-friction: paste a channel webhook URL and every new post lands in your community as a rich embed (title, description, image, link). No app registration, no OAuth.
+- Evergreen re-sharing. Opt-in: older evergreen posts are periodically re-shared to your text channels for steady archive traffic — age threshold and daily cap are configurable, visual channels are excluded, and the same post is never repeated within the window.
+- Failed-item recovery. The queue screen now lets you retry or delete failed items (one or all) and shows a 7-day per-platform success-rate table.
+
+### Improved
+- Adding a new token-based platform no longer requires editing the admin screen: connection forms are generated from the platform registry.
+- Facebook Page connections now exchange for a long-lived token and refresh themselves — previously the token silently died within hours and the account broke on first publish.
+- The queue is now claimed atomically per item, so overlapping schedulers can never double-publish; stuck items self-recover after 30 minutes, and web-cron runs respect a time budget.
+
+### Fixed
+- Pinterest "Diagnose" results were never written to the log (a status value the table did not accept was silently dropped).
+- Expired connections are now labeled as expired with a clear reconnect signal instead of a generic error.
+- The X/Twitter authorization no longer requests a media permission the adapter never uses.
+
+---
+
+## [2.18.34] - 2026-07-07  ·  _Patch_
+**Admin Raw-Key Repair: 249 Missing Translations Restored**
+
+### Fixed
+- Several admin pages showed raw translation keys instead of text (e.g. "admin_blog_posts.th_title") — in both languages. 249 missing dictionary entries were authored in Turkish and English across the blog posts, licenses, email templates, order detail, invoices, backups and login screens; a new linter check now blocks any future use of an undefined key.
+- The theme catalog page and the sidebar's First-Install Package label were hardcoded in Turkish; they now follow the admin language.
+- The invoices screen crashed on load: its overdue-count query referenced a column that never existed (due_at → due_date).
+
+---
+
+## [2.18.33] - 2026-07-07  ·  _Patch_
+**Customer Portal Fully Bilingual + a Language-Leak Shield**
+
+### Improved
+- A new internal language-leak linter guards every future change: any new user-facing string that is not born as a TR/EN pair is caught before release, so this class of bug cannot silently return.
+
+### Fixed
+- Turkish text no longer leaks into the English customer portal (and vice versa). Every remaining single-language page was made properly bilingual: security settings, email verification, forgot/reset password, checkout and its success/cancel pages, support tickets, downloads and order details.
+- The setup wizard now speaks English. The first screen a new buyer sees was almost entirely Turkish; it is now fully bilingual with a TR/EN switcher, follows the browser language by default, and all of its error messages are translated too.
+
+---
+
+## [2.18.32] - 2026-07-07  ·  _Patch_
+**Site Name Signal Completed Across All 14 Themes**
+
+### Fixed
+- Every theme's homepage now marks the site name as an H1 heading — completing all four signals Google documents for choosing the site name shown in search results, so Google stops falling back to the bare domain. The heading renders with zero visual change; inner pages keep their content H1. (Personal shipped in the previous release; the remaining 13 themes are covered now.)
+- The Minimalist theme's header brand was hardcoded to a specific site name; it now follows the Site Name setting like every other theme.
+- The Finance theme showed no brand at all when no logo was uploaded, and its homepage detection could mislabel search or paginated pages; both were corrected.
+- The Recipes theme rendered its brand as an H1 on every page, giving articles two H1s; the brand is an H1 on the homepage only now.
+
+---
+
+## [2.18.31] - 2026-07-07  ·  _Patch_
+**Personal Theme: Site Name Signal Completed for Google (Homepage H1)**
+
+### Fixed
+- Google could fall back to showing your domain instead of your site name in search results. The Personal theme's homepage had no H1 heading — one of the four signals Google documents for choosing a site name (WebSite structured data, og:site_name, title, and a prominent heading). The header brand now renders as an H1 on the homepage only, with identical visual styling; inner pages keep their content H1.
+
+---
+
+## [2.18.30] - 2026-07-07  ·  _Minor_
+**Buying Goes Live: Pricing-Page Checkout and a Discount Campaign Manager**
+
+### Added
+- The pricing page now sells. Every plan's button opens the secure checkout with that plan preselected; signed-in customers get their email and name prefilled, and the checkout language follows the site language.
+- Discount campaign manager. Define campaigns in the admin — percentage or fixed amount, date windows, redemption limits, per-plan restrictions and special-day presets (New Year, Black Friday, and more). Campaigns sync to the payment provider automatically; the pricing page shows a campaign banner and can apply the code at checkout without the customer typing anything.
+
+### Fixed
+- Plan prices defined in code had drifted from the public pricing page; they are aligned again.
+
+---
+
+## [2.18.29] - 2026-07-07  ·  _Minor_
+**International Payments via Polar, Instant License Delivery, and an Account Security Overhaul**
+
+### Added
+- International card payments via Polar (Merchant of Record). Every paid Polar order automatically creates the customer account, issues the license key, generates the invoice and emails the key — no manual steps. Deliveries are idempotent, webhook signatures are verified, and the checkout thank-you page shows the license key the moment it is ready.
+- Email verification for customer accounts. New registrations receive a verification link (sign-in is never blocked); changing your email re-requires verification of the new address and notifies the old one. A new resend-verification page replaces links that previously led nowhere.
+- Account deletion (GDPR/KVKK). Customers can permanently anonymize their account from the Security page with password confirmation; order and invoice records are retained as required by law.
+- Real login history. The Security page now shows actual sign-in attempts (date, IP, outcome) — the old list was wired to a table nothing ever wrote to.
+
+### Improved
+- Brute-force protection is now database-backed. The old limiter counted attempts inside the visitor's own session, so clearing cookies reset it; limits are now enforced per email and per IP across sessions, and every attempt is audit-logged.
+- Changing your password now confirms it by email and refreshes the session; the non-functional "Remember me" checkbox was removed (sessions already persist for 30 days).
+
+### Fixed
+- The email verification page queried columns that never existed in production, so verification links could not work; it now uses the real schema.
+- Viewing a support ticket linked to an order could fail due to a query against a non-existent table.
+- Site-validation bots of payment providers were blocked by an over-broad user-agent filter, which made provider onboarding fail with "could not reach this URL".
+
+---
+
+## [2.18.28] - 2026-07-07  ·  _Patch_
+**Sign-In Flow Streamlined: Session-Aware Header and Google-Only Social Login**
+
+### Improved
+- The site header now recognizes signed-in customers. After signing in or registering, the "Sign In / Get Started" buttons are replaced with "Dashboard" and "Sign Out" — on desktop and in the mobile menu.
+- Signing in no longer pulls you away from the page. Logging in or registering from the site keeps you where you were instead of forcing a redirect to the customer dashboard; Google sign-in returns you to the page you started from.
+- Your language choice follows you into the customer portal. Browsing the site in English opens the dashboard in English after sign-in; browsing in Turkish opens it in Turkish.
+- Social sign-in is now Google only. The rarely used GitHub, Facebook and Microsoft sign-in options were removed from the sign-in modal, the portal pages and the admin settings.
+- Signing out now returns you to the homepage instead of the login screen.
+
+### Fixed
+- Google sign-in errors are now shown. The login page listened for the wrong URL parameter, so OAuth errors (cancelled sign-in, misconfiguration, inactive account) were silently swallowed; all error codes now surface with bilingual messages.
+- The registration modal accepted submissions without the Terms of Service checkbox being ticked; acceptance is now enforced.
+- Sign-in and registration API calls resolved to the wrong path on subfolder installations; they now respect the site base path.
+- Password reset now works on installations missing its table. The password_resets table only existed in a development migration; when absent, the forgot-password form crashed. The table now self-heals on first use, and a mail delivery failure no longer breaks the flow.
+- Login error messages mixed English and Turkish regardless of the chosen portal language; they now follow it.
+
+---
+
+## [2.18.27] - 2026-07-05  ·  _Patch_
+**Content Tables Are Now Styled in the Personal Theme**
+
+### Fixed
+- Tables inside articles now have proper borders, a header row and spacing. The Personal theme had no table styling, so tables rendered as plain unbordered columns that were hard to read. They now have cell borders, a shaded header row, comfortable padding, zebra striping and horizontal scrolling on small screens.
+
+---
+
+## [2.18.26] - 2026-07-05  ·  _Patch_
+**Schema Gaps Closed for Voting, AI SEO Analysis and IP Blocking**
+
+### Fixed
+- Article voting now works. The up/down vote feature (used by the crypto theme) wrote to a post_votes table and a posts.votes column that the schema never created — and an old migration even defined the table with mismatched column names. The table and column are now part of the schema, self-heal on existing sites, and the stale migration was corrected.
+- AI SEO analysis is now saved. The editor's AI analysis wrote to seo_meta columns (ai_score, ai_analysis, ai_analyzed_at) that did not exist, so results were never persisted. The columns were added to the schema and self-heal on existing sites.
+- The IP block list has a proper schema table. Previously it only existed when an admin happened to open the Security Center; it is now part of the core schema and self-heals.
+
+---
+
+## [2.18.25] - 2026-07-05  ·  _Patch_
+**Schema Consistency: Silent Database Errors Fixed + Drift Guard**
+
+### Improved
+- A schema drift guard now runs in the release pipeline. A new tool cross-checks every table/column written by the code against the schema and plugin definitions; any newly introduced mismatch fails the release, preventing this class of fresh-install error from recurring.
+
+### Fixed
+- Comment replies and API comment creation now save reliably. Both wrote to a column name (ip_address) that did not exist on the comments table (the correct column is author_ip), so these paths failed on every install. They now use the correct column.
+- Automatic IP blocking now actually blocks. The security module wrote a non-existent blocked_at column, so blocks were silently dropped; it now uses the correct column.
+- Theme switching and settings saves are safe on fresh installs. The settings table gained created_at/updated_at columns (added to the schema and self-healed on existing sites) — code wrote these timestamps but the fresh-install schema lacked them.
+- ZeroTrack registers correctly on activation. Its plugin record used the wrong column names (active/core instead of is_active/is_core).
+
+---
+
+## [2.18.24] - 2026-07-05  ·  _Patch_
+**Log and Data Hygiene: A Self-Limiting CMS**
+
+### Improved
+- Automatic maintenance now covers every accumulating store. Raw view records (180 days), auto-link logs, SEO ping logs and expired Google Console cache entries are pruned on the existing maintenance schedule, and oversized log files (including php-errors.log) are rotated centrally with 30-day cleanup of old rotations.
+
+### Fixed
+- The database error log can no longer grow without bound. It now rotates at 5 MB with a single backup kept, matching the application log. A recurring cron error had been able to grow this file indefinitely.
+- Two chronic error sources were silenced at the root. The webhook queue self-heals missing api_tokens columns on older installs (and the webhook feature starts working), and the AI bulk worker skips quietly when its table is not installed — both had been writing an error entry every minute.
+
+---
+
+## [2.18.23] - 2026-07-05  ·  _Patch_
+**ZeroTrack: Interactive Trend Chart and Full Localization**
+
+### Improved
+- The trend chart was redesigned from scratch. The bare line chart is now an interactive bar chart: hovering highlights the bar and its neighbors, shows a tooltip with views and unique visitors, and updates the live value in the header. Days with no data render as zero instead of being skipped, and the "Today" range now shows an hourly breakdown.
+- KPI cards now compare against the previous period. Page views, unique visitors and sessions show a rise/fall percentage next to the label.
+- The whole plugin follows the admin design system and language. Every label on the dashboard and settings pages is fully localized (Turkish admin shows Turkish everywhere), and hard-coded light-theme colors were replaced with design tokens so dark mode renders correctly. Top pages gained proportional usage bars.
+
+---
+
+## [2.18.22] - 2026-07-05  ·  _Patch_
+**Google Console: Consistent Reports and a Permanent-Connection Guide**
+
+### Improved
+- Search Console and Analytics now report the same date window. GA4 requests previously ended "today" while Search Console ended yesterday, so overview KPIs compared different periods. Both now use the identical range, making trends directly comparable.
+- Keyword and page tables show up to 50 rows (previously 20), and indexing-coverage scans now cover up to 2,000 URLs (previously 500) in line with Google's URL Inspection daily quota.
+- Reconnect banner now explains the most common cause. When Google drops the connection with invalid_grant — typically because the OAuth app was left in "Testing" mode, which expires grants after 7 days — the panel says so and walks through publishing the app to production for a permanent connection. The setup guide covers this too.
+- Search Console site addresses are normalized on save. Entering a bare domain becomes a proper domain property (sc-domain:), and URL-prefix properties get their required trailing slash — malformed values used to fail silently with empty reports.
+
+---
+
+## [2.18.21] - 2026-07-05  ·  _Patch_
+**Newsletter Result Pages Work on Every Theme, in Both Languages**
+
+### Fixed
+- Newsletter subscribe/confirm/unsubscribe pages no longer crash on non-Personal themes. These pages called a Personal-theme helper directly, which caused a server error on any other active theme. They now use a theme-safe helper and render their texts in the site language (Turkish or English) instead of hard-coded Turkish.
+
+---
+
+## [2.18.20] - 2026-07-05  ·  _Patch_
+**Visible Spam Protection, Reliable Newsletter Signup, Consistent Plugin Naming**
+
+### Improved
+- The built-in spam filter is now visible and explainable. The Comments screen links directly to Spam Protection settings, flagged comments show their spam score with the reasons that triggered it, and the spam tab offers a one-click "Not Spam" action. The filter itself (link limits, keyword/IP/e-mail blacklists, submit-speed and repeat-offender checks) was already scoring every comment behind the scenes.
+- Plugin names and ordering are consistent everywhere. The sidebar now uses the same localized plugin names as the Plugins screen, and both lists are sorted alphabetically by the displayed name.
+- Theme customizer is fully localized. Tab and theme descriptions now appear in Turkish on Turkish admin panels, and the page title follows the admin language.
+
+### Fixed
+- Newsletter signup now works from every theme. Several themes posted their subscribe forms to endpoints that did not exist (/newsletter, /api/v1/newsletter/subscribe), so signups silently failed. Both endpoints now reach the newsletter plugin, and the API works in sub-directory installs too.
+- Fresh installs no longer break on comments or subscribers. The installer schema was missing the spam-score columns on comments and the subscribed_at column on newsletter subscribers; both are now in the schema and self-heal on existing sites.
+- New-post notification e-mails render correctly. The notification campaign stored post data as raw JSON that would have been printed into the e-mail; the sender now resolves it into the template placeholders.
+- Crypto theme footer now obeys the customizer. The "Brand blurb" field is actually rendered, the social-icons toggle works, the site name is no longer hard-coded, and the footer subscribe form posts to the correct endpoint.
+
+---
+
+## [2.18.19] - 2026-07-05  ·  _Patch_
+**Instant Admin Asset Updates, Dropdown Clipping Fix**
+
+### Fixed
+- Admin CSS/JS updates now reach the browser immediately. Stylesheet and script URLs are versioned by file modification time instead of the CMS version number, so hotfixes no longer require a hard refresh or a version bump to become visible.
+- Custom dropdown panels are no longer clipped by their card. When a select panel (such as the Author picker in the post editor) is open, its containing card temporarily allows overflow so the full option list is visible.
+
+---
+
+## [2.18.18] - 2026-07-05  ·  _Patch_
+**Author Picker on the Post Editor, Sentence-Aware Excerpts**
+
+### Added
+- Posts can now be assigned to a different author from the editor. A new Author dropdown in the Publish box lists the site's writers; the change is saved with the post. Autosave and quick-edit paths are unaffected.
+
+### Fixed
+- Auto-generated excerpts no longer cut off mid-phrase. The generator now prefers the last full sentence within the window, ignores version-number dots (like "GPT-3.5"), is UTF-8 safe for Turkish characters, and inserts spaces where block tags met. Existing truncated excerpts across all sites were regenerated from content.
+
+---
+
+## [2.18.17] - 2026-07-04  ·  _Minor_
+**Pro Theme Customizer: Font Previews, Import/Export, Turkish UI, Deeper Options**
+
+### Added
+- Theme settings can now be exported and imported as JSON — move a finished design to another install in one click, with schema-validated import, cross-theme confirmation and a one-click "Reset to defaults" that preserves footer-builder data.
+- Font pickers became real font pickers. A central 38-family library backs every font field (empty dropdowns are gone), the current font sits selected at the top, every option renders in its own typeface, and a live preview line updates as you browse.
+- Deeper per-theme options, all wired to real output: the Personal theme gained homepage controls (hero slide count, popular section and count, categories toggle, posts-per-page for the latest grid) and a Post Page tab (sidebar, author card, related posts and count, comments) — every switch verified to change the rendered page.
+
+### Improved
+- The customizer speaks Turkish now. Over a hundred remaining English field and tab labels across all theme schemas were translated for Turkish admin sessions.
+
+---
+
+## [2.18.16] - 2026-07-04  ·  _Patch_
+**Fresh-Install Audit: Theme Switching, Customizer and Setup Hardened End-to-End**
+
+### Fixed
+- A full customer-journey audit (installer → theme switching → customizer → import) fixed nine fresh-install bugs. Subdirectory installs no longer hit an infinite redirect on About/legal pages; single-post pages now receive author data, so the News theme no longer crashes; the Tech theme's missing helper, the Finance theme's missing comments partial, and Health theme null-image crashes are all resolved.
+- Search works on every host now. Reusing one SQL placeholder twice broke search with an SQL error on servers where PDO prepares are not emulated — fixed in the core query builder, the Health theme and the quiz plugin.
+- Saving the Theme Customizer no longer wipes other settings. It used to replace the theme's whole customization record, silently deleting footer-builder data; it now updates only its own fields. The footer builder likewise activates only on themes that render it, instead of corrupting other themes' footer settings.
+- Setup polish: application logging now creates its log directory on first use (it was silently dead on fresh installs), broken absolute-path ErrorDocument rules were removed, and session ini warnings on first requests are gone.
+
+---
+
+## [2.18.15] - 2026-07-04  ·  _Patch_
+**Media Library: Click-to-Edit Restored, Smarter Alt Text Editing**
+
+### Improved
+- Alt text editing got a live character counter and guidance (ideal ≤125 characters) so image SEO fields are filled properly, not just filled.
+
+### Fixed
+- Clicking an image in the media library opens its detail/edit screen again. The lightbox was capturing every click on image cards, so the screen where alt text, caption and description are edited had become unreachable. Zooming now has its own magnifier button on the card (and clicking the preview on the detail page).
+
+---
+
+## [2.18.14] - 2026-07-04  ·  _Patch_
+**Ad Placements Standardised Across All Themes, Honest Slot Panel**
+
+### Improved
+- Every theme now renders the standard ad placement set. An audit found the personal and trends themes rendered no ad slots at all, health and recipes only one or two — ad code pasted in the admin simply never appeared. All themes now support: below navigation, above/inside/below the article, between archive cards and above the footer.
+- The ad manager now tells the truth per slot. Each slot card shows whether the active theme actually renders it ("In theme" / "Not in theme" badge), and the four legacy slots that no current theme uses are hidden unless they hold saved code.
+
+---
+
+## [2.18.13] - 2026-07-04  ·  _Patch_
+**Hotfix: Footer Customizer Save No Longer Rejected**
+
+### Fixed
+- The real root cause of the footer customizer's "CSRF token mismatch" was a field-name mismatch, now fixed at the core. The form emits its token as `_token` while the handler read `csrf_token` and passed an empty string, which blocked the fallback lookup — so every save was rejected even in a fresh session. The validator now treats an empty token as "not provided" and falls back to all accepted field names; invalid tokens are still rejected.
+
+---
+
+## [2.18.12] - 2026-07-04  ·  _Patch_
+**Footer Customizer Redesign, Newsletter Styling, Session-Lifetime CSRF**
+
+### Improved
+- The footer customizer got a visual overhaul. Templates are now picked from illustrated layout thumbnails instead of a text list, sections follow a consistent card design, and a sticky save bar keeps the action always in reach.
+- The footer newsletter block is now fully configurable. Besides the title and intro, you can set the input placeholder, the button text and a display style — plain, boxed card or accent-tinted card — with matching styles for dark footers and mobile.
+
+### Fixed
+- "CSRF token mismatch" on save is gone. Security tokens used to hard-expire after one hour, so any admin form left open longer — the footer customizer, a long post edit — died on submit. Tokens are now valid for the whole login session, per the standard per-session pattern.
+
+---
+
+## [2.18.11] - 2026-07-04  ·  _Patch_
+**One-Click Edit for Every Legal Page**
+
+### Improved
+- Every row in the legal page status table now has an Edit button. For pages still served from the theme's built-in template, clicking Edit creates the page from the ready-made text using your site settings and opens the editor immediately — no detour through the generator form. The explanatory text on the screen was also rewritten in plain language.
+
+---
+
+## [2.18.10] - 2026-07-04  ·  _Patch_
+**Pages Hub With Inner Navigation, Legal Pages Finally Editable at a Glance**
+
+### Improved
+- The Pages screen is now a proper hub with an inner sidebar — the same pattern as Settings. Modules are grouped under headings: Pages (all pages, new page) and Legal Pages (status & edit, generator). The old single-scroll screen that mixed the generator, a status table and a legacy record list into one confusing page is gone.
+- Every legal page now has a clear path to editing. Pages backed by a CMS record show an Edit button; pages currently served from the theme's built-in template are labelled "theme default" and offer a one-click Create action that jumps to the generator with that page preselected.
+
+### Fixed
+- Hover row actions (Edit | View | Trash) in content lists are left-aligned under the title again. A shared action-cell style had pushed them to the right edge of the title column in posts, categories, tags and quiz lists.
+- The legacy legal-records block was removed from the CMS admin. It edited a marketing-site table that has no effect on a CMS site's public pages, which made the screen genuinely misleading.
+
+---
+
+## [2.18.9] - 2026-07-04  ·  _Patch_
+**Category Slug Renames Get Automatic 301s, 404 Logging Heals Itself**
+
+### Added
+- Renaming a category slug now creates a 301 redirect automatically — in both the admin panel and the REST API. Combined with v2.18.8's post-slug redirects, no rename anywhere in jekcms can silently orphan an indexed URL anymore.
+
+### Fixed
+- 404 logging works on every install now. The not-found log table was only created when an admin first opened the Redirects page; on sites where that never happened, every 404 was silently discarded and the "suggest redirect" list stayed empty forever. The logger now creates its own table on first use.
+
+---
+
+## [2.18.8] - 2026-07-04  ·  _Patch_
+**Automatic 301 on Slug Change, Legacy URL Guard, Cleaner Crawl Budget**
+
+### Added
+- Renaming a published post now creates a 301 redirect automatically. Previously every slug change silently left the old URL as a 404 in Google until someone noticed and added a manual redirect — a fleet-wide Search Console audit found exactly this pattern in the wild. The redirect is created on save, existing chains pointing at the old slug are re-pointed at the new one, and duplicate sources are never inserted.
+- Built-in guard for legacy WordPress URL families. Retired Turkish tag archives (/etiket/…) now return 410 instead of soft-404 redirects, taxonomy AMP leftovers (/author/…/amp, bare /amp, /amp/page/N) redirect in a single hop, so migrated sites stop accumulating Search Console errors.
+
+### Improved
+- Crawlers no longer waste budget on write-only endpoints. robots.txt now disallows the analytics beacon (/zt-track) and webhook paths, which previously showed up as "other 4xx" noise in Search Console.
+
+---
+
+## [2.18.7] - 2026-07-04  ·  _Patch_
+**Search Console Cleanup: Retired Tag URLs Are Now Crawlable (410)**
+
+### Fixed
+- Retired /tag/ URLs can now leave Google's index. robots.txt disallowed /tag/ while the pages correctly returned 410 Gone — but a crawler that is blocked can never see the 410, so hundreds of dead tag URLs stayed frozen in Search Console error reports indefinitely. The disallow is removed; Google can now crawl the 410 responses and drop the URLs for good.
+
+---
+
+## [2.18.6] - 2026-07-02  ·  _Patch_
+**Comprehensive Legal Pages, Unified Footer Credit, Author Card Fix**
+
+### Improved
+- Legal pages are now comprehensive and professional out of the box. The default Privacy Policy, Terms of Service, Cookie Policy and Disclaimer texts were rewritten editorially in both languages: data categories, legal bases, retention periods, Google AdSense/analytics disclosures with opt-out links, a cookie category table, permitted-use and liability sections. Sites that publish their own legal pages are unaffected — defaults apply only when no custom page exists.
+- One footer credit everywhere. The footer bottom bar now reads "Powered by jekcms" in every language — the former Turkish translation of the credit was dropped in favor of a single brand-standard phrase.
+
+### Fixed
+- Legal pages are readable on dark-bodied themes. The universal legal template had no background of its own, so themes with a dark page body rendered near-invisible headings on a dark surface. The template now pins an explicit light panel with fixed text colors, plus proper list and table styling.
+- Author card uses its full width. The author bio in the crypto theme was capped at 480px, wrapping sentences into a cramped column next to the avatar; the cap is removed.
+
+---
+
+## [2.18.5] - 2026-07-02  ·  _Patch_
+**Crypto Theme: Legacy TOC Cleaner No Longer Swallows Article Bodies**
+
+### Fixed
+- Articles no longer render truncated. A legacy WordPress-import cleaner in the single template removed inline tables of contents with overly broad patterns: any H2 merely containing the word "içerik" — e.g. "AI content production" — triggered deletion of everything up to the next list, silently cutting up to 90% of an article at render time (the database content was intact). The cleaner now only scans the first 3000 characters, matches exact TOC phrases, and caps the removal window.
+
+---
+
+## [2.18.4] - 2026-07-02  ·  _Patch_
+**Crypto Theme: Full-Width Layout and Styled Content Tables**
+
+### Improved
+- Homepage post grid and single articles now align with the header width. The "All Posts" section and the article layout previously used a narrower container, and the article body was additionally capped at 736px — both now follow the site's full 1400px line, so wide screens are actually used.
+
+### Fixed
+- Content tables render properly in articles. Table styling was scoped only to static pages, so tables inside posts appeared bare (no borders, no header background). Article bodies now get the same professional table look, with zebra rows and horizontal scrolling on mobile.
+
+---
+
+## [2.18.3] - 2026-07-02  ·  _Patch_
+**Winning Content: Traffic Trends on Your Dashboard**
+
+### Added
+- Winning Content card on the dashboard. Your top 5 posts of the last 30 days with rise/fall indicators, powered by the built-in privacy-first ZeroTrack analytics — no external service, no cookies. Appears automatically once traffic data exists.
+- Content Trend report in ZeroTrack. A rising/falling comparison (last 30 days vs the previous 30) at post level; falling posts are labelled as refresh candidates, so you know exactly which articles need attention before rankings slip further.
+
+---
+
+## [2.18.2] - 2026-07-02  ·  _Patch_
+**Uniform Row Actions Across All SEO Lists**
+
+### Improved
+- List action buttons follow one clean standard. In Heading Fixer, Content SEO, Content Optimization and Orphan Content, row actions (Preview / Fix / Save / Edit) no longer wrap onto multiple lines or mix button styles — they sit in a single compact row with a consistent look; secondary validator shortcuts (Rich Results, Schema) are now subtle links instead of heavy buttons.
+- Less noise in the Content SEO list. The redundant content-type label before each slug was removed; pages are marked with a small badge only when relevant.
+
+---
+
+## [2.18.1] - 2026-07-02  ·  _Patch_
+**Advanced SEO Panel v2: One Navigation, Auto-Linked Orphans, Brand-Safe Headings**
+
+### Added
+- Orphan content fixes itself. The Orphan Content module gained an Auto-Link action: for every post with no inbound internal links, related posts (same category first) are scanned and a natural internal link pointing at the orphan is injected automatically — no manual editing, with the full markup-safety net and at most one new link per source post.
+- SEO Health Check is now tabbed. Identity, AdSense, content, files and HTTP checks each get their own tab with issue-count badges — no more scrolling through long card columns.
+
+### Improved
+- One navigation, zero duplication. The Advanced SEO panel sidebar is now grouped (Overview, Content, Images, Links, Site) and each optimizer tab is its own module; inside the panel the old duplicate top tab bar is gone, and confusingly-named entries were renamed (Image SEO vs. Featured Images).
+- Redirects & 404 opens clean. The module previously rendered the whole Settings page — including its own settings menu — inside the panel; it now opens as a standalone tool.
+- Year Updater and Content Optimization follow the design line. Cards, tables and buttons match the rest of the admin; action buttons no longer wrap into circle-shaped blobs, and the Edit button got its missing style.
+
+### Fixed
+- Technical terms are no longer "fixed" into broken casing. Heading checks flagged titles like "cPanel Guide" or "iptables and ufw" as lowercase errors, and title-case would mangle them (cPanel → Cpanel). Brand-like words — mixed-case names, terms with digits or dots, and a broad list of lowercase tool names — are now left untouched in both detection and repair; Turkish conjunctions (ve, ile, için…) also stay lowercase in title case, in both languages.
+
+---
+
+## [2.18.0] - 2026-07-02  ·  _Minor_
+**Advanced SEO Overhaul: Internal Linking Repaired, Turkish-Aware Matching, New Modules**
+
+### Added
+- Turkish-aware internal linking. On Turkish sites the linker now recognizes inflected forms ("e-posta pazarlamasında" matches "E-posta Pazarlama"), and posts' multi-word tags become anchor candidates — noticeably more natural internal links, with the same markup-safety net that reverts anything suspicious.
+- Orphan Content module. Lists published posts with no inbound internal links and uncategorized posts, with linking-candidate suggestions from the same category.
+- Bulk meta editor. Edit meta title/description inline in the post list with live character counters; scores recompute on save. CSV export is one click away.
+- The panel now surfaces SEO Health Check, Redirects & 404 log and the SERP Identity test — previously hidden in Settings.
+
+### Fixed
+- Posts that matched no links are no longer excluded from future scans. A "processed, no links" marker made such posts invisible to the incremental scan forever and miscounted the panel statistics; they are now retried as your library grows, and the stats distinguish processed, linked and awaiting posts.
+- Internal-linker silence is over. Every skipped, failed or successful on-publish linking attempt is now recorded to a dedicated log, so "why did this post publish without links?" is answerable — a read-only diagnostic page shows settings truth, log distribution and a live dry-run.
+- The SEO panel no longer breaks inside its frame. Saving a form could render a second admin shell inside the panel, and edit links trapped you inside the frame; both fixed.
+- Turkish content scores are measured correctly. Word counting was not UTF-8 aware, so Turkish posts scored artificially low; generated meta titles also respect your title separator and site name now.
+- All SEO tools require administrator rights and use a single heading-hierarchy engine, ending inconsistent results between modules.
+
+---
+
+## [2.17.6] - 2026-07-02  ·  _Patch_
+**No More Style Flash on Inner Pages, Analytics Beacon Restored**
+
+### Fixed
+- Pages no longer flash unstyled for a split second. The Personal theme async-loaded its full stylesheet while the inline critical CSS did not fully cover any page type; navigation briefly rendered bare. The stylesheet now loads normally — it is same-origin, versioned and immutable-cached, so the change costs nothing after the first visit.
+- ZeroTrack page views are recorded again. The tracker posted to a plugin route that 404'd in production; it now uses the standalone /zt-track endpoint that works independently of plugin bootstrap.
+- Cloudflare Insights no longer triggers console CSP errors. Its beacon origin was missing from the Content-Security-Policy script allowlist.
+
+---
+
+## [2.17.5] - 2026-07-02  ·  _Patch_
+**Zero Validator Errors: noscript Guard & Footer Style Leftovers**
+
+### Fixed
+- The font-defer optimizer no longer touches noscript fallbacks. It could wrap the fallback link inside an existing noscript block, producing nested noscript markup and a dead stylesheet for no-JS visitors.
+- Personal footer layouts dropped their duplicate legal bar. All eight variants carried a leftover legal-links block and an in-body stylesheet from before the standard bottom bar; links were doubled and the markup failed validation.
+
+---
+
+## [2.17.4] - 2026-07-02  ·  _Patch_
+**Three Gaps Caught by the New Live Signal Checks**
+
+### Fixed
+- Health theme now emits the WebSite/Organization schema. Its header never called the central schema emitter, so sites on this theme published no structured data — invisible to Google's site-name and rich-result systems.
+- Personal theme search pages are noindexed again. The header skipped the robots-meta helper entirely, leaving search results indexable.
+- News-theme language attribute reads the correct setting. A legacy key left Turkish sites reporting lang="en".
+
+---
+
+## [2.17.3] - 2026-07-02  ·  _Patch_
+**Theme Integrity: Every Theme File Now Ships From One Source**
+
+### Fixed
+- Recipe featured images resolve to the correct URL everywhere. A media-path fix that lived on a single install (cards/hero images could 404 when stored without the uploads prefix) is now part of the core Recipes theme.
+- Theme copies can no longer silently drift. Previously only ~30 hand-picked theme files were integrity-checked; now every theme template and stylesheet is verified against the canonical source, and deliberately customized installs are tracked explicitly instead of being overwritten.
+- Hardened against a class of update crashes. Syncing a theme's function file onto a customized install could remove helpers its templates still call, cutting pages off mid-render. Sync tooling now knows about customized theme sets and never overwrites them.
+
+---
+
+## [2.17.2] - 2026-07-02  ·  _Patch_
+**Valid Markup, Correct Language Tags & Faster Font Loading**
+
+### Improved
+- Fonts no longer block first paint. Google Fonts and icon stylesheets across all themes now load with the non-blocking preload pattern, improving Core Web Vitals.
+
+### Fixed
+- Turkish search pages are no longer indexable. The /arama route escaped the noindex rule that /search already had, leaving thin search results crawlable — a "low value content" risk for ad-network review.
+- Removed the hidden duplicate H1 from homepages. An old experiment injected an invisible site-name heading on every homepage, producing two H1 elements on themes that render their own. Each page now has a single, visible heading.
+- Article pages no longer break on customized Entertainment installs. A sidebar helper call could crash mid-page on sites with a customized theme copy, cutting the page off before the footer. The sidebar now degrades gracefully.
+- Markup validates cleanly. Headings inside inline wrappers, a mis-scoped ARIA label and the footer bar's in-body stylesheet (now emitted in the head) were the last W3C validator errors.
+- Language attribute now follows your site language. Five themes hard-coded lang="en"; Turkish sites reported the wrong language to browsers and crawlers.
+
+---
+
+## [2.17.1] - 2026-07-02  ·  _Patch_
+**Your Site Name Now Reaches Google Exactly As You Typed It**
+
+### Fixed
+- Google could show your domain instead of your site name in search results. The system auto-generated a spaceless copy of your site name as a schema alternate name, and a Turkish-character comparison bug let this domain-lookalike value slip into the page. Google's site-name algorithm could then fold your brand into the bare domain. The auto-generated alternate name is gone, the comparison now transliterates Turkish characters correctly, and existing installs clean up the stray value automatically — the Site Name setting is now the single source of truth, emitted verbatim.
+- Removed weaker duplicate schema emitters from five themes. Personal, Trends, Recipes, News and Lifestyle carried their own WebSite/OpenGraph generators missing fields Google uses for site-name selection; all themes now use the central, complete emitter.
+- Admin SEO preview now matches the real page output. The preview showed a different homepage title pattern than what the site actually emitted.
+
+---
+
+## [2.17.0] - 2026-07-02  ·  _Minor_
+**Content Rendering, Performance & AdSense-Ready Theme Pass**
+
+### Improved
+- Faster pages with responsive images. Article cards and thumbnails now load an appropriately sized image variant instead of the full-resolution original, cutting page weight significantly.
+- Navigation and footers are data-driven. Menus, category bars and footer links now come from your real categories, so a fresh site never shows dead example links — better for visitors and for ad-network review.
+- Dark mode stays correct with custom colors. Setting brand colors no longer overrides the dark theme; dark mode renders reliably regardless of customization.
+- Cleaner article intros. The first paragraph is auto-capitalized at publish, so content never starts lowercase.
+
+### Fixed
+- Markdown headings no longer leak as raw “###” text. Content that mixed HTML with Markdown could print literal “### Heading” or merge a heading and its first paragraph into one oversized block. Headings are now correctly separated and rendered, both at publish time and on render — across every theme.
+- Queued articles that silently failed to publish now go out reliably. A session-cookie error during manual publishing could leave items stuck as “failed”. The underlying call is now guarded, so publishing completes instead of aborting mid-way.
+- Removed placeholder/demo content from themes. Sample authors, demo article bodies, fabricated statistics and dead example links could appear on real pages; these are gone, so only your real content is shown.
+- Legal links now appear in the Personal theme footer. The standard bottom bar (copyright · legal links · credit) was missing from all Personal footer layouts, so privacy/terms pages existed but were unreachable from the footer. Every footer variant now renders the shared bottom bar.
+- Theme stylesheets update reliably after an upgrade. Tech, Entertainment and Pets linked their CSS without a version stamp, so browsers could keep serving a cached stylesheet indefinitely; the link is now stamped per file change.
+
+---
+
+## [2.16.37] - 2026-06-23  ·  _Patch_
+**No More Dead-End Update Banner on Centrally Managed Sites**
+
+### Fixed
+- The “Update available / Update Now” banner no longer appears on centrally managed sites. On these installations self-update is disabled and new versions are delivered by operator deployment, so the banner, the header update icon and the sidebar update badge were a dead end — clicking “Update Now” did nothing. They are now hidden whenever the install is centrally managed, matching the System Updates page which already showed “Central deployment ready”.
+
+---
+
+## [2.16.36] - 2026-06-23  ·  _Patch_
+**Professional Single-Bar Footer & Permanent CSS Cache Fix**
+
+### Improved
+- The footer bottom is now a single clean bar — copyright, legal links and the credit line share one row instead of a separate, duplicated legal strip below the copyright. Legal links used to render twice (in the footer columns and again in an injected bar); the redundant strip is removed across all themes.
+
+### Fixed
+- Theme CSS no longer serves a stale cached copy after an update — the stylesheet is cache-busted by its file modification time, so visitors get the current styles without a hard refresh.
+
+---
+
+## [2.16.35] - 2026-06-17  ·  _Patch_
+**Canonical Cleanup: /page Redirects, Alias Consolidation & AdSense Readiness**
+
+### Improved
+- robots.txt is now AdSense- and Google-safe — the Googlebot group mirrors the base disallow rules (a crawler obeys only its most-specific group, so admin/api paths were previously left crawlable), and the AdSense crawler `Mediapartners-Google` is now explicitly allowed.
+- The site now serves a valid `ads.txt` declaring the authorised AdSense publisher, resolving the “authorised sellers” warning that appears when the ad code is present but ads.txt is missing.
+
+### Fixed
+- The duplicate `/page/{slug}` URL now 301-redirects to the clean `/{slug}` and is no longer emitted in the sitemap — previously every static page was reachable at two URLs (a soft-duplicate that dilutes ranking signals and trips content-quality audits). The clean slug is now the single canonical address.
+- Legal, about and contact aliases consolidate onto one canonical URL with a 301 — language and spelling variants (e.g. `/privacy`, `/privacy-policy`, `/gizlilik`) used to each return 200 with their own canonical, signalling duplicate pages. They now redirect to the page’s real address and the canonical tag matches the redirect target.
+- About/Contact pages that have no content now return 404 instead of an empty soft-200 — an alias with no template and no published page no longer renders a blank page whose canonical pointed at the homepage.
+
+---
+
+## [2.16.34] - 2026-06-16  ·  _Patch_
+**Image SEO: In-Content Images in Schema & Sitemap**
+
+### Improved
+- Article structured data now lists every image, not just the featured one — the Article/BlogPosting `image` property is now an array of ImageObjects covering the featured image plus the images embedded in the article body, each resolved with width, height and caption from the media library. This gives the in-content images a real shot at ranking in Google Images.
+- The image sitemap now includes in-content images — previously only the featured (and gallery) image of each post was submitted; the images inside the article body are now listed too, so Google can discover and index them.
+- Fixed a silent bug where the featured image carried no dimensions in structured data — the media lookup queried a non-existent column, so width/height/caption were always dropped. Image objects now include their real dimensions.
+
+---
+
+## [2.16.33] - 2026-06-11  ·  _Patch_
+**SEO: Archive Canonicals, Unique Titles & Schema Fixes**
+
+### Improved
+- The homepage FAQ is now eligible for rich results — FAQPage structured data is emitted from the marketing site’s FAQ section.
+
+### Fixed
+- Category, tag and author pages now point their canonical to themselves — in the travel theme these archive pages were inheriting the homepage’s canonical, title and description, which told search engines they were duplicates of the home page and effectively dropped them from the index. They now emit their own canonical URL, a unique title and description, and correct rel=prev/next for pagination.
+- Every page now has a unique title and meta description — the recipes and finance themes were falling back to the site name on all pages (and recipes single posts had no meta description at all). Titles and descriptions now come from the page’s own content.
+- The finance theme showed a hard-coded “FinancePro” heading regardless of the site’s real name, and rendered a second H1 on article pages — both fixed (real site name, single H1 per page). The news theme’s duplicate H1 was also resolved.
+- News article structured data is now generated by the central engine — replacing an older version that referenced a missing logo file and could emit an invalid date, so news articles now carry correct Article/NewsArticle schema with the configured logo.
+
+---
+
+## [2.16.32] - 2026-06-11  ·  _Patch_
+**PageSpeed: Responsive Images, Accessibility & Security Headers**
+
+### Improved
+- Images now download at the size they are displayed — the responsive image engine was emitting wrong width descriptors, so browsers fetched the 1600px version into ~800px slots. Descriptors now match the real variants (800/1600) and the size hint reflects the actual layout, cutting roughly 500 KiB from a typical page. Tip-card and recipe-card covers, which shipped a single full-size source, now serve responsive variants; continent illustrations were resized to their display size and the footer logo serves AVIF/WebP.
+- Accessibility fixes across the travel theme and marketing site — section labels, hero chips and the newsletter button use an accent that meets WCAG AA contrast; decorative continent images no longer repeat adjacent link text; tip “Read” links carry the article title for screen readers; footer headings follow proper heading order.
+- Smoother homepage animation — the step progress bar animates with a compositor-friendly transform instead of width, and the FAQ accordion no longer triggers a forced reflow on open.
+
+### Security
+- Content-Security-Policy now declares `script-src` and a Cross-Origin-Opener-Policy header is sent — script sources are restricted to the site itself plus the required Google advertising, analytics and font origins, closing the “missing script-src / COOP” findings without affecting ads.
+
+---
+
+## [2.16.31] - 2026-06-11  ·  _Patch_
+**Security Hardening from a Full Code Audit**
+
+### Security
+- Closed a SQL injection in the content scheduler — the status filter on the scheduler screen now uses a strict allow-list and a parameterized query, so a crafted filter value can no longer reach the database.
+- The post listing helper now enforces a column allow-list — sort field, direction and limits are validated and type-cast before they touch the query, removing a latent injection path for themes and plugins.
+- The automation webhook secret falls back to an installation-unique key — when no webhook secret is configured it is now derived from the per-install security key instead of a guessable time-based value.
+
+---
+
+## [2.16.30] - 2026-06-11  ·  _Minor_
+**Publisher Catalog & Backlink Opportunities, Verified for 2026**
+
+### Improved
+- The Backlink Opportunities module now lists real, verified programs — every niche grew from a couple of search shortcuts to 10-19 named opportunities checked live in 2026: Source of Sources and the relaunched free HARO, unlinked-mention reclamation, Lonely Planet Correspondents, BoardingArea, Matador Creators, foodgawker, mindbodygreen, the Plutus Awards, CryptoPanic, BlogPaws, Google/Bing/Apple business listings and more — each with priority, effort, and a concrete first step.
+- The News Publishers catalog was re-verified for 2026 — Apple News (ANF, four countries), Flipboard (program closed; magazine + bookmarklet path documented), SmartNews and NewsBreak requirements updated; Bundle and SQUID added as open application channels; Pocket and Yandex Dzen removed.
+
+---
+
+## [2.16.29] - 2026-06-11  ·  _Minor_
+**Brand Consistency, robots.txt Compliance & Full Turkish Admin**
+
+### Improved
+- The Turkish admin is now fully Turkish — dozens of hardcoded English labels were localized across the post editor (Recipe/LocalBusiness schema fields), backups schedule, comment replies, duplicate finder, media upload, banner manager, theme customizer, user profiles and the traffic plugin menu (now "Hızlı İndeksleme", "Anında Bildirim", "RSS Beslemesi", "Backlink Fırsatları", "Tarayıcı Bildirimi"). The English admin remains fully English.
+
+### Fixed
+- robots.txt now passes Bing validation — the non-standard `Host:` directive (a legacy Yandex extension that Bing flags as an error) was removed from the generated robots.txt on every site.
+- The brand reads "jekcms" everywhere — a repo-wide sweep replaced every wrong-case variant across emails, feeds, installer screens, API docs, theme metadata, user-agent strings and comments. License-key format and code identifiers are untouched, so nothing breaks.
+
+---
+
+## [2.16.28] - 2026-06-11  ·  _Patch_
+**Proper-Noun Anchors in Internal Linking**
+
+### Improved
+- Auto internal linking now recognises single-word proper nouns — place, brand and topic names such as a city or a dish (capitalised, 5+ letters) can now become link anchors, not just multi-word phrases. Lowercase generic words stay excluded, so the links remain relevant. This noticeably improves internal linking on niche sites (travel, food, local guides) where titles are often a single proper noun.
+
+### Fixed
+- Fixed the content-import wizard showing the "External authority links" label in English on a Turkish admin (it now follows the admin UI language).
+
+---
+
+## [2.16.27] - 2026-06-11  ·  _Minor_
+**Smarter Internal Linking & E-E-A-T Outbound Links**
+
+### Added
+- External authority links in the content generator — the content-queue import wizard can now request a set number (0–5) of in-content outbound links to high-authority, non-competitor sources. When enabled, the AI prompt weaves them naturally into the body on descriptive anchors (never a "Sources" list), strengthening E-E-A-T.
+
+### Improved
+- Auto internal linking now waits for a real library — on a brand-new site there is nothing useful to link to, so auto-linking stays dormant until a configurable minimum number of published posts exists. The Auto Linker screen explains the threshold and shows current progress. As before, only published posts are link targets — queued/scheduled content is never linked.
+
+---
+
+## [2.16.26] - 2026-06-11  ·  _Patch_
+**Pinterest Production Setup Instructions**
+
+### Improved
+- Clearer Pinterest go-live instructions — after Pinterest grants Standard access, the setup guide now tells you to remove the existing connection and connect again in Production mode, instead of using plain Reconnect (which can silently stay in Sandbox).
+
+---
+
+## [2.16.25] - 2026-06-10  ·  _Patch_
+**Admin Customer Detail Fix**
+
+### Fixed
+- The customer detail screen in the admin panel opens reliably again — orders, licenses, invoices, support tickets and internal notes loaded with queries that did not match the production database, so the page returned a server error. Every section now reads the live schema correctly, and the customer create/edit forms save address details to the right fields.
+
+---
+
 ## [2.16.24] - 2026-06-10  ·  _Patch_
 **Clearer Product Positioning Copy**
 
