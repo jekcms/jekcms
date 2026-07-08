@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.25.0] - 2026-07-09  ·  _Minor_
+**First-Publish Journey: Redesigned Welcome Guide**
+
+### Improved
+- The dashboard welcome guide was rebuilt as a slim one-line journey rail: a circular progress ring, five connected step dots and a single call-to-action for whatever comes next. It takes a fraction of the space of the old checklist and reads at a glance.
+- The five steps now follow the real order of setting up a site: site identity (name and tagline), logo, first category, first published post, and securing your admin password. Every step updates live as you complete it anywhere in the admin, and each links straight to the right screen.
+- "Pick a theme" and "connect an AI provider" are no longer setup steps — keeping the theme you chose during installation is a perfectly good choice, and AI is optional.
+
+---
+
 ## [2.24.2] - 2026-07-09  ·  _Patch_
 **Featured Image Path Fix in Theme Templates**
 
