@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.24.2] - 2026-07-09  ·  _Patch_
+**Featured Image Path Fix in Theme Templates**
+
+### Fixed
+- A handful of theme templates (Recipes cards and pages, Starter posts, Pets error page) printed the featured image path exactly as stored in the database. Relative paths then resolved against the site root and returned 404, so those images never showed. All of these now resolve through the central image helper, which builds the correct uploads URL and serves the best available format.
+
+---
+
 ## [2.24.1] - 2026-07-09  ·  _Patch_
 **Logo Aspect Ratio & Accessibility Fixes**
 
