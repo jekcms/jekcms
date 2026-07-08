@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.24.1] - 2026-07-09  ·  _Patch_
+**Logo Aspect Ratio & Accessibility Fixes**
+
+### Fixed
+- Site logos in the Health and Travel themes now declare their real pixel dimensions instead of fixed placeholder values, so uploaded logos of any shape render at the correct aspect ratio without distortion or layout-shift warnings.
+
+---
+
 ## [2.24.0] - 2026-07-08  ·  _Minor_
 **Setup Wizard 2.0: WordPress Migration at Scale & Smart Recovery**
 
