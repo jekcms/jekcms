@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.28.2] - 2026-07-09  ·  _Patch_
+**Health and Travel Headers No Longer Leak Broken Markup**
+
+### Fixed
+- On the Health and Travel homepages the brand link's H1 was printed inside the aria-label attribute, breaking the attribute and leaking a literal « — home"> » text next to the logo (most visible on fresh installs without a logo). The H1 now renders inside the link body where it belongs; the accessibility label and the SEO site-name signal both work as intended.
+
+---
+
 ## [2.28.1] - 2026-07-09  ·  _Patch_
 **Wizard Polish: Come Back Days Later, Nothing Is Lost**
 
