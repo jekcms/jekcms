@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.28.1] - 2026-07-09  ·  _Patch_
+**Wizard Polish: Come Back Days Later, Nothing Is Lost**
+
+### Improved
+- Take the prompt, close the browser, come back next week with the AI's JSON: the wizard now remembers every choice, greets you with a "Jump to import" shortcut, and the step chips are clickable so you can move to any step directly — no more starting over.
+- The Content Studio menu is now one flat list in a clear order (Overview, Content Wizard, AI Content, Automation, Content Queue) — the confusing "Advanced" sub-group is gone — and it stays visible inside the Content Queue and Automation pages too, so sub-pages no longer feel like leaving the studio.
+- The Pinterest and external-link option cards were realigned (checkbox beside the title instead of floating above it) and light up when selected.
+
+### Fixed
+- The sample JSON no longer carries a fixed example date in scheduled_at — some AIs copied that stale date into every article. Scheduling belongs to the wizard's own final step.
+- The old JSON generator form inside the import tab was removed (the wizard replaced it); the tab now cleanly hosts the raw import tools (JSON file, Google Sheets, CSV) with a pointer to the wizard.
+
+---
+
 ## [2.28.0] - 2026-07-09  ·  _Minor_
 **Content Wizard: Plan, Create, and Schedule in One Guided Flow**
 
