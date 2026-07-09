@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.27.3] - 2026-07-09  ·  _Patch_
+**Finance Theme: Sans Headings, Breadcrumb Fix, Dark-Mode Readability**
+
+### Improved
+- The default heading font switched from the serif Fraunces to Inter: every heading across the theme now shares one modern sans family. Sites that picked a custom heading font in the Customizer keep their choice.
+
+### Fixed
+- On single posts the breadcrumb sat in a detached band that ended up unreadable behind the colored post header; it now lives inside the header as light, legible text.
+- In dark mode, links inside articles and the table of contents used the light-mode teal and nearly disappeared against the dark background; dark mode now switches them to a bright, readable tone without touching buttons or the hero.
+
+---
+
 ## [2.27.2] - 2026-07-09  ·  _Patch_
 **Finance Theme: Sticky Table of Contents, Author Bio, Tidier Cards**
 
