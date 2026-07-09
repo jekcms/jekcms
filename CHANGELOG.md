@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.26.0] - 2026-07-09  ·  _Minor_
+**Zero-Setup Scheduling: Posts Publish On Time Without a Server Cron**
+
+### Added
+- Scheduled posts and the content queue no longer depend on a server cron job. A built-in scheduler keeps a "next job due" timestamp and, when that moment arrives, runs the publishing engine right after a page response has been delivered to the visitor — so a post scheduled for 14:37 goes live on the first visit at or after 14:37, and the visitor never waits for it. On hosts that cannot detach the response, the work is handed to a lightweight background request instead.
+- A real cron job is still first-class: when one is configured it takes over completely and the visitor-triggered scheduler switches itself off, adding zero overhead. It can also be disabled explicitly with the JEK_DISABLE_PSEUDO_CRON constant.
+
+### Improved
+- The old fallback rolled a dice on every request (a 1% chance), which meant late posts on quiet sites and wasted database work on busy ones. The new scheduler is deterministic: on a normal request it reads one or two tiny files and does nothing else — no database queries, no guesswork.
+
+---
+
 ## [2.25.0] - 2026-07-09  ·  _Minor_
 **First-Publish Journey: Redesigned Welcome Guide**
 
