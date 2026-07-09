@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.27.2] - 2026-07-09  ·  _Patch_
+**Finance Theme: Sticky Table of Contents, Author Bio, Tidier Cards**
+
+### Improved
+- The "In This Article" table of contents no longer pushes the article down from the top of the content: it moved into the right sidebar, where it stays visible (sticky) while the reader scrolls through long articles.
+- Article cards were tidied up: date and reading time sit on one muted line separated from the content, and the author appears as an aligned chip with a round photo instead of a loose letter placeholder. The homepage now also loads author photos for its cards.
+- More breathing room between the homepage hero and the "Latest Articles" section.
+
+### Fixed
+- The author box under articles rendered without the author's biography because the router does not pass it; the template now loads the bio itself, so the full author card (photo, name, bio) appears.
+
+---
+
 ## [2.27.1] - 2026-07-09  ·  _Patch_
 **Finance Theme: Design Consistency Pass and Author Byline Fix**
 
