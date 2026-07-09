@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.27.6] - 2026-07-09  ·  _Patch_
+**The Finance Footer Shows Your Logo Instead of Plain Text**
+
+### Fixed
+- The Finance theme footer always printed the site name as plain text and never used the logo you uploaded. It now shows the logo, preferring the dark-mode variant because the footer background is dark in both themes. Sites without a logo keep the text heading exactly as before.
+
+---
+
 ## [2.27.5] - 2026-07-09  ·  _Patch_
 **A Newly Uploaded Logo Now Appears Immediately**
 
