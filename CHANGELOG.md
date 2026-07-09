@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.29.0] - 2026-07-09  ·  _Minor_
+**SEO Analyzer: Turkish-Correct Matching, Keyword Cannibalization Warning, New Checks**
+
+### Added
+- Keyword cannibalization warning: as you type a focus keyword, the analyzer checks whether another post already targets it and names that post — the classic premium-plugin feature, built in.
+- Three new checks: a warning when the meta description merely copies the title, a nudge when no image alt text contains the focus keyword, and a heads-up for slugs containing Turkish/special characters.
+
+### Fixed
+- Turkish focus keywords were silently failing: JavaScript lowercases dotted İ into a combining character, so a title like "İçerik Rehberi" never matched the focus keyword "içerik" — the analyzer wrongly reported the keyword missing from the title, description, headings, and first paragraph. A Turkish-aware folder now backs every comparison, and the slug check ascii-folds the keyword ("beslenme önerileri" correctly matches "beslenme-onerileri").
+- Keyword density counted substrings ("spor" also counted "sporcu"); it now counts whole words. Internal/external link detection resolves the real hostname instead of matching the site name anywhere in the URL. The analyzer also stopped re-rendering every 2.5 seconds, which used to force categories you had collapsed back open.
+- On installations without the AI settings table, the editor died mid-page with "Server Error" while rendering the AI tab; the check is now failure-safe and the editor always loads.
+- The social preview card showed a broken image for uploads-relative featured paths; description length limits were aligned to 160 everywhere.
+
+---
+
 ## [2.28.3] - 2026-07-09  ·  _Patch_
 **Health Theme Speaks Your Site Language on the Frontend**
 
