@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.29.1] - 2026-07-09  ·  _Patch_
+**ZeroTrack Analytics: Data Collection Restored on Production Sites**
+
+### Fixed
+- ZeroTrack silently stopped recording visits on production installations: the standalone beacon endpoint read database credentials only from .env, but production installs keep the real credentials in .env-production (the installer writes them there). The endpoint could never connect, answered every beacon with a polite 204, and the dashboard showed zeros while the site had traffic. The endpoint now uses the same environment-file priority as the rest of the CMS (.env-production first), and a failed database connection is written to the error log instead of disappearing without a trace.
+- Page views could be counted twice: both the plugin hook and the core footer injected the tracker script, and the plugin side ignored the once-per-page guard. The guard is now honored on both paths — one tracker, one beacon, one count per view.
+
+---
+
 ## [2.29.0] - 2026-07-09  ·  _Minor_
 **SEO Analyzer: Turkish-Correct Matching, Keyword Cannibalization Warning, New Checks**
 
