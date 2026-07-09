@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.27.0] - 2026-07-09  ·  _Minor_
+**Logo Variants: Dark-Mode and Retina Logos, Uploaded from the Panel**
+
+### Added
+- Settings → Branding now accepts three optional logo variants alongside your main logo: a dark-mode logo and 2x (retina) versions of both. When the visitor switches to dark mode the logo swaps instantly — no page reload — and high-density screens automatically receive the sharper file. If you never upload a dark logo, nothing changes: the light logo is used everywhere, exactly as before.
+- Themes with permanently dark areas (like the Pets footer) automatically prefer the dark-mode logo there when one is uploaded, so a dark-text logo no longer disappears into a dark background.
+
+### Fixed
+- The Finance homepage never listed articles on any installation: the home route loaded the template without passing it data, so the "Latest Articles" section always claimed the site was empty. The template now queries published posts itself, with pagination.
+- A sweep of rough edges reported on fresh installs: the tagline no longer duplicates next to the logo in the Finance header, raw emoji icons were removed from category chips and lists in both Finance and Pets, a literal "NULL" tag and a "0.00 views" line no longer render in the Finance sidebar, empty tag boxes hide themselves, the featured-post category badge no longer overlaps the title in Pets, and legal pages regained a readable header in all themes.
+
+---
+
 ## [2.26.1] - 2026-07-09  ·  _Patch_
 **Theme Honesty: Placeholder Stats Removed, Fresh-Install Language Fixed**
 
