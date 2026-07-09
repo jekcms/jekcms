@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.30.0] - 2026-07-09  ·  _Minor_
+**Google Console: PageSpeed Tab, Fresh Search Data, Stability Fixes**
+
+### Added
+- New PageSpeed tab: measure any page of your site with Google PageSpeed Insights (Lighthouse) right from the panel — mobile and desktop scores for Performance, Accessibility, Best Practices and SEO, lab metrics (FCP, LCP, TBT, CLS, Speed Index) and real-user Core Web Vitals (CrUX) when Google has field data for your site. Works without a Google connection; results are cached for 24 hours. An optional API key setting raises the measurement quota.
+
+### Fixed
+- Search Console reports were consistently thinner than the GSC interface: the API omits the last ~2 days by default ("final" data), so recent queries and clicks simply never appeared — the exact "my search terms don't show up" complaint. All Search Console reports now request fresh data, matching what the GSC UI shows.
+- The Top Queries and Top Pages cards swallowed API errors and displayed a misleading "No data" — a quota or permission problem now shows its actual, actionable message on the card itself (same for the Analytics tables).
+- When Google was unreachable, every page load fired the full set of live API calls with 20-second timeouts each, freezing the panel; failed responses are now briefly cached so the page stays responsive, and the Refresh button retries immediately. The response cache table also cleans up its expired rows, which previously accumulated forever.
+
+---
+
 ## [2.29.1] - 2026-07-09  ·  _Patch_
 **ZeroTrack Analytics: Data Collection Restored on Production Sites**
 
