@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.28.3] - 2026-07-09  ·  _Patch_
+**Health Theme Speaks Your Site Language on the Frontend**
+
+### Fixed
+- On Turkish sites the Health theme still printed dozens of hardcoded English strings — section titles (Most Popular, Trending Topics, Latest Articles, Recommended), the entire footer navigation (About, Categories, For You, Editorial, Connect and every link inside them), the author card (About Author, View All Articles), the comment form (Leave a comment, Name, Email, Post comment), search, 404, tags, and the fallback header menu (Home, About). All of them now follow the site language setting: Turkish sites read fully Turkish, English sites are unchanged.
+
+---
+
 ## [2.28.2] - 2026-07-09  ·  _Patch_
 **Health and Travel Headers No Longer Leak Broken Markup**
 
