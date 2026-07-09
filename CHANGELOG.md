@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.27.1] - 2026-07-09  ·  _Patch_
+**Finance Theme: Design Consistency Pass and Author Byline Fix**
+
+### Fixed
+- Every Finance article showed "Staff Writer" as the byline and skipped the author box entirely, even when the post had a real author. The template expected author data in a nested array while the router provides flat fields; the template now reads both, so the correct name, avatar and author box render on every post.
+- The Finance theme received a design consistency pass: the serif display font is now reserved for article headlines while all interface labels use the sans family, the color palette was unified around the theme's navy and gold (the off-brand purple button and blue underlines are gone), the newsletter box no longer blends into the hero, the unused gray band between header and hero was removed, the trending numbers and footer fine print are readable, the author avatar aligns with its name, and archive pages say "1 Article" instead of "1.00 Articles".
+- Hardcoded newsletter and footer texts that promised "market analysis and investment tips" were replaced with neutral wording that fits any finance site built on the theme.
+
+---
+
 ## [2.27.0] - 2026-07-09  ·  _Minor_
 **Logo Variants: Dark-Mode and Retina Logos, Uploaded from the Panel**
 
