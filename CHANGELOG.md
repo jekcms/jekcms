@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.26.1] - 2026-07-09  ·  _Patch_
+**Theme Honesty: Placeholder Stats Removed, Fresh-Install Language Fixed**
+
+### Fixed
+- The Finance theme homepage shipped with hard-coded placeholder claims — invented reader counts, satisfaction percentages and a fake "expert analysts" figure. All of it is gone: the hero now speaks with your site name and tagline, and the stats strip only appears once it has real numbers from your own database to show.
+- Fresh installs now seed the site language from the setup wizard. Previously the language row was never written, so every new site quietly fell back to Turkish in the footer and legal pages — even when everything else was in English.
+- Finance and Pets headers printed the logo and the site name side by side, doubling the brand. With a logo set, the text is now kept for screen readers only; without a logo, the text brand still shows.
+- The Pets homepage listed every category — including empty ones and the seeded "Uncategorized" — each with a "0" badge. Category lists now show only categories that actually have published posts, without count badges.
+
+---
+
 ## [2.26.0] - 2026-07-09  ·  _Minor_
 **Zero-Setup Scheduling: Posts Publish On Time Without a Server Cron**
 
