@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.28.0] - 2026-07-09  ·  _Minor_
+**Content Wizard: Plan, Create, and Schedule in One Guided Flow**
+
+### Added
+- The new Content Wizard (Content Studio → Content Wizard) replaces the old maze of JSON wizard, batch planner, and import tab with one step-by-step experience: how many articles → topic and keywords → richness (word count, images, Pinterest, authority links) → who creates it → schedule. Your theme profile is auto-detected, so recipe, travel, and finance themes automatically request their special fields.
+- Two creation paths, same quality contract: use your own ChatGPT/Claude/Gemini account for free (copy one prompt, drop the returned JSON back — the wizard imports and validates it), or let jekcms generate everything through your API key, article by article with a live progress bar. Both land in the same review queue.
+- The final step schedules the whole batch on a rhythm (daily, every 2-3 days, weekly) with a randomized time window, and explains the image workflow plainly: every article ships with a ready image plan (per-image generation prompts); generate covers automatically via the AI Images plugin, or create them anywhere, name them by slug, upload to uploads/temp and press Match Images.
+
+### Improved
+- Content Studio's inner menu was decluttered (Posts and New Post moved back to the main sidebar where they belong) and it now stays visible on every studio sub-page, so you never lose your bearings. The n8n automation planner and raw queue live under a clearly labeled "Advanced" section.
+- The single-draft AI tool now shares one AI client with the wizard (Gemini, Groq, and OpenAI — OpenAI upgraded to gpt-4o-mini).
+
+---
+
 ## [2.27.6] - 2026-07-09  ·  _Patch_
 **The Finance Footer Shows Your Logo Instead of Plain Text**
 
