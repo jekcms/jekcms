@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.27.4] - 2026-07-09  ·  _Patch_
+**Author Pages Get Photos, Archive Layout Fix, Pets Brand Palette**
+
+### Improved
+- Author archive pages now show the author's photo next to their name in both Finance and Pets — the header no longer reads as an anonymous text block.
+- Pets customizer color defaults joined the brand: the off-palette purple secondary and blue links became the theme's navy and deep orange, so the newsletter button and links no longer clash with the orange brand.
+
+### Fixed
+- Finance archive pages (category, tag, author) stacked the sidebar full-width below the article cards because the layout container had no grid rules; the sidebar is back in its right-hand column. The archive breadcrumb also lost its detached white band, matching single posts.
+- Author archive pages claimed every author was a "Financial Analyst" when no credential was set; the fabricated fallback was removed and only real credentials render.
+- On the Pets homepage, when the newest post was the only one published, the featured card left a dead column next to it and an empty grid below; the card now spans the full width at a fixed height and a short "more articles on the way" note replaces the blank area.
+
+---
+
 ## [2.27.3] - 2026-07-09  ·  _Patch_
 **Finance Theme: Sans Headings, Breadcrumb Fix, Dark-Mode Readability**
 
