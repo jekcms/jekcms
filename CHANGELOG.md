@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.31.2] - 2026-07-10  ·  _Patch_
+**Posts List: One-Click SEO Score Refresh, Editor and List Finally Agree**
+
+### Added
+- New "Recalculate SEO Scores" button on the posts list: refreshes every post's stored SEO score with the current scoring engine — in batches of 100 with live progress, so a 1,000-post site takes seconds instead of hitting a timeout. Useful after upgrading, since scores saved by older versions used the old scoring rules.
+
+### Fixed
+- The score in the editor and the score in the posts list could differ: the editor's live analyzer inspects the actual page structure (headings, tables, snippet blocks) while the save-time engine cannot, so recomputing on save produced a different number. The editor now passes its own score along when you save — the list shows exactly what the editor dial showed.
+- The "Analyze All" AI button appeared on every installation, including ones with no AI provider configured, where clicking it could only show a setup notice. The button now appears only when AI is actually configured.
+
+---
+
 ## [2.31.1] - 2026-07-10  ·  _Patch_
 **SEO Score You Can Trust: Fixed Budgets, No More Reward for Leaving Fields Empty**
 
