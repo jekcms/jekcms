@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.36.0] - 2026-07-10  ·  _Minor_
+**Personal Theme: Full-Width Brand Logo with Automatic Light/Dark Switching**
+
+### Added
+- The Personal theme now supports a full-width brand logo in the header: upload your logo (and an optional dark variant) under Settings → Branding and it replaces the icon + site-name pair, switching automatically with the visitor's light/dark preference. The site name stays in the markup as a visually-hidden heading, so the Google site-name signal is preserved. Nothing changes for sites without an uploaded logo.
+
+---
+
 ## [2.35.0] - 2026-07-10  ·  _Minor_
 **Stories, the Instagram Way: One "Latest Posts" Bubble That Plays Your Recent Content**
 
