@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.31.1] - 2026-07-10  ·  _Patch_
+**SEO Score You Can Trust: Fixed Budgets, No More Reward for Leaving Fields Empty**
+
+### Improved
+- Each check group in the SEO widget now shows its point contribution (e.g. "20/25p" next to Keyword) so you can see exactly where a score comes from and which section is worth fixing first.
+
+### Fixed
+- A post with NO focus keyword could score 80-90, and the score DROPPED the moment you entered one — the old ratio model removed the keyword checks from the denominator when the field was empty, so withholding information was mathematically rewarded. Scoring now uses fixed category budgets (keyword 25, content 20, structure 15, basics 15, readability 10, visuals 10, schema 5): an empty keyword field burns its whole 25-point budget, and filling in information can only raise your score, never lower it. The same flaw existed in the score saved on every post update (an even stronger version: keyword-less posts were graded out of 50 and could reach 100) — post saves now use the same fixed-budget engine as the SEO Optimizer page, so all scores finally speak the same language.
+- Turkish keywords containing İ/I (e.g. "İçerik Pazarlaması") silently failed every match — title, content and density checks all reported "keyword not found" because of a Unicode case-folding quirk. Keyword matching is now Turkish-aware across the editor widget, the save-time score and the SEO Optimizer. Density also counts whole words only (a short keyword inside longer words no longer inflates the percentage) and word counting is UTF-8 correct.
+- The title length check said "good" up to 70 characters while the SERP preview's pixel meter showed the same title being cut at ~580px — the two now agree (60-character budget), and a keyword missing from the title is no longer punished twice.
+
+---
+
 ## [2.31.0] - 2026-07-10  ·  _Minor_
 **SEO Assistant: Content Structure Checks, Pixel-Accurate SERP Preview, Wider AI Analysis**
 
