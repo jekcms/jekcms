@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.34.0] - 2026-07-10  ·  _Minor_
+**Stories Strip Becomes a True Latest-Posts Showcase**
+
+### Improved
+- With auto-stories enabled, the strip now carries EVERY post published within the story lifetime window (7 days by default) — not just posts published after the feature was switched on. Older posts are backfilled automatically every hour, each story retires based on its post's publish date, and the newest post always sits first in the strip, Instagram-style.
+- The strip now announces itself: when auto-stories are on and no custom heading is set, a heading in the site's language appears above the circles — "Son İçerikler" on Turkish sites, "Latest Posts" on English ones. Set your own heading to override it, or enter "-" to hide it entirely.
+
+---
+
 ## [2.33.0] - 2026-07-10  ·  _Minor_
 **Image Captions Done Right: Visible Captions Are Now a First-Class Editor Feature**
 
