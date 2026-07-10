@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.33.0] - 2026-07-10  ·  _Minor_
+**Image Captions Done Right: Visible Captions Are Now a First-Class Editor Feature**
+
+### Added
+- New "Caption" field in the image details dialog: add a visible caption under any image, shown identically on every theme via self-contained styling. The dialog now clearly separates the two concepts — alt text is invisible and for search engines and screen readers; the caption is the text readers actually see. Captions render live in the editor and are editable with one click.
+
+### Fixed
+- Editing a post that contained figure-wrapped images could leak the old caption markup as a visible plain paragraph under the image — the editor did not understand the figure/figcaption structure, so saving unwrapped it and turned caption text into body text. The editor now parses figures natively: real captions survive editing round-trips intact, and legacy captions that merely duplicated the alt text are dropped automatically instead of becoming visible.
+- Opening the image details dialog could scroll the page behind it, so you lost sight of which image you were editing. The background now stays exactly where it was while the dialog is open and after saving.
+
+---
+
 ## [2.32.0] - 2026-07-10  ·  _Minor_
 **Click, Resize, Align: Full Image Editing Inside the Editor**
 
