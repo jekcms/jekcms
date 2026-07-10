@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.32.0] - 2026-07-10  ·  _Minor_
+**Click, Resize, Align: Full Image Editing Inside the Editor**
+
+### Added
+- Images in the post editor are now fully editable in place, the way WordPress users expect. Click an image and a floating toolbar appears right on it: size presets (Small 300px / Medium 600px / Full width), left-center-right alignment, a details button and remove — plus four corner handles you can drag to resize freely, with a live pixel readout while you drag. Aspect ratio is always preserved.
+- New image details dialog (toolbar pencil or double-click the image): see and edit the alt text, title tooltip, exact pixel width and the image URL in one place, with a live preview. Alt text finally gets a proper editing home after insertion — good for accessibility and image SEO.
+- Sizing and alignment are written into the content as self-contained inline styles, so they render identically on every theme — no theme CSS support required, and images never overflow on mobile (max-width is built in).
+
+### Fixed
+- The alt text label in the image insert dialog was hardcoded in Turkish and appeared untranslated on English admin panels.
+
+---
+
 ## [2.31.2] - 2026-07-10  ·  _Patch_
 **Posts List: One-Click SEO Score Refresh, Editor and List Finally Agree**
 
