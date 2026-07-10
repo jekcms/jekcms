@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.31.0] - 2026-07-10  ·  _Minor_
+**SEO Assistant: Content Structure Checks, Pixel-Accurate SERP Preview, Wider AI Analysis**
+
+### Added
+- New "Content Structure" check group in the editor's SEO assistant — seven checks that mirror how editors actually review a draft: duplicate H1 in the body (your title is already the page H1), skipped heading levels (H2→H4), a too-thin intro before the first heading, a missing conclusion/summary section on long posts, table and list usage, and a featured-snippet readiness check that looks for a question heading followed by a concise 40–60 word answer.
+- The SERP preview now measures your title and description in pixels, the way Google actually truncates them (~580px for titles, ~990px for descriptions on desktop). Character counts stay, pixel widths appear next to them and turn red when the limit is exceeded — no more titles that pass the character check but still get cut in results.
+- AI deep analysis covers four new dimensions: overall content quality (informativeness, originality, freshness), Google Helpful Content fit, AI-search readiness (would an AI Overview cite this page?), and AdSense policy suitability — including thin-content and clickbait-mismatch warnings before you publish.
+
+### Fixed
+- The SERP preview showed a broken icon instead of your favicon: it pointed at a file path that only exists on jekcms.com, not on customer installations. The preview now resolves the site's real favicon through the same priority chain the front end uses (uploaded favicon, site-root favicon files, generated icon), with a letter-badge fallback so the slot is never empty.
+
+---
+
 ## [2.30.0] - 2026-07-09  ·  _Minor_
 **Google Console: PageSpeed Tab, Fresh Search Data, Stability Fixes**
 
