@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.38.0] - 2026-07-12  ·  _Minor_
+**Honest Freshness Signals, a Content Quality Gate for Automation, and Full-Document Revision Restore**
+
+### Added
+- Editorial date model: posts now track "last meaningful content change" separately from internal system touches. Schema.org dateModified, article:modified_time and sitemap lastmod are generated from the new signal — so bulk SEO passes, counters and cache refreshes no longer make hundreds of posts look "updated today" to search engines. When editing a published post you can also override the automatic detection: mark a save as a content update or a technical fix.
+- Content Quality Gate: every automated publish path — content queue approval (single and bulk), REST API and n8n webhooks — now runs the same deterministic quality checks before anything goes live: minimum content length, duplicate and near-duplicate titles, and broken local image references block publication with visible reasons; missing featured image, internal links or headings raise warnings. Thresholds are configurable in Settings, and there is no bypass channel.
+- Full-document revisions: each revision now stores a complete snapshot — SEO meta, categories, tags, featured image, status and dates — and restoring one brings all of it back, not just the text. The state before a restore is saved as its own revision, so history is never lost. The revision limit is now configurable (default raised from 10 to 50).
+- Author Person schema now includes verifiable sameAs links built from the author's social profiles and website, alongside the job title, bio and photo added in the previous release.
+
+### Improved
+- The REST API now returns explicit ISO 8601 editorial dates (content_modified_at, reviewed_at) on post endpoints and accepts content_modified_at on writes, so migrations and rewrites can preserve original dates.
+
+### Fixed
+- Schema dateModified and sitemap lastmod could report a date earlier than the publish date on scheduled posts; both are now clamped so a modification date never precedes publication.
+- The sample admin account seeded by a manual database import shipped with a known example password; the seed now ships with an unusable password hash, and the installer sets real credentials as before.
+
+---
+
 ## [2.37.0] - 2026-07-10  ·  _Minor_
 **Legal Pages Repaired and Expanded, Author Archives Fixed, Tag Indexing Made Consistent**
 
