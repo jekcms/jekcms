@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.41.0] - 2026-07-13  ·  _Minor_
+**Editorial Transparency Readers Can See, Paraphrase-Aware Similarity, and a Test That Actually Runs**
+
+### Added
+- "How this content was made" box: the editorial fields you fill in (AI usage disclosure, original-contribution note, sources, YMYL flag) are now shown to readers under the post — in every theme, with no template edits. Sources also continue to be emitted as schema.org citations. The box appears only when you have filled the fields in, and it can be turned off in Settings.
+- Editorial fields are now part of the REST API: every post response carries an "editorial" object (ai_disclosure, original_notes, sources, ymyl), so external editors, archives and n8n flows can read and act on them.
+- Editorial checklist in the post editor: missing sources, missing original-contribution note or an undisclosed AI usage are listed as informational reminders. YMYL-flagged posts without sources or without a human approval are called out. Nothing here ever blocks publishing.
+
+### Improved
+- Content-similarity protection now catches rewrites, not just copies. Three measures work together: verbatim overlap (5-gram), partial copy (containment — a copied section buried inside an otherwise original post), and term overlap (TF-IDF cosine — the same article rewritten with different sentences). Each has its own threshold in Settings. The comparison window grew from the last 120 posts to a configurable 500, and each post is compared over 20,000 characters instead of 8,000.
+- Honest naming: this is lexical near-duplicate and term-overlap protection, not embedding-based semantic analysis. It catches verbatim copies, near-duplicates, reordered sentences, embedded partial copies and same-term rewrites; it does not claim to catch two posts that target the same search intent with entirely different wording. The acceptance test fails the build if the product ever over-claims this.
+
+### Fixed
+- The publishing-policy acceptance test now proves behaviour instead of matching text. It builds an isolated MySQL fixture and measures the real decisions on real SQL: publish/block outcomes, gate_state persistence, the absence of fabricated approvals, approval invalidation on edit, seven content-similarity scenarios (verbatim, near-duplicate, reordered, partial, paraphrase, false-positive control, and window depth) and the editorial-field consumers. It runs on every push in CI. Previously it could report success while a fatal error had occurred; a fatal now fails the build.
+
+---
+
 ## [2.40.0] - 2026-07-12  ·  _Minor_
 **Editorial Transparency, Near-Duplicate Protection, and a Tighter CSP**
 
