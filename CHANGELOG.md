@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.40.0] - 2026-07-12  ·  _Minor_
+**Editorial Transparency, Near-Duplicate Protection, and a Tighter CSP**
+
+### Added
+- Editorial Details panel in the post editor: declare the sources a post is based on (one URL per line — they are emitted as schema.org citations on the published page), record an original-contribution note, disclose AI usage (none / AI-assisted / AI-generated, human-reviewed), and flag YMYL content. Everything is optional, stored per post, and requires no theme changes.
+- Content-similarity protection in the quality gate: in addition to the existing title checks, the gate now measures body-level overlap between a new post and the last 120 published posts. Content that overlaps above the threshold (default 80%, configurable in Settings) is blocked before publishing; noticeably-similar content produces a cannibalization warning. This closes the near-duplicate class that title checks alone cannot see.
+- The publishing-policy acceptance test now runs automatically: it is wired into both the local release gate and the CI pipeline, so no future change can silently reopen a publish path around the quality gate.
+
+### Security
+- Content-Security-Policy hardened: 'unsafe-eval' removed from script-src after a full inventory (no first-party or third-party script in use requires eval). 'unsafe-inline' remains by documented decision — themes use inline scripts and the Custom Header Scripts feature outputs user-pasted snippets that cannot carry nonces.
+
+---
+
 ## [2.39.0] - 2026-07-12  ·  _Minor_
 **Publishing Policy: One Gate, Your Choice, an Honest Record**
 
