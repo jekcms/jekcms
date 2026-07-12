@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.39.0] - 2026-07-12  ·  _Minor_
+**Publishing Policy: One Gate, Your Choice, an Honest Record**
+
+### Added
+- A single publishing policy now governs every path that can put a post live — the AI draft screen, the content queue, scheduled publishing, the REST API and n8n webhooks. Automatic publishing remains entirely your choice: if you turn it on, posts go live without review, exactly as you asked. What changed is that no path can quietly skip the quality gate while it is switched on, and every publication is recorded honestly.
+- Publication audit trail: each post now records how it reached the reader — its source (manual, AI, JSON, n8n, API, queue) and its publication mode (draft, scheduled, automatic, reviewed). When a human editor approves a post, jekcms stores who approved it, when, and a fingerprint of the exact content they approved. Automatic publishing never fabricates a human approval — it is recorded as automatic, plainly.
+- Approval invalidation: if an approved post is edited afterwards, the stored fingerprint no longer matches and the old approval is treated as void.
+- Risk notices in the admin: the AI Draft, JSON Import and content automation screens now carry a permanent, non-blocking note explaining that generated or imported content can be inaccurate or low-value, that publishing without review can affect search visibility, and that the choice of draft, schedule or direct publish is yours. Turning auto-publish on, or turning the quality gate off, shows a visible warning next to the setting — never a modal, never a forced checkbox.
+
+### Fixed
+- The AI draft screen wrote posts straight to the database and never consulted the quality gate, even when the gate was switched on. It now goes through the same publishing policy as every other path; if the gate holds a post back, it is saved as a draft and the reasons are shown.
+
+---
+
 ## [2.38.0] - 2026-07-12  ·  _Minor_
 **Honest Freshness Signals, a Content Quality Gate for Automation, and Full-Document Revision Restore**
 
