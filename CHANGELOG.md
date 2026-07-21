@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.46.4] - 2026-07-22  ·  _Patch_
+**SEO Tools Accuracy Pass: ads.txt False Negative, Honest Heading Warnings, Stale-Year Scanner, and a Code-Style SERP Report**
+
+### Improved
+- The SERP Identity Check turned from a raw text dump — unreadable on the dark admin theme — into a GitHub-style code window: line numbers, syntax coloring on the admin's own theme tokens (correct in light and dark), a clean/review status chip, one-click copy, and the old plain-text output still available for support scripts.
+
+### Fixed
+- SEO Health Check could report ads.txt (and favicon) as missing while the file was live: the checker requests a byte range, and web servers answer static files with HTTP 206 Partial Content — which the check treated as failure. 206 is now recognized as success and redirects are followed, so sites with a physical ads.txt are reported truthfully.
+- The Heading Fixer's "starts lowercase" warning looked wrong because it never said WHICH heading it meant — it checks subheadings inside the article body, not the post title, so a flag on "Linux RAID Setup: mdadm…" read like a false alarm. The warning is now honest twice over: the label says "a content subheading", the message quotes the actual heading text, and the technical-term whitelist grew by ~40 commands (mdadm, vmstat, iostat, netsh, adb and friends) so command-titled sections are no longer flagged at all.
+- The Year Updater only suggested last year by default, quietly missing older leftovers. It now scans every title and slug for any past year and shows them as clickable chips — "2021: 4 posts, 2019: 2 posts" — one click selects that year for the bulk update.
+
+---
+
 ## [2.46.3] - 2026-07-22  ·  _Patch_
 **Advanced SEO Ships Active by Default — the Single SEO Panel Works Out of the Box**
 
