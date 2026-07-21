@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.44.0] - 2026-07-21  ·  _Minor_
+**Person Publisher Support, an SEO Signal Test Matrix for All Themes, and Single-H1 / Language Fixes**
+
+### Added
+- Publisher type setting: a personal site can now publish its structured-data publisher as a Person instead of an Organization. Pick "Person" under Settings → SEO and the WebSite node, article publisher references and the about-page reference all switch to a single Person identity — with the contact e-mail expressed the way a Person node expects it. Business sites are untouched: the default remains Organization, and nothing changes unless you opt in.
+- An SEO signal regression matrix now guards every release. It activates all fourteen themes in sequence on a live test install and asserts, for each one: exactly one WebSite JSON-LD node; the site name — Turkish characters included — reproduced identically in WebSite.name, og:site_name and the page title; no auto-generated alternateName; the correct publisher type (both Organization and Person modes are exercised); exactly one visible H1; the right html lang; canonical equal to og:url; valid JSON-LD; and no character corruption. The harness ships in the repository and runs as part of the release gate.
+
+### Improved
+- One positioning sentence, everywhere: jekcms is a self-hosted CMS for publishers and agencies with built-in SEO and image optimization, running on standard PHP + MySQL hosting. The vague "Next-Gen Smart CMS" phrasing is gone from the homepage, metadata, structured data and the admin login — and so are claims we can't prove: "24/7 support" now reads as support actually works (e-mail, response within 24–48 business hours), "Enterprise Security" now names the real controls (2FA, CSRF protection, rate limiting), and the theme count says exactly 14. The n8n integration is described in one place, as what it is: content arrives as drafts and publishes only after your editorial approval. A security.txt contact file is now published as well.
+
+### Fixed
+- The minimalist theme's homepage rendered two H1 headings — the brand in the header and the featured post title. The featured post title is now an H2, so every page has exactly one visible H1 and the brand heading keeps carrying the site-name signal to Google.
+- Seven themes read the site language through a helper that falls back to Turkish, while the other themes fell back to English — on a fresh install where no language row existed yet, the same site could declare html lang="tr" on one theme and lang="en" on another. All fourteen themes now read the same source, which follows the language chosen during installation.
+- The crypto theme's error and maintenance pages hardcoded lang="tr" regardless of the site's language; they now follow the site language setting.
+- The "Powered by jekcms" footer credit across all themes now carries rel="nofollow". It is a technology credit for readers, not an SEO signal — sitewide template links from one network shouldn't pass link authority, and search engines discount them anyway.
+
+---
+
 ## [2.43.4] - 2026-07-21  ·  _Patch_
 **Theme Switching Verified End-to-End — About and Contact Now Work on Every Theme**
 
