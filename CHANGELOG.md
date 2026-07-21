@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.45.3] - 2026-07-21  ·  _Patch_
+**AdSense Readiness: Stored Scans Auto-Refresh After a Plugin Update**
+
+### Fixed
+- After updating the plugin, the dashboard could keep showing the previous version's stored scan — old wording, and no "Show posts" modal button, because that list simply doesn't exist in the old result. The panel now compares the stored scan's plugin version on load and silently re-runs the audit when it's stale, so a new feature never appears to be "missing" just because the visible result predates it. The scan is measurement-only and changes nothing on the site.
+
+---
+
 ## [2.45.2] - 2026-07-21  ·  _Patch_
 **AdSense Readiness: Sticky Insight Panel, Full-Width Header, and a Post-List Modal**
 
