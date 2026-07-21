@@ -8,6 +8,82 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.43.3] - 2026-07-21  ·  _Patch_
+**AI Keys Encrypted at Rest Everywhere, and the Main CI Pipeline Now Runs Every Quality Gate**
+
+### Improved
+- The main GitHub deployment pipeline now runs the same quality gates as a local release: the fresh-install acceptance test, the hardening regression suite, the schema linter and the i18n linter all execute on every push to main — a regression in any of them stops the deployment before it reaches production. The hardening suite itself grew to 37 checks, including real cryptographic behavior tests for the new key vault (plaintext never lands in the stored JSON, legacy entries migrate, masked hints never leak the full value).
+- The fresh-install schema now includes the multi-key AI columns, which previously existed only in a secondary schema file — saving multiple Gemini keys on a brand-new install could fail with a database error.
+
+### Security
+- AI provider API keys are no longer stored in plaintext anywhere. The multi-key Gemini list and the flat provider key fields (OpenAI, Groq, Cohere, Claude) previously saved raw keys into the database and echoed them back into the settings form HTML. Keys are now encrypted with authenticated AES-256-GCM before they touch the database, the settings form shows only a masked hint and never echoes a stored key, and every consumer — content tools, cron, connection tests — reads through the same decryption gate. A one-shot migration converts existing plaintext records automatically on the next cron pass, verified end-to-end on a real database.
+- Signing out is a pure POST form now. The interim design carried the CSRF token in a GET link, which could land in access logs, browser history and prefetchers; the admin logout links are now styled POST forms, so the token never appears in a URL.
+- A short mixed-version window could crash AI key reads: the migration check called a brand-new method without guarding against the older class still being loaded mid-deploy. All migration detection now runs behind a guarded helper and inside its own try block, with failures logged instead of swallowed.
+
+---
+
+## [2.43.2] - 2026-07-21  ·  _Patch_
+**Review Follow-up: Crypto Edge Case, Transparent Secret Migration, CSRF-Protected Logout, and Permanent Hardening Tests**
+
+### Fixed
+- Decrypting an encrypted empty value works again. The new authenticated-encryption format rejected the shortest valid packet (a zero-byte ciphertext), breaking the encrypt/decrypt round-trip contract for empty strings.
+- The schema linter's success message now reports the number of currently open findings instead of the raw baseline line count, which had kept showing already-resolved entries.
+
+### Security
+- Stored secrets now migrate to authenticated encryption on their own. When an AI provider key or a Google OAuth token stored in the legacy format is read successfully, it is transparently re-saved in the new integrity-checked format — long-lived secrets no longer wait for the user to re-enter them.
+- Signing out is now CSRF-protected. A plain GET to the logout address could previously be triggered by an external page to force-end an admin session; logout now requires a valid token (admin links carry it — still one click) and shows a small confirmation page otherwise.
+- The audit fixes are locked in by a permanent hardening test suite that runs on every release: encryption round-trips including the empty-value and tampering cases, route targets that must exist, fail-closed API role checks, the cron result contract, and error-message masking. A regression in any of these now blocks the release.
+
+---
+
+## [2.43.1] - 2026-07-21  ·  _Patch_
+**Audit Fixes: Reliable Cron Output, Working /login Route, and Authenticated Encryption**
+
+### Fixed
+- The cron runner no longer crashes when a run is already in progress. The lock branch returned a bare error string while the CLI reporter expected structured results, producing a fatal error on every overlapping run — and the shutdown path then tried to send an HTTP status from the command line, masking the original error. The result contract is now uniform, the reporter is defensive, and CLI errors go to stderr with a proper exit code.
+- The public /login and /logout routes work again. They pointed at an auth/ directory that never shipped, so every hit returned a server error; they now redirect to the admin login and logout pages.
+- The optional AI bulk worker no longer logs database errors on installations without its table: the web-side tick now checks for the table first, exactly like the cron side always did.
+- Two more fresh-install schema gaps closed by the new acceptance test: scheduled task results and the social queue's completion timestamp now exist in the shipped schema, and failed tasks write to the correct error column.
+
+### Security
+- Stored secrets are now protected with authenticated encryption. Encrypted values (AI provider keys, Google OAuth tokens) previously used AES-CBC without an integrity check, so a tampered ciphertext could not be detected. New values are written as versioned AES-256-GCM; existing records keep decrypting and migrate transparently as they are re-saved.
+- The API's write authorization is now fail-closed: a user record with an empty or unknown role gets no write capabilities instead of inheriting full admin rights through a legacy fallback.
+- API error responses no longer echo raw exception details. Clients receive a fixed message with a correlation ID; the full detail goes only to the server log.
+
+---
+
+## [2.43.0] - 2026-07-20  ·  _Minor_
+**Offline Documentation in Every Package, and Fresh-Install Schema Repairs**
+
+### Added
+- The installation package now ships the full documentation offline. All 37 guides are bundled as self-contained HTML in both English and Turkish under documentation/ — no external assets, readable without an internet connection. The admin panel's "How to use this" links open the local copy first and only fall back to jekcms.com when the folder is absent, so in-product help keeps working even if the vendor site is unreachable.
+- One-click sample content. On an empty site, the Posts screen now offers to load six short, well-formatted starter articles across three categories — with generated cover images — so a fresh install shows what your theme really looks like. The samples double as a formatting guide (headings, lists, quotes, images) and are removed with a single click, covers and categories included, without touching anything you created yourself.
+- Fresh-install acceptance testing joined the release pipeline. Every release now installs the shipped database schema into a clean MySQL and runs the product's critical write paths against it in strict mode — the class of bug where code writes a column the packaged schema doesn't know is caught before a package ever reaches a customer. The internationalization check runs in the same pipeline, so untranslated admin text can no longer slip into a release unnoticed.
+
+### Fixed
+- Creating an API key on a fresh install works again. The admin screen stores API keys as a SHA-256 hash, but the shipped schema still described the old plaintext-token layout, so the very first "Create key" click on a new install failed with a database error. The schema now matches the code, and existing installations are repaired automatically on their next cron pass.
+- Automation logging and the social share queue no longer lose data on strict-mode databases. The automation log rejected entries whose source was "system" or "admin" (values the code actually writes), and the social queue had nowhere to store the published-at time and the platform's post ID after a successful share. Both tables are aligned with the code and heal themselves on existing installations.
+- The pricing page FAQ no longer claims online payments are "coming soon" while the checkout buttons on the same page are live — it now explains card payment, instant delivery, and the invoice/bank-transfer option honestly, in both languages.
+
+---
+
+## [2.42.0] - 2026-07-14  ·  _Minor_
+**Auto-Activated Plugins Now Create Their Tables, a Rate-Limited License Endpoint, and Gates That Are Honestly Green**
+
+### Improved
+- Fleet consistency checks now cover every managed site and every core file. Two sites were outside the drift gate and had silently fallen behind the core: seven admin screens (customers, invoices, orders, support tickets, billing settings) were guarded only by "must be logged in" instead of "must be an admin". They are back in line with the core, and the gate now watches them.
+- Line endings are pinned to LF via .gitattributes. Without it the drift gate reported hundreds of phantom mismatches on Windows checkouts — noise a genuine drift could hide in.
+
+### Fixed
+- Auto-activated plugins now install their database tables on a fresh install. A plugin marked AutoActivate was switched on automatically, but its activate.php — which creates the tables — only ever ran when you toggled the plugin by hand in the admin. On a brand-new install Newsletter therefore appeared active while newsletter_campaigns, email_templates, newsletter_queue, newsletter_clicks and email_logs were never created, and the Campaigns screen died with a fatal error. Activation now runs once per plugin version, is idempotent, adds no query on the hot path, and repairs installations that are already in the broken state on their next request. If one plugin fails to install its schema, the site stays up and the attempt is retried.
+- Author social links, the reader-facing editorial box and the similarity gate carry the fixes shipped since 2.41.0: social profiles were invisible on author archives in seven themes, and the similarity gate now uses roughly a quarter of the memory it used to on large sites (measured: 64MB → 16MB on a 2,000-post blog).
+
+### Security
+- The license activation endpoint is now rate limited (20 attempts per IP per hour). Heartbeat already had a limiter; activation did not, which left it usable as an unthrottled oracle for guessing license keys. The counter is per IP rather than per key, because an attacker tries a different key on every request.
+- The release tooling no longer reads credentials from the git remote URL, and the secret preflight now scans .git/config as well — a token embedded in a remote URL is invisible to a tracked-files scan.
+
+---
+
 ## [2.41.0] - 2026-07-13  ·  _Minor_
 **Editorial Transparency Readers Can See, Paraphrase-Aware Similarity, and a Test That Actually Runs**
 
@@ -17,7 +93,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Editorial checklist in the post editor: missing sources, missing original-contribution note or an undisclosed AI usage are listed as informational reminders. YMYL-flagged posts without sources or without a human approval are called out. Nothing here ever blocks publishing.
 
 ### Improved
-- Content-similarity protection now catches rewrites, not just copies. Three measures work together: verbatim overlap (5-gram), partial copy (containment — a copied section buried inside an otherwise original post), and term overlap (TF-IDF cosine — the same article rewritten with different sentences). Each has its own threshold in Settings. The comparison window grew from the last 120 posts to a configurable 500, and each post is compared over 20,000 characters instead of 8,000.
+- Content-similarity protection now catches rewrites, not just copies. Three measures work together: verbatim overlap (5-gram), partial copy (containment — a copied section buried inside an otherwise original post), and term overlap (TF-IDF cosine — the same article rewritten with different sentences). Each has its own threshold in Settings. The comparison window grew from the last 120 posts to a configurable 500, and each post is compared over its first 12,000 characters (chunked, so a wider scope does not raise memory use).
 - Honest naming: this is lexical near-duplicate and term-overlap protection, not embedding-based semantic analysis. It catches verbatim copies, near-duplicates, reordered sentences, embedded partial copies and same-term rewrites; it does not claim to catch two posts that target the same search intent with entirely different wording. The acceptance test fails the build if the product ever over-claims this.
 
 ### Fixed
