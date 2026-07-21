@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.45.1] - 2026-07-21  ·  _Patch_
+**AdSense Readiness: 5 New Checks, a Legal-Page False Negative Fixed, and a Polished Dashboard**
+
+### Added
+- Five new checks in the AdSense Readiness audit. SSL certificate: a real TLS handshake verifies the chain and reports the issuer and days until expiry (expiring within 14 days warns, expired fails). Domain: the site must live on a real domain — an IP address or a bare host fails, and IDN (unicode) domains get a punycode heads-up. Google bot access: the homepage is actually requested with Googlebot and Mediapartners-Google user agents to prove the server doesn't block the crawlers AdSense review depends on (honestly labeled as an in-server test — a CDN/WAF in front should also be verified externally). noindex is now its own heavyweight check covering both the homepage meta tag and the SEO setting. Meta description: presence and length of the homepage description (target 120–160 characters).
+
+### Improved
+- The dashboard got a design pass: the five category cards now sit in a single equal-width row with ellipsized titles (no more ragged two-line wrapping), and the previously empty right side of the score hero hosts a compact "maturity — honest note" summary with a link to the full text. Status filters became a proper segmented control, fix buttons are now solid primary actions, cards gained consistent depth and hover states, and the score ring color follows the overall verdict instead of the raw number — no more green ring next to "fix the gaps".
+
+### Fixed
+- Legal pages were reported missing on sites that serve them through the built-in route templates instead of database pages. jekcms renders complete, AdSense-compliant legal texts at /privacy-policy, /cookie-policy and friends even when no page row exists — the audit now recognizes both paths (plus every slug alias, Turkish and English), and the About/Contact checks follow the same logic: a database page, a theme template or the contact-form plugin all count; only sites left with the bare built-in fallback get a warning.
+- Clicking a category card scrolled the section heading under the fixed admin header, landing mid-section. Anchor targets now reserve headroom, so every jump lands with the section title fully visible.
+
+---
+
 ## [2.45.0] - 2026-07-21  ·  _Minor_
 **New Plugin: AdSense Readiness — a Full Site Audit Through a Reviewer's Eyes**
 
