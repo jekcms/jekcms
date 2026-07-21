@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.45.2] - 2026-07-21  ·  _Patch_
+**AdSense Readiness: Sticky Insight Panel, Full-Width Header, and a Post-List Modal**
+
+### Added
+- Checks that carry a post list — thin content first — now open a modal: every affected post is listed by title with its word count, and clicking a row opens that post's edit screen in a new tab. No more hunting post IDs from a summary sentence; the list is capped at 200 rows with an honest "first N of M shown" note beyond that.
+
+### Improved
+- The empty right side of the AdSense Readiness dashboard is now a sticky insight panel that follows you as you scroll. It carries the full "maturity — honest note" (why green checks alone don't guarantee approval, with your site's first-publish date and last-30-days output), an application-process card with the key numbers (2–14 day review, ~1 week wait after a rejection), and an application-day checklist: single-source AdSense snippet, automatic ads.txt verification, Search Console, and keep-publishing-during-review.
+- The header now spans the full layout: the intro paragraph is no longer truncated into a narrow column, and the Re-scan button sits at the far right of the title row.
+
+---
+
 ## [2.45.1] - 2026-07-21  ·  _Patch_
 **AdSense Readiness: 5 New Checks, a Legal-Page False Negative Fixed, and a Polished Dashboard**
 
