@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.45.0] - 2026-07-21  ·  _Minor_
+**New Plugin: AdSense Readiness — a Full Site Audit Through a Reviewer's Eyes**
+
+### Added
+- AdSense Readiness plugin: one click scans your site the way an AdSense reviewer would — about 30 real measurements across five areas. Content: published post count against the 25+ target, average post length, thin posts under 300 words listed one by one, category structure (no empty or 3-post-starved categories), duplicate titles, publishing freshness, leftover "lorem ipsum" and still-installed sample content. Legal & trust: all four legal pages (privacy, cookie, terms, disclaimer — the built-in generator creates them in one click if missing), a real About page, a reachable contact channel and the cookie-consent banner. Authors: every active author checked for a real bio in the 3–5 sentence sweet spot (overlong "epic" bios are flagged too), job title, photo, and posts piled onto a single admin account. Technical: HTTPS, site name/tagline/logo, live homepage fetch (indexability, schema, og:site_name, single H1), sitemap.xml, robots.txt access for Googlebot and Mediapartners-Google, 404 behavior and Search Console verification. AdSense: snippet detection with an explicit double-loader warning, and ads.txt validation against your pub-id.
+- Every finding shows the measured value — "18 posts (target: at least 25)", not a vague tip — and ships with a direct fix link into the right admin screen: legal page generator, user profiles, category manager, settings. A weighted 0–100 readiness score with an animated gauge, per-category progress bars and status filters (missing / warnings / passed) make the gap list actionable at a glance.
+- The report is honest by design: an unscored "maturity" panel states clearly that technical hygiene is necessary but not sufficient — real traffic, site age and perceived content value drive the final decision — and documents the typical 2–14 day review window and the wait-before-reapplying rule. The plugin never promises approval; it removes every reason to be rejected on the measurable side.
+
+---
+
 ## [2.44.0] - 2026-07-21  ·  _Minor_
 **Person Publisher Support, an SEO Signal Test Matrix for All Themes, and Single-H1 / Language Fixes**
 
