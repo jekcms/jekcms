@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.46.1] - 2026-07-22  ·  _Patch_
+**Customizer Polish: Light/Dark Color Rows Are Now One Aligned Component**
+
+### Fixed
+- The light/dark color pair introduced in 2.46.0 looked cluttered: the disabled dark swatch was squeezed into a thin gray sliver by the flex layout, the two rows didn't line up, and the override checkbox floated awkwardly at the end. Each color is now a single aligned component — a fixed four-column grid (sun/moon tag, swatch, hex, control) shared by both rows, so swatches and hex fields sit exactly under each other; the checkbox became a proper toggle switch; and a disabled dark row dims cleanly with a "theme default" placeholder instead of collapsing.
+
+---
+
 ## [2.46.0] - 2026-07-22  ·  _Minor_
 **Theme Customizer, Reworked: Separate Light & Dark Palettes, New Theme-Specific Sections**
 
