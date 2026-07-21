@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.46.5] - 2026-07-22  ·  _Patch_
+**Dark Theme Pass: the Root Cause of White Boxes Fixed, With a Permanent Guard**
+
+### Improved
+- The SERP Identity report's code window now uses a fixed GitHub-dark palette — identical and fully readable in both the light and the dark admin theme, instead of inheriting ambient colors that could lose contrast.
+
+### Fixed
+- Several admin screens kept glaring white patches in dark mode — the contact messages card, the sticky "Save settings" bar, the social-profiles box on the user form, the backup info strip. The root cause was one pattern, not many bugs: pages referenced CSS variables under local names (--card-bg, --admin-surface, --bg-subtle…) that the admin stylesheet never defines, so their light fallback color won in every theme. Those names are now bridged to the real theme tokens in one place, the remaining hardcoded light strips were converted to tokens, and a static guard runs with the release gate: any future undefined variable with a light fallback fails the build before it can ship a white box.
+- Browser autofill was punching light-lavender fields into dark forms (social connections, backup inputs). Autofilled inputs now keep the admin theme's own background and text color.
+
+---
+
 ## [2.46.4] - 2026-07-22  ·  _Patch_
 **SEO Tools Accuracy Pass: ads.txt False Negative, Honest Heading Warnings, Stale-Year Scanner, and a Code-Style SERP Report**
 
