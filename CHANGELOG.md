@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.46.3] - 2026-07-22  ·  _Patch_
+**Advanced SEO Ships Active by Default — the Single SEO Panel Works Out of the Box**
+
+### Improved
+- The Advanced SEO hub — the single panel that 2.46.2 made the one way into every SEO tool — used to require manual activation on a fresh install, which would have left new sites with the old scattered entry points until someone flipped the switch. The plugin now activates itself on first install, so the sidebar entry, the module menu and the single-navigation routing are all there from minute one. Existing installs are untouched: whatever activation state you chose stays exactly as it is.
+
+---
+
 ## [2.46.2] - 2026-07-22  ·  _Patch_
 **One SEO Panel: Duplicate Entry Points Now Route to the Advanced SEO Hub, Legacy Duplicate Screens Retired**
 
