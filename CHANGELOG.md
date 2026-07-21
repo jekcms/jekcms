@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.46.2] - 2026-07-22  ·  _Patch_
+**One SEO Panel: Duplicate Entry Points Now Route to the Advanced SEO Hub, Legacy Duplicate Screens Retired**
+
+### Fixed
+- The standalone SEO Optimizer page and the Advanced SEO hub were the same tool with two front doors: the dashboard's "SEO score" tiles opened /seo-optimizer.php directly, where the sidebar showed no active section and the hub's module menu was missing. Every tool embedded in the Advanced SEO hub (optimizer tabs, health check, heading fixer, content optimizer, auto-linker, redirects and friends) now routes its direct URL into the hub with the right module selected — old links and bookmarks keep working, the sidebar highlights correctly, and there is exactly one way in. The routing is careful: POST requests, embedded (iframe) loads and unknown internal tabs are never redirected, and if the Advanced SEO plugin is deactivated the standalone pages behave exactly as before.
+- Two hidden screens left over from old versions were retired into safe redirects, found by a full inbound-link scan of the admin: "Advanced Ad Manager" duplicated banners.php on the same database table, and "Content Scheduler" duplicated the Content Queue — worse, it carried its own outdated CREATE TABLE that could seed a fresh install with the wrong schema. Both now 301 to their successors; nothing was deleted, old bookmarks land in the right place.
+- The WordPress REST API migration tool existed but was linked from nowhere — you could only reach it by typing the URL. It now has a visible entry on the Import screen, next to the SQL/CSV path it complements.
+
+---
+
 ## [2.46.1] - 2026-07-22  ·  _Patch_
 **Customizer Polish: Light/Dark Color Rows Are Now One Aligned Component**
 
