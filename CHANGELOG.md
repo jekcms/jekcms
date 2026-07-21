@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.43.4] - 2026-07-21  ·  _Patch_
+**Theme Switching Verified End-to-End — About and Contact Now Work on Every Theme**
+
+### Improved
+- Theme switching itself was exercised the way a real user would do it: all fourteen themes were activated in sequence on a live test install — each activation running the theme's own migration hook — and after every switch, eight real pages (home, a post, a category, search, about, contact, a static page, and the 404 page) were fetched over HTTP and checked for errors. 112 page loads, zero failures. Per-theme customizations were also verified to survive a switch away and back, without leaking into the other theme's settings. The test harness ships in the repository so this can be re-run before any release.
+
+### Fixed
+- Switching themes no longer breaks the About and Contact pages. Eleven themes ship without their own about template (and two without a contact template); on a site that hadn't created those pages yet, switching from a theme that had the template to one that didn't turned working footer links into 404s. The router now falls back to an honest built-in default rendered through the theme's page template — with the contact form auto-injected — and the moment you create a real "about" or "contact" page in the admin, your content takes over.
+- Three themes (crypto, minimalist, health) ignored page content handed to them by the router and re-queried the database by slug, which broke the new built-in defaults and any router-provided page. They now use the provided content first, exactly like the other eleven themes.
+
+---
+
 ## [2.43.3] - 2026-07-21  ·  _Patch_
 **AI Keys Encrypted at Rest Everywhere, and the Main CI Pipeline Now Runs Every Quality Gate**
 
