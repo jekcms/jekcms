@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.46.0] - 2026-07-22  ·  _Minor_
+**Theme Customizer, Reworked: Separate Light & Dark Palettes, New Theme-Specific Sections**
+
+### Added
+- Every color in the theme customizer can now be set separately for light and dark mode. Each color shows a Light and a Dark picker; the dark value is written under the theme's real dark mechanism — the data-theme attribute on ten themes, the .dark-mode class on Finance, and the system preference (prefers-color-scheme) on Lifestyle. An "override" switch per color keeps the theme's own dark tone until you opt in, and themes without a dark mode (Crypto is light-only, Tech is dark-native) simply don't show dark pickers — no fake settings. All twelve theme-specific schemas gained the pairing automatically, without a single line changed in their definitions.
+- Minimalist and Lifestyle — the two themes that had been falling back to a thin generic panel — got full, hand-written customizer schemas wired to their actual stylesheets: every color maps to the variable the theme really uses (defaults read from the CSS itself, including Minimalist's dark block), font pickers, layout controls (content width; on Lifestyle also section spacing and grid gap), and real section toggles that were wired into the templates — hero, categories bar and newsletter on the homepage; breadcrumbs, share buttons, author card and related posts on articles (Lifestyle additionally: table of contents and the popular-posts widget). Toggles physically remove the markup, they don't just hide it.
+- The default schema for future themes also grew: heading, border and surface colors, body line-height, and font pickers that emit their CSS variables directly.
+
+### Improved
+- jekcms.com now tells both stories on the features page: the reworked Theme Customizer (with its light/dark palettes) and the AdSense Readiness plugin shipped in 2.45 — described honestly, including that approval is always Google's call.
+
+### Fixed
+- The Lifestyle theme's customizer had never actually worked: the theme's header never printed the customization stylesheet, so every saved setting was silently ignored. The calls are now in place — and covered by a behavior test that catches any theme dropping them again.
+- The customizer spoke Turkish to English admins in two themes: Personal and Trends had their panel labels written in Turkish inside the theme definition, and the translation dictionary only worked in one direction. All their labels are now bilingual at the source, help texts pass through localization too, a reverse mapping catches any legacy Turkish label, and a new two-language scan across all fourteen themes runs with the test suite — zero leakage, permanently guarded.
+
+---
+
 ## [2.45.3] - 2026-07-21  ·  _Patch_
 **AdSense Readiness: Stored Scans Auto-Refresh After a Plugin Update**
 
