@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.47.2] - 2026-07-22  ·  _Patch_
+**Cloudflare Wizard Matched to the Real Onboarding Flow: DNSSEC, AI Policies, and the MX/TXT Nuance**
+
+### Improved
+- The Cloudflare setup wizard now mirrors Cloudflare's current add-site flow step by step: Domains → Add domain → "Connect a domain", the new "AI training & search policies" screen (with a jekcms recommendation — Search: Allow and Agent: Allow so you stay visible to search and AI answer engines, matching your llms.txt), picking the Free plan, and reviewing the auto-scanned DNS records before activation.
+- Two easy-to-miss but breaking details are now called out explicitly. Turn DNSSEC OFF at your registrar before switching nameservers — leaving it on while you move NS to Cloudflare makes the site completely unreachable. And keep email records (MX, SPF/DKIM TXT) grey "DNS only" while web records (A/AAAA/CNAME) go orange (proxied) — proxying mail records breaks delivery.
+- The token step now points at the shorter path too (Overview → API → "Get your API token", or My Profile → API Tokens), and the step indicator reflects the real four phases: Connect, Plan + DNS, NS, Token.
+
+---
+
 ## [2.47.1] - 2026-07-22  ·  _Patch_
 **Cloudflare Wizard Leveled Up: Polished Steps, Current Dashboard Paths, and a Bot Fight Mode Warning**
 
