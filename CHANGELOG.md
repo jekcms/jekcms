@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.47.0] - 2026-07-22  ·  _Minor_
+**New Plugin: Cloudflare — a CDN + WAF Edge Layer With a jekcms-Aware Setup Wizard**
+
+### Added
+- A Cloudflare plugin puts an optional CDN + WAF layer in front of your site — extra protection and speed on top of jekcms's built-in security (2FA, encrypted keys, signed updates), not instead of it. A four-step wizard walks you through it: create a free Cloudflare account and add your domain, change your nameservers (with the exact NS to set at your registrar), create a scoped API token (the wizard lists the precise permissions — Zone Settings, Cache Purge, Firewall — limited to this one site), then paste the token to connect. The token is stored encrypted with the same AES-256-GCM vault used for AI keys, and is never shown again.
+- One click applies the settings that actually fit jekcms — and each one explains why: SSL Full (Strict) because "Flexible" would loop against the server's own http→https redirect; Always Use HTTPS; a TLS 1.2 floor; HTTP/3 and Brotli for speed; a sensible security level and browser integrity check.
+- A second one-click step writes the exception rules that keep jekcms working behind Cloudflare — the part a generic plugin gets wrong. Cloudflare's bot/challenge layer is told to skip /api/v1 (n8n and integrations), the scheduled-publishing loopback and the analytics beacon, and robots/sitemap/ads.txt — without these, scheduled posts, automation and search/AdSense crawling silently break. The real visitor IP is already restored safely from CF-Connecting-IP for rate limiting and logs.
+- The status panel shows zone/SSL/security state live, offers one-click cache purge and an "I'm Under Attack" switch, and deep-links to Cloudflare's own WAF editor for your custom rules — deliberately kept there, since a mis-written rule can lock you out. Publishing, updating or deleting a post now purges the affected URLs from the edge automatically. A test (mock) mode lets you preview the whole flow before connecting a real token.
+
+---
+
 ## [2.46.5] - 2026-07-22  ·  _Patch_
 **Dark Theme Pass: the Root Cause of White Boxes Fixed, With a Permanent Guard**
 
