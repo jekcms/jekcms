@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.47.1] - 2026-07-22  ·  _Patch_
+**Cloudflare Wizard Leveled Up: Polished Steps, Current Dashboard Paths, and a Bot Fight Mode Warning**
+
+### Improved
+- The Cloudflare setup wizard was rebuilt to feel like a real onboarding flow: a visual step indicator, a value strip (protection / speed / jekcms-aware), and richer step content with breadcrumb-style dashboard paths that match Cloudflare's current interface — creating a custom token now lists the exact permissions to grant (Zone Read, Zone Settings Edit, Cache Purge, Firewall Services Edit) scoped to the one site, and each step points at the right menu (Overview, DNS, My Profile → API Tokens).
+- A critical-warnings block now surfaces two things the API can't safely automate: keep Free-plan Bot Fight Mode OFF — it is aggressive and does NOT honor the jekcms skip rules, so turning it on breaks scheduled publishing, n8n and search/AdSense crawling — and make sure your DNS records are proxied (orange cloud) or the whole CDN/WAF layer is bypassed. The advanced panel also links straight to Cloudflare's Bot settings and WAF custom-rules pages.
+
+---
+
 ## [2.47.0] - 2026-07-22  ·  _Minor_
 **New Plugin: Cloudflare — a CDN + WAF Edge Layer With a jekcms-Aware Setup Wizard**
 
