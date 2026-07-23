@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.54.1] - 2026-07-23  ·  _Patch_
+**Customizer: Live Sidebar Preview and a Dropdown Fix**
+
+### Added
+- The Sidebar tab now has its own live preview: the widget stack on the right mirrors your changes instantly — switch a widget on or off or drag it to a new spot and the preview follows.
+
+### Fixed
+- Opening a layout card's variant dropdown could nudge the card's content upward and clip its title. Cards no longer scroll internally, so the dropdown opens cleanly every time.
+
+---
+
 ## [2.54.0] - 2026-07-23  ·  _Minor_
 **The Health Theme Goes Modular: Drag-and-Drop Homepage, Widget Sidebar and Post-Page Blocks**
 
