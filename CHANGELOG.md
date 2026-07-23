@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.51.3] - 2026-07-23  ·  _Patch_
+**One Brand Voice: jekcms Now Introduces Itself the Same Way Everywhere**
+
+### Added
+- EULA 2.1: the agreement now records the jekcms trademark application before the Turkish Patent and Trademark Office (Application No. 2026/095211, Nice Classes 09 and 42), turning the trademark clause from a general statement into a verifiable fact.
+
+### Improved
+- jekcms now speaks with one voice: the positioning is "Next-Generation Blog CMS", the homepage slogan is "Start Your Blog. Publish Your Posts." and a single product definition explains what it manages (posts, pages, images and comments in one panel). The same wording now appears on the marketing site, the admin login screen, the license screen and site metadata — replacing four different, jargon-heavy taglines that each described the product differently.
+- Technical qualifiers like "self-hosted" and hosting requirements moved out of the first impression and into the feature and comparison sections where technically minded buyers actually look for them.
+
+---
+
 ## [2.51.2] - 2026-07-23  ·  _Patch_
 **License Protection Hardened: Installations Now Report Their Integrity, and Every Copy Stays Traceable**
 
