@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.53.2] - 2026-07-23  ·  _Patch_
+**Customizer Polish: A Unified Appearance Tab with Rich Typography, One Toggle Language and Pixel-Aligned Cards**
+
+### Added
+- A new Appearance tab gathers Colors and Typography in one place — and both grew up. Typography now controls body text size, heading size, line height, paragraph spacing and content column width; Colors gained muted text, border and content-link colors. Defaults match the current look exactly, so nothing changes until you change it.
+- The homepage hero and categories cards absorbed their text options (kicker tag, button label, section title) into their gear settings — the loose, confusing text-field pile at the bottom of the Homepage tab is gone.
+
+### Improved
+- The tab bar is now truly page-first: Homepage, Post Page, Sidebar, Appearance, Advanced. Layout cards align pixel-perfect — variant menus have a fixed width (no more shifting when you pick an option), and every card reserves the same columns so all toggles line up vertically.
+- One toggle language everywhere: the customizer now uses the same switch component as the rest of the admin. The layout preview also reflects your variant choice by name, and the Reset Layout button moved up into the tab header where it belongs.
+
+---
+
 ## [2.53.1] - 2026-07-23  ·  _Patch_
 **Detail Controls, WordPress-Grade: Block Design Variants, Sticky Widgets and Post-Header Structure**
 
