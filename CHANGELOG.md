@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.57.0] - 2026-07-23  ·  _Minor_
+**The Menu Tab Grows Up: Five Designs Including Floating Box and Two-Tier, Plus Logo Size and Padding Controls**
+
+### Added
+- Two new menu designs join the visual picker (Personal and Health): Floating Box — the menu sits in a rounded, softly-shadowed bar detached from the page edge — and Two-Tier, a classic editorial layout with the logo and tools on top and a full-width menu strip beneath.
+- Fine-grained header sizing: a logo height slider and a vertical padding slider let you make the top menu as compact or as commanding as you want. The Slim design scales both proportionally.
+
+---
+
 ## [2.56.0] - 2026-07-23  ·  _Minor_
 **A Menu Tab for the Customizer: Visual Design Picker, Sticky Behavior and Element Switches**
 
