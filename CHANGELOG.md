@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.51.1] - 2026-07-23  ·  _Patch_
+**EULA 2.0: A Hardened License Agreement with Stronger Electronic-Acceptance Evidence**
+
+### Improved
+- The End User License Agreement was upgraded to version 2.0 with maximum commercial protection: explicit bans on publishing the source code to public repositories, sharing or publishing license keys, and using the code to train AI models or build datasets — each now covered by the liquidated-damages clause. New sections cover electronic acceptance as a binding signature (with an evidence agreement), agency/third-party installations, trial/developer license limits, personal-data processing grounds (KVKK), the no-withdrawal rule for instantly delivered digital goods, and standard severability/no-waiver/entire-agreement terms. Domain limits now correctly reflect the purchased plan.
+- Acceptance records got stronger evidentiary value: both the checkout consent and the first-login admin consent now record the agreement's own version (EULA 2.0) and a SHA-256 hash of the exact text accepted, alongside the existing timestamp, IP, browser and identity records.
+- The agreement is now readable at a public /eula page rendered from the very same file that ships with the product, showing the version and text hash; the checkout consent link points there instead of the general Terms of Service.
+
+---
+
 ## [2.51.0] - 2026-07-23  ·  _Minor_
 **Newsletter Grows Up: 6 Email Templates, Selectable Signup Placements and a Scheduled Popup; Contact Form Admin Rebuilt**
 
