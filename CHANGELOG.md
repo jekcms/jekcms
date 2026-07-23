@@ -8,6 +8,107 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.48.0] - 2026-07-23  ·  _Minor_
+**Update Notifications Across the Admin: Sidebar Badges, Plugin/Theme Cards and a Dashboard Core Alert**
+
+### Added
+- WordPress-style update notifications throughout the admin panel. When an update is published for an active plugin, the "Plugins" sidebar item shows a numbered badge; installed-theme updates show the same badge on "Themes", and the "Updates" item now shows the total pending count instead of a generic mark.
+- Plugin and theme cards now show an "Update available vX.Y.Z" notice (with the current → new version in the tooltip) linking straight to the Updates page. The notice appears on every installed plugin, active or not — the sidebar badge only counts active ones.
+- A core update now shows a clear notification band on the dashboard with the installed and available version, including a "critical update" emphasis for security releases. Centrally-managed installations receive updates from the operator, so they intentionally show none of these prompts.
+- All notifications are fed by a single per-request status helper sitting on top of the existing 12-hour update-check cache, so no extra requests are made to the update server.
+
+### Fixed
+- Repaired a disconnect in the update release channel: versions uploaded through the release management panel were stored in a legacy catalog that the client update API never read, so published releases were invisible to installations. The panel now writes to the same catalog the update API, the signed manifest and the download endpoint all read, and lists the SHA-256 of every uploaded package.
+- Contact Form 1.0.1: server-side responses (validation errors, rate-limit and security messages) now follow the site language — English sites no longer show Turkish error messages to visitors. Field length limits are now counted in characters rather than bytes, so messages with accented or non-Latin characters near the limit are no longer rejected even though the form allowed them.
+
+---
+
+## [2.47.10] - 2026-07-22  ·  _Patch_
+**Content Quality Gate Now Blocks Leaked Rewrite Notes and Stray Image Markers**
+
+### Added
+- The Content Quality Gate now blocks publishing when a post contains a leaked editorial process-note — the kind an automated rewrite step can leave behind, e.g. a fake "Kaynak" (Source) section whose text is "metindeki … temizlendi/çıkarıldı" (commentary about what was edited) rather than a real citation. The check is precise: it triggers only on the "Kaynak"+"metindeki" leak signature, so legitimate uses of the word "metindeki" (e.g. in a regex or text-processing article) are never blocked.
+- The gate also blocks any post still containing an unresolved [IMAGE:] placeholder marker, which would otherwise leak into the published page as raw text instead of an image.
+
+---
+
+## [2.47.9] - 2026-07-22  ·  _Patch_
+**Cloudflare Safety: "Apply Recommended" Is Now Origin-Aware and Can Never Take Your Site Down**
+
+### Fixed
+- Fixed a serious bug where "Apply recommended settings" could take a live site offline. It set the Cloudflare SSL mode to Full (Strict) unconditionally; if the origin server's certificate was expired the site returned 526, and if the origin had no HTTPS certificate at all the site returned 525 (SSL handshake failed). Both make the whole site unreachable.
+- The recommended SSL mode is now Full (not Full/Strict). Full encrypts browser-to-Cloudflare with a valid certificate and Cloudflare-to-origin as well, but does not reject an expired or self-signed origin certificate, so it can never cause the 526 that Strict does. If your origin certificate is valid you can still upgrade to Full (Strict) manually in the Cloudflare dashboard.
+- Added an origin-HTTPS safety gate: before touching the SSL mode the plugin checks whether your origin server can complete a TLS handshake at all. If it cannot (no certificate installed), the SSL setting is skipped entirely and the plugin explains that you need to install a certificate (e.g. free Let's Encrypt) in your hosting panel first. All the other recommended settings still apply. The connected panel also shows this warning up front.
+
+---
+
+## [2.47.8] - 2026-07-22  ·  _Patch_
+**Accessibility: Primary Navigation No Longer Trips the "aria-hidden Contains Focusable Elements" Audit**
+
+### Fixed
+- Fixed an accessibility violation flagged by page audits (and the newer AI-agent accessibility scan): the shared mobile-navigation script set aria-hidden="true" on the primary unconditionally, but that same element is the visible horizontal menu on desktop. An element with aria-hidden="true" must not contain focusable links, so on desktop the audit reported a malformed accessibility tree.
+- aria-hidden (and inert) are now applied only while the mobile panel is genuinely hidden on small screens, and removed on desktop where the navigation is visible and focusable. Also removed a redundant static aria-hidden="true" from the lifestyle theme mobile-nav so it can never leak into the desktop tree. Applies fleet-wide via the shared, cache-busted navigation script.
+
+---
+
+## [2.47.7] - 2026-07-22  ·  _Patch_
+**Cloudflare Panel: Consistent Status Icons and a Truthful Exception-Rule State**
+
+### Fixed
+- The two checklists in the connected panel now use the exact same status icons. Previously the recommended-settings list used a plain checkmark while the exception-rules list used a different check-in-a-circle icon, which looked inconsistent.
+- The exception-rules list now reflects its real, live state instead of always showing green. The panel reads the current custom rules from Cloudflare and marks each jekcms exception as applied (green check) or not-yet (empty), with an "ALL APPLIED" badge and a re-apply / apply-count button that mirror the recommended-settings card.
+
+---
+
+## [2.47.6] - 2026-07-22  ·  _Patch_
+**Cloudflare Exception Rules Now Actually Apply: Right Permission, Modern API, Your Own Rules Preserved**
+
+### Improved
+- Removed the colored left-rail line from the sidebar warning cards (a design-system rule) and reworked them into clean, softly tinted alert cards -- amber for attention, blue for info -- that fit the rest of the admin.
+
+### Fixed
+- Fixed "Apply exception rules" failing with an Authentication error even when the token had "Firewall Services -> Edit". Diagnosed against the live Cloudflare API: the legacy Firewall Rules API is now frozen (maintenance mode, no new rules), and modern WAF custom rules (Rulesets API) require the separate "Zone WAF" permission -- which "Firewall Services" does not grant. The setup wizard now asks for "Zone -> Zone WAF -> Edit" (with a note explaining why), and every permission error message names the exact permission needed.
+- The jekcms exception rules now use a proper skip action that bypasses the relevant Cloudflare security products (WAF managed, browser integrity check, security level, rate limiting, UA/zone lockdown) for the automation and crawler paths, instead of an ineffective placeholder.
+- Applying the exceptions no longer wipes your own custom WAF rules. The plugin now reads the existing rules first, refreshes only the jekcms ones, and preserves everything else -- so re-applying is safe and idempotent.
+
+---
+
+## [2.47.5] - 2026-07-22  ·  _Patch_
+**Cloudflare Wizard: "Connect" Now Really Connects, Clearer Token Steps, Calmer Sidebar**
+
+### Improved
+- The token step now walks through Cloudflare's real screens in order: My Profile -> API Tokens -> Create Token, then explicitly "under Custom token click Get started" (so users do not pick a template that grants the wrong permissions), then naming the token (Token name, e.g. jekcms) before the permission table. This closes the most common wrong-permission trap.
+- Reworked the setup wizard into the same calm two-column layout as the connected panel: the step-by-step guide on the left, the critical warnings in a refined right-hand sidebar. Removed the remaining red boxes in the wizard (red read as an error); warnings are now amber "attention" / blue "info" with a clean left-rail accent instead of the previous generic colored icon tiles.
+
+### Fixed
+- Fixed a bug where the setup wizard's "Connect" button never actually connected. The test-mode toggle was accidentally nested as a inside the connect ; browsers flatten nested forms, so pressing Connect submitted the toggle action instead -- the token was never saved or verified and the panel stayed stuck in test (mock) mode no matter what. The two forms are now separate, and connecting with a real token always runs a real verification (and clears any leftover test mode).
+
+---
+
+## [2.47.4] - 2026-07-22  ·  _Patch_
+**Cloudflare Panel: Real Action Feedback, Permission Diagnostics and a Calmer Layout**
+
+### Improved
+- Reworked the connected Cloudflare panel into a two-column layout: the actionable cards (status, recommended settings, automation exceptions, your own rules) sit in the main column, and the "Critical warnings" moved into a calm right-hand sidebar. The warnings are no longer shown as loud red error boxes -- red read like something was broken; they are now amber "attention" and blue "info" notes.
+- Unified the panel header (title + description on one clean band with a direct "Open Cloudflare dashboard" button once connected), and the marketing value strip now only shows before you connect, so the connected panel leads with live status instead of a sales pitch.
+
+### Fixed
+- Fixed missing feedback on the Cloudflare panel: Purge cache, I'm Under Attack, Apply recommended and Apply exceptions all reloaded the page silently with no confirmation. The panel was writing its flash message under one key while the admin renderer read another, so nothing ever showed. Every action now shows a clear success / warning / error banner.
+- Fixed the SSL and Security tiles showing a bare "?" with no explanation when the connected API token lacked the Zone Settings permission. The panel now detects the read failure, shows a plain-language notice telling you to recreate the token with "Zone Settings -> Edit" (and surfaces Cloudflare's own error), instead of a silent question mark.
+
+---
+
+## [2.47.3] - 2026-07-22  ·  _Patch_
+**Cloudflare Setup Wizard: Cleaner Layout and a Token Table That Mirrors Cloudflare**
+
+### Improved
+- The token step now shows the required permissions as a table that matches Cloudflare's real "Create Token" screen one-to-one (Group / Item / Access), plus a matching Zone Resources row (Include / Specific zone / your domain). You can copy each dropdown value straight across instead of decoding a run-on sentence.
+
+### Fixed
+- Fixed a layout bug in the Cloudflare setup wizard where the click-path chips (Domains, Add domain, Overview, etc.) were placed inline inside wrapping paragraph text; their padding was taller than the line, so wrapped lines overlapped and the guide looked jumbled. Each navigation path now sits on its own dedicated breadcrumb row with chevrons, so the text stays clean at every width.
+
+---
+
 ## [2.47.2] - 2026-07-22  ·  _Patch_
 **Cloudflare Wizard Matched to the Real Onboarding Flow: DNSSEC, AI Policies, and the MX/TXT Nuance**
 
