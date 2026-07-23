@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.57.1] - 2026-07-23  ·  _Patch_
+**License Activation and Heartbeat Restored on the Server, Plus Menu Tab Polish**
+
+### Improved
+- The Menu tab is tidier: the sizing sliders sit on one row and the four element switches (sticky, search, light/dark, social icons) align on a single row beneath them — powered by a new per-tab column layout theme authors can reuse.
+
+### Fixed
+- The license server's activation and heartbeat endpoints were failing with a server error due to a wrong database-call signature — activations could not complete and installs never got their periodic license confirmation, which surfaced as a persistent "license could not be verified" notice. Both endpoints now respond correctly; installs re-validate automatically on their next check-in.
+- On the Personal theme, the menu's logo size slider had no effect when a wide brand logo was uploaded — the slider only drove the compact brand mark. It now sizes the wide logo too.
+- Slider tracks in the customizer were invisible in dark mode — only the thumb showed. Sliders now use themed tracks and thumbs that read clearly in both light and dark.
+
+---
+
 ## [2.57.0] - 2026-07-23  ·  _Minor_
 **The Menu Tab Grows Up: Five Designs Including Floating Box and Two-Tier, Plus Logo Size and Padding Controls**
 
