@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.50.3] - 2026-07-23  ·  _Patch_
+**Automatic Updates Now Work from Real Cron Jobs**
+
+### Fixed
+- Update downloads triggered from a real (CLI) cron job were rejected by the license check: without a web request there is no host header, so the download request reported "localhost" instead of the licensed domain and the server refused it — automatic updates could never actually install from cron. The updater now always uses the domain stored with the license activation (matching how the update check already behaved), so scheduled automatic updates install correctly. Verified end-to-end: a live install auto-updated its core from cron with the license intact.
+
+---
+
 ## [2.50.2] - 2026-07-23  ·  _Patch_
 **Your License Now Survives Core Updates; Plugin Cards, System Menu and AdSense Intro Polished**
 
