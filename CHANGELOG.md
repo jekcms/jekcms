@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.58.0] - 2026-07-24  ·  _Minor_
+**Branding, Done Right: Generated Logos Publish for Real, OG Images, SERP-Safe Favicons**
+
+### Added
+- Social share (OG) image module under Settings → General → Branding: upload your own 1200×630 image or generate one from four professional templates (dark gradient, light minimal, color band, monogram) in your brand color — with live preview and one-click apply.
+- Generated favicons now also produce real PNG files (48px + 180px Apple touch icon). Google's SERP crawler does not read SVG/data-URI favicons; the PNG link is emitted first so your icon shows up in search results.
+
+### Improved
+- The automatic logo generator was rebuilt: rounded monogram marks, balanced typography, two-letter initials, duotone and pill styles, and two new palettes (slate, rose). Same six styles, distinctly more professional output.
+- Settings → General was redesigned in the theme customizer's card language: grouped cards with clear descriptions, two-column field rows, pill source toggles and round color swatches.
+- Organization/Person schema now falls back to your site logo when no schema logo is set — search engines get a logo either way.
+
+### Fixed
+- Generated logos and favicons never reached the live site — they lived only as admin-side SVG settings while themes read the URL fields. On save, generated assets are now written to real files under uploads/branding and the URL fields are updated; the logo, favicon, OG image and schema all pick them up.
+- The Health and Minimalist themes hard-coded favicon links in their header, overriding whatever favicon you uploaded. Removed — the favicon you set in Settings now always wins.
+- The footer description text (Settings → General → Site Info) now actually renders under the footer logo on the Health theme.
+- Footer customizer on themes that manage their footer via the Theme Customizer (e.g. Health) no longer shows a dead-end notice — it takes you straight to the right Footer section.
+
+---
+
 ## [2.57.5] - 2026-07-24  ·  _Patch_
 **Health Theme: The Footer Menu Location Now Actually Renders in the Footer**
 
