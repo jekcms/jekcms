@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.55.0] - 2026-07-23  ·  _Minor_
+**Health Customizer, Brought Up to Par: Page-First Tabs, a Real Appearance Tab and Post-Page Structure Controls**
+
+### Added
+- The Health theme now has the same customizer structure as Personal: the tab bar reads Homepage, Post Page, Sidebar, Appearance, Advanced. Colors and typography live in Appearance, the newsletter widget copy sits inside the Sidebar tab, and footer texts moved under Advanced.
+- Post-page structure controls for Health: header style (classic or compact), breadcrumb, excerpt lead, reading progress bar and a featured-image switch — new elements ship switched off, so nothing changes until you opt in.
+- Appearance controls that actually work: Health's color pickers now drive the theme's real palette (primary, accent, text, muted, backgrounds, border) with separate light/dark values, and heading/body fonts, content text size and line height apply across the whole theme. Defaults match the current design exactly.
+
+### Fixed
+- The old Branding color fields on Health pointed at CSS variables the theme never used — they looked adjustable but changed nothing. They were replaced by the wired Appearance controls above.
+
+---
+
 ## [2.54.3] - 2026-07-23  ·  _Patch_
 **Customizer: The Variant Dropdown Panel Is No Longer Clipped by Its Card**
 
