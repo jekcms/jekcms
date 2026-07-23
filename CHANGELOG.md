@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.56.0] - 2026-07-23  ·  _Minor_
+**A Menu Tab for the Customizer: Visual Design Picker, Sticky Behavior and Element Switches**
+
+### Added
+- A new Menu tab sits between Post Page and Sidebar in the customizer (Personal and Health themes). Its centerpiece is a visual design picker — mini header mockups you click to switch the top menu between three layouts: Classic, Centered (logo on top, menu below) and Slim (a lower, quieter bar).
+- Menu behavior and elements are now switches: keep the menu sticky or let it scroll away, and show or hide the search, the light/dark switch and social media icons (accounts come from Settings → Social). The Personal theme learned to show header social icons for the first time — off by default.
+- The visual picker is a new reusable field type for theme authors (choice_cards): any theme option can now be presented as clickable design cards instead of a plain dropdown.
+
+---
+
 ## [2.55.0] - 2026-07-23  ·  _Minor_
 **Health Customizer, Brought Up to Par: Page-First Tabs, a Real Appearance Tab and Post-Page Structure Controls**
 
