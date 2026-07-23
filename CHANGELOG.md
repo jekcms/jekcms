@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.57.5] - 2026-07-24  ·  _Patch_
+**Health Theme: The Footer Menu Location Now Actually Renders in the Footer**
+
+### Fixed
+- On the Health theme, a menu assigned to the Footer location never appeared — the footer columns were fixed. When the footer menu has items, it now replaces the "For You" column, titled with your menu's name; when empty, the footer keeps its current layout exactly.
+
+---
+
 ## [2.57.4] - 2026-07-24  ·  _Patch_
 **Menu Manager Redesigned: The Customizer's Card Language, Applied to Menus**
 
