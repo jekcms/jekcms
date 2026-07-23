@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.53.1] - 2026-07-23  ·  _Patch_
+**Detail Controls, WordPress-Grade: Block Design Variants, Sticky Widgets and Post-Header Structure**
+
+### Added
+- Design variants for post-page blocks: the author box can render classic (horizontal) or as a centered card, comments come in classic or minimal (compact, avatar-free) style, and related posts switch between a card grid and a row list — each picked right on its layout card, with a round/square avatar shape option for author cards.
+- Per-widget sticky control in the sidebar: every widget's gear now has a "Sticky" switch — decide whether the table of contents, share box or any other widget stays on screen while scrolling or flows with the page.
+- Post-header structure controls: header style (classic centered or compact left-aligned), plus switches for the breadcrumb, the excerpt lead, the "continue reading" indicator and the reading progress bar.
+
+### Improved
+- The Advanced tab got tidier: a short description explains what lives there, its own fields are grouped under a "Custom Code" heading, and the Branding and Author sub-sections sit clearly separated below.
+
+---
+
 ## [2.53.0] - 2026-07-23  ·  _Minor_
 **The Customizer Thinks in Pages Now: Modular Sidebar with Widget Cards, a Modular Post Page, and a Cleaner Tab Structure**
 
