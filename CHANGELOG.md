@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.57.4] - 2026-07-24  ·  _Patch_
+**Menu Manager Redesigned: The Customizer's Card Language, Applied to Menus**
+
+### Improved
+- The Menus screen now speaks the same visual language as the theme customizer: menu items are drag-handle cards showing the title and a muted path, with a rotating chevron opening each item's settings; the menu list uses count badges and calm hover states; the add-item panels became clean scrollable pickers. Everything reads clearly in dark mode.
+- Admin copy on this screen was tightened to short, direct statements.
+
+---
+
 ## [2.57.3] - 2026-07-24  ·  _Patch_
 **Menu Manager Repaired: No More Phantom Items, Instant Frontend Sync, One Save That Saves Everything**
 
