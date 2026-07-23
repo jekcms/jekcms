@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.54.0] - 2026-07-23  ·  _Minor_
+**The Health Theme Goes Modular: Drag-and-Drop Homepage, Widget Sidebar and Post-Page Blocks**
+
+### Added
+- The Health theme now runs on the modular layout engine — the second theme after Personal. Its homepage sections (hero, trending topics, most popular, recommended, latest articles) become drag-and-drop cards in the customizer: reorder them, switch them off, and tune hero autoplay and cycle speed, posts-per-tab and posts-per-page from each card's gear.
+- A real sidebar for Health post pages: the About Me card and table of contents are now widgets you can reorder or disable, joined by five optional ones — latest articles, categories, tags, a newsletter mini-form and a free-form custom content box. Widget-level sticky control and a right/left position switch included.
+- Post-page blocks are modular too: the author box, related posts (with a post-count setting) and the comments section can be reordered or turned off from the Post Page tab.
+
+### Improved
+- The layout engine learned per-theme capability declarations: a theme now lists exactly which variants and settings each section really supports, along with its own defaults — so the customizer only ever shows controls that actually do something in the active theme.
+- The Health customizer was cleaned of controls that had no effect: leftover fields from an earlier design (hero texts, category row options, archive grid and disclaimer toggles among others) are gone, replaced by the working layout cards. Existing sites keep their exact current look until they change something.
+
+---
+
 ## [2.53.2] - 2026-07-23  ·  _Patch_
 **Customizer Polish: A Unified Appearance Tab with Rich Typography, One Toggle Language and Pixel-Aligned Cards**
 
