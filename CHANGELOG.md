@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.54.3] - 2026-07-23  ·  _Patch_
+**Customizer: The Variant Dropdown Panel Is No Longer Clipped by Its Card**
+
+### Fixed
+- The admin's styled dropdown component draws its option panel inside the layout card, and the card's overflow clipping was cutting the panel off — sometimes leaving just a sliver visible. A card now releases its clipping while its dropdown is open (the same proven rule the post editor's publish box uses), so the full option list always appears.
+
+---
+
 ## [2.54.2] - 2026-07-23  ·  _Patch_
 **Customizer: The Variant Dropdown Now Opens Cleanly on Layout Cards**
 
