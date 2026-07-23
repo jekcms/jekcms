@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.54.2] - 2026-07-23  ·  _Patch_
+**Customizer: The Variant Dropdown Now Opens Cleanly on Layout Cards**
+
+### Fixed
+- The variant dropdown on layout cards could open glitched or misplaced. Cause: the whole card was permanently marked as draggable, which interferes with native dropdowns in Chrome. Cards now become draggable only while you are actually holding the drag handle — dropdowns open exactly like everywhere else in the admin, and the menus got the same arrow icon as the rest of the panel.
+
+---
+
 ## [2.54.1] - 2026-07-23  ·  _Patch_
 **Customizer: Live Sidebar Preview and a Dropdown Fix**
 
