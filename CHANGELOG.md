@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.53.0] - 2026-07-23  ·  _Minor_
+**The Customizer Thinks in Pages Now: Modular Sidebar with Widget Cards, a Modular Post Page, and a Cleaner Tab Structure**
+
+### Added
+- A brand-new Sidebar tab: the sidebar is now a widget stack you compose with cards — author card, table of contents, share, plus new widgets: recent posts, categories, tag cloud, a mini newsletter form and a Custom Content box for your own HTML. Drag to reorder, toggle, tune counts.
+- Sidebar visibility matrix: decide where the sidebar appears — post pages, archive/category pages, search results and author pages each have their own switch, and you can dock the sidebar left or right. Pages without it get the full width automatically.
+- The post page went modular too: the author box and comments are reorderable below-content blocks, related posts is a tunable end-of-page block, and a new toggle controls the featured image.
+
+### Improved
+- The customizer tabs were reorganized around pages: Colors and Typography first, then Homepage, Post Page and Sidebar — each page tab contains its own layout cards and options in one place. Branding and Author collapsed into Advanced as sub-sections, so the tab bar stays short and every control lives exactly where you would look for it.
+
+---
+
 ## [2.52.1] - 2026-07-23  ·  _Patch_
 **Layout Cards Grow Up: Per-Section Settings and a Live Page Preview**
 
