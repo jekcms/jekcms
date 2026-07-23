@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.51.2] - 2026-07-23  ·  _Patch_
+**License Protection Hardened: Installations Now Report Their Integrity, and Every Copy Stays Traceable**
+
+### Added
+- License heartbeats now include a signed-manifest integrity summary: an installation whose protected core files have been modified is flagged on the license server, so tampered or cracked copies surface automatically instead of going unnoticed.
+- New operator tooling for piracy response: an outward-facing scanner that hunts jekcms watermarks and source-code canaries across public code and web indexes, and a source-hash stamping tool that produces a per-release SHA-256 manifest of the entire source tree as timestamped evidence of authorship.
+
+### Improved
+- Official core updates now regenerate the file-integrity manifest automatically, so a legitimate update is never mistaken for tampering.
+- The footer credit is now generated through the integrity layer and tied to the installation's fingerprint, strengthening the traceability chain of every deployed copy.
+- The pricing page now explains, in plain language, how the license you pay for is protected: traceable copies, non-functional pirated installs, and the legal guarantees of EULA 2.0.
+
+---
+
 ## [2.51.1] - 2026-07-23  ·  _Patch_
 **EULA 2.0: A Hardened License Agreement with Stronger Electronic-Acceptance Evidence**
 
