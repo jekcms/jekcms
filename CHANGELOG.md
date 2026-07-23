@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.57.3] - 2026-07-24  ·  _Patch_
+**Menu Manager Repaired: No More Phantom Items, Instant Frontend Sync, One Save That Saves Everything**
+
+### Fixed
+- The menu manager silently re-created sample items ("Home, Recipes, About, Contact" in English, with categories nested under Recipes) every time the page was opened while a menu was empty — deleted menus kept coming back and the skeleton did not match the active theme or site language. That auto-seeding is gone; an empty menu simply falls back to the theme's own navigation, and the explicit "Fill Default Items" button remains for those who want a starter set built from real categories.
+- Menu changes now reach the site immediately: every menu save clears the navigation cache. Previously the frontend could keep serving the old menu for up to half an hour, so the admin and the site disagreed.
+- Menu name, display location and items are now one form with one save — pressing the items' save button used to silently discard a just-changed display location, which snapped back to "Primary" after refresh.
+
+---
+
 ## [2.57.2] - 2026-07-24  ·  _Patch_
 **Theme Switching Hardened: Switch as Often as You Like, Every Switch Lands Clean**
 
