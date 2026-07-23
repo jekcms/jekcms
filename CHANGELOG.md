@@ -8,6 +8,31 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.52.1] - 2026-07-23  ·  _Patch_
+**Layout Cards Grow Up: Per-Section Settings and a Live Page Preview**
+
+### Added
+- Every layout card now opens its own settings via a gear icon. The hero slider is fully tunable: slide count, autoplay on/off, seconds per slide, optional prev/next arrow buttons and dot indicators. Popular and Latest sections control their post counts from the card. Settings that only apply to one variant appear only when that variant is selected.
+- A live page skeleton preview beside the cards: the final page is mirrored box by box in the order you arrange, updating instantly as you drag, toggle or retune sections — plus a one-click link to open the real site in a new tab. A page selector is in place for the post-page layout coming in the next phase.
+
+### Improved
+- The layout cards were rebuilt on a solid grid: no more overlapping variant menus or squeezed labels; existing slider preferences (like slide count) migrate into the new settings automatically, so nothing changes until you change it.
+
+---
+
+## [2.52.0] - 2026-07-23  ·  _Minor_
+**Your Homepage, Your Order: Modular Layout Engine Arrives — Drag, Toggle and Restyle Sections**
+
+### Added
+- A new section-based layout engine turns theme pages into reorderable building blocks. In Customize → Layout, every homepage section (hero, intro grid, categories, popular, latest posts, newsletter band) is a card you can drag to reorder, switch off, or restyle with a variant — the page then renders top to bottom in exactly that order. No theme files are touched, and one click restores the theme default.
+- Section variants: the hero can now run as a multi-post slider or a calm single-post opener, chosen from the layout card. The variant system is built into the engine, so future sections and themes gain variants without new UI work.
+- The Personal theme is the first to go fully modular: its homepage is now composed of six independent sections. Existing sites look identical until you change something — saved settings and the classic order carry over untouched. Remaining themes migrate to the engine in upcoming releases.
+
+### Improved
+- The theme customizer got tidier: the newsletter tab moved out — newsletter design (email templates, signup placements, popup) is managed on its own Newsletter → Appearance page, and the customizer now links there. Legacy per-section show/hide toggles are absorbed into the Layout tab so each control exists in exactly one place.
+
+---
+
 ## [2.51.3] - 2026-07-23  ·  _Patch_
 **One Brand Voice: jekcms Now Introduces Itself the Same Way Everywhere**
 
