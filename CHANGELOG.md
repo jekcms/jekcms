@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.57.2] - 2026-07-24  ·  _Patch_
+**Theme Switching Hardened: Switch as Often as You Like, Every Switch Lands Clean**
+
+### Fixed
+- Switching between certain theme pairs could crash mid-switch: the activation step loaded the new theme's helper functions into the same request as the old theme's, and shared helper names collided fatally, leaving the site half-switched. Activation now loads only the new theme's configuration — the next page load brings its helpers in cleanly. Verified with a new behavior test that cycles through all 13 themes twice, checks homepage, post and archive rendering on each, and asserts zero residue after returning to the original theme.
+
+---
+
 ## [2.57.1] - 2026-07-23  ·  _Patch_
 **License Activation and Heartbeat Restored on the Server, Plus Menu Tab Polish**
 
