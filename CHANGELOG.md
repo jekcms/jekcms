@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.49.0] - 2026-07-23  ·  _Minor_
+**System Updates Page Rebuilt: Plugin/Theme/Core Package Installs, Update History and In-Panel Release Notes**
+
+### Added
+- The System Updates page can now install packages by ZIP upload — plugins and themes as well as the core. Plugin and theme packages are structure-validated before install (single safe root folder, a real plugin.php version header or theme.json), a backup is taken automatically and a failed install rolls back. Core packages keep the stricter rule: the official release SHA-256 digest is required.
+- A local update history now records every applied update — component, old and new version, whether it came from the update channel or a manual upload, and whether it completed, failed or was rolled back. The history survives cache clears and deployments.
+- Release notes are now readable inside the panel: the page shows the full recent core changelog (bilingual, categorized) plus published theme and plugin releases, fetched from jekcms.com and cached for 12 hours. Centrally-managed sites see them too, so operators and site owners follow the same history.
+- The installed themes and plugins lists moved into their own collapsible "Installed Components" card with counts, so a site with many themes no longer stretches the version summary into a full-page column.
+
+### Fixed
+- Backup folders no longer appear as installed components: a leftover directory like "Trends.bak-20260430-210630" was listed as a theme on the updates page and even reported to the update server. Backup-named folders (.bak/.old/.backup) are now excluded everywhere.
+- Live sites no longer display a stale core version: the per-site version file was left behind by deployments (a site could show 2.16.20 while actually running the current release), and it is now synchronized on every release.
+- The update report sent after a core update now carries the real previous version instead of always reporting "unknown".
+
+---
+
 ## [2.48.0] - 2026-07-23  ·  _Minor_
 **Update Notifications Across the Admin: Sidebar Badges, Plugin/Theme Cards and a Dashboard Core Alert**
 
