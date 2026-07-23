@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.49.1] - 2026-07-23  ·  _Patch_
+**Updates Page Reorganized into Tabs; Package Install Stays Visible (Locked) on Managed Sites**
+
+### Improved
+- The System Updates page now uses the same tabbed layout as Settings: Overview (status strip + available updates + installed components), Install Package, History (updates + backups) and Release Notes each have their own tab, instead of one long scrolling page. The Overview tab shows a pending-update count badge.
+- Package type selection on the install tab is now a visual card picker (Plugin / Theme / Core) with the SHA-256 field appearing only for core packages.
+- On centrally-managed installations the Install Package tab is no longer hidden: it now explains why ZIP installs are disabled there and how an operator can deliberately enable them (JEK_ALLOW_SELF_UPDATE); with the flag set, the full install form is available with an overwrite warning.
+
+---
+
 ## [2.49.0] - 2026-07-23  ·  _Minor_
 **System Updates Page Rebuilt: Plugin/Theme/Core Package Installs, Update History and In-Panel Release Notes**
 
