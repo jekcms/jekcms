@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.50.4] - 2026-07-23  ·  _Patch_
+**Theme/Plugin Updates No Longer Resurface After a Core Update; Admin Visits Now Drive the Scheduler Too**
+
+### Improved
+- The visitor-triggered scheduler (scheduled publishing + automatic updates, no cron required) now also fires on admin panel visits — on a low-traffic site, simply logging into the admin is enough to keep automation running. A real cron job remains optional.
+
+### Fixed
+- Fixed an update loop where an already-applied theme update kept coming back: the core package carries a version ledger, and a stale entry in it could mark an up-to-date theme as outdated again after every core update. The updater now rebuilds the theme/plugin ledger from what is actually on disk after each core update, and the release pipeline generates the packaged ledger from the real component versions — so the loop cannot recur from either side.
+- Automatic updates now apply the core first and then theme/plugin updates (with a fresh check in between), so a core update can no longer overwrite the version records of components updated in the same run.
+
+---
+
 ## [2.50.3] - 2026-07-23  ·  _Patch_
 **Automatic Updates Now Work from Real Cron Jobs**
 
