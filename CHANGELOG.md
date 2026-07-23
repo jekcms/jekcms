@@ -8,6 +8,43 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.50.2] - 2026-07-23  ·  _Patch_
+**Your License Now Survives Core Updates; Plugin Cards, System Menu and AdSense Intro Polished**
+
+### Improved
+- Plugin cards are aligned and consistent: the action button row now sits at the same height on every card, descriptions are standardized to a fixed length range (with a display clamp as a safety net), and previously unlocalized plugins (Stories, Cloudflare, AdSense Readiness, ZeroTrack) got proper Turkish/English names and descriptions.
+- The System section of the sidebar is reordered by frequency of use: Settings, Updates, License, Import, Backups, Users.
+- The AdSense Readiness first-run screen was redesigned to match the admin design language: a calm card with the scan scope listed as chips and a single standard primary action, replacing the dashed box with duplicate oversized dark buttons.
+- The automatic-updates note on the Updates page now stays on a single line on desktop.
+
+### Fixed
+- Critical: applying a core update no longer wipes the license activation. The core package ships its own version file and overwriting it dropped the stored license — the panel fell back to "activate your license" and theme/plugin update buttons disappeared. The updater now preserves the license (and a custom update-server address) across core updates. A related latent bug was fixed too: database migrations no longer overwrite the new package version metadata while recording their progress.
+- The header update banner now says what is actually pending: the core version when a core update is ready, otherwise the number of theme/plugin updates — instead of a bare "Update available!" that lingered confusingly after a core update.
+
+---
+
+## [2.50.1] - 2026-07-23  ·  _Patch_
+**Plugin Cards Now Show a Distinct Icon per Plugin**
+
+### Improved
+- Every plugin card on the Plugins page now has its own recognizable icon (newsletter envelope, SEO magnifier, social share graph, analytics bars, cloud, quiz, recipe and more) instead of the same generic circle repeated on every card. Plugins without a dedicated icon fall back to a package icon.
+
+---
+
+## [2.50.0] - 2026-07-23  ·  _Minor_
+**Automatic Updates Arrive; the Updates Page Gets Even Simpler**
+
+### Added
+- Automatic updates: on the Updates overview you can now choose "Off", "Plugins + Themes" or "Everything (core included)". With it enabled, the scheduler checks once a day and applies pending updates through the same signed channel — backup first, automatic rollback on failure, and every run is recorded in the History tab.
+
+### Changed
+- The Updates page is simpler by design: the in-panel ZIP install form was removed. Updates are applied with one click from the overview (or automatically); publishing releases is an operator-side pipeline, not something site owners juggle ZIPs for. Update history and release notes keep their own tabs.
+
+### Fixed
+- Fixed a server-side configuration blind spot dating back to the security hardening that moved secrets out of the web root: the update/license API could no longer load its database credentials, so the component update catalog silently served empty results. The API now searches the relocated secrets directory as well — theme and plugin updates published to the channel are actually visible to installations again, verified end-to-end against the signed manifest.
+
+---
+
 ## [2.49.1] - 2026-07-23  ·  _Patch_
 **Updates Page Reorganized into Tabs; Package Install Stays Visible (Locked) on Managed Sites**
 
