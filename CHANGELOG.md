@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.51.0] - 2026-07-23  ·  _Minor_
+**Newsletter Grows Up: 6 Email Templates, Selectable Signup Placements and a Scheduled Popup; Contact Form Admin Rebuilt**
+
+### Added
+- Six selectable email designs for campaigns and newsletters — Signature, Clean, Bold, Editorial, Dark and Minimal — chosen from a visual picker with live previews (Newsletter → Appearance), applied to the campaign template with one click. All designs are email-client-safe (table layout, inline CSS).
+- Signup form placements you control: choose where the newsletter form appears — end of every post, top of the sidebar, a band above the footer, and/or a popup. No theme files are touched; the plugin injects the form on every theme through one universal point.
+- A polite newsletter popup: shown after a delay you set (in seconds), at most once per day per visitor, never again after subscribing, with four selectable styles — centered card, corner card, bottom bar or mini card.
+
+### Fixed
+- The Contact Form admin link no longer 404s: its pages moved to the standard plugin-admin location and the inbox was rebuilt as a tabbed page (Inbox + Settings in one place) with unread badge, filters, search, mark-all-read and the message settings alongside.
+
+---
+
 ## [2.50.4] - 2026-07-23  ·  _Patch_
 **Theme/Plugin Updates No Longer Resurface After a Core Update; Admin Visits Now Drive the Scheduler Too**
 
