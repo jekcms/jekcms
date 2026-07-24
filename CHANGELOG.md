@@ -8,6 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.59.1] - 2026-07-24  ·  _Patch_
+**Settings, Audited: Maintenance Mode, Static Homepage, Comment Rules, Media Sizes and Cache Controls Now Actually Work**
+
+### Added
+- Static homepage: Settings -> Reading can now show a published page as the homepage, with a page picker; switch back to latest posts anytime.
+- A master "Comments" switch: turn commenting off site-wide and both the comment blocks and the submission endpoint respect it.
+- Maintenance mode is real now: visitors get a proper 503 maintenance page (theme template when available) while signed-in admins keep browsing the site.
+
+### Improved
+- Comment rules are wired end to end: moderation on/off decides approved vs pending, "must log in to comment" is enforced on submit, and the default comment status applies to newly created posts.
+- Media settings drive real processing: max image size, JPEG quality, thumbnail/medium/large dimensions and the WebP/AVIF conversion switches now control uploads (verified with real uploads).
+- Cache controls are honest: the toggle and lifetime now set the Cache-Control header on visitor pages, and the lazy-load switch truly adds or removes lazy loading (LCP promotion preserved).
+- The feed "full content" switch works across RSS, Atom and JSON feeds; the timezone setting is now applied to date handling.
+- Dead settings that controlled nothing were removed: HTML minify and defer toggles, comments-per-page, time format, and the unused Google OAuth / n8n / ElevenLabs API fields (the latter also stored secrets in plain text).
+
+### Fixed
+- Comment submission could crash with a server error at the spam-check step because the spam filter was never loaded on that path -- submissions now always reach the spam check.
+- Changes made on the Settings screen were missing from Settings History; every save from the form is now recorded with old and new values.
+- Settings whose stored row lived under a different group could silently fall back to defaults (e.g. cache lifetime); readers are now group-agnostic.
+
+---
+
 ## [2.59.0] - 2026-07-24  ·  _Minor_
 **Every Theme Is Now Modular: Drag-and-Drop Sections, Menu Designs and Real Color Controls Across All 14 Themes**
 
