@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.61.0] - 2026-07-24  ·  _Minor_
+**Google Console Grows Up: Connect With One Click -- No Cloud Console -- and Real Performance Charts**
+
+### Added
+- Connect with your Google account in one click -- like the big-name SEO plugins. Press "Connect with Google", sign in, approve; done. No Google Cloud project, no API enabling, no client ID/secret. The flow runs through jekcms's central OAuth relay: tokens are handed to your site server-to-server with a one-time code and never appear in a browser URL. The old "your own Cloud app" method remains as an advanced option.
+- Search Console now shows real charts and breakdowns: a clicks-and-impressions performance chart over the whole period, separate CTR and average-position trend charts, plus device and country breakdown tables -- alongside the existing top queries and top pages.
+- Analytics gained a daily users-and-sessions chart for the selected period.
+
+### Fixed
+- The indexing-coverage scan tested page URLs with the redirecting /page/ prefix, so static pages were wrongly flagged as errors; it now checks the canonical /slug address.
+
+---
+
 ## [2.60.5] - 2026-07-24  ·  _Patch_
 **Content Wizard Tuned Like Clockwork: A Bulletproof AI Prompt, Multi-Part Imports, and a Working "Start Fresh"**
 
