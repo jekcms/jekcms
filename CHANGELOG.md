@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.60.3] - 2026-07-24  ·  _Patch_
+**Deep SEO Audit Pass: Correct Page Schemas, One Canonical URL per Post, and a News Sitemap That Respects Publish Time**
+
+### Improved
+- Static pages (About, Contact...) no longer declare themselves as blog articles in structured data: the misleading BlogPosting node is gone and the WebPage node gained a description. Posts keep their full Article graph untouched.
+- More tracking parameters are now stripped with a 301 (gclid, msclkid, twclid, igshid, mc_eid and friends), and UTM parameters are caught anywhere in the query string -- fewer duplicate URLs reach the index.
+
+### Fixed
+- Uppercase or otherwise-cased URL variants of a post used to render as a 200 page pointing the canonical at the wrong variant -- a duplicate-content opening. Any request whose path differs from the stored slug now 301-redirects to the single canonical URL, in every theme.
+- The Google News sitemap used the creation date instead of the publish date: scheduled posts could miss the 48-hour news window or report the wrong publication_date. It now keys on the actual publish time, and the keywords list is truly capped at five.
+
+---
+
 ## [2.60.2] - 2026-07-24  ·  _Patch_
 **Traffic & Distribution Untangled: One Flat Tab Bar Instead of Nested Menus, and Three Publisher Cards per Row**
 
