@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.60.4] - 2026-07-24  ·  _Patch_
+**Single-Post Publishing Hardened: Clean Structured Data, and Scheduled Posts That Fire Every Publish Signal**
+
+### Improved
+- The editor's SERP preview and pixel meter now measure the full rendered title -- including the theme's " | Site Name" suffix -- matching what Google actually truncates.
+- The permalink bar and SEO snippet preview now show the real canonical URL (/slug) instead of the redirecting /post/ prefix, and the SEO analyzer no longer marks empty FAQ rows as an applied FAQ schema.
+
+### Fixed
+- Hidden "enable" fields in the editor submitted even while invisible, so every save quietly wrote empty Product/Event/Review/Course/Recipe/LocalBusiness objects into the post's schema data -- and picking a type without filling its fields could emit an incomplete schema node on the live page (a Search Console error waiting to happen). Blocks are now saved only for the selected type when they carry real content, and the live output also skips all-empty legacy blocks.
+- Selecting the Recipe or Local Business schema type showed no fields until the post was saved and reloaded; both panels now appear instantly, and the live JSON-LD preview covers them too.
+- Scheduled publishing ran outside the content quality gate and stamped a fake 400-3000 view count on every calendar-published post. All scheduler entry points now converge on one gated engine: PublishPolicy decides, the recorded publish date is the planned time, and view counters stay untouched.
+- Posts published by the calendar went out silently -- no social auto-share, newsletter, push or search-engine ping ever fired. The scheduler now runs the same post_published pipeline as a manual publish.
+- A post marked as scheduled without a date could hang in the queue forever; it is now date-stamped on save and goes live on the next scheduler pass.
+
+---
+
 ## [2.60.3] - 2026-07-24  ·  _Patch_
 **Deep SEO Audit Pass: Correct Page Schemas, One Canonical URL per Post, and a News Sitemap That Respects Publish Time**
 
