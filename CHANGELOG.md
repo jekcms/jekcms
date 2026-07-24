@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.60.0] - 2026-07-24  ·  _Minor_
+**Cloud Backups Arrive: A Tabbed Backup Center, Truly Complete Backups, and an Import That Survives Every Broken CSV**
+
+### Added
+- Cloud backup: send backups to S3-compatible storage (AWS S3, Cloudflare R2, Backblaze B2, Wasabi, MinIO) or an FTP/FTPS server -- with a one-click connection test, encrypted credential storage, per-backup "send to cloud" buttons and an option to auto-upload the daily backup. Step-by-step setup guides for each provider are built into the page.
+- The Backups screen is now a tabbed center: Backups, Cloud Backup and Schedule. Creating a backup shows a modern toast notification and the new backup appears right in the history list -- no more hunting at the bottom of the page.
+- Import safety options: "skip existing content" (re-running the same CSV never creates duplicates) and an optional old-site address that rewrites internal links to your new domain.
+
+### Improved
+- Full backups are now truly full: themes and plugins are included alongside the database and media, and restore puts them back safely. Automatic maintenance keeps cleaning old auto-backups per your retention setting.
+- The importer now handles real-world files: semicolon-separated Excel exports, Turkish Windows-1254 encoding, rows with missing or extra columns (repaired and reported instead of silently dropped), and huge CSVs are streamed without exhausting memory. Wrong files get a clear upfront error listing the missing columns.
+- The import button locks while running with a progress note, so an impatient double-click can no longer import everything twice. The setup wizard's finish screen now offers a direct "Import Content" shortcut.
+
+### Fixed
+- Admin profile photos showed as broken images in the user list, user editing and the top bar when the avatar was stored with an absolute uploads path -- the admin now resolves avatars exactly like the site front end.
+- Error messages on admin pages could silently vanish: the shared admin header overwrote the page's error variable while rendering flash notices. Import errors (wrong file, security token) are now actually visible.
+- Custom S3 endpoints with a port number (e.g. MinIO) lost the port and the upload went to the wrong server.
+
+---
+
 ## [2.59.3] - 2026-07-24  ·  _Patch_
 **One Tidy General Tab: Media and Social Move In, and the API Tab No Longer Crashes on Fresh Installs**
 
