@@ -8,6 +8,29 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.59.0] - 2026-07-24  ·  _Minor_
+**Every Theme Is Now Modular: Drag-and-Drop Sections, Menu Designs and Real Color Controls Across All 14 Themes**
+
+### Added
+- The modular layout engine now covers all 14 themes. Every homepage is built from reorderable cards in Customize → Homepage: drag to reorder, toggle sections on or off, and tune each one (post counts, titles, category lists) from its gear panel.
+- New universal sections in the engine: category spotlights, opinion row, edition strip, video row, CTA band, photo gallery strip, plus sidebar widgets for popular posts, trending, search, social links, an about box and a free info box.
+- A Menu tab in the customizer for every converted theme: pick between menu designs (classic, centered, slim and theme-specific variants), toggle sticky behavior, search and the light/dark switch.
+- Sidebar control where the theme has one: choose whether it shows on the homepage and post pages, pick left/right placement, and manage the widget stack with the same cards.
+
+### Improved
+- Color and typography controls now bind to each theme's real CSS variables with defaults that match the current look exactly — changing a color changes the site, and not changing anything changes nothing.
+- Themes that declared menu locations but never rendered them now consume them: primary menus you build in Appearance → Menus finally drive the header in News, Finance, Lifestyle and Recipes, and footer menus render as footer columns.
+- Turkish sites get a Turkish storefront on News and Entertainment: section titles, dates, comment forms and newsletter copy now follow the site language instead of being hard-coded English.
+- Dead customizer fields that controlled nothing (fake tickers, chart colors, unused archive filters) were removed across themes — every remaining control does something.
+
+### Fixed
+- Finance: the Related Posts section always came back empty — it now queries real related content by category and tags.
+- News: the comment form silently attached comments to the wrong article (the last related post on the page). Comments now always land on the article you are reading.
+- Crypto: trending and article vote counters showed fabricated numbers; they now display the real vote totals from the voting API.
+- Lifestyle: menu items built in the admin now resolve page and category URLs correctly instead of printing raw stored links.
+
+---
+
 ## [2.58.0] - 2026-07-24  ·  _Minor_
 **Branding, Done Right: Generated Logos Publish for Real, OG Images, SERP-Safe Favicons**
 
