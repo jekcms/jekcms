@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.60.1] - 2026-07-24  ·  _Patch_
+**Traffic & Social, Sharpened: Full-Text Feeds Repaired, Fresh 2026 Backlink and Publisher Sources, and Far Less Text to Wade Through**
+
+### Added
+- New verified backlink sources in the Authority Builder: #JournoRequest tracking (X/Bluesky), the AllTop curated directory, product testimonial outreach, Product Hunt and Indie Hackers for tech sites, and the WalletHub expert panel for finance sites.
+- New publisher channels in News Publishers: Refind (curated link digests) and Techmeme (the tech industry news river), each with honest, step-by-step guidance.
+
+### Improved
+- Much less text to wade through: publisher cards now show a two-line summary with full details folded away, backlink source cards fold their "why & how" paragraphs, and the Social Connections screen gained a status strip with a "connected channels only" filter.
+- The News Publishers readiness checklist now performs real HTTP checks on your RSS feed and sitemaps (cached for 10 minutes) instead of always showing green.
+
+### Fixed
+- Critical: the main feed generator was silently failing on every request and falling back to a minimal RSS without full article content -- breaking the full-text requirement of platforms like NewsBreak and SmartNews. Full-text feeds are restored, and the "full content in feed" switch now defaults to on.
+- Saving Traffic or Social settings on installs where the plugin tables were never created used to fail (silently or with a server error); both plugins now create their own tables on demand.
+- The Hashnode documentation link in News Publishers pointed to a page that no longer exists.
+
+---
+
 ## [2.60.0] - 2026-07-24  ·  _Minor_
 **Cloud Backups Arrive: A Tabbed Backup Center, Truly Complete Backups, and an Import That Survives Every Broken CSV**
 
