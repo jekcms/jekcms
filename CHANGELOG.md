@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.59.3] - 2026-07-24  ·  _Patch_
+**One Tidy General Tab: Media and Social Move In, and the API Tab No Longer Crashes on Fresh Installs**
+
+### Improved
+- Settings -> General now hosts seven sub-tabs: Site Info, Branding, Localization, Reading, Discussion, Media and Social Media. The sidebar got two entries shorter; old links redirect automatically and saving returns you to the same sub-tab.
+
+### Fixed
+- Settings -> API & Automation could crash halfway with a server error on installs where the AI tables were never created (the setup wizard did not install them). The tables now ship with the installer, are self-created on first visit, and the page renders safely even if creation fails.
+- Daily background maintenance now also repairs the AI tables on existing installs, so the fix reaches every site without any manual step.
+
+---
+
 ## [2.59.2] - 2026-07-24  ·  _Patch_
 **Tidier Settings and Serious Spam Defense: General Now Has Sub-Tabs, and Bot Floods Can No Longer Bloat Your Database**
 
