@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.59.2] - 2026-07-24  ·  _Patch_
+**Tidier Settings and Serious Spam Defense: General Now Has Sub-Tabs, and Bot Floods Can No Longer Bloat Your Database**
+
+### Added
+- Settings -> General is now organized into sub-tabs: Site Info, Branding, Localization, Reading and Discussion. Reading and Discussion moved out of the sidebar into General -- fewer clicks, less clutter; old links redirect automatically.
+- Flood guard: comments, the contact form and newsletter signups now have hourly and daily per-IP caps plus a site-wide hourly ceiling. Requests over the cap are silently dropped without ever touching the database -- a bot army can no longer pump millions of rows into your site. Limits are adjustable under Comments -> Spam Protection.
+- Newsletter hardening: a honeypot field catches bots, blacklisted addresses are filtered, and any single email address can receive at most 3 subscription emails per day -- so nobody can weaponize your signup form to mail-bomb a victim.
+
+### Improved
+- The spam filter got sharper: it now also scores bot-like browser signatures, missing user agents and shortened URLs (bit.ly and friends), on top of the existing link, keyword and timing checks.
+- Definite spam is no longer stored: spam comments used to be written to the database and pile up -- now they are rejected outright, with only a compact trace kept in a self-pruning log (30-day retention, hard row cap). The contact form now runs through the same spam engine too.
+- Automatic maintenance now also clears spam comments older than 30 days and stale rate-limit counter files.
+
+### Fixed
+- Database maintenance cleanup was silently doing nothing on MariaDB servers (the table checks always failed), so old logs and view records never got purged -- cleanup now actually runs.
+- The logo and social-image generators read the site name from a field that now lives on another sub-tab; they fall back to your saved site name instead of a generic placeholder.
+
+---
+
 ## [2.59.1] - 2026-07-24  ·  _Patch_
 **Settings, Audited: Maintenance Mode, Static Homepage, Comment Rules, Media Sizes and Cache Controls Now Actually Work**
 
