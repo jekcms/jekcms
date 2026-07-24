@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.60.5] - 2026-07-24  ·  _Patch_
+**Content Wizard Tuned Like Clockwork: A Bulletproof AI Prompt, Multi-Part Imports, and a Working "Start Fresh"**
+
+### Improved
+- The copy-paste AI prompt now works like clockwork on ChatGPT, Claude and Gemini alike: hard JSON-validity rules (single-string escapes, plain quotes, first/last character contract) plus a chunking protocol for long batches -- the AI closes each part as valid JSON on its own and continues with only the remaining articles.
+- The single-draft AI Content generator was upgraded from its v1 prompt to the wizard's quality standard: zero-fabrication rule, banned AI-tell phrases, honest handling of volatile figures, and the site language as the default -- with a larger response budget so long drafts no longer get cut off.
+
+### Fixed
+- The wizard's "Start fresh" button appeared to do nothing: it reloaded the page and the browser silently restored the old form values. It now performs a clean reset via a fresh navigation -- saved parameters are wiped and the wizard truly starts over.
+- Importing the AI's answer in multiple parts overwrote the earlier batch: only the last part got scheduled. Imported items now accumulate across parts, the input box clears for the next part, and the calendar step covers every article.
+- The AI Content page rendered the model's raw HTML straight into the admin preview. The preview now passes through a strict sanitizer (tag whitelist, event handlers and script URLs stripped).
+
+---
+
 ## [2.60.4] - 2026-07-24  ·  _Patch_
 **Single-Post Publishing Hardened: Clean Structured Data, and Scheduled Posts That Fire Every Publish Signal**
 
