@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.60.2] - 2026-07-24  ·  _Patch_
+**Traffic & Distribution Untangled: One Flat Tab Bar Instead of Nested Menus, and Three Publisher Cards per Row**
+
+### Improved
+- The Traffic & Distribution screen dropped its inner module sidebar: modules are now a single horizontal tab bar, ending the confusing nested navigation.
+- Publisher cards in News Publishers now lay out three per row (two on narrow screens), so the catalogue scans much faster.
+
+---
+
 ## [2.60.1] - 2026-07-24  ·  _Patch_
 **Traffic & Social, Sharpened: Full-Text Feeds Repaired, Fresh 2026 Backlink and Publisher Sources, and Far Less Text to Wade Through**
 
