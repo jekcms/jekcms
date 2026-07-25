@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.62.0] - 2026-07-25  ·  _Minor_
+**Move From WordPress With One File: The jekcms Migrator Plugin**
+
+### Added
+- A WordPress plugin that packs your whole site into one file. Install "jekcms Migrator" on your WordPress site, press Start export, download the .zip -- that is the entire WordPress side. No database host, user or password, and no server-to-server MySQL connection, which most shared hosting blocks anyway. The export runs in batches and saves its progress, so sites with thousands of posts finish without hitting PHP time limits.
+- The package carries posts, pages and drafts, the category tree with its parent-child structure, tags, authors with their bios, approved comments, menus, media files, SEO titles and descriptions from Yoast, Rank Math or All in One SEO, and a redirect map from every old URL to its new address.
+- Two ways to bring the package in: the setup wizard has a third scenario ("Import a WordPress package") for brand-new installs, and an existing site takes it from Admin panel -> Import -> WordPress package. Both use the same import engine, so both apply exactly the same rules.
+- Imported images are copied into your own uploads folder and the addresses inside the content are rewritten to those local copies -- including the scaled variants WordPress writes into post bodies. Your images keep working after the old site goes offline.
+- Old WordPress URLs are installed as 301 redirects during the import, so links in search results and on other sites keep working.
+- The plugin is in the Downloads section of your customer portal, in English and Turkish.
+
+---
+
 ## [2.61.0] - 2026-07-24  ·  _Minor_
 **Google Console Grows Up: Connect With One Click -- No Cloud Console -- and Real Performance Charts**
 
