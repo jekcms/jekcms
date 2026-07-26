@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.62.2] - 2026-07-27  ·  _Patch_
+**Security Release: Stricter Input Validation And Reliable Throttling**
+
+### Security
+- The environment check no longer trusts a substring of the Host header. A visitor can no longer make an installed site behave as if it were running locally, which previously could turn on debug output and relax cookie security.
+- The rate limiter now holds its lock across the whole read-decide-write cycle. Before this, simultaneous requests could each read the same counter and all pass, so login, API and upload limits could be exceeded by sending requests in parallel.
+- Restoring a backup now only accepts a .zip inside your own backups directory. Any other path is refused.
+- A WordPress package import now writes only recognised media files. Entries such as .php or .htaccess inside a package are skipped and counted, instead of being written into your uploads folder.
+- On an already-installed site, the setup wizard's remaining steps -- including the WordPress cleanup that can drop a database -- now work only in the browser session that performed the installation.
+- The support endpoint no longer reveals whether a licence key exists: an unknown key and an inactive key return the same answer, and the endpoint is rate limited.
+- The contact form links a message to a customer account only when the sender is signed in as that customer. Otherwise the message is filed as a guest request, so nobody can attach a message to someone else's support history by typing their address.
+- Language alternate links are escaped on output and built from a sanitised page name.
+- Newsletter click tracking now verifies a signature before redirecting, so a tracking link cannot be reused to send visitors to an unrelated site.
+- The newsletter queue worker refuses web requests without the configured cron secret. Running it from a real cron job is unchanged.
+- Outgoing mail aborts if the connection cannot be upgraded to TLS, instead of continuing in the clear and sending the mailbox password. The newsletter mailer now verifies the server certificate as well.
+
+---
+
 ## [2.62.1] - 2026-07-27  ·  _Patch_
 **Security Release: Tighter Role Boundaries And A Leaner Installation Package**
 
