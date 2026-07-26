@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.62.1] - 2026-07-27  ·  _Patch_
+**Security Release: Tighter Role Boundaries And A Leaner Installation Package**
+
+### Fixed
+- Theme stylesheet and script addresses now carry a stamp derived from the file itself. Before this, a corrected theme file could sit on the server for months while browsers and the CDN kept serving the old copy for up to a year.
+- Signing in on jekcms.com now updates the header immediately instead of leaving the "Sign In" button in place.
+
+### Security
+- The update-server component no longer ships inside the installation package. It is our own distribution infrastructure, not something a site owner runs, and it has no business sitting in your web root.
+- Admin screens that affect the whole site -- the ad manager, banner editor and comment import -- now require an administrator account. An editor or author account can no longer reach them.
+- Authors can now only edit, trash or delete their own posts and their own media. Bulk actions skip anything that belongs to someone else and tell you how many items were skipped.
+- The newsletter subscriber list and campaign sending are administrator-only. Previously any signed-in staff account could open them.
+- The order confirmation page now only shows an order that belongs to the signed-in customer.
+- Invoice PDFs are written to a directory that is closed to the web and carry an unguessable filename. They are still downloadable from your customer portal, where ownership is checked.
+- A licence that has been revoked or suspended can no longer download the installation package.
+- A post marked private is no longer served on its own page to visitors. Administrators and editors still see it.
+- The example environment file now ships with placeholders instead of real-looking keys, so an installation that copies it cannot end up signing sessions with a value published in the source.
+
+---
+
 ## [2.62.0] - 2026-07-25  ·  _Minor_
 **Move From WordPress With One File: The jekcms Migrator Plugin**
 
