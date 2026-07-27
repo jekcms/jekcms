@@ -8,12 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.63.0] - 2026-07-27  ·  _Minor_
+**Empty Screens, Dark Logo And Instant Refresh**
+
+### Improved
+- On the Turkish site every page address is now Turkish: the cookie policy moved from /tr/cookie-policy to /tr/cerez-politikasi, with the old address redirected so existing links keep working.
+- Language alternate links now describe the page you are actually on. Documentation sub-pages were all announcing the documentation index instead of themselves, which made search engines discard the annotation for a third of the site.
+
+### Fixed
+- An admin page could stop rendering halfway through, leaving everything below the greeting blank. A single empty date, image or e-mail column coming from the database was enough to do it. Every display helper now tolerates empty values, so one missing field can no longer take down a whole screen.
+- The dark mode logo you upload under Settings → General → Branding is now the logo that appears in dark mode. Some themes were guessing it from the light logo's filename instead of reading your setting, which showed an unrelated file or a broken image.
+- Uploading a logo now takes effect immediately. The address of the file carries a stamp derived from the file itself, and saving settings clears the CDN cache as well, so you no longer wait for the old copy to expire.
+- Publishing or editing a post also refreshes the CDN copy of your home page, feed and sitemap.
+- File sizes of zero are shown as "0 B" instead of producing a warning.
+
+---
+
 ## [2.62.5] - 2026-07-27  ·  _Patch_
 **Update Confirmation Shows The Version You Just Installed**
 
 ### Fixed
-- After a core update the confirmation message showed the version you were on before, while the panel header already showed the new one. Two different numbers on the same screen read as a half-finished update. The message now reports the version that was actually installed.
-- The same message for a theme or plugin update now names that component's new version instead of leaving it blank.
+- The confirmation message after a core update now shows the version that was installed.
+- Theme and plugin updates also name the component's new version in the confirmation message.
 
 ---
 
@@ -21,9 +37,9 @@ _`php tools/gen-changelog-md.php` and commit._
 **Reliable Rollback For One-Click Updates**
 
 ### Fixed
-- The backup taken before a core update now contains every file that update replaces. Previously it covered only three folders, so restoring a backup brought back part of the installation and left the rest on the new version. The backup is now built from the contents of the incoming package, so a rollback returns the site to exactly the state it was in.
-- Version markers are always included in the backup. After a rollback the site no longer reports one version in the admin panel and a different one to the update service.
-- Your uploads are never placed in an update backup, so backups stay small and your media is untouched.
+- The backup taken before a core update now covers every file that update changes, so restoring it returns the site to exactly its previous state.
+- Version information is included in the backup. After a rollback the admin panel and the update service report the same version.
+- Your media is never placed in an update backup, so backups stay small and your files are untouched.
 
 ---
 
@@ -31,10 +47,10 @@ _`php tools/gen-changelog-md.php` and commit._
 **Security Follow-Up: Environment Detection And Content Visibility**
 
 ### Security
-- A site now decides whether it is running locally from the server itself, not only from the address in the request. The previous release narrowed the check but a visitor could still send a host name ending in .local or .test and make an installed site behave as a development install -- turning on debug output and relaxing HTTPS and cookie settings. Local development is unaffected, and JEK_ENV can pin the mode explicitly.
-- A second, older copy of the same host check was still matching by prefix, so addresses like 10.example.com counted as private. Both now use one shared check.
-- Posts marked private are now excluded from archives, search, related and featured lists, the sitemap and the RSS/Atom/JSON feeds -- not just from their own page. This matters most after a WordPress migration, where private posts are imported as published with private visibility: their full text was previously readable in the feed. Administrators and editors still see everything in the panel, and an author still sees their own.
-- A WordPress package import now scans SVG files for active content (scripts, event handlers, external references) instead of trusting the extension. Static SVG logos still import normally.
+- A site now decides whether it is running locally by looking at the server itself. A visitor can no longer make an installed site behave as a development install through the address they send. Local development is unaffected; set the JEK_ENV environment variable if you want to pin the mode.
+- Private network address matching was tightened, so lookalike external addresses are no longer treated as local.
+- Posts marked private are now hidden not only on their own page but also in archives, search, related and featured lists, the sitemap and the RSS/Atom/JSON feeds. This matters for sites migrated from WordPress, where private posts arrive as published. Administrators and editors still see everything in the panel, and an author still sees their own.
+- SVG files in a WordPress package are scanned as content during import; files carrying scripts or external references are not accepted. Static SVG logos import normally.
 
 ---
 
