@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.62.4] - 2026-07-27  ·  _Patch_
+**Reliable Rollback For One-Click Updates**
+
+### Fixed
+- The backup taken before a core update now contains every file that update replaces. Previously it covered only three folders, so restoring a backup brought back part of the installation and left the rest on the new version. The backup is now built from the contents of the incoming package, so a rollback returns the site to exactly the state it was in.
+- Version markers are always included in the backup. After a rollback the site no longer reports one version in the admin panel and a different one to the update service.
+- Your uploads are never placed in an update backup, so backups stay small and your media is untouched.
+
+---
+
 ## [2.62.3] - 2026-07-27  ·  _Patch_
 **Security Follow-Up: Environment Detection And Content Visibility**
 
