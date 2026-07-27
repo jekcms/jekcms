@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.63.1] - 2026-07-27  ·  _Patch_
+**Mobile Header, Dark Documentation, Readable Turkish**
+
+### Fixed
+- On phones and tablets the search and day/night buttons now sit on the right, next to the menu button, in that order. They used to be pushed up against the logo while the menu button stood alone at the far edge. The layout is the same in all fourteen themes.
+- Documentation pages follow dark mode again. They were asking for colours that were never defined; a colour the browser cannot resolve makes it drop the whole line, so the backgrounds stayed white with no error anywhere.
+- Turkish text that had been stored through the wrong character set, showing accented letters as pairs of unrelated symbols, has been repaired across the site.
+
+---
+
 ## [2.63.0] - 2026-07-27  ·  _Minor_
 **Empty Screens, Dark Logo And Instant Refresh**
 
@@ -1040,7 +1050,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - The default Cookie Policy was rewritten to be genuinely comprehensive in both languages: cookie categories with purposes, legal bases and durations in a table, first/third-party and session/persistent distinctions, named third parties with opt-out links, consent management and withdrawal, browser instructions, Do Not Track / Global Privacy Control, and a legal-basis section (KVKK on Turkish sites, GDPR/ePrivacy on English ones).
 
 ### Fixed
-- The built-in legal page templates shipped with corrupted text in all 13 themes — Turkish characters and arrow symbols rendered as garbage ("â†’", "Ã‡erez") on fresh installs that had not saved their own legal pages. The templates were re-encoded and every character now renders correctly in both languages.
+- The built-in legal page templates shipped with corrupted text in all 13 themes — Turkish characters and arrow symbols rendered as garbage ("â†’", "Çerez") on fresh installs that had not saved their own legal pages. The templates were re-encoded and every character now renders correctly in both languages.
 - Opening an author archive on the Personal theme returned a server error: a routing variable leaked into the template and shadowed the real author record. Author pages now render on every theme, and a non-existent author correctly returns 404.
 - Tag archives could be indexed by search engines even while tag archives were disabled in SEO settings — the sitemap respected the setting but the page-level robots meta did not. With tag archives off (the default), every tag page is now noindex.
 - On the Finance theme, the author box at the end of a post showed the author's name as plain text; it now links to the author's archive page, and the Pets theme's archive pages now emit a proper page title and meta description instead of just the site name.
