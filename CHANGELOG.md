@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.63.5] - 2026-07-27  ·  _Patch_
+**The Search Sits At The Top Of Every Mobile Menu**
+
+### Improved
+- Where a theme already puts a search inside its mobile menu, it is now moved to the top and given the same full width as everywhere else. The travel theme kept it at the very bottom, below every link, where it was easy to miss. All fourteen themes now open the menu the same way: search first, then the links.
+
+---
+
+## [2.63.4] - 2026-07-27  ·  _Patch_
+**Search Always Inside The Mobile Menu**
+
+### Fixed
+- The mobile menu now always contains a search field. The search icon in the header disappears on narrow screens in different ways from theme to theme - one hides it at a breakpoint, another runs out of room, a third has it switched off in the theme settings. Rather than chase each theme, the menu itself now guarantees it: if the menu has no search of its own, one is added at the top. Themes that already put a search there keep theirs.
+
+---
+
 ## [2.63.3] - 2026-07-27  ·  _Patch_
 **Search On Mobile, In Every Theme**
 
