@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.63.3] - 2026-07-27  ·  _Patch_
+**Search On Mobile, In Every Theme**
+
+### Fixed
+- The search button was missing from the mobile header in the finance theme. Its buttons sat inside the navigation element, and the theme hides that element on small screens, so the search and day/night buttons went with it. They now sit outside it and stay visible.
+- The personal and trends themes had no search on phones at all: the header search box is hidden on small screens and nothing replaced it. Both now carry a search field at the top of the mobile menu, the way the pets theme already did.
+- The touch-target rule no longer resizes custom switches. The day/night control in the trends theme is a pill-shaped switch, and a 40px minimum turned it into a black circle.
+
+---
+
 ## [2.63.2] - 2026-07-27  ·  _Patch_
 **A Readable Mobile Menu In Dark Mode**
 
