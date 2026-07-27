@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.63.2] - 2026-07-27  ·  _Patch_
+**A Readable Mobile Menu In Dark Mode**
+
+### Fixed
+- In dark mode the mobile menu showed dark text on a dark panel, so the links were almost invisible. The shared mobile menu pinned its colours to light values for every theme, and nothing set the matching dark ones. The menu now reads the theme you are actually in, and follows it even if you switch the theme while the menu is open.
+- The order of the header buttons on phones and tablets is now day/night, then search, then the menu button on the far right.
+
+---
+
 ## [2.63.1] - 2026-07-27  ·  _Patch_
 **Mobile Header, Dark Documentation, Readable Turkish**
 
