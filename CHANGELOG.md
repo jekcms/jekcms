@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.62.3] - 2026-07-27  ·  _Patch_
+**Security Follow-Up: Environment Detection And Content Visibility**
+
+### Security
+- A site now decides whether it is running locally from the server itself, not only from the address in the request. The previous release narrowed the check but a visitor could still send a host name ending in .local or .test and make an installed site behave as a development install -- turning on debug output and relaxing HTTPS and cookie settings. Local development is unaffected, and JEK_ENV can pin the mode explicitly.
+- A second, older copy of the same host check was still matching by prefix, so addresses like 10.example.com counted as private. Both now use one shared check.
+- Posts marked private are now excluded from archives, search, related and featured lists, the sitemap and the RSS/Atom/JSON feeds -- not just from their own page. This matters most after a WordPress migration, where private posts are imported as published with private visibility: their full text was previously readable in the feed. Administrators and editors still see everything in the panel, and an author still sees their own.
+- A WordPress package import now scans SVG files for active content (scripts, event handlers, external references) instead of trusting the extension. Static SVG logos still import normally.
+
+---
+
 ## [2.62.2] - 2026-07-27  ·  _Patch_
 **Security Release: Stricter Input Validation And Reliable Throttling**
 
