@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.62.5] - 2026-07-27  ·  _Patch_
+**Update Confirmation Shows The Version You Just Installed**
+
+### Fixed
+- After a core update the confirmation message showed the version you were on before, while the panel header already showed the new one. Two different numbers on the same screen read as a half-finished update. The message now reports the version that was actually installed.
+- The same message for a theme or plugin update now names that component's new version instead of leaving it blank.
+
+---
+
 ## [2.62.4] - 2026-07-27  ·  _Patch_
 **Reliable Rollback For One-Click Updates**
 
