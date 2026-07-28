@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.8] - 2026-07-29  ·  _Patch_
+**License State Is Not Public Reading**
+
+### Security
+- A site's version.json no longer answers over the web. The product records its license activation — including the license key — in that file, and anyone who requested /version.json could read it, along with the exact version and component list, which is useful reconnaissance. The file is now refused at the web-server level on every installation (VERSION.txt too); the admin panel keeps reading it from disk exactly as before, so nothing changes in daily use.
+
+---
+
 ## [2.65.7] - 2026-07-29  ·  _Patch_
 **The Wizard Cleans Up After Itself**
 
