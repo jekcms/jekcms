@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.9] - 2026-07-29  ·  _Patch_
+**The Messages Link Opens the Messages**
+
+### Fixed
+- The Contact Form entry in the admin menu answered "not found". The messages screen moved to its current address a while ago and old bookmarks were being redirected — but the menu itself still pointed at the old address, which redirects only from the old location, not from the one the menu produced. The menu now links straight to the messages screen.
+
+---
+
 ## [2.65.8] - 2026-07-29  ·  _Patch_
 **License State Is Not Public Reading**
 
