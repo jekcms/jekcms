@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.7] - 2026-07-29  ·  _Patch_
+**The Wizard Cleans Up After Itself**
+
+### Security
+- The setup wizard now proves its own files are gone when installation finishes. The wizard and the package zip were already being deleted at the end, but the deletion was never checked — if the server refused it, both files stayed behind without a word, and a forgotten installer is an open door. Removal is now verified on disk, and when any file survives, the finish screen names it and gives exact instructions: open FTP or your hosting file manager, go to the site root, delete these files. Same behaviour on the paid and the free package.
+
+---
+
 ## [2.65.6] - 2026-07-28  ·  _Patch_
 **Only Your Software on Your Server**
 
@@ -15,6 +23,10 @@ _`php tools/gen-changelog-md.php` and commit._
 - Where the free edition stops, it now says so and shows what a paid plan adds. The plugins page, the themes page, the footer editor and the post editor each carry the same short card — what is closed, what opens, and a link to the plans in your customer portal — instead of an empty screen or a missing page.
 
 ### Fixed
+- The footer editor no longer ends in a missing page. It used to forward every unsupported theme to the theme customizer, which the free edition does not ship — so the link answered "not found". It now explains where the footer logo lives on the free edition and links straight to it, and the menu entry is hidden when neither editor is available.
+- The SEO analysis panel is no longer shown on the free edition. It appeared in the post editor and reported nothing, because the scoring engine is part of the paid package. The save and preview bar above it stays exactly where it was.
+- The License screen now knows the free plan. A site running a valid free license was labelled "Unlicensed" on both the License and Updates screens, because the free tier was missing from the plan table — the product did not recognise the license it had issued itself. Plan names also read in the panel language now instead of always in English.
+- Paid plans no longer show bought features as switched off. The feature badges came from an older tiering in which Personal had no premium themes and Standard had no plugins; every paid plan includes everything and only the number of sites differs, so the badges said otherwise to paying customers.
 - A fresh installation no longer answers with an error on its own home page. The table that records reads was created only when the first post was viewed, but on a new site the first page anyone opens is the home page — and the Minimalist theme reads that table to build its popular-posts list. The table is now part of the installation, and the Reports screen, which is built entirely on it, opens on a brand-new site as well.
 
 ### Security
