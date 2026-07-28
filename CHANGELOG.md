@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.10] - 2026-07-29  ·  _Patch_
+**Quizzes Speak Your Panel's Language**
+
+### Added
+- The Recipe plugin now has a place in the admin menu. It used to work invisibly — recipe data is filled in per post in the editor — so there was nothing to click and no way to see which posts carry a recipe card. A Recipe Cards screen now lists those posts with their status, links straight to the editor, and explains where the data lives.
+
+### Fixed
+- The quiz screens now follow the panel language. On a Turkish panel the list page greeted you with "New Quiz", "All / Published / Draft", "Search quizzes…", "No quizzes found" — and the editor's placeholders and buttons were English too. Every label on the list and editor screens now reads in the panel language, and the search row uses the same layout as the rest of the panel instead of a stacked, misaligned one.
+- Opening a quiz screen before the plugin was ever activated no longer ends in a server error. The quiz tables were created only when the plugin started; the screens now create them on first visit, the same self-healing the contact form received.
+
+---
+
 ## [2.65.9] - 2026-07-29  ·  _Patch_
 **The Messages Link Opens the Messages**
 
