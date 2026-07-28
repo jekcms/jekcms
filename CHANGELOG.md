@@ -9,7 +9,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.65.5] - 2026-07-28  ·  _Patch_
-**No Dead Ends, and a Wizard That Is Yours**
+**No Dead Ends, a Wizard That Is Yours, a Plan Name That Is Right**
 
 ### Changed
 - Where the free edition stops, it now says so and shows what a paid plan adds. The plugins page, the themes page, the footer editor and the post editor each carry the same short card — what is closed, what opens, and a link to the plans in your customer portal — instead of an empty screen or a missing page.
