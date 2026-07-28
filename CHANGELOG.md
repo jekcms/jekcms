@@ -8,6 +8,40 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.3] - 2026-07-28  ·  _Patch_
+**No Dead Ends in the Free Edition**
+
+### Changed
+- Where the free edition stops, it now says so and shows what a paid plan adds. The plugins page, the themes page, the footer editor and the post editor each carry the same short card — what is closed, what opens, and a link to the plans in your customer portal — instead of an empty screen or a missing page.
+
+### Fixed
+- The footer editor no longer ends in a missing page. It used to forward every unsupported theme to the theme customizer, which the free edition does not ship — so the link answered "not found". It now explains where the footer logo lives on the free edition and links straight to it, and the menu entry is hidden when neither editor is available.
+- The SEO analysis panel is no longer shown on the free edition. It appeared in the post editor and reported nothing, because the scoring engine is part of the paid package. The save and preview bar above it stays exactly where it was.
+
+---
+
+## [2.65.2] - 2026-07-28  ·  _Patch_
+**One Language Per Page**
+
+### Fixed
+- Theme wording now follows the site language everywhere, not only in the footer. Sixty-six labels in the bundled themes carried a single hard-coded default — some English, some Turkish — so a page could show both at once. Each label now carries both languages, and the page language attribute follows the site setting instead of the language declared by the theme.
+
+---
+
+## [2.65.1] - 2026-07-28  ·  _Patch_
+**A Site That Behaves: Logo, Language and Newsletter**
+
+### Added
+- Setup wizard: the site language and the admin panel language are chosen separately during installation, instead of being inherited from the language of the wizard itself.
+- Setup wizard: the theme step shows a real preview of each theme instead of a coloured strip.
+
+### Fixed
+- The newsletter form no longer appears on installations that do not have the newsletter plugin. The free edition ships without it, yet themes still printed the form on every page — and a visitor who typed an email received a server error. The interface is now drawn only when the feature exists, and the endpoint answers "not found" instead of failing.
+- A logo uploaded during setup now also appears in the footer. The footer was reading a separate setting and, when it was empty, printed a fixed letter left over from the original site the theme came from — so the site name could be anything and the footer still showed the same initial. You can still set a different footer logo, or remove it, under Appearance.
+- Theme wording follows the site language. A site installed in Turkish had Turkish legal pages but an English footer, newsletter box and "Page Not Found" screen — two languages on one page. Theme labels may now carry both languages, and an English label from a theme no longer leaks onto a Turkish site.
+
+---
+
 ## [2.65.0] - 2026-07-28  ·  _Minor_
 **Update Channel Restored, and a Real Path from Free to Paid**
 
