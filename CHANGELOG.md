@@ -8,8 +8,8 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
-## [2.65.3] - 2026-07-28  ·  _Patch_
-**No Dead Ends in the Free Edition**
+## [2.65.4] - 2026-07-28  ·  _Patch_
+**No Dead Ends, and a Wizard That Is Yours**
 
 ### Changed
 - Where the free edition stops, it now says so and shows what a paid plan adds. The plugins page, the themes page, the footer editor and the post editor each carry the same short card — what is closed, what opens, and a link to the plans in your customer portal — instead of an empty screen or a missing page.
@@ -17,6 +17,9 @@ _`php tools/gen-changelog-md.php` and commit._
 ### Fixed
 - The footer editor no longer ends in a missing page. It used to forward every unsupported theme to the theme customizer, which the free edition does not ship — so the link answered "not found". It now explains where the footer logo lives on the free edition and links straight to it, and the menu entry is hidden when neither editor is available.
 - The SEO analysis panel is no longer shown on the free edition. It appeared in the post editor and reported nothing, because the scoring engine is part of the paid package. The save and preview bar above it stays exactly where it was.
+
+### Security
+- The setup wizard now belongs to whoever opens it first. Until installation finished, anyone who found the wizard could run it against a database server of their own choosing and become the administrator of that site — the protection only started once setup was complete. The first visit now claims the wizard for that session; another session from another address is refused, and the way out is one line on screen: delete config/.install-claim. The claim expires by itself after twelve hours.
 
 ---
 
