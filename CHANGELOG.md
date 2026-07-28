@@ -8,6 +8,55 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.0] - 2026-07-28  ·  _Minor_
+**Update Channel Restored, and a Real Path from Free to Paid**
+
+### Added
+- Güncellemeler screen: components your plan covers but your installation does not have can now be downloaded one by one. Coming from the free edition, premium themes and plugins were never on disk, and the channel only ever offered updates for what was already installed — so a paid plan delivered nothing until the whole package was reinstalled by hand.
+- Customer portal: a free licence now shows the paid plans, and once a paid licence exists the site can be moved onto it in one click. A domain belongs to one licence at a time, so the new licence previously could not be added while the free one still held the site; the move does both steps at once and does not spend a slot from the 30-day move allowance.
+
+### Fixed
+- Updates could be listed but never downloaded. The key used to verify the signed update manifest was rotated on the server and the matching key never reached the product, so every install refused each package with a verification error while the panel still advertised the update. The current key now ships with the product; core, theme and plugin downloads work again. This is the single most important reason to install 2.65.0.
+
+### Security
+- A licence upgraded in place from the free edition now receives a newly issued key. The key format itself marks a licence as free, so raising only the plan column would have left the customer paying for a plan the update channel still treated as free.
+
+---
+
+## [2.64.1] - 2026-07-28  ·  _Patch_
+**Security Fix: Contact Notification Email Headers**
+
+### Fixed
+- Replies to a contact notification now go to the person who wrote the message. The reply-to address was being set through a method the mailer did not have, so the call quietly did nothing.
+- A site name containing characters that look like a pattern reference no longer corrupts the header when the brand name is printed next to a square logo.
+
+### Security
+- The subject a visitor types into the contact form went into the notification email header as-is. A crafted subject could therefore add headers of its own — enough to have the site send mail to addresses the owner never chose, from the site's own domain. Every value that reaches a mail header is now stripped of line breaks and encoded, on both the SMTP and PHP mail paths, and recipient addresses are validated before use. Sites running 2.64.0 with the new contact notification should update.
+- The AI draft screen now requires an administrator, matching the other content screens. It previously accepted any signed-in account, so an editor or author could generate content with the site's own API key.
+
+---
+
+## [2.64.0] - 2026-07-28  ·  _Minor_
+**A Setup Wizard Worth The First Impression — And A Contact Form That Delivers**
+
+### Improved
+- The setup wizard was rebuilt around the first impression: a welcome that says what will happen, the four steps shown up front, the three ways to start side by side on one row, system checks in two columns, and motion that points at what matters. It respects reduced-motion settings and works the same on a phone.
+- The contact form now brings its own appearance. It used to inherit whatever the theme happened to provide, which on most themes was nothing — raw browser fields with labels beside them. Themes that style the form themselves are left untouched.
+- The wizard asks for the administrator name properly instead of silently filling in "Admin", and offers only the themes that are actually inside the package you are installing.
+
+### Fixed
+- The setup wizard would not start. A single unescaped apostrophe in a Turkish label broke the whole page script, so the wizard opened with empty labels and a spinner that never stopped. Every download since 2.60.0 carried it. The wizard now parses in both languages and a release check keeps it that way.
+- Contact messages were being lost. On some installations the messages table had never been created — it was only built when a plugin was activated or an administrator happened to open the messages page — so submissions vanished while the visitor was told "message received". The table is now created the moment a message needs to be stored.
+- No email ever went out for a contact message. The message sat in the panel and the site owner heard nothing. Owners now receive a notification with the sender set as reply-to, so a reply is one click away.
+- A contact message could disappear silently. Four separate anti-spam paths dropped the message and still answered "sent". Nothing is discarded any more: a suspicious message is stored under Spam with the reason attached, so a false alarm can be recovered instead of lost.
+- The spam filter was tuned for comments and flagged ordinary contact messages — a plain message could land in Spam and never reach the owner. Contact submissions now only count as spam on decisive signals, and lesser suspicion is recorded as a note instead of blocking the message.
+- A stray search box appeared next to the logo on desktop headers. The in-menu search guarantee was modifying the page on load; it now only appears when the mobile menu opens and is removed when it closes.
+- An uploaded brand logo could overflow the header at its natural size. Every theme now caps the header logo, and a square logo (an icon rather than a wordmark) is shown with the site name beside it instead of leaving the brand nameless.
+- Related articles showed an initial instead of the author photo, while the same card showed the photo everywhere else.
+- On the finance theme, the newsletter box in category and author pages stretched down the whole page, and the author header was hard to read on its coloured band.
+
+---
+
 ## [2.63.5] - 2026-07-27  ·  _Patch_
 **The Search Sits At The Top Of Every Mobile Menu**
 
@@ -918,7 +967,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - An SEO signal regression matrix now guards every release. It activates all fourteen themes in sequence on a live test install and asserts, for each one: exactly one WebSite JSON-LD node; the site name — Turkish characters included — reproduced identically in WebSite.name, og:site_name and the page title; no auto-generated alternateName; the correct publisher type (both Organization and Person modes are exercised); exactly one visible H1; the right html lang; canonical equal to og:url; valid JSON-LD; and no character corruption. The harness ships in the repository and runs as part of the release gate.
 
 ### Improved
-- One positioning sentence, everywhere: jekcms is a self-hosted CMS for publishers and agencies with built-in SEO and image optimization, running on standard PHP + MySQL hosting. The vague "Next-Gen Smart CMS" phrasing is gone from the homepage, metadata, structured data and the admin login — and so are claims we can't prove: "24/7 support" now reads as support actually works (e-mail, response within 24–48 business hours), "Enterprise Security" now names the real controls (2FA, CSRF protection, rate limiting), and the theme count says exactly 14. The n8n integration is described in one place, as what it is: content arrives as drafts and publishes only after your editorial approval. A security.txt contact file is now published as well.
+- One positioning sentence, everywhere: jekcms is a self-hosted blog CMS with built-in SEO and image optimization, running on standard PHP + MySQL hosting. The vague "Next-Gen Smart CMS" phrasing is gone from the homepage, metadata, structured data and the admin login — and so are claims we can't prove: "24/7 support" now reads as support actually works (e-mail, response within 24–48 business hours), "Enterprise Security" now names the real controls (2FA, CSRF protection, rate limiting), and the theme count says exactly 14. The n8n integration is described in one place, as what it is: content arrives as drafts and publishes only after your editorial approval. A security.txt contact file is now published as well.
 
 ### Fixed
 - The minimalist theme's homepage rendered two H1 headings — the brand in the header and the featured post title. The featured post title is now an H2, so every page has exactly one visible H1 and the brand heading keeps carrying the site-name signal to Google.
