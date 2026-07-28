@@ -8,18 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
-## [2.65.5] - 2026-07-28  ·  _Patch_
-**No Dead Ends, a Wizard That Is Yours, a Plan Name That Is Right**
+## [2.65.6] - 2026-07-28  ·  _Patch_
+**Only Your Software on Your Server**
 
 ### Changed
 - Where the free edition stops, it now says so and shows what a paid plan adds. The plugins page, the themes page, the footer editor and the post editor each carry the same short card — what is closed, what opens, and a link to the plans in your customer portal — instead of an empty screen or a missing page.
 
 ### Fixed
-- The License screen now knows the free plan. A site running a valid free license was labelled "Unlicensed" on both the License and Updates screens, because the free tier was missing from the plan table — the product did not recognise the license it had issued itself. Plan names also read in the panel language now instead of always in English.
-- Paid plans no longer show bought features as switched off. The feature badges came from an older tiering in which Personal had no premium themes and Standard had no plugins; every paid plan includes everything and only the number of sites differs, so the badges said otherwise to paying customers.
+- A fresh installation no longer answers with an error on its own home page. The table that records reads was created only when the first post was viewed, but on a new site the first page anyone opens is the home page — and the Minimalist theme reads that table to build its popular-posts list. The table is now part of the installation, and the Reports screen, which is built entirely on it, opens on a brand-new site as well.
 
 ### Security
 - The setup wizard now belongs to whoever opens it first. Until installation finished, anyone who found the wizard could run it against a database server of their own choosing and become the administrator of that site — the protection only started once setup was complete. The first visit now claims the wizard for that session; another session from another address is refused, and the way out is one line on screen: delete config/.install-claim. The claim expires by itself after twelve hours.
+
+### Removed
+- Our own store code no longer ships with the product. Because the shop and the product were built from one source tree, every installation received the jekcms.com customer portal (login, registration, licenses, downloads, invoices), the iyzico payment endpoints and the order, invoice and customer screens — thirty-five files that can never run on your server, because the tables they need are not part of the schema. In practice they produced a confusing broken page on your own domain and an error entry in your log on every request to them.
 
 ---
 
