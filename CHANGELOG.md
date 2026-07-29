@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.11] - 2026-07-29  ·  _Patch_
+**A Fresh Install Tells the Truth**
+
+### Improved
+- Theme previews in the setup wizard are now twice the size, so you can actually see what you are choosing. Hovering a card reveals a "View demo" link that opens the live theme showcase in a new tab — pick with your eyes, not from a thumbnail.
+- On the wizard's finish screen, "View Site" now opens your site in a new tab, so the completion page with your next steps stays where you left it.
+
+### Fixed
+- Right after installation the admin greeted you with "License validation has not succeeded for 999 days" — alarming, and not what was happening. When no license key has been entered yet, the panel now simply asks you to enter it; the day counter only ever appears after a real validation has aged.
+- The free edition's Updates screen claimed all 14 themes and 13 plugins were installed. "Installed Components" now reports what is actually on your server — and when you upgrade to a paid license, the missing premium components are offered for install exactly as before.
+- On installs without the distribution plugins, the dashboard showed a "Traffic Control" panel with a made-up setup score and links to screens that don't exist. Plugin panels now appear only when the plugin is actually installed, and the score is computed only from the channels you have.
+
+---
+
 ## [2.65.10] - 2026-07-29  ·  _Patch_
 **Quizzes Speak Your Panel's Language**
 
