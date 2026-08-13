@@ -37,6 +37,28 @@ Installs on any PHP + MySQL hosting, one-time license.
   be imported
 - **One-time pricing** — no subscription, lifetime updates
 
+## Included modules
+
+Everything below ships as an official, first-party module — no third-party
+plugins to buy, install or keep compatible:
+
+- **Content & SEO** — per-post SEO (Schema.org/JSON-LD), automatic internal
+  linking, Schema Studio (13 types), Redirect Manager, Instant Indexer
+  (IndexNow + WebSub), **Advanced Search** (FULLTEXT relevance ranking),
+  **Editorial Calendar** (kanban board + month view), modern editor with live
+  SEO scoring
+- **Media & performance** — AVIF/WebP pipeline, Image Studio (bulk convert,
+  responsive srcset), Critical CSS Studio, AI image generation
+- **Audience & growth** — Newsletter (campaigns + SMTP), **Web Push
+  notifications** (self-hosted VAPID, no third-party service), **Form Builder**,
+  **Digital Downloads** (sell files or lead magnets), **Audience / CRM** (unify
+  subscribers, form leads, buyers & commenters), **A/B Tests** (headline & CTA
+  experiments), Social Publisher (21 networks), ZeroTrack privacy analytics
+- **Security & ops** — security center/WAF, TOTP 2FA, daily Smart Backup with
+  one-click restore, signature-verified auto-updates, Cloudflare setup wizard
+
+New modules ship continuously — see the release history below.
+
 ## Live
 
 - Product & pricing — **https://jekcms.com**
