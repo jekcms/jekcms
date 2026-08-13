@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.94] - 2026-08-13  ·  _Patch_
+
+### Improved
+- The admin sidebar now shows the newest modules (Forms, Downloads, Web Push, Editorial Calendar, Audience/CRM, A/B Tests) with proper localized names and their own icons, instead of an English name and a generic icon.
+
+### Security
+- CSV exports are now hardened against spreadsheet formula injection. A value starting with =, +, -, @ or | (for example a contact name harvested from a public form or comment) could otherwise be treated as a live formula when the file is opened in Excel or Google Sheets. Every untrusted cell in the Audience (CRM), SEO and Analytics exports is now neutralized so it stays plain text.
+
+---
+
 ## [2.65.93] - 2026-08-13  ·  _Patch_
 **A/B Tests: Even Variant Split on 32-bit PHP**
 
