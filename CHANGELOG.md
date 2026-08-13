@@ -8,6 +8,842 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.92] - 2026-08-13  ·  _Minor_
+**New Plugin: A/B Tests**
+
+### Added
+- A/B Tests — find out which headline or call-to-action actually works instead of guessing. Create an experiment with two or more variants, drop the [ab id=N] shortcode into any post or page, and each visitor is shown one variant — the same one every time they return, chosen without a cookie so it just works. A link to /ab/go?e=N records a conversion for that visitor's variant and forwards them to your goal page. The admin shows impressions, conversions and conversion rate side by side, highlights the leader with a 🏆, and warns while the sample is still too small to trust. Weights let you send more traffic to a variant, and pausing an experiment freezes the numbers while still showing the winning version to readers. Lightweight by design: cookieless bucketing and aggregate counters, so no per-click table piles up. Activate it under Plugins.
+
+---
+
+## [2.65.91] - 2026-08-13  ·  _Minor_
+**New Plugin: Audience (CRM)**
+
+### Added
+- Audience (CRM) — a lightweight CRM that unifies the contacts you already collect into one place. It gathers your newsletter subscribers, Form Builder leads, Digital Downloads buyers and approved commenters into a single audience keyed by e-mail: someone who subscribed, filled a form and bought a download shows up as one contact with all three sources, not three scattered rows. Search by name or e-mail, filter by source or by your own tags, and open any contact to see a full activity timeline across every channel. Add tags to build segments (vip, prospect, customer…) and a private note per contact, then export the filtered list to CSV for your mail tool. One click rebuilds the audience from your live data, and it always keeps the tags and notes you added. Activate it under Plugins.
+
+---
+
+## [2.65.90] - 2026-08-13  ·  _Minor_
+**New Plugin: Editorial Calendar**
+
+### Added
+- Editorial Calendar — plan your content pipeline with a kanban board (Idea → Draft → Review → Ready) and a month calendar. Assign posts to authors, set due dates, and add editorial notes. Moving a card to Review flips the post to “pending”; the other stages keep it a draft, and publishing still happens in the editor — so nothing goes live by accident. The calendar places published and scheduled posts on their publish date and planned drafts on their due date, giving you a clear month-at-a-glance of what’s coming. Multi-author teams get a shared view of who’s working on what and when it’s due. Activate it under Plugins.
+
+---
+
+## [2.65.89] - 2026-08-13  ·  _Minor_
+**New Plugin: Web Push Notifications**
+
+### Added
+- Web Push Notifications — let visitors opt in to browser notifications and reach them even after they leave your site. When you publish a new post, every subscriber gets a native notification that reopens the article — bringing readers back for repeat visits. Includes a subscriber count and a one-click test broadcast. Fully self-hosted: standard VAPID authentication and RFC 8291 payload encryption in pure PHP, no third-party push service and no per-message fees. Only trusted push endpoints are accepted, dead subscriptions are pruned automatically, and the private key is encrypted at rest. Works on HTTPS sites (and localhost); the visitor grants permission in their browser. Activate it under Plugins and turn on “notify on new post”.
+
+---
+
+## [2.65.88] - 2026-08-13  ·  _Minor_
+**New Plugin: Digital Downloads**
+
+### Added
+- Digital Downloads — sell or give away digital files (ebooks, printables, templates, courses). Embed a product anywhere with the [download id=N] shortcode. Free products act as e-mail-gated lead magnets: the visitor enters an e-mail and instantly gets a secure download link (also e-mailed). Paid products create an order you fulfil however you like — bank transfer / havale or any method — then one click marks it paid and e-mails the buyer their link. Files are stored in a web-blocked folder and served only through single-use tokenized links with a per-order download limit and expiry, so they can’t be shared or hotlinked. Uploads of executable file types are refused. Activate it under Plugins; set your payment instructions on its page.
+
+---
+
+## [2.65.87] - 2026-08-13  ·  _Patch_
+**Smarter Search: Relevance-Ranked Results**
+
+### Improved
+- Site search now ranks results by relevance instead of just date. It uses the database full-text index (which existed but was unused) so the best matches surface first — a term in the title outranks the same term buried in the body — and partial words match too (searching “brew” finds “brewing”). Very short queries automatically fall back to the previous substring search, so nothing is lost. Turkish content and multi-word queries are handled correctly.
+
+---
+
+## [2.65.86] - 2026-08-12  ·  _Minor_
+**New Plugin: Form Builder**
+
+### Added
+- Form Builder — build unlimited custom forms (contact, lead-gen, surveys, quote requests) with a visual field editor. Ten field types (text, email, phone, URL, number, textarea, dropdown, radio, checkbox, date), each optional or required. Embed any form anywhere with the [form id=N] shortcode, collect submissions in a built-in viewer, and get e-mail notifications on new entries. Protected out of the box with a honeypot, CSRF, rate limiting, minimum-submit-time and spam filtering; all stored values are safely escaped. Activate it under Plugins.
+
+### Fixed
+- Shortcodes such as [form id=5] or [quiz id=3] could leak as raw text into a page’s meta description and social-share (Open Graph) snippet. They are now stripped from the description, so search results and shared links read cleanly.
+
+---
+
+## [2.65.85] - 2026-08-12  ·  _Patch_
+**Core Cleanup: Removed Unused Legacy Modules**
+
+### Improved
+- Removed several unused code modules left over from earlier versions — a dead front-end controller, a duplicate image-optimizer class (the feature runs from a different code path and is unaffected), an unused string helper, a duplicate support-ticket class, two unused cache helpers, an unused query builder, and three already-disabled one-time scripts. This trims the codebase with no change to how the site behaves; every page and feature was re-verified afterward.
+
+---
+
+## [2.65.84] - 2026-08-12  ·  _Patch_
+**Backup System Hardening: View-Safe Restore, Memory-Safe Dumps, Reliable Scheduling**
+
+### Improved
+- Database dumps are now streamed to disk instead of being assembled entirely in memory, so backups no longer risk running out of memory on busy sites with large analytics or log tables.
+- Scheduled daily backups are more reliable on low-traffic sites: instead of only firing in a single exact hour (which a quiet site could miss entirely), the backup now runs at the first opportunity from the chosen hour onward, still once per day.
+- Old pre-restore safety backups are now cleaned up on the same retention schedule as automatic backups, so they no longer accumulate and fill disk space over time.
+
+### Fixed
+- Restoring a backup could fail completely on databases that contain a SQL view: the dump treated the view as an ordinary table and the restore aborted partway. Backups now handle views correctly, so a restore runs cleanly from start to finish.
+- Restoring a large backup could run out of time and stop halfway, leaving the database partly restored. The restore now lifts the same time and memory limits the backup step already used, and if a specific statement ever fails it reports exactly which one instead of a cryptic error.
+
+---
+
+## [2.65.83] - 2026-08-12  ·  _Patch_
+**Comments & Newsletter Deep Audit: Closed-Post Guard, Accurate Counts, New Notification E-mails**
+
+### Added
+- Optional comment notification e-mails: get an e-mail when a new comment arrives (including ones awaiting moderation), and let commenters know when someone replies to them. Both are off by default and configurable under Settings → Discussion.
+
+### Fixed
+- Comments could still be posted to an article whose comments were closed: the theme hid the form, but the endpoint did not enforce it, so a direct submission slipped through. Closing comments on a post now truly rejects new submissions.
+- The comment counter shown on posts could drift out of sync when comments were approved, unapproved, spammed, or deleted from the admin — the number is now recomputed from the approved comments on every change, so structured-data and listings stay correct.
+- The newsletter signup box on the Lifestyle theme never worked — the form pointed at a blocked internal path and returned a silent error. It now uses the correct subscription endpoint and confirms properly.
+
+---
+
+## [2.65.82] - 2026-08-12  ·  _Patch_
+**Fixed a Setting Collision: Comments, Newsletter & Spam “Enabled” Are Now Independent**
+
+### Fixed
+- Three separate features — comments, the newsletter, and the spam filter — were all storing their on/off state under the same internal “enabled” name, so they secretly shared a single database row. Turning one off could silently turn the others off too: disabling the newsletter, for example, could make comments disappear from your site. Each feature now uses its own dedicated setting, so their switches are fully independent. Existing sites are migrated automatically, keeping whatever state they were last showing — no action needed.
+
+---
+
+## [2.65.81] - 2026-08-12  ·  _Patch_
+**General Settings Audit: “Posts Per Page” Now Actually Works**
+
+### Fixed
+- Settings → Reading → Posts Per Page was a dead knob on most themes: changing it did nothing to the category, tag, author, search and archive listings, because those theme templates read a hard-coded constant instead of your setting. The value you pick now drives pagination on all of them, with the constant kept only as a fallback. Every observable general setting was re-verified live: analytics snippets (GA4, GTM, Meta Pixel, AdSense), the cookie-consent banner, custom header/body/footer scripts, SEO verification tags, JSON-LD publisher data, the RSS full-content switch, robots crawler blocking, page-cache headers and maintenance mode all apply correctly.
+
+---
+
+## [2.65.80] - 2026-08-12  ·  _Patch_
+**Plugin Deep Audit: License Gate, Quiz Fix, and Two 500s Closed**
+
+### Fixed
+- The Quiz plugin created no database tables when activated — it looked for a migration file that was never shipped, so every quiz admin page failed with a server error and the plugin was effectively dead on arrival. Its full schema is now built into the plugin itself; activating it (or simply loading a site where it was activated) creates the tables and heals existing broken installs on the next visit.
+- Two endpoints returned a server error when reached over the web: the legacy contact-form submit shim and the newsletter weekly-digest web-cron. Both re-declared a core constant (and the digest re-loaded the whole framework a second time) when invoked through the site router. Both now run cleanly — the contact shim rejects a missing security token with a proper 403, and the digest cron enforces its secret key with a 403 before doing any work.
+- Hardened the plugin authorization boundary. Plugins are a paid-tier feature: activation was already blocked on the free tier, but the code that loads active plugins on every page did not re-check the licence — so a site that lapsed from paid to free (or had a paid database copied onto it) could keep running paid plugins. The loader now verifies the licence on every request and refuses to load plugins on a genuine free-tier licence, while never restricting a paid site whose token has not yet refreshed.
+
+---
+
+## [2.65.79] - 2026-08-12  ·  _Minor_
+**Preview Bar on the Site + Live Preview in the Customizer**
+
+### Added
+- While you preview a theme, the site itself now pins a small dark bar to the bottom of every page: it names the theme being previewed, reminds you that only you can see it, and carries two links — activate this theme, or close the preview — so you decide right where you are looking, without returning to the panel. Visitors never see the bar; it exists only in your admin session, and preview pages are never written to the shared page cache.
+- The theme customizer gained a live preview pane: your site sits in a small window next to the settings, and color, size and font fields repaint it the instant you change them — before saving. Fields that feed several style variables at once update all of them together; the remaining settings show after you save, and the pane can be refreshed or popped into a new tab. The whole appearance layer was re-verified on all 13 themes after these additions: 272 checks, all green.
+
+---
+
+## [2.65.78] - 2026-08-12  ·  _Patch_
+**Theme Preview Now Actually Previews — Plus Two Appearance Fixes**
+
+### Fixed
+- Theme preview was a dead switch: the admin banner said preview mode was active, but nothing on the frontend ever read the flag, so the site kept rendering the active theme. The preview now genuinely applies to your own browser session — you browse the whole site in the candidate theme while visitors keep seeing the live one, then either activate it or close the preview.
+- Switching themes could fail with a bare "database error" on customized sites: every activation stored a rollback backup that embedded the previous backup inside itself, so the record snowballed with each switch until it exceeded the database packet limit. The backup now stores only what rollback actually needs, a failed backup can no longer block the activation itself, and per-theme customizations are untouched as before.
+- Saving the footer builder could return a silent server error when the payload lacked the logo-type field, losing the save. The whole appearance layer was then re-verified end to end on all 13 themes with a real admin session — activation, preview, rollback, customizer save, footer save, header logo and page rendering: 136 checks, all green.
+
+---
+
+## [2.65.77] - 2026-08-12  ·  _Patch_
+**Trends Theme No Longer Crops In-Content Images**
+
+### Fixed
+- The Trends theme forced every in-content image into a fixed 1.45:1 frame and cover-cropped it to fit — a 16:9 image lost a wide strip on both sides, so infographics went out with their titles and edge elements cut off. The image looked correct in the editor and broken only on the published page, which made the cause hard to spot. Content images now keep their own aspect ratio at full width; covers, cards and hero areas keep their designed framing. The other thirteen themes were audited for the same pattern and are unaffected.
+
+---
+
+## [2.65.76] - 2026-08-11  ·  _Patch_
+**n8n Templates: Live End-to-End Tested, Image Bug Fixed, Flow Slimmed**
+
+### Fixed
+- The queue templates were run live end to end — from a real queue task through research, writing, three image generations, media upload and publishing — and that run caught a real bug: the current image model returns JPEG while the templates named the files .png, so the site rejected every upload as a type mismatch and articles went out without their in-content images and cover. The templates now derive the file extension from the actual image type the model returns, so the images land no matter what format the model produces. After the fix the full live run passed end to end: article published with its cover and both in-content images in place.
+- Both queue workflows were slimmed down: a pointless 2-second wait and a decorative dead-end node were removed, so the canvas shows only steps that actually do something.
+
+---
+
+## [2.65.75] - 2026-08-11  ·  _Patch_
+**n8n Templates Upgraded to the Current Gemini Generation**
+
+### Fixed
+- The n8n templates shipped pointing at the previous Gemini generation, and the researched template's writer even defaulted to a model Google no longer offers to newly created API keys — a fresh key failed with a not-found error at the content-writer step on the very first run. All three templates now use the current generation the CMS itself uses: gemini-3.6-flash for writing, research and SEO, and gemini-3.1-flash-image for image generation. Every model was verified live against a plain free-tier key, including the Google Search research step.
+- Token budgets in the templates were adjusted for the new generation's thinking behaviour: current models spend part of the output budget on reasoning, so the tight limits on the SEO and image-vetting steps could have returned empty answers. Already-imported workflows are fixed by re-downloading the template, or by updating the model names in its Settings node.
+
+---
+
+## [2.65.74] - 2026-08-11  ·  _Patch_
+**A Direct Path from the n8n Box to Creating an API Key**
+
+### Fixed
+- The n8n box on the Content Panel shows the webhook URL and the templates, but the page where you create the site API key those requests need had no link pointing to it from there — on some plans it was effectively unreachable. The box now says it plainly under the webhook URL: requests need a site API key, with a direct "Create API Key" link.
+
+---
+
+## [2.65.73] - 2026-08-11  ·  _Patch_
+**n8n Templates Live in Exactly One Place**
+
+### Changed
+- The n8n template downloads now live in exactly one place: the n8n integration box on the Content Panel, right under the webhook URL the templates use. The duplicate card sections added to Settings > API & Automation and to the API Keys guide page have been removed; the guide page instead points to the Content Panel with a single line.
+
+---
+
+## [2.65.72] - 2026-08-11  ·  _Patch_
+**n8n Templates Right Where the Queue Lives**
+
+### Changed
+- The Content Panel's n8n integration box — the place that already shows your webhook URL and the workflow outline — now ends with the three ready-made template downloads. The queue-driven templates feed on exactly this page's task queue, so you grab the workflow right where you fill its queue: no jumping to another screen.
+
+---
+
+## [2.65.71] - 2026-08-11  ·  _Patch_
+**n8n Templates Now Live Inside Settings > API & Automation**
+
+### Changed
+- The ready-made n8n templates are now embedded directly in Settings > API & Automation — the tab opens with the three template cards and their download buttons, followed by a link to the API key / webhook guide page. The separate menu entry added in the previous release has been removed: the admin menu stays as it was, and the automation page now behaves like the other settings sub-pages (the Settings menu item stays highlighted while you are on it).
+
+---
+
+## [2.65.70] - 2026-08-11  ·  _Patch_
+**The Automation (n8n) Page Is Now in the Menu**
+
+### Fixed
+- The page that holds your site API keys, webhook URLs and the new n8n templates was practically unreachable: its only link lived inside Content Studio, so on plans without that screen the page existed but nothing pointed to it. It now has its own "Automation (n8n)" entry in the admin menu under System, and the Settings > API & Automation tab opens with a clear pointer to it. The page title now says what it is: Automation (n8n) & API Keys.
+
+---
+
+## [2.65.69] - 2026-08-11  ·  _Minor_
+**Ready-Made n8n Workflow Templates**
+
+### Added
+- The API Keys page now offers three downloadable n8n workflow templates, so full content automation no longer starts from a blank canvas: an RSS Content Factory (collects fresh feed items, lets AI pick the best candidate, de-duplicates against your published posts, vets the source image and rewrites everything into an original post), a Content Queue Persona Writer (pulls tasks from your site's content queue, writes in a configurable author voice while producing SEO data in parallel, generates an AI cover and publishes), and a Researched Production template (genuinely researches the topic via Google Search first, writes strictly from the verified data under anti-hallucination rules, and produces a cover plus two in-content images in distinct art styles).
+- Every template is configured in one single place: an "Ayarlar" (Settings) node at the start of the workflow holds your site URL, your site API key and your AI keys. No n8n credentials to set up for the queue templates, nothing scattered across nodes — and if you run a template before filling it in, it stops with a clear message telling you exactly what to do. The templates ship with no secrets inside; sticky notes in the canvas explain setup and how each stage works.
+
+---
+
+## [2.65.68] - 2026-08-11  ·  _Patch_
+**Match Images No Longer Skips Your Pinterest Pin**
+
+### Fixed
+- Some AI models echo the file-naming contract back inside the article JSON — a plain file name like "slug-pinterest" in an image field. The importer stored that name as if it were the image's address, so the Pinterest slot looked already filled: Match Images refused to touch a "filled" slot and the pin you uploaded to the temp folder was never picked up, with no error anywhere. A bare file name is no longer treated as an address at import, and the matcher now recognizes such leftover values as unmatched — so previously imported articles heal themselves the next time you press Match Images.
+- The same phantom value also inflated the matched/total badge in the queue, made prompt export skip the article as "already done", and could reach the published post as a broken image. All of these paths now check for a real image address before counting a slot as matched.
+
+---
+
+## [2.65.67] - 2026-08-10  ·  _Patch_
+**Update Downloads Now Work on Hardened Hosting**
+
+### Fixed
+- On hosting accounts where the PHP setting allow_url_fopen is switched off — a common security hardening on shared hosting — the panel could find a new version but then fail with a download error. The update check had already been moved to the more capable cURL transport, but the actual package download (and the signed-manifest verification in front of it) was still using the old method, so the very same host that could see the update could not fetch it. Every network step of the update chain now uses the same cURL-first transport, so checking, verifying and downloading all work on the same hosts.
+- When a download does fail, the panel no longer says only "failed to download": the message now carries the underlying transport reason (for example the exact cURL error or HTTP status), so support can diagnose the host from a screenshot instead of guessing.
+
+---
+
+## [2.65.66] - 2026-08-10  ·  _Patch_
+**In-Content Image Count Now Means What It Says**
+
+### Fixed
+- The Content Wizard asked for the number of in-content images but quietly counted the cover as one of them: picking 2 delivered a cover plus only 1 in-content image. The count now means exactly what the label says — every article always gets its cover plan, and the number you pick is how many in-content images are planned on top of it. Both creation paths (your own AI and in-app generation), the copied prompt and the downloadable sample template all follow the same rule, and picking 0 now yields a clean cover-only plan instead of no images at all.
+- The requested in-content image count is now capped at the article's section count, because each image goes under a different heading — previously an extreme request could instruct the AI to place more images than the article had sections.
+
+---
+
+## [2.65.65] - 2026-08-09  ·  _Patch_
+**Batch Image Production: Prompt Export and a ChatGPT Automation Tool**
+
+### Added
+- Premium plans now solve the hardest part of importing content at scale: the images. A hundred articles easily mean three hundred image prompts, and producing those by hand is not realistic. The Content Queue (and the wizard's image-prompts card) now offers two new buttons: one downloads every pending image prompt as a single JSON file, the other downloads a small automation tool (Windows and macOS). Feed the JSON to the tool and it generates the images one by one in your own ChatGPT Plus account, saves each file under the exact name Match Images expects, stops by itself when your daily quota runs out and resumes where it left off the next day. A step-by-step setup guide for both operating systems is included in the ZIP; requirements (ChatGPT Plus, Python, Chrome) are stated up front.
+- The image window of every queue item now shows, next to each prompt, the exact file name the image must be saved under — cover, in-content and Pinterest slots each get their name spelled out, so there is nothing left to guess before pressing Match Images.
+
+### Fixed
+- The Content Wizard told you to save in-content images as slug-2.jpg — a name the image matcher never recognized, so files saved that way were silently ignored and the posts went out without their in-content images. The matcher's real contract is slug-img02.jpg, and the wizard now shows exactly that.
+
+---
+
+## [2.65.64] - 2026-08-08  ·  _Patch_
+**The Package Upload Box Is Now Always Visible**
+
+### Fixed
+- Manual package upload only appeared after a failed update check, so on a site where the check worked there was no way to find it at all. It is now a section of its own on the Updates screen and always available — whether you need it because the update server cannot be reached, or simply because you want to apply a particular package by hand.
+
+---
+
+## [2.65.63] - 2026-08-08  ·  _Patch_
+**Update Your Site Even When It Cannot Reach the Update Server**
+
+### Added
+- You can now upload an update package straight into the panel. Until now, if a site could not reach the update server — because the host blocks outbound connections, for example — there was no way to update it from the panel at all; the only route left was editing files over FTP, which is not something a site owner should have to do. The option appears exactly where the problem shows up: when a check fails, the failure notice now carries the upload box, a link to your downloads page and the size this server accepts.
+- An uploaded package goes through the same safety chain as a normal update: the archive is verified as a genuine jekcms package before anything is touched, your license and update settings are preserved, a full backup is taken first, and the result is written to the update history so you can roll it back from the History tab.
+
+### Improved
+- The installation wizard now says what the outbound-connection check actually affects. It was labelled as being about downloading remote images, so a missing connection looked like a detail about media — while it is in fact what updates depend on. The check now names updates explicitly, tells you to have the curl extension enabled, and mentions that packages can be applied by hand if it cannot be.
+
+---
+
+## [2.65.62] - 2026-08-07  ·  _Patch_
+**Automatic Updates Are Now On by Default**
+
+### Improved
+- Automatic updates now arrive without being switched on first. The preference used to start in the off position, so a site only ever updated if its owner happened to find the setting — which meant most installations quietly stayed on old versions and never received fixes, security ones included. New and untouched installations now keep themselves current on their own.
+- Nothing is expected from your hosting. Updates run off ordinary visitor traffic, so there is no cron job to set up and no server access needed. Each update still goes through the same chain as before: a signed manifest, a checksum, an automatic backup and a rollback you can use if anything looks wrong.
+- Your own choice always wins. If you have already set the preference — including turning it off — that setting is left exactly as it is; the new default only applies where nobody has chosen yet. You can change it any time under Updates, and centrally managed installations are unaffected.
+
+---
+
+## [2.65.61] - 2026-08-07  ·  _Patch_
+**Uploading a Logo No Longer Breaks the Settings Page**
+
+### Improved
+- Every file field in Settings — logo, dark logo, footer logo, favicon, touch icon and the social sharing image — now states the largest size this server accepts, and a file over that limit is stopped before it is sent instead of failing halfway.
+
+### Fixed
+- Uploading a logo could end on a bare "Server Error" page, losing everything else you had just filled in. The upload ran without any protection, so a single failure while processing the image took the whole settings page down with it. The upload is now contained: if it fails, the page stays, the rest of your settings still save, and a message names the field and the reason.
+- A failed logo upload used to be silent. The old value was quietly kept and the page reported success, so you could press save repeatedly and never learn that the image had not been accepted. Failures are now reported.
+- Image handling no longer assumes the server can write every modern format. On hosting where PHP is built without WebP support, an upload could stop with a fatal error instead of simply falling back — the fallback is now in place.
+
+---
+
+## [2.65.60] - 2026-08-07  ·  _Patch_
+**Update Check Now Works on Hosts That Block URL File Access**
+
+### Fixed
+- "Update check failed — cannot reach the update server" appeared on hosting where everything else worked. The update check was the one place still fetching over PHP's URL file wrapper, which many shared hosts disable for security; every other outbound call in jekcms already used cURL. The check now uses cURL when it is available and only falls back to the old method otherwise, so it works on those hosts.
+- The failure no longer hides its cause. The screen now shows what actually happened — the connection error, the HTTP status, or that neither transport is available — together with what to do about it, such as asking the host to enable cURL. Previously the only message was that the server could not be reached, which was impossible to act on.
+- A rejected license used to be reported as "up to date". If the update server refused the key, the response was quietly treated as "nothing new", so a site could sit on an old version believing it was current. That case is now reported, and it says to check the key and the registered domain.
+- A momentary network glitch no longer locks the screen out of update checks for half a day. The failed result was cached for the full check interval; it is now kept only briefly, so trying again actually retries.
+
+---
+
+## [2.65.59] - 2026-08-07  ·  _Patch_
+**Image Upload Now Tells You the Size Limit Before You Hit It**
+
+### Improved
+- On hosting where the real limit sits in front of PHP — a proxy or web server rule that PHP cannot see — the site owner can now declare the true ceiling with a single setting, and both the on-screen limit and the pre-upload check honour it.
+
+### Fixed
+- Adding an image inside the editor could fail with nothing but "Connection error", most often with photos straight from a phone. The real cause was size: past a certain point the server stops accepting the request body, and the browser reports that as a network failure. The upload field now shows the largest size this server actually accepts, an oversized image is stopped before it is ever sent, and if the server still refuses one the message says so plainly and tells you to resize the image.
+- The upload endpoint now always answers in a format the editor can read. Previously a server-side failure — an out-of-memory during image conversion, for example — produced an error page instead of a proper response, which the editor could only report as a connection problem. Fatal errors and size rejections are now reported as real, readable messages.
+- When an upload exceeds the server's total request limit, PHP discards the whole request including the security token, so the upload used to be reported as a security error. The size is now checked first, so the message names the actual reason.
+
+---
+
+## [2.65.58] - 2026-08-07  ·  _Patch_
+**The "Empty Content" AI Error Now Recovers By Itself**
+
+### Fixed
+- Some AI actions failed with "Gemini returned empty content (MAX_TOKENS)". Newer models think before they answer and that reasoning is paid for out of the same budget as the text, so a budget sized for a non-thinking model can run out before a single word is written. The model now gets a floor large enough to reason and still write, whatever the individual feature asked for. If it somehow still happens, the request is automatically retried once with a much larger budget instead of being reported as an error.
+- Testing the API key in Settings could fail even though the key and model were perfectly fine. The test asked for a handful of tokens — enough for the word "OK", but not enough for a thinking model to finish reasoning first — so the test reported a failure that content generation never had. The test now asks for a realistic budget.
+- When a model rejects the request to switch reasoning off, the retry no longer reuses the smaller budget that was chosen on the assumption that reasoning was disabled — which was itself a way to arrive at an empty response.
+
+---
+
+## [2.65.57] - 2026-08-07  ·  _Patch_
+**Long AI Generations No Longer Time Out: No More 504s, No More Missing Articles**
+
+### Fixed
+- Generating a draft on the AI Draft screen often failed with a "504 Gateway Time-out", seemingly at random. The cause was a hard limit on the hosting side: a web server cuts a request off if no data reaches the browser for about 55 seconds, and a real article takes considerably longer than that to write — measured between 42 and 104 seconds, so a large share of generations were over the line. The work was actually finishing on the server; only the connection had already been closed. The connection is now kept alive while the model writes, so the result arrives however long it takes. Shortening the wait would have been the wrong fix — it would have killed generations that were about to succeed.
+- Asking the Content Wizard for five articles could leave you with three. Each article is generated in its own request, but when one needed a second attempt the retry ran inside that same request and pushed it past the server's cut-off point. The browser then saw a broken response and counted a perfectly good article as an error. Those requests now survive, and the retry timings were rebuilt around how long generation actually takes instead of an assumed limit.
+- The AI Draft screen no longer freezes on a blank page while it works. Generation runs in the background and the button shows a live counter, so you can see it is still working instead of guessing whether the page has hung.
+- Some AI features returned "empty content" and stopped. Newer Gemini models think before they answer, and that reasoning is paid for out of the same output budget as the text — but the budget still defaulted to a value from before those models existed, and the highest value the settings page allowed could be consumed by the reasoning alone, leaving nothing for the article. Thinking models now get a budget large enough to reason and still write, and the ceiling in Settings has been raised accordingly.
+
+---
+
+## [2.65.56] - 2026-08-06  ·  _Patch_
+**AI Images Plugin Hardened: OpenRouter Fixed, Response Limits, No More Duplicate Runs**
+
+### Improved
+- A temporary "high demand" response from the image service is retried briefly instead of being reported as a failed image, matching how text generation already behaves.
+
+### Fixed
+- Choosing OpenRouter as the image provider could never work. The settings screen stores that API key encrypted, but the generator read it back without decrypting, so the encrypted value itself was sent as the key — every request failed, and the stored ciphertext was handed to a third party in the process. The key is now decrypted on read, and an unresolvable value is never sent at all.
+- Publishing the same post twice in quick succession — a double click, a manual publish racing the scheduler, an automation retry — ran image generation twice and produced duplicate images while spending the API quota twice. A short-lived lock now lets only one run work on a post at a time, and a stale lock is taken over automatically so a crashed run cannot block the post forever.
+- An aborted download could be treated as a real response. When a transfer failed midway the partial body was returned alongside the error, and the caller only checked for outright failure — so truncated data reached the image parser. A transfer error now always means no response.
+
+### Security
+- Image responses had no size limit. A broken or hostile endpoint could return an arbitrarily large body and exhaust the server's memory before anything checked it. Responses are now capped at 24 MB and an oversized transfer is cut off immediately.
+- Generated bytes are now validated in memory before anything is written to disk, and the file extension comes from the real content rather than the type the provider claimed. Previously the data was written first and inspected afterwards, so non-image content briefly existed on disk under an image name.
+- Error messages from the image service are scrubbed of secrets before they reach the admin screen or the log. The Gemini endpoint carries its API key in the URL, so any error that echoed the request would have exposed it. API keys, OpenRouter keys and stored ciphertext are now masked.
+- TLS verification, redirect following and connection limits are set explicitly on every image request instead of relying on server defaults, and redirects are refused so a response cannot be pulled from an unexpected host.
+
+---
+
+## [2.65.55] - 2026-08-06  ·  _Patch_
+**Security Fix in Imported Links, and Image Fields Understood From Every AI**
+
+### Improved
+- Image fields are now understood no matter which AI wrote the JSON. Every assistant names things differently — `imagePrompt` or `image_prompt` or just `prompt` or `description`; `cover`, `hero` or `featured`; `afterH2`, `after` or `section` — and anything unrecognised was silently dropped, leaving articles with no prompts. The importer now reads all of these, accepts an images object keyed by slot as well as a plain list, and even a bare list of prompt strings, which it aligns to the image markers in the article. Verified against ten different shapes: every one yields the same clean result.
+- The instructions that ask an AI for image prompts now demand a prompt that works unchanged in any generator — Midjourney, DALL-E, Stable Diffusion, Nano Banana, Firefly. Tool-specific syntax such as `--ar` or `::weights` is explicitly banned because it breaks every other tool, and the prompt must name subject, setting, lighting, framing and mood in 25-60 words.
+
+### Security
+- A Markdown link in imported content could publish executable code. Content arriving from an import, the wizard or the API is sanitized on the way in — but the Markdown-to-HTML conversion happens afterwards and creates new tags, so a link written as `[click](javascript:…)` produced a working javascript: anchor that nothing had checked. A quote inside the address could also break out and add an event handler such as onmouseover. Measured: six of six attack variants published successfully. Link conversion now allows only http, https, mailto, tel and same-site addresses, escapes both the address and the label, and ignores attempts to hide the scheme with invisible characters or HTML entities. The converted output passes through the content filter a second time as a backstop. Legitimate links, YouTube and Vimeo embeds, tables and code blocks are unaffected.
+- Content sent straight to the API could publish a literal `[IMAGE: …]` marker. Those markers only mean something inside the publishing queue, where they are replaced with real images; on the direct API path nothing resolved them and they appeared on the page. They are now stripped on that path.
+
+---
+
+## [2.65.54] - 2026-08-06  ·  _Patch_
+**The Image Prompts the Wizard Writes Are Now Actually Shown**
+
+### Fixed
+- The Content Wizard writes a ready image-generation prompt for every cover, in-content and Pinterest image — and there was no way to read any of them. The queue had a window built for exactly this, but the button that opens it had been removed as "redundant" while the window itself stayed, so the prompts were unreachable from anywhere in the admin. The button is back on every item that has an image plan, with a badge showing how many prompts it holds.
+- The wizard's final step now lists every prompt it just produced, grouped per article, each with the exact filename to save the generated image under. There are copy buttons per prompt, a copy-all button, and a download-as-text button for taking the whole set into another tool. The wizard had been promising this since step 3 ("the final step explains exactly what to do") without delivering it.
+- The queue preview window showed the article and, once images were matched, the images — but never the prompts. It now lists them under the content with a mark showing which ones already have an image and which are still waiting.
+
+---
+
+## [2.65.53] - 2026-08-06  ·  _Minor_
+**Content From Any AI Now Renders Properly, and the AI SEO Panel Tells You What To Fix**
+
+### Improved
+- The AI panel in the post editor's SEO tab was a flat list of observations. It now opens with a score bar and a plain verdict ("fix before publishing", "ready to publish"), followed by a ranked "do these first" list, then ready-to-use text you can put straight into the post: two title options, a meta description, a rewritten opening paragraph and the headings the article is missing. Title and meta apply to their fields with one click; the rest copies.
+- Each finding now quotes the sentence it is about, verbatim from your post, and carries an impact and effort label so you can tell a five-minute fix from a rewrite. Quotes are checked against the actual text before display — a paraphrased or invented one is dropped rather than shown. Findings are ordered problems-first, highest impact first.
+- A cut-off AI response used to fail with "returned non-JSON despite schema", which said nothing about the cause. It now names the real problem — the response ran out of token budget — and the SEO analysis budget was raised so it stops happening.
+
+### Fixed
+- Content written by one AI and pasted or imported into jekcms could reach the site with raw `###` markers and text running together in one unbroken block. Every model writes differently — some produce Markdown, some HTML, most a mix of both — and mixed content was passed through untouched: the HTML parts rendered, everything between them did not. The converter now keeps the HTML exactly as it is and converts the Markdown islands sitting between it, so headings, lists, tables, quotes and paragraphs come out right no matter which assistant wrote them. Verified against pure Markdown, pure HTML, deliberately mixed and unmarked plain prose.
+- Inline markers left inside HTML paragraphs — `**bold**`, `[text](link)`, backtick code — were printed literally on the page. They are now converted wherever they appear in text, while anything inside a code block is left untouched.
+- Content sent through the public API or an automation was never converted at all: only the publishing queue did that. A Markdown body posted from n8n or a script published with its markers intact. The API now runs the same conversion.
+- AI Draft produced thin articles — roughly 350 words when 1000-1500 was selected. Length is now requested the way models actually follow, as a paragraph budget per section, and the same quality and formatting rules the Content Wizard uses apply here too. Measured after the change: 1185-1733 words, each draft carrying a table, both list types, bolded terms and a callout, with no oversized paragraphs.
+- AI Draft showed an API error on the first attempt and worked on the second. A single failed call now retries quietly with spacing between tries, and an error is only shown when generation genuinely could not complete. Transient "high demand" responses from the provider are also retried instead of being surfaced raw.
+
+---
+
+## [2.65.52] - 2026-08-06  ·  _Patch_
+**Hotfix: API Settings Page Stopped Halfway, and the Key Row Now Shows What It Is Doing**
+
+### Improved
+- The Gemini key rows were cramped: the enable checkbox, Test and × were pushed against the right edge with the key field stretched across the rest. Each row is now a bounded card with its controls grouped together and room to breathe, and it stacks cleanly on narrow screens.
+
+### Fixed
+- Settings → API stopped rendering halfway through in 2.65.51: everything from the AI model selector down — the model list itself, the quota fields, the privacy options and the Save button — was missing, and the model dropdown appeared empty. A helper introduced with the new model list did not exist under that name, so PHP aborted the page at that exact point. Introduced in 2.65.51 and fixed here; no data was affected, only the page output.
+- Removing a Gemini API key with × gave no visible feedback when it was the only key left. The saved key is shown as a masked placeholder rather than a value, so clearing it changed nothing you could see — it looked like the button did nothing. The row is now dimmed and struck through, the field reads "key will be deleted", the explanation appears full width instead of squeezed into the label column, and an Undo button restores the key if you clicked by mistake. The same explanation, and Undo, now also appear when one of several keys is removed.
+
+---
+
+## [2.65.51] - 2026-08-06  ·  _Minor_
+**Newer AI Models, and Generated Articles That Actually Look Like Articles**
+
+### Improved
+- The AI now runs on Google's current generation of models instead of the 2.5 family. The default for writing is Gemini 3.6 Flash, chosen on measured reliability rather than version number: asked for a full 1200-1800 word Turkish article, the old default returned usable output in two runs out of three, the new one in three out of three. That single change is what fixes the complaint that selecting five articles produced only four — a five-article run now completes five for five. Image generation moves to Nano Banana 2, and the model list in Settings has been rebuilt from models verified to answer, so a retired name can no longer sit in the menu.
+- Articles generated by the Content Wizard were arriving as unbroken walls of text: no tables, no lists, no sub-headings, nothing emphasized. The site has always rendered all of that — the instructions simply never asked for it. They now require short paragraphs, sub-headings, at least one comparison table, bulleted and numbered lists, bolded key terms, a practical callout and a closing takeaway list. Measured across generated articles: paragraphs over 80 words dropped from routine to zero, and every article now carries a table, roughly a dozen list items and around ten highlighted terms.
+- Generated articles were also coming in short — around 900 words when 1200-1800 was requested. Length is now requested in a form models follow accurately, as a paragraph budget per section rather than a total word count, which brings articles back inside the range you asked for.
+- The model you pick in Settings now actually drives content generation. Until now that choice only affected SEO analysis; the writing path ignored it and always used a fixed model, so changing it appeared to do nothing.
+
+### Fixed
+- The one-sentence visual brief that guides every AI image was being cut off after about two words. Its token budget left no room once the model's internal reasoning took its share, so a brief meant to describe a full scene arrived as a fragment — and every generated image was drawn from that fragment. Briefs now come through complete, around thirty-five words, which is the difference between a described scene and a guess.
+- A model that Google retires no longer takes the site's AI features down with it. Gemini 2.5 Pro was offered in the Settings menu and now answers 404; any site left on it had every AI feature failing with no visible cause. Retired names are migrated on update, and if a configured model turns out to be unavailable — retired, or not included in your API key's tier — the request falls back to a working model instead of failing.
+- Newer models reject the request we send to disable internal reasoning, and reply only with "invalid argument" without naming the field. Left alone, upgrading the model would have silently killed SEO analysis, content generation and image briefs at once. Each path now recognizes the refusal, retries without that setting and remembers the result per model.
+
+---
+
+## [2.65.50] - 2026-08-06  ·  _Patch_
+**Automation Overhaul: Queue Publishing Unblocked, Bearer Auth Fixed, Imported Content Sanitized**
+
+### Fixed
+- Articles produced by the Content Wizard could not be published at all: the quality gate inspected the raw queued text and rejected every item for containing an unresolved image marker — even though publishing removes those markers moments later, so nothing could ever leak. In testing, six of six generated articles were blocked; with the gate now judging the text that will actually be published, six of six publish cleanly and no marker reaches the site. This affected every wizard and JSON import that had not matched images by hand.
+- API requests authenticated with "Authorization: Bearer " were rejected with 401 even when the key was valid, because most Apache/CGI setups do not hand that header to PHP — while the admin's own API Keys screen recommends exactly this method and it is the default in n8n. The key is now read from every source the server may expose, and the site config passes the header through. X-API-Key keeps working unchanged.
+- A malformed JSON body sent to the API produced a bare "Internal error" 500. Bad JSON now returns 400 with the parser's reason, and a create request missing title or content returns 400 naming the fields — so an automation shows you what to fix instead of a dead end.
+- JSON import crashed with a 500 when a field arrived as an array or object instead of text (a hand-edited file, a mis-mapped automation), and when the articles wrapper was an object rather than a list. Both shapes are now accepted or skipped cleanly, with the reason reported per article.
+
+### Security
+- Content arriving through an automation channel is now sanitized before it can be published. Measured: a JSON file containing a script tag and an image with an onerror handler was imported, published, and executed in every visitor's browser — stored XSS. Imports, the Content Wizard and the public API now strip script-capable markup (script/style/object/embed/form/base/meta tags, on* event attributes, javascript: and data:text/html URLs, iframes from unknown hosts) while keeping everything an article legitimately uses: headings, lists, tables, images, links, code blocks and video embeds from known providers. Content you write yourself in the editor is unchanged.
+
+---
+
+## [2.65.49] - 2026-08-06  ·  _Patch_
+**Content Generation Is Around Four Times Faster, and Stop Now Works Instantly**
+
+### Fixed
+- Generation in the Content Wizard could sit for a long time and then end with a network error. Two causes, both fixed: Gemini 2.5 models spend invisible reasoning tokens from the same output budget as the text, which made every article slower and occasionally truncated it; reasoning is now switched off for content generation, exactly as the SEO analyzer already did. And a single request now stays inside a strict time budget — the automatic retry only runs when there is time left for it, so a request can no longer outlive the server's limit and leave the browser with a dropped connection. In testing, one article went from about 25-60 seconds to 8-12 seconds.
+- The Stop button did nothing until the article in progress finished, which could take a minute. It now cancels the running request immediately, shows "Stopping…", and the interrupted item is no longer listed as an error.
+- During generation the screen showed no sign of activity. Each article now displays a live counter ("generating #2 · 14 s"), so a long run never looks frozen, and a genuine connection failure now says so in plain language instead of just "network error".
+
+---
+
+## [2.65.48] - 2026-08-06  ·  _Patch_
+**Cleaner Installer Packages: Build-Machine Runtime Files Are Excluded**
+
+### Fixed
+- The installer packages could include runtime files produced on the machine that built them — session files under storage/ and images under uploads/. A fresh install therefore started with unrelated media in its library, and session files had no business travelling with a package at all. Packaging now ships the folders (so permissions and protection rules stay intact) without their runtime contents, and skips stray temporary files in the project root. Your installed sites are unaffected; this only changes what a new download contains.
+
+---
+
+## [2.65.47] - 2026-08-06  ·  _Patch_
+**Wizard Articles Get Their Images Automatically: One-Click AI Images Integration**
+
+### Added
+- The Content Wizard and the AI Images plugin now work as one system. The image plan the wizard writes for each article (the cover prompt and every in-content image prompt) is handed to the plugin at publish time, so the generated images match what the wizard planned for that specific article instead of a generic concept. In the wizard's final step, the Images card now enables the plugin with a single click — no detour through the Plugins page — and explains that an image-capable API key is required.
+
+### Fixed
+- With the AI Images plugin set to generate at publish, the quality gate no longer blocks queue items whose planned images haven't been manually matched — the plugin is about to produce those images, so the "unresolved image marker" warning doesn't apply. When the plugin is off, the gate still protects the manual workflow exactly as before.
+
+---
+
+## [2.65.46] - 2026-08-06  ·  _Patch_
+**Content Wizard Generation Is Now Reliable: Structured JSON Mode and a Bigger Output Budget**
+
+### Fixed
+- Starting generation in the Content Wizard could fail with "Could not extract valid JSON from the AI response". Server diagnostics showed the model's answer was being cut off mid-article: on Gemini 2.5, invisible reasoning tokens share the same output budget as the text, so long articles hit the ceiling and arrived truncated. Generation now requests the provider's structured JSON mode (the reply is guaranteed to be syntactically valid JSON, with no markdown fences), the output budget was doubled, and if a response still can't be parsed the wizard automatically retries once before reporting an error. The AI Draft screen uses the same JSON mode and a larger budget too.
+
+---
+
+## [2.65.45] - 2026-08-06  ·  _Patch_
+**On/Off Switches Render Correctly in Every Settings Row**
+
+### Fixed
+- On/off toggle switches placed inside standard form rows could collapse: the track disappeared and the On/Off labels overlapped each other (visible for example on the "How this content was made" switch at the bottom of Settings → API). A general form style was overriding the switch layout; the component now always keeps its shape, everywhere in the admin. The affected row also got clearer spacing between its title and description.
+
+---
+
+## [2.65.44] - 2026-08-06  ·  _Patch_
+**AI Draft Now Recognizes Your Saved Gemini Keys, and Generation Rotates Between Them**
+
+### Improved
+- Content generation now honors your multiple Gemini keys: if a key hits its quota, is unauthorized, or has been revoked, jekcms automatically retries with the next key in your list — the same rotation the SEO analyzer already had. Previously only the first key was ever used for drafts and wizard articles.
+
+### Fixed
+- On fresh installs, saving a Gemini API key in Settings → API and then opening the AI Draft screen still showed an "API key required" warning with the Generate button disabled — the settings form stores Gemini keys in the multi-key list, but the AI Draft screen (and the Content Studio status card) only looked at the old single-key field. Both now read the same key store the settings page writes to, so a key you saved is a key that works.
+- Generating a draft could be cut off mid-request on servers with a strict PHP time limit; the AI Draft screen now allows the same generous time window the Content Wizard already used.
+
+---
+
+## [2.65.43] - 2026-08-06  ·  _Patch_
+**AI Draft Generation Works Again, and All Five AI Providers Are Now Fully Supported**
+
+### Added
+- Claude (Anthropic) and Cohere are now fully working AI providers for content generation. All five providers offered in Settings → API — Gemini, Groq, Cohere, OpenAI and Claude — generate drafts and wizard articles through the same client, each with a sensible default model.
+
+### Improved
+- The Content Wizard's article-generation endpoint now enforces the same license check as the wizard screen itself, and logs a diagnostic sample to the server log when an AI response cannot be parsed — making "could not extract JSON" reports actually debuggable.
+
+### Fixed
+- The AI Draft screen's Generate button had been failing with a server error on every click since v2.28.0 — an internal file was loaded after the code that needed it. Generating a draft from a topic now works end-to-end again: the article is produced, previewed, and saved as a draft through the quality gate.
+- The Test button next to the Groq, OpenAI, Cohere and Claude API key fields used to reply "provider not wired" even for perfectly valid keys. It now performs a real test call against the selected provider — the same code path content generation uses, so a passing test means generation will work too.
+- With Cohere or Claude selected as the provider, the AI Draft screen claimed no API key was configured even when one was saved. Provider key lookup now covers all five providers.
+- Content pasted with a broken character encoding could make the AI request go out with an empty body, producing a baffling provider error. Invalid bytes are now cleaned before the request is built.
+- When AI features are disabled because of the site's license status, the editor now says exactly that and points to the license page — previously it claimed AI was "not configured", sending users to reconfigure settings that were fine.
+- AI task-specific settings (such as the SEO analyzer's larger response budget) were being overridden by the global defaults, which could truncate long analyses. Task settings now take precedence, and bulk SEO analysis now writes its suggestions in the site's content language rather than the admin panel language.
+
+---
+
+## [2.65.42] - 2026-08-05  ·  _Patch_
+**SEO Preview in the Post Editor Now Always Shows Real Data**
+
+### Fixed
+- The search-result preview at the top of the SEO Settings box could render completely empty — just the URL, no title or description — whenever the SEO title and description fields were blank but an SEO record already existed for the post (for example after setting only a focus keyword). Your published page never had this problem: the site falls back to the post title and excerpt, but the preview didn't mirror that. The preview now uses the exact same fallback chain as the live site — SEO title → post title, SEO description → excerpt → content text — so it always shows what Google will actually see.
+- The preview also updates live now: typing in the post title, excerpt or slug immediately refreshes the preview (previously it only reacted to the SEO fields themselves), long titles and descriptions are truncated at Google's display limits, and the URL line follows your slug as you edit it.
+
+---
+
+## [2.65.41] - 2026-08-05  ·  _Patch_
+**Archive Pages Now Emit Breadcrumbs and a Proper Listing Type**
+
+### Improved
+- Category, tag and author archive pages now include BreadcrumbList structured data (Home › Category), so Google can show a breadcrumb trail under these pages in search results — previously only single posts had one. The archive pages are also now typed as CollectionPage instead of a generic WebPage, which more accurately tells search engines they are listing pages. Single posts and the homepage are unchanged.
+
+---
+
+## [2.65.40] - 2026-08-05  ·  _Patch_
+**Heading Fixer Capitalizes Turkish Words Correctly**
+
+### Fixed
+- The Heading Fixer tool (Advanced SEO → Content) title-cases your headings, but it capitalized the first letter with a routine that follows English rules: a Turkish lower-case "i" became a dotless "I" instead of the correct dotted "İ". So on Turkish sites a heading like "içerik yönetimi" was turned into "Içerik Yönetimi" instead of "İçerik Yönetimi", and every word starting with i (izmir, internet, iş…) was mis-capitalized. Capitalization now follows the site's content language: Turkish sites get the correct İ/ı casing, English sites are unchanged (i → I). "ışık" → "Işık", "içerik" → "İçerik".
+
+---
+
+## [2.65.39] - 2026-08-05  ·  _Patch_
+**A Failed Security Check No Longer Looks Like a Server Crash**
+
+### Fixed
+- When an admin action failed its CSRF security check — most commonly a benign case: you left a tab open long enough for the token to rotate — the server replied with HTTP status 419. That code is not part of the official HTTP standard, so Apache rewrote it to 500 on the way out, and the browser showed a scary "500 server error" for what was really just an expired token. The request is now rejected with the standard 403 Forbidden, which Apache passes through unchanged, so the admin gets the correct "please reload and try again" response and server logs stop showing phantom 500s. This affects every admin form and AJAX action, not only the SEO tools.
+
+---
+
+## [2.65.38] - 2026-08-05  ·  _Patch_
+**Correct Social-Share Image Dimensions and Turkish Word Counts**
+
+### Fixed
+- The og:image:width / og:image:height tags were hardcoded to 1200×630 for every share image. Sites that use portrait featured images (common on recipe, pets and Pinterest-focused blogs) were telling Facebook, LinkedIn and Twitter the image was landscape, so the social-card preview came out cropped or letterboxed. The tags now report the image's real dimensions (read from the file), and are omitted entirely when the size can't be determined — a wrong size is worse than none.
+- Word counts and "X min read" estimates were computed with a routine that only understands the English A–Z alphabet, so Turkish letters (ü, ı, ğ, ş, ç, ö) were treated as word breaks — "güzel" counted as two words. This inflated the reading-time badge, the JSON-LD wordCount and the schema "time required" value by roughly 40% on Turkish sites. All of these now count whole Unicode words, matching the SEO analyzer, so the numbers are correct across the article, its structured data and every theme.
+
+---
+
+## [2.65.37] - 2026-08-05  ·  _Patch_
+**Traffic Setup Score Reads 0% Until You Connect a Channel**
+
+### Fixed
+- After the previous fix, a brand-new site still showed 17% instead of 0%. The AI-crawler policy was being counted as a completed setup step, and since it defaults to "allow all," every fresh site got that one step for free. But that setting is about letting bots read your site (inbound), not about distributing your content (outbound), so it never belonged in the distribution setup score. It has been removed from the calculation — a site with nothing connected now reads 0%, and the score rises only as you actually connect social, Pinterest, IndexNow, WebSub or the newsletter. The AI policy is still shown in the card, just not counted.
+
+---
+
+## [2.65.36] - 2026-08-05  ·  _Patch_
+**SEO and Setup Scores Start at 0 on a Fresh Site**
+
+### Fixed
+- The dashboard's Traffic Control ("Distribution setup score") showed 48% on a brand-new site with nothing configured. It was built as "100 minus penalties," and because the penalties never summed to 100 the score floored around 48 no matter what. It is now a true completion score — done setup steps ÷ applicable steps — so an unconfigured site reads 0% and rises as you connect social, Pinterest, IndexNow, WebSub and the newsletter. Queue/bounce errors are no longer mixed into the score; they stay in the issues list.
+- The single-post SEO analyzer showed 29/100 before you typed anything. Two categories scored full marks on a blank post: readability (an empty draft trivially has "no long paragraphs or sentences") and schema (a blank draft defaults to "auto"). Both are now only graded once there is real content, and a post with nothing entered reads 0. The posts list and the server-side recalculation were aligned the same way, so a blank post is 0 everywhere instead of 29 in the editor and 5 in the list.
+- The AI analysis endpoint returned a 500 error for a non-POST request; it now returns a clean 405 Method Not Allowed.
+
+---
+
+## [2.65.35] - 2026-08-05  ·  _Minor_
+**A Professional Media Library: Drag to Select, Edit Alt Text Without Leaving the Page**
+
+### Added
+- WebP and AVIF quality are now configurable from settings, with safe universal defaults (WebP 82, AVIF 60). As before, uploaded JPEG/PNG files are converted to a modern format and the original is not kept, keeping your uploads folder lean.
+
+### Improved
+- The Media library now works like a modern media manager. Drag a rectangle across the grid to select several images at once, or Ctrl/Cmd-click to add and remove items individually. A floating action bar appears with the count and one-click Delete, so bulk actions no longer need the dropdown.
+- Each image has a pencil button that opens a slide-in panel where you can edit the title, alt text and caption without leaving the page — with a live character counter and guidance to keep alt text under ~125 characters. Images still missing alt text are marked with an "Alt missing" badge, and the badge clears the moment you add one.
+- The library header now shows WebP and AVIF support at a glance, plus how many items are still missing alt text or a caption, so accessibility and SEO gaps are easy to spot.
+
+---
+
+## [2.65.34] - 2026-08-05  ·  _Patch_
+**Your FAQ Now Shows on the Page, and Autosave Is Calmer**
+
+### Fixed
+- The FAQ questions and answers you enter under Structured Data were only sent to search engines as hidden schema — they never appeared on the page for readers. They now render as a clean expand/collapse "Frequently Asked Questions" section at the end of the article, on every theme. (This also matches Google's own requirement that FAQ content be visible on the page.)
+- Autosave ran every 30 seconds, which was more often than needed and could collide with the editor switching a new post into draft-edit mode. It now runs every 2 minutes.
+
+---
+
+## [2.65.33] - 2026-08-05  ·  _Patch_
+**URL Slugs Keep Turkish Letters When a Draft Is Saved**
+
+### Fixed
+- As you typed a title, the URL slug was built correctly ("Sokak Modası" → sokak-modasi). But the first time the draft was saved — by autosave or the Save button — the slug was rebuilt by a different, broken routine that dropped Turkish letters instead of converting them, turning sokak-modasi into sokak-modas. Because the editor then re-read that broken slug, a manual save kept it broken too. All slug generation now goes through the single correct routine that converts Turkish letters (ı→i, ş→s, ğ→g…) rather than dropping them.
+
+---
+
+## [2.65.32] - 2026-08-05  ·  _Patch_
+**Checklist Boxes Line Up With Their Text**
+
+### Fixed
+- In a checklist, each checkbox sat slightly above its line of text. The box is now vertically centered on the first line of the item, so the list reads cleanly — and on a checklist item that wraps to two lines the box still lines up with the first line.
+
+---
+
+## [2.65.31] - 2026-08-05  ·  _Patch_
+**Tables, Checklists and Captions Look Right on the Page**
+
+### Fixed
+- In the posts list, the row "Trash" action did nothing when clicked. The row's little form was nested inside the bulk-actions form, which browsers quietly ignore; the click is now handled correctly and the post moves to Trash. Restore, Delete and the "add sample content" button in the same list were affected the same way and are fixed too.
+- Tables written in the editor appeared on the page as plain text with no borders or spacing. They now have proper borders, a shaded header row and cell padding, and scroll sideways on narrow screens instead of overflowing.
+- Checklists (task lists) showed a bullet next to each checkbox with the text on a separate line. They now render as a clean checkbox and text on one line, with checked items struck through.
+- An image caption sat far below its image, looking disconnected. It now sits directly under the image, centered and quietly styled.
+- When a brand-new post was first saved automatically as a draft, the Revisions panel and the preview-link button did not appear until a manual reload — because the page was still showing its "new post" layout. The editor now switches to the full draft-editing view once the draft is saved, without interrupting your typing.
+
+---
+
+## [2.65.30] - 2026-08-05  ·  _Patch_
+**Analytics Daily Totals Are More Robust**
+
+### Fixed
+- ZeroTrack Analytics builds a daily summary from visited paths and referrers. If a single visit carried text in a broken encoding, saving that whole day's summary could fail. The summary now stores such values safely, so a day's totals are never lost to one unusual request.
+
+---
+
+## [2.65.29] - 2026-08-05  ·  _Patch_
+**Analytics Reach Subfolder Installs — and Forms Never Crash**
+
+### Fixed
+- On a site installed in a subfolder, ZeroTrack Analytics silently recorded nothing: the visit beacon was sent to the domain root, where nothing answers. It now targets the install itself, so visits are counted wherever jekcms lives.
+- The newsletter, comment and contact forms answered with a server error when a field arrived in an unexpected shape. They now reject such input politely instead of failing the page.
+- Recipe schema times typed as plain numbers — "15" instead of the ISO form — were published as-is, which fails Google's Rich Results validation. Times are now normalised on output ("15", "15 min" and "15 dk" all become PT15M), and a value that cannot be understood is left out rather than published broken.
+
+---
+
+## [2.65.28] - 2026-08-05  ·  _Patch_
+**What You Type in the SEO Panel Is What Google Sees**
+
+### Fixed
+- The social share image chosen in the post editor was saved but never shown: every theme kept using the featured image when a post was shared. The image you pick is now the one social networks display.
+- On the Lifestyle, News and Pets themes the SEO title you wrote was ignored — the browser tab and search results showed the plain post title instead. Lifestyle also ignored the SEO description. All three now honour the SEO panel.
+- On the Health theme, category, tag, search and author pages all carried the same title — just the site name. Each archive now gets its own descriptive title, as on the other themes.
+- A post whose SEO title field was cleared ended up with a browser-tab title that began with the separator, like " | My Site". It now falls back to the post title.
+- A featured image stored with an extra path prefix produced a broken image address and silently dropped the share image. The prefix is now corrected on the way out.
+
+---
+
+## [2.65.27] - 2026-08-05  ·  _Patch_
+**Search Returns Posts, Not Legal Pages**
+
+### Fixed
+- Site search on the Lifestyle, Minimalist and Tech themes returned pages — privacy policy, terms, cookie policy — mixed in with blog posts, and counted them in the result total. Search now returns posts only, and the count matches. The Pets theme's "not found" page listed pages among its recent posts for the same reason.
+- A malformed request could make any page answer with a server error. Sending a form field in the wrong shape was enough; the page returned HTTP 500, which search engines read as "this page is broken". Such requests are now ignored instead of failing the page. The same applied to the login, contact and comment forms.
+- Content carrying an older character encoding — typically brought over from WordPress — could stop a meta description or a URL slug from being generated, which in turn could halt an import. The text is now repaired as it comes in.
+- Under the same conditions, media details, SEO analysis records and scheduled task logs could fail to save. They now store the repaired text instead of failing.
+
+---
+
+## [2.65.26] - 2026-08-05  ·  _Patch_
+**The Dashboard Stops Counting Pages as Posts**
+
+### Fixed
+- The dashboard greeting could report posts you had not written. Publishing pages — the legal pages generator creates several at once — was counted as "5 posts published today", while the content calendar right below it correctly showed nothing for the same day. The greeting now counts posts only, so the two agree.
+- The "Scheduled" list on the dashboard also showed scheduled pages among the posts. It now lists posts only, matching the drafts list next to it.
+
+---
+
+## [2.65.25] - 2026-08-05  ·  _Patch_
+**Author Selection Works — and Your SEO Fields Stay Put**
+
+### Fixed
+- The Author dropdown in the post editor was empty on a newly installed site, so there was no way to say who a post belongs to. It now lists everyone who can write on the site — the administrator included — and opens on the account you are signed in with.
+- When you did choose an author, your choice could be quietly replaced with a different writer on sites that have more than one. The name you pick is now the name that is saved.
+- Text carrying an older character encoding — most often content brought over from a WordPress site — could stop a post from saving, or let it save while silently discarding the whole SEO panel with it: meta title, description and focus keyword all disappeared without a word. Such text is now repaired as it comes in and the SEO fields are kept.
+- On installations served over a non-standard port, every save in the admin panel was refused as a security failure, which left the panel unusable. Ports are no longer part of that check.
+- A writer account could publish a post under someone else's name, and a post could be assigned to a deleted or subscriber account. Both are now rejected on the server.
+
+---
+
+## [2.65.24] - 2026-08-04  ·  _Patch_
+**Your Logo Shows Up — and You Decide How Big**
+
+### Added
+- Görünüm → Customize now has a logo height control for the header and the footer. Each theme starts from a sensible default for its own header, and you can change it with a slider; the width follows automatically and the aspect ratio is never distorted.
+
+### Fixed
+- A logo uploaded under Settings → Brand did not appear in the header or footer on several themes — the favicon, social share image and search-engine logo were all correct, only the site itself never showed it. Every theme now displays it.
+- Saving your profile failed with a server error whenever social links were filled in. Saved links were not being shown back to you either. Both are fixed.
+
+---
+
+## [2.65.23] - 2026-08-03  ·  _Patch_
+**Sites Stay Crawlable When the Database Is Busy**
+
+### Fixed
+- On shared hosting the database refuses new connections once the account hits its simultaneous-connection ceiling. A page that hit that moment returned HTTP 500 — the code search engines read as "this page is broken", which costs indexing. Measured under a parallel crawl, 1.7% to 6.7% of requests were failing this way.
+- The connection is now retried briefly with a randomised backoff, so short collisions resolve invisibly. If the database is still unreachable, the page answers 503 with Retry-After instead of 500 — the signal that means "temporarily busy, come back" rather than "broken".
+- Error responses are no longer cacheable, so a CDN cannot keep serving an outage page after the site has recovered.
+- About page (travel theme): a stray backslash was printed in the "Popular topics" text.
+
+---
+
+## [2.65.22] - 2026-08-03  ·  _Minor_
+**Footer Designer, Now in Every Theme**
+
+### Added
+- Appearance → Footer now opens the full footer designer in every theme: pick one of eight layouts, build your own columns (menu, categories, text, newsletter, contact, brand), set the brand block, social icons and bottom bar — with a live preview.
+- Previously only one theme had this; the other thirteen offered a handful of fields. The designer now lives in the core, so any theme gets it.
+
+### Fixed
+- A footer saved before this release no longer changes your site on its own — the new designer only takes over once you save it yourself.
+
+---
+
+## [2.65.21] - 2026-08-03  ·  _Patch_
+**Sidebar Label Fix**
+
+### Fixed
+- On Turkish installs the sidebar link for footer settings still read "Footer" instead of matching the tab name.
+
+---
+
+## [2.65.20] - 2026-08-03  ·  _Patch_
+**Appearance → Footer Opens the Footer Settings Directly**
+
+### Fixed
+- Clicking Appearance → Footer bounced you to a different screen, which read as "this theme has no footer settings". The menu item now opens the footer settings directly, with no redirect in between.
+- The sidebar item was still labelled "Footer" in Turkish; it now matches the tab name, "Alt Bilgi".
+
+---
+
+## [2.65.19] - 2026-08-03  ·  _Patch_
+**Footer Tab Is Visible Again**
+
+### Fixed
+- In every theme the Footer settings were folded into the Advanced panel, so clicking Appearance → Footer opened Advanced and no Footer tab was anywhere to be seen. Footer is now its own tab, right next to Menu.
+- Three tab labels in one theme were still in English.
+
+---
+
+## [2.65.18] - 2026-08-03  ·  _Patch_
+**Menu and Footer Customization in Every Theme**
+
+### Fixed
+- Five themes — including the one new sites start with — opened an empty screen when you went to customise the menu or the footer. Every theme now has both.
+- The "Copyright text" field under Appearance → Footer was saved but never appeared on the site. It works now, and supports {year} and {site_name} placeholders.
+
+---
+
+## [2.65.17] - 2026-08-03  ·  _Patch_
+**Dark Mode Switch Fixes**
+
+### Fixed
+- In one theme the dark mode switch stopped responding after moving to another page, and only worked again after a refresh.
+- In two themes the dark mode switch did nothing at all.
+- Because those switches never worked, their dark palettes had gone unchecked: several cards kept a fixed white background and turned white-on-white in dark mode. Both themes are now readable in dark mode.
+
+---
+
+## [2.65.16] - 2026-08-03  ·  _Patch_
+**Readability, Pages and Checkout Reliability**
+
+### Improved
+- Text contrast across themes was reviewed and raised where it fell short, improving readability and accessibility scores.
+- Upgrading from the free plan to a paid licence now carries your existing site over instead of leaving it unlicensed.
+- Licence checks are more forgiving of temporary network problems and no longer misread addresses that start with www.
+- Password reset and update downloads are more robust.
+
+### Fixed
+- Order confirmation after payment could fail to record. Payments now complete reliably.
+- Visitors whose device is set to dark mode could see unreadable text on some themes. Light and dark are now both checked.
+- About and Contact pages written in the admin were ignored by several themes and never appeared on the site. They now show up.
+- The homepage slider is aligned with the header width, keeps its rounded corners and shadow, and no longer clips its text on phones.
+- Page numbers in one theme were listed vertically with bullet points instead of a row of buttons.
+- The editorial box under articles had no styling and blended into the article text.
+- Social icons in one theme's footer were invisible.
+
+---
+
+## [2.65.15] - 2026-08-02  ·  _Patch_
+**Stability & Integrity Improvements**
+
+### Improved
+- Internal reliability and integrity improvements across the core. No changes to how you write or manage content.
+
+---
+
+## [2.65.14] - 2026-08-02  ·  _Patch_
+**License Seats Stay in Sync**
+
+### Fixed
+- When a site's seat is released from the customer panel, that change now takes effect on the site itself. Previously a site could keep running on a seat that had already been freed, so the seat count and what was actually installed could drift apart. The admin now re-checks with the license server shortly after you open it and, if this domain is no longer registered to the license, shows a clear notice with a one-click reactivation link.
+
+---
+
+## [2.65.13] - 2026-08-02  ·  _Minor_
+**What You Write Is What You Get**
+
+### Added
+- Galleries: multiple images render as a responsive grid, and clicking one opens it full-screen in a lightbox.
+
+### Improved
+- The editor now matches the published page. Paragraph spacing and Shift+Enter line breaks looked one way while writing and another way live — a shared content-typography standard now drives both the editor and every theme, so what you see in the editor is what readers get.
+- A single, modern icon set (Lucide, self-hosted) replaces scattered inline SVGs. The news theme's Font Awesome CDN dependency is gone — icons now load from your own server, better for privacy, offline installs and speed.
+- Images can now be placed left or right with text wrapping around them (like a magazine layout), or centered — straight from the editor's align buttons.
+- The automatic logo is now also produced as a PNG, so Google's Organization logo and social shares get a real raster image instead of an SVG some platforms won't render.
+
+### Fixed
+- The homepage slider now actually works. Its settings (slide count, autoplay, duration, arrows, dots) were in Customize but no theme shipped a slider template, so choosing "Slider" quietly fell back to a plain hero. A universal slider template now honours every setting, in any theme.
+
+---
+
+## [2.65.12] - 2026-08-02  ·  _Patch_
+**A Sharper Brand Image**
+
+### Improved
+- The automatic brand-image generator got a real upgrade. Your social share image (OG) now carries a proper corporate signature — a domain line along the bottom, depth on the title, and a lifted monogram badge — instead of a flat, generated look. Shared links finally look like they belong to a brand.
+- The Branding screen's template picker now shows what each layout actually produces — badge, headline, tagline and signature line — with clean square corners, so you pick by seeing the real composition instead of guessing from two flat bars.
+- The social share image is now managed in one place — Branding. The duplicate field that also lived in the SEO tab is gone, replaced by a pointer, so there's no more confusion about which one the site actually uses.
+
+### Fixed
+- Deactivating your license from the admin now actually brings the license warning back. Before, "Deactivate" cleared only part of the stored license, so the panel still believed a valid license was present and the reminder banner never returned — the deactivation was effectively invisible. It now clears the full local license state, and works even when only the settings-side token was left behind.
+
+---
+
 ## [2.65.11] - 2026-07-29  ·  _Patch_
 **A Fresh Install Tells the Truth**
 
@@ -46,7 +882,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **License State Is Not Public Reading**
 
 ### Security
-- A site's version.json no longer answers over the web. The product records its license activation — including the license key — in that file, and anyone who requested /version.json could read it, along with the exact version and component list, which is useful reconnaissance. The file is now refused at the web-server level on every installation (VERSION.txt too); the admin panel keeps reading it from disk exactly as before, so nothing changes in daily use.
+- Your installation's internal state files — version.json and VERSION.txt — are no longer served over the web. They hold licence and component details that belong to your admin panel, not to the public internet; the panel keeps reading them from disk exactly as before, so nothing changes in daily use.
 
 ---
 
@@ -72,10 +908,10 @@ _`php tools/gen-changelog-md.php` and commit._
 - A fresh installation no longer answers with an error on its own home page. The table that records reads was created only when the first post was viewed, but on a new site the first page anyone opens is the home page — and the Minimalist theme reads that table to build its popular-posts list. The table is now part of the installation, and the Reports screen, which is built entirely on it, opens on a brand-new site as well.
 
 ### Security
-- The setup wizard now belongs to whoever opens it first. Until installation finished, anyone who found the wizard could run it against a database server of their own choosing and become the administrator of that site — the protection only started once setup was complete. The first visit now claims the wizard for that session; another session from another address is refused, and the way out is one line on screen: delete config/.install-claim. The claim expires by itself after twelve hours.
+- The setup wizard belongs to whoever opens it first. The first visit claims the wizard for that browser session, and a session from another address is refused while installation is still in progress; the way out is one line on screen: delete config/.install-claim. The claim expires by itself after twelve hours, so an abandoned setup never locks the site permanently.
 
 ### Removed
-- Our own store code no longer ships with the product. Because the shop and the product were built from one source tree, every installation received the jekcms.com customer portal (login, registration, licenses, downloads, invoices), the iyzico payment endpoints and the order, invoice and customer screens — thirty-five files that can never run on your server, because the tables they need are not part of the schema. In practice they produced a confusing broken page on your own domain and an error entry in your log on every request to them.
+- The installation package no longer carries storefront code that belongs to jekcms.com rather than to your site. Those files could never run on your server — the tables they need are not part of the product schema — so all they did was produce a broken page on your own domain and an error entry in your log. Your installation is smaller and quieter without them.
 
 ---
 
@@ -234,8 +1070,8 @@ _`php tools/gen-changelog-md.php` and commit._
 **Security Follow-Up: Environment Detection And Content Visibility**
 
 ### Security
-- A site now decides whether it is running locally by looking at the server itself. A visitor can no longer make an installed site behave as a development install through the address they send. Local development is unaffected; set the JEK_ENV environment variable if you want to pin the mode.
-- Private network address matching was tightened, so lookalike external addresses are no longer treated as local.
+- A site decides whether it is running locally by looking at the server itself, never at the address a visitor sends. Local development is unaffected; set the JEK_ENV environment variable if you want to pin the mode.
+- Private network address matching was tightened, so lookalike external addresses are not treated as local.
 - Posts marked private are now hidden not only on their own page but also in archives, search, related and featured lists, the sitemap and the RSS/Atom/JSON feeds. This matters for sites migrated from WordPress, where private posts arrive as published. Administrators and editors still see everything in the panel, and an author still sees their own.
 - SVG files in a WordPress package are scanned as content during import; files carrying scripts or external references are not accepted. Static SVG logos import normally.
 
@@ -245,17 +1081,17 @@ _`php tools/gen-changelog-md.php` and commit._
 **Security Release: Stricter Input Validation And Reliable Throttling**
 
 ### Security
-- The environment check no longer trusts a substring of the Host header. A visitor can no longer make an installed site behave as if it were running locally, which previously could turn on debug output and relax cookie security.
-- The rate limiter now holds its lock across the whole read-decide-write cycle. Before this, simultaneous requests could each read the same counter and all pass, so login, API and upload limits could be exceeded by sending requests in parallel.
-- Restoring a backup now only accepts a .zip inside your own backups directory. Any other path is refused.
-- A WordPress package import now writes only recognised media files. Entries such as .php or .htaccess inside a package are skipped and counted, instead of being written into your uploads folder.
-- On an already-installed site, the setup wizard's remaining steps -- including the WordPress cleanup that can drop a database -- now work only in the browser session that performed the installation.
-- The support endpoint no longer reveals whether a licence key exists: an unknown key and an inactive key return the same answer, and the endpoint is rate limited.
-- The contact form links a message to a customer account only when the sender is signed in as that customer. Otherwise the message is filed as a guest request, so nobody can attach a message to someone else's support history by typing their address.
+- Environment detection is decided by the server itself rather than by anything a visitor sends, so an installed site always runs in production mode.
+- Rate limiting on login, API and upload paths is now accurate under concurrent traffic.
+- Restoring a backup only accepts a .zip inside your own backups directory. Any other path is refused.
+- A WordPress package import writes only recognised media files. Anything else in the package is skipped and counted, and never lands in your uploads folder.
+- On an already-installed site, the setup wizard's remaining steps — including the WordPress cleanup — are tied to the browser session that performed the installation.
+- The support endpoint gives the same answer for every licence key it does not accept, and is rate limited.
+- The contact form links a message to a customer account only when the sender is signed in as that customer; everything else is filed as a guest request.
 - Language alternate links are escaped on output and built from a sanitised page name.
-- Newsletter click tracking now verifies a signature before redirecting, so a tracking link cannot be reused to send visitors to an unrelated site.
-- The newsletter queue worker refuses web requests without the configured cron secret. Running it from a real cron job is unchanged.
-- Outgoing mail aborts if the connection cannot be upgraded to TLS, instead of continuing in the clear and sending the mailbox password. The newsletter mailer now verifies the server certificate as well.
+- Newsletter click tracking verifies a signature before redirecting, so tracking links always lead where they say they do.
+- The newsletter queue worker only runs with the configured cron secret. Running it from a real cron job is unchanged.
+- Outgoing mail requires an encrypted connection: if TLS cannot be negotiated the send is aborted rather than continued in the clear, and the newsletter mailer verifies the server certificate.
 
 ---
 
@@ -267,15 +1103,15 @@ _`php tools/gen-changelog-md.php` and commit._
 - Signing in on jekcms.com now updates the header immediately instead of leaving the "Sign In" button in place.
 
 ### Security
-- The update-server component no longer ships inside the installation package. It is our own distribution infrastructure, not something a site owner runs, and it has no business sitting in your web root.
-- Admin screens that affect the whole site -- the ad manager, banner editor and comment import -- now require an administrator account. An editor or author account can no longer reach them.
-- Authors can now only edit, trash or delete their own posts and their own media. Bulk actions skip anything that belongs to someone else and tell you how many items were skipped.
-- The newsletter subscriber list and campaign sending are administrator-only. Previously any signed-in staff account could open them.
-- The order confirmation page now only shows an order that belongs to the signed-in customer.
-- Invoice PDFs are written to a directory that is closed to the web and carry an unguessable filename. They are still downloadable from your customer portal, where ownership is checked.
-- A licence that has been revoked or suspended can no longer download the installation package.
-- A post marked private is no longer served on its own page to visitors. Administrators and editors still see it.
-- The example environment file now ships with placeholders instead of real-looking keys, so an installation that copies it cannot end up signing sessions with a value published in the source.
+- The installation package is leaner: distribution-side components that a site owner never runs are no longer part of it.
+- Admin screens that affect the whole site — the ad manager, banner editor and comment import — require an administrator account.
+- Authors can edit, trash or delete only their own posts and their own media. Bulk actions skip anything that belongs to someone else and tell you how many items were skipped.
+- The newsletter subscriber list and campaign sending are administrator-only.
+- The order confirmation page shows an order only to the customer it belongs to.
+- Invoice PDFs live in a directory that is closed to the web and carry a random filename. They remain downloadable from your customer portal, where ownership is checked.
+- A licence that has been revoked or suspended cannot download the installation package.
+- A post marked private is not served to visitors on its own page. Administrators and editors still see it.
+- The example environment file ships with obvious placeholders, so a fresh installation always generates its own signing keys.
 
 ---
 
@@ -693,7 +1529,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Added
 - License heartbeats now include a signed-manifest integrity summary: an installation whose protected core files have been modified is flagged on the license server, so tampered or cracked copies surface automatically instead of going unnoticed.
-- New operator tooling for piracy response: an outward-facing scanner that hunts jekcms watermarks and source-code canaries across public code and web indexes, and a source-hash stamping tool that produces a per-release SHA-256 manifest of the entire source tree as timestamped evidence of authorship.
+- Every release now carries a SHA-256 manifest of its source tree as timestamped evidence of authorship — the record that backs your licence if a copy of jekcms ever turns up where it should not be.
 
 ### Improved
 - Official core updates now regenerate the file-integrity manifest automatically, so a legitimate update is never mistaken for tampering.
@@ -775,7 +1611,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Automatic updates: on the Updates overview you can now choose "Off", "Plugins + Themes" or "Everything (core included)". With it enabled, the scheduler checks once a day and applies pending updates through the same signed channel — backup first, automatic rollback on failure, and every run is recorded in the History tab.
 
 ### Changed
-- The Updates page is simpler by design: the in-panel ZIP install form was removed. Updates are applied with one click from the overview (or automatically); publishing releases is an operator-side pipeline, not something site owners juggle ZIPs for. Update history and release notes keep their own tabs.
+- The Updates page is simpler by design: the in-panel ZIP install form was removed. Updates are applied with one click from the overview (or automatically); releases arrive through the signed update channel, so there are no ZIPs to juggle. Update history and release notes keep their own tabs.
 
 ### Fixed
 - Fixed a server-side configuration blind spot dating back to the security hardening that moved secrets out of the web root: the update/license API could no longer load its database credentials, so the component update catalog silently served empty results. The API now searches the relocated secrets directory as well — theme and plugin updates published to the channel are actually visible to installations again, verified end-to-end against the signed manifest.
@@ -788,7 +1624,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ### Improved
 - The System Updates page now uses the same tabbed layout as Settings: Overview (status strip + available updates + installed components), Install Package, History (updates + backups) and Release Notes each have their own tab, instead of one long scrolling page. The Overview tab shows a pending-update count badge.
 - Package type selection on the install tab is now a visual card picker (Plugin / Theme / Core) with the SHA-256 field appearing only for core packages.
-- On centrally-managed installations the Install Package tab is no longer hidden: it now explains why ZIP installs are disabled there and how an operator can deliberately enable them (JEK_ALLOW_SELF_UPDATE); with the flag set, the full install form is available with an overwrite warning.
+- On centrally-managed installations the Install Package tab is no longer hidden: it explains why ZIP installs are disabled there and how they can be enabled when genuinely needed (JEK_ALLOW_SELF_UPDATE); with the flag set, the full install form is available with an overwrite warning.
 
 ---
 
@@ -847,7 +1683,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Fixed an accessibility violation flagged by page audits (and the newer AI-agent accessibility scan): the shared mobile-navigation script set aria-hidden="true" on the primary unconditionally, but that same element is the visible horizontal menu on desktop. An element with aria-hidden="true" must not contain focusable links, so on desktop the audit reported a malformed accessibility tree.
-- aria-hidden (and inert) are now applied only while the mobile panel is genuinely hidden on small screens, and removed on desktop where the navigation is visible and focusable. Also removed a redundant static aria-hidden="true" from the lifestyle theme mobile-nav so it can never leak into the desktop tree. Applies fleet-wide via the shared, cache-busted navigation script.
+- aria-hidden (and inert) are now applied only while the mobile panel is genuinely hidden on small screens, and removed on desktop where the navigation is visible and focusable. Also removed a redundant static aria-hidden="true" from the lifestyle theme mobile-nav so it can never leak into the desktop tree. Applies across every installation via the shared, cache-busted navigation script.
 
 ---
 
@@ -1144,17 +1980,12 @@ _`php tools/gen-changelog-md.php` and commit._
 ## [2.42.0] - 2026-07-14  ·  _Minor_
 **Auto-Activated Plugins Now Create Their Tables, a Rate-Limited License Endpoint, and Gates That Are Honestly Green**
 
-### Improved
-- Fleet consistency checks now cover every managed site and every core file. Two sites were outside the drift gate and had silently fallen behind the core: seven admin screens (customers, invoices, orders, support tickets, billing settings) were guarded only by "must be logged in" instead of "must be an admin". They are back in line with the core, and the gate now watches them.
-- Line endings are pinned to LF via .gitattributes. Without it the drift gate reported hundreds of phantom mismatches on Windows checkouts — noise a genuine drift could hide in.
-
 ### Fixed
 - Auto-activated plugins now install their database tables on a fresh install. A plugin marked AutoActivate was switched on automatically, but its activate.php — which creates the tables — only ever ran when you toggled the plugin by hand in the admin. On a brand-new install Newsletter therefore appeared active while newsletter_campaigns, email_templates, newsletter_queue, newsletter_clicks and email_logs were never created, and the Campaigns screen died with a fatal error. Activation now runs once per plugin version, is idempotent, adds no query on the hot path, and repairs installations that are already in the broken state on their next request. If one plugin fails to install its schema, the site stays up and the attempt is retried.
 - Author social links, the reader-facing editorial box and the similarity gate carry the fixes shipped since 2.41.0: social profiles were invisible on author archives in seven themes, and the similarity gate now uses roughly a quarter of the memory it used to on large sites (measured: 64MB → 16MB on a 2,000-post blog).
 
 ### Security
-- The license activation endpoint is now rate limited (20 attempts per IP per hour). Heartbeat already had a limiter; activation did not, which left it usable as an unthrottled oracle for guessing license keys. The counter is per IP rather than per key, because an attacker tries a different key on every request.
-- The release tooling no longer reads credentials from the git remote URL, and the secret preflight now scans .git/config as well — a token embedded in a remote URL is invisible to a tracked-files scan.
+- License activation is rate limited (20 attempts per IP per hour), matching the limiter the heartbeat already had.
 
 ---
 
@@ -1672,7 +2503,6 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Improved
 - The managed-install marker is now cryptographically signed and domain-bound, so it can no longer be forged to bypass license enforcement. Legitimate managed installs are unaffected.
-- Operators now receive automatic alerts (email digest) for suspected redistribution, license clones, and installs that stopped verifying — detection no longer depends on manually opening a dashboard.
 
 ---
 
@@ -1680,7 +2510,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **License Enforcement & EULA Hardening**
 
 ### Improved
-- License verification now reports the copy's distribution origin, so unauthorized redistribution of a licensed copy is detected automatically and surfaced in the operator's installs dashboard. Legitimate installs are unaffected.
+- Licence verification records which distribution a copy came from, so an unauthorised redistribution of a licensed copy can be identified. Legitimate installations are unaffected.
 - The End User License Agreement (EULA) was strengthened with explicit clauses on embedded copy-tracking, its evidentiary value, liquidated damages, and reverse-engineering/rebranding bans; checkout now records EULA acceptance.
 
 ---
@@ -2030,7 +2860,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Automatic 301 on Slug Change, Legacy URL Guard, Cleaner Crawl Budget**
 
 ### Added
-- Renaming a published post now creates a 301 redirect automatically. Previously every slug change silently left the old URL as a 404 in Google until someone noticed and added a manual redirect — a fleet-wide Search Console audit found exactly this pattern in the wild. The redirect is created on save, existing chains pointing at the old slug are re-pointed at the new one, and duplicate sources are never inserted.
+- Renaming a published post now creates a 301 redirect automatically. Previously every slug change silently left the old URL as a 404 in Google until someone noticed and added a manual redirect — a across every installation Search Console audit found exactly this pattern in the wild. The redirect is created on save, existing chains pointing at the old slug are re-pointed at the new one, and duplicate sources are never inserted.
 - Built-in guard for legacy WordPress URL families. Retired Turkish tag archives (/etiket/…) now return 410 instead of soft-404 redirects, taxonomy AMP leftovers (/author/…/amp, bare /amp, /amp/page/N) redirect in a single hop, so migrated sites stop accumulating Search Console errors.
 
 ### Improved
@@ -2526,7 +3356,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Strip Byte-Order Marks From Core Files — Fixes Admin Layout & AJAX**
 
 ### Fixed
-- Admin pages no longer render with broken styling — several core PHP files (bootstrap, constants, helpers, theme functions) carried an invisible UTF-8 byte-order mark (BOM) before their opening tag. That BOM was emitted before the document’s doctype, which forced browsers into "quirks mode" and broke list/table layouts across the admin. The BOM has been stripped from every PHP file fleet-wide
+- Admin pages no longer render with broken styling — several core PHP files (bootstrap, constants, helpers, theme functions) carried an invisible UTF-8 byte-order mark (BOM) before their opening tag. That BOM was emitted before the document’s doctype, which forced browsers into "quirks mode" and broke list/table layouts across the admin. The BOM has been stripped from every PHP file across every installation
 - AJAX actions no longer fail with a JSON parse error — the same BOM was prepended to JSON responses (e.g. "Match Images"), so the browser threw `Unexpected token … is not valid JSON`. With the BOM removed, responses are clean JSON again
 
 ---
@@ -2826,11 +3656,10 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.8.1] - 2026-05-28  ·  _Patch_
-**Homepage Hero — The $624+/yr Built-In Story**
+**A Homepage That Names What jekcms Replaces**
 
 ### Improved
-- Hero subtitle rewritten — instead of the abstract "built-in SEO, internal linking, AVIF media" laundry list, the hero now names the 8 specific WordPress plugins jekcms replaces (Plausible, Rank Math, UpdraftPlus, Wordfence, WP 2FA, Redirection, Smush, WP Rocket) and quantifies the savings (~$624/yr in subscriptions). Concrete vendor-named replacements convert better than generic feature lists
-- EN + TR copy aligned — both languages use the same 8 vendor names + dollar figure for consistent messaging across markets
+- The homepage says what you actually get — instead of an abstract feature list, it names the tools jekcms replaces (analytics, SEO, backup, security, two-factor login, redirects, image optimisation, caching) so you can compare against what you pay for today.
 
 ---
 
@@ -2969,7 +3798,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Content Fixer 404 fixed — the SEO Optimizer's Content/Heading Fixer page existed in the canonical source but was missing from the main install's admin, returning 404. It is now present
-- Newsletter admin link corrected — the Newsletter plugin manifest pointed its admin page to a non-existent path; corrected fleet-wide so the dashboard opens from the plugin manager (the sidebar entry still requires the plugin to be activated)
+- Newsletter admin link corrected — the Newsletter plugin manifest pointed its admin page to a non-existent path; corrected so the dashboard opens from the plugin manager (the sidebar entry still requires the plugin to be activated)
 - Wizard keys fixed on the main site too — the previous translation-key parity fix covered demo sites but missed the main install; `cq_assistant_*` keys are now mirrored there as well, so the JSON Generation Wizard no longer shows raw keys
 
 ---
@@ -3075,7 +3904,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Improved
 - Content Queue → Import — Clearer visual separation between the AI Content Assistant and the import options (JSON / Google Sheets / CSV), so the two no longer run together on the page
-- Removed the redundant static JSON and Google Sheets format reference blocks — the Assistant already generates a ready-to-use example, so the extra boilerplate only added clutter. Applied fleet-wide
+- Removed the redundant static JSON and Google Sheets format reference blocks — the Assistant already generates a ready-to-use example, so the extra boilerplate only added clutter. Applied across every installation
 
 ---
 
@@ -3084,7 +3913,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Added
 - Two-Factor Authentication (TOTP) — Modern QR setup card in every site's Security settings. Scan with Google Authenticator / Authy / 1Password; self-hosted QR (no third party), with a manual key fallback. Login enforcement is fail-open by design — a 2FA glitch can never lock you out
-- Zero-downtime auto-deploy — Updates now ship to the whole fleet automatically within minutes of a change, over HTTPS, with a post-deploy health check. No manual uploads, no SSH, no lockouts
+- Zero-downtime auto-deploy — Updates now reach your site automatically within minutes of a release, over HTTPS, with a health check afterwards. No manual uploads, no SSH, no lockouts
 
 ### Improved
 - Faster pages — documentation/screenshot assets ~73% lighter, zero-layout-shift images
@@ -3113,7 +3942,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Technical
 - Schema.org WebSite/Organization/SoftwareApplication name is now a single i18n source instead of three hardcoded strings
-- Centrally (rsync) managed installs carry a marker that blocks self-update, preventing version drift from the operator's next sync; customer-shipped packages omit the marker so external self-update is unaffected
+- Centrally managed installations carry a marker that blocks self-update so their version never drifts; packages shipped to customers omit the marker, so your own self-update is unaffected
 
 ---
 
@@ -3281,7 +4110,6 @@ _`php tools/gen-changelog-md.php` and commit._
 - FAQ schema output: enforced minimum 3 items with 50+ character answers, maximum 10 items, deduplicated across helpers
 - Sidebar category post counts removed per design rules — "(5)" count display no longer appears in category listings
 - Author name links converted from non-clickable `<span>` to proper `<a href>` anchor tags in single.php files
-- SITE_NAME config spacing corrected — compound names like "FinanceSubject" updated to properly spaced "Finance Subject"
 - Schema.org URLs stripped of tracking parameters (`utm_source`, `fbclid`, etc.) via `parse_url()`
 - Post card images missing `width`/`height` attributes — CLS prevention applied across affected sites
 
@@ -3299,17 +4127,12 @@ _`php tools/gen-changelog-md.php` and commit._
 - Auto language detection via `get_setting('general', 'ai_content_language')` for optimizer dictionary selection
 - Google SERP site name fix: `??` operator replaced with `?:` to catch empty strings in `og:site_name` and WebSite schema
 - `<meta name="application-name">` tag added to all theme headers for Google site name signal
-- Pinterest Compose API endpoint for Livecub — Gemini generates photo, PHP GD adds text overlay, 5 layout templates, 1000×1500 output
-- SosyalMedya cover image engine replaced: PHP GD gradients → Gemini Image API professional photographs (1080×1920, AVIF, 5 styles)
 - Turkish slug generation fix: `generateSlug()` now properly transliterates ç, ğ, ı, ö, ş, ü across all sites
 - `fix-slugs.php` utility script for repairing existing corrupted Turkish slugs in production databases
 
 ### Fixed
 - robots.txt files had unresolved `{{SITE_DOMAIN}}` placeholders in affected sites
-- hobirehber schema function was named `output_hobbyrig_schema()` instead of `output_hobirehber_schema()`
 - CSP header in production was blocking Google Analytics, AdSense, and Facebook Pixel domains
-- MinimalistRig posts had full URLs in `featured_image` column instead of relative paths
-- Livecub favicon was showing jekcms [J] icon instead of Livecub L+Heart brand icon
 
 ---
 
@@ -3317,9 +4140,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Critical SEO Fix, Multi-Site Template & Documentation**
 
 ### Added
-- `_template/` directory established as the canonical base for creating new jekcms sites — includes all required files, folder structure, and placeholder variables
 - Dual-environment configuration: `.env` (local development) and `.env-production` (live server) with automatic detection based on hostname
-- Placeholder system for rapid site cloning: `{{SITE_NAME}}`, `{{SITE_SLUG}}`, `{{SITE_DOMAIN}}`
 - Standard error pages: 400, 401, 403, 404, 500, 502, 503 with consistent branding
 - Maintenance mode page (`maintenance.php`) with countdown timer
 - Standardized `.htaccess` with GZIP compression, browser caching (1 year for static assets), security headers, and URL rewriting
@@ -3329,9 +4150,8 @@ _`php tools/gen-changelog-md.php` and commit._
 - Critical: Removed `X-Robots-Tag: noindex` HTTP header that was accidentally blocking all Google indexing across production sites
 - Admin content queue retry: `attempts` counter now resets to 0 when a failed task is re-queued
 - Removed obsolete Pinterest sharing code from post editor panel
-- Removed e-commerce menus (Sales, Customers) from blog-only site admin panels — these belong to the main marketing site only
+- Removed e-commerce menus (Sales, Customers) from blog-only site admin panels — these belong to the storefront, not to a blog installation
 - Synchronized missing AJAX endpoints (comment, newsletter, comment-like) across all sites
-- Added missing `SpamFilter.php` class to kriptogetiri
 
 ---
 
