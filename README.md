@@ -26,11 +26,11 @@ Installs on any PHP + MySQL hosting, one-time license.
 
 - **Everything in the core** — SEO, media optimization, security and automation
   are built in, not bolted on with a stack of paid plugins to maintain
-- **SEO built in** — Schema.org/JSON-LD, multilingual hreflang/canonical, XML
-  sitemaps, automatic internal linking, AVIF/WebP media pipeline
+- **SEO built in** — Schema.org/JSON-LD, canonical URLs, XML sitemaps,
+  automatic internal linking, AVIF/WebP media pipeline
 - **Automation-ready** — full REST API + n8n webhook workflows for
   AI-assisted publishing (Gemini / GPT), plus JSON bulk import
-- **14+ professional themes** — travel, recipes, health, finance, news, tech…
+- **13 professional themes** — travel, recipes, health, finance, news, tech…
   customizable from the admin panel
 - **Portable & yours** — installs on any PHP + MySQL hosting; your code and
   data live in a standard exportable database; existing WordPress content can
