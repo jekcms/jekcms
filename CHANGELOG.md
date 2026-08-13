@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.95] - 2026-08-13  ·  _Patch_
+
+### Fixed
+- Fixed a 500 error that could break plugin admin pages. The admin header's update check caught its exception into a variable named — the same name pages use for their HTML-escaping helper — so whenever that check failed (e.g. a slow update server or a stale database), the page's next output call crashed with “Object of type … is not callable”. The header and sidebar now use private catch variables, so a failed background check never takes the page down.
+- Plugin admin descriptions and sidebar names for the newest modules (Forms, Downloads, Web Push, Editorial Calendar, Audience/CRM, A/B Tests) now show in Turkish on Turkish installs instead of falling back to English.
+
+---
+
 ## [2.65.94] - 2026-08-13  ·  _Patch_
 
 ### Improved
