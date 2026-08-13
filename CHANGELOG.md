@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.93] - 2026-08-13  ·  _Patch_
+**A/B Tests: Even Variant Split on 32-bit PHP**
+
+### Fixed
+- A/B Tests now split traffic evenly on 32-bit PHP builds too. The visitor-bucketing hash could turn negative on 32-bit, which would have pushed almost everyone onto the first variant and skewed the results; the hash is now masked to stay non-negative on every platform. No effect on 64-bit hosting (the common case), where the split was already even.
+
+---
+
 ## [2.65.92] - 2026-08-13  ·  _Minor_
 **New Plugin: A/B Tests**
 
