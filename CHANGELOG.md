@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.96] - 2026-08-14  ·  _Minor_
+**Pro Forms, an Audience suite, a richer editor, and faster videos**
+
+### Added
+- Form Builder is now a real visual builder: a two-pane editor with a LIVE PREVIEW that updates as you type, 16 field types (text, e-mail, dropdown, checkbox, date, time, star rating, consent/GDPR, section heading, info text, hidden…), per-field width so fields can sit side by side, and drag-and-drop reordering by a handle. Plus an auto-reply e-mail to the sender that fills in their own answers, redirect-after-submit, keyword spam filter, an entry limit, and a full submissions manager (read/spam, per-entry detail, CSV export).
+- Audience & Marketing — the CRM grew into a marketing hub: contacts from every source unified by e-mail, plus saved Segments (audience filters with live counts) that will become broadcast targets for e-mail and web push.
+- The post editor gained rich content blocks — Button/CTA, Accordion (collapsible FAQ), Star Rating, and YouTube video — inserted through professional modals (not browser prompts). Tables now open a visual size picker (pick rows × columns) and show a floating toolbar right on the table to add/remove rows and columns without dialogs.
+
+### Improved
+- Every plugin admin screen was rebuilt to the jekcms admin design — proper cards, pill buttons, stat panels, inline how-it-works notes and rich empty states, with a left inner-sidebar where a plugin has multiple sections.
+- Web Push adds a “Send test to this browser” button so you can subscribe and test notifications right from the admin.
+
+### Fixed
+- Adding a YouTube video no longer slows the page: embeds load a lightweight poster and pull in the real player only on click (privacy-friendly youtube-nocookie).
+- Hardened CSV exports (Audience, SEO, Analytics, form entries) against spreadsheet formula injection.
+
+---
+
 ## [2.65.95] - 2026-08-13  ·  _Patch_
 
 ### Fixed
