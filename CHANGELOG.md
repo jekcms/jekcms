@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.0] - 2026-08-15  ·  _Minor_
+**More resilient automatic updates**
+
+### Improved
+- Automatic updates are now sturdier: before installing anything, the update package's digital signature is verified against several canonical forms and the exact bytes served — so a future change in how the update server formats its release list can never silently stop updates from reaching your site. The current, working verification is always tried first, so nothing changes for you day to day; this only adds safety nets.
+
+---
+
 ## [2.65.102] - 2026-08-14  ·  _Patch_
 **Fix: image & logo uploads failing on some servers**
 
