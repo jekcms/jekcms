@@ -8,6 +8,29 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.98] - 2026-08-14  ·  _Patch_
+**Editor blocks: audited and hardened for every theme**
+
+### Fixed
+- FAQ questions no longer appear inside a theme’s table-of-contents: the question is now a styled heading that stays out of the on-page contents list while still powering the FAQ rich result.
+- Verified every new block (FAQ, Pros & Cons, Key takeaways, How-to) renders correctly through the article pipeline on all themes, with the FAQ and How-to search markup produced automatically and safely (user text is always escaped).
+
+---
+
+## [2.65.97] - 2026-08-14  ·  _Minor_
+**A pro-grade editor: SEO content blocks, fixed Button & Accordion**
+
+### Added
+- Four new content blocks for richer, search-friendly articles: an FAQ (question & answer) block that automatically adds Google FAQ rich-result markup, a Pros & Cons box, a Key takeaways box, and How-to steps that automatically add How-to rich-result markup — each inserted and edited through a professional panel.
+- Video now has its own toolbar button, right next to the image button — clearer than hiding it in a menu.
+
+### Fixed
+- The Button block now inserts a clean, compact button instead of a broken empty area, and can be re-edited by double-clicking it.
+- The Accordion block is now fully editable: type the title directly and write the hidden content underneath (previously it appeared as an unusable strip).
+- The format menu items now line up consistently — every entry is an icon plus a label in a logical order, instead of scattered styles.
+
+---
+
 ## [2.65.96] - 2026-08-14  ·  _Minor_
 **Pro Forms, an Audience suite, a richer editor, and faster videos**
 
