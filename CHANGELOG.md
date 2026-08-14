@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.99] - 2026-08-14  ·  _Minor_
+**Beautiful content blocks, collapsible FAQ, and two new text styles**
+
+### Added
+- Two strong new text styles for richer articles: a Lead paragraph (a larger, standout intro) and a Pull quote (a decorative, oversized quotation) — both in the format menu.
+- The FAQ block is now collapsible on the page: each question expands and collapses like an accordion, so one FAQ block gives you a full set of expandable questions in one place.
+
+### Improved
+- All content blocks were visually redesigned on both the editor and the live page: buttons get depth and hover, How-to steps show numbered badges, Pros & Cons use clear check/cross marks with colored headers, Key takeaways carry an icon and accent bar, and star ratings are larger — a noticeably more finished, professional look.
+
+---
+
 ## [2.65.98] - 2026-08-14  ·  _Patch_
 **Editor blocks: audited and hardened for every theme**
 
