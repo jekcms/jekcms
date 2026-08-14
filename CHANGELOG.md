@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.101] - 2026-08-14  ·  _Patch_
+**The format menu now scrolls neatly instead of overflowing the screen**
+
+### Fixed
+- With all the new blocks, the format menu could run off the bottom of the screen; it now fits the viewport with a tidy internal scroll and closes when you scroll the page, so it never appears detached from its button.
+
+---
+
 ## [2.65.100] - 2026-08-14  ·  _Minor_
 **Cleaner block design, styled callouts on the page, plus keyboard keys and drop caps**
 
