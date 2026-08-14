@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.102] - 2026-08-14  ·  _Patch_
+**Fix: image & logo uploads failing on some servers**
+
+### Fixed
+- On servers where PHP's Fileinfo extension is turned off, every image and logo upload failed with “Class finfo not found”. Upload validation now detects the file type through several fallbacks (including reading the image header directly), so uploads work regardless of that extension.
+
+---
+
 ## [2.65.101] - 2026-08-14  ·  _Patch_
 **The format menu now scrolls neatly instead of overflowing the screen**
 
