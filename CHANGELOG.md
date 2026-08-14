@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.65.100] - 2026-08-14  ·  _Minor_
+**Cleaner block design, styled callouts on the page, plus keyboard keys and drop caps**
+
+### Added
+- Two more inline text tools other editors have: a Keyboard key style (renders a real key cap, e.g. Ctrl + S) and a Drop cap (an oversized decorative first letter to open an article).
+- The Info / Warning / Error / Tip highlight boxes are now properly styled on the published page — before they only looked right inside the editor.
+
+### Improved
+- Cleaner, less templated block design: the colored left bar was removed from the Key takeaways box (and the editorial summary box), replaced by a clean titled panel; the pull quote is now a centered, magazine-style quotation. The look is more editorial and less generic.
+
+---
+
 ## [2.65.99] - 2026-08-14  ·  _Minor_
 **Beautiful content blocks, collapsible FAQ, and two new text styles**
 
