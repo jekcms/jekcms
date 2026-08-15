@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.9] - 2026-08-16  ·  _Patch_
+**Redirect manager overhaul: 404 suggestion engine revived, URL matching fixed**
+
+### Improved
+- Pasting a full URL of your own site as the redirect source now works — the domain is stripped and the path is stored canonically; foreign-domain sources are rejected with a clear message.
+- Static-asset 404s (missing images, fonts, bot .env scans) are excluded from the suggestion log so real page URLs aren't buried in noise.
+- The redirects table is now self-healing on older installations where it never existed — adding a redirect no longer fails with a generic error, and automatic 301s on slug changes work there too.
+
+### Fixed
+- The "Orphan 404s" suggestion engine never received any data: the 404 logger existed but nothing ever called it, so the tab read from a table nothing wrote to. 404s (including theme-rendered ones) are now logged centrally, so the one-click "create 301" suggestions finally appear.
+- Redirects with Turkish or other non-ASCII characters in the slug never fired: the browser sends the URL percent-encoded while the redirect was stored decoded, and the two were compared as raw strings. Requests are now normalized exactly like the router normalizes them (decoding, trailing slash, subfolder base path), so /eski-yazı style redirects work.
+- Redirects were completely dead on subfolder installations (e.g. example.com/blog): the incoming path carried the folder prefix while the rule was stored without it, and relative targets redirected to the domain root instead of the subfolder.
+- Saving a redirect whose target equals its source is now rejected — previously it created an infinite redirect loop in the browser.
+- Form resubmission on refresh is gone: actions now follow the POST→redirect→GET pattern, so pressing F5 after toggling a redirect no longer silently toggles it back.
+- The "Hits (30 days)" stat actually showed the lifetime hit total of recently-hit rules; it is now split into an honest "Total hits" and "rules hit in the last 30 days".
+
+---
+
 ## [2.66.8] - 2026-08-16  ·  _Patch_
 **SEO tab: archive indexing controls and Pinterest verification**
 
