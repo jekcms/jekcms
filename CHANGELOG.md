@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.8] - 2026-08-16  ·  _Patch_
+**SEO tab: archive indexing controls and Pinterest verification**
+
+### Added
+- Archive Indexing panel in Settings → SEO: the thin-content engine that decides whether author and category archives are indexable was always running, but its knobs were hidden. You can now turn author-archive indexing on/off and tune the minimum-post thresholds for author and category archives — meta robots and the sitemap follow the same values, so Google never gets conflicting signals.
+- Pinterest site verification field: the meta tag output has supported Pinterest verification all along, but the form only offered Google, Bing and Yandex. The fourth field is now there.
+
+### Fixed
+- The “AI bot access” shortcut in the SEO checklist pointed at an anchor that didn't exist on the page, so the click landed at the top instead of the AI bot panel. The anchor now exists and the link scrolls to the right place.
+- Archive threshold values are clamped to a sane 1–50 range on save; previously a 0 or negative value silently fell back to a different number than the one shown in the form.
+
+---
+
 ## [2.66.7] - 2026-08-16  ·  _Minor_
 **Security hardening: 2FA replay protection, backup codes, secret handling**
 
