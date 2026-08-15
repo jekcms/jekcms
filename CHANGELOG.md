@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.6] - 2026-08-15  ·  _Patch_
+**Mail overhaul: honest delivery status, diagnostic errors, deliverability tools**
+
+### Added
+- Every core e-mail (sent or failed) is now logged, and the Mail tab shows a “Recent Sends” panel with per-message errors — failures are finally visible instead of dying silently.
+- One-click Deliverability (DNS) check on the Mail tab: verifies the sender domain's MX, SPF and DMARC records — the three most common reasons mail lands in spam.
+- A clear warning appears when the sender address and the SMTP account are on different domains (the classic setup that providers treat as spoofing).
+
+### Fixed
+- The core SMTP client never checked the server's replies — a rejected recipient (550) or rejected message (554) was still reported as “sent”, so failed contact-form, comment and download-delivery e-mails vanished without a trace. Every SMTP step is now verified and failures carry the server's exact response.
+- The “Send test” button used a different mail engine than real notifications — a passing test could hide a broken production path. The test now exercises the same engine your notifications use (and no longer depends on the newsletter plugin being present).
+- The admin's PHP mail() / SMTP method choice was ignored by core notifications; it is now honored everywhere, and authless SMTP relays (no username) work.
+- Scheduled-task e-mails were sent raw with an empty From header due to a settings-lookup bug; they now go through the same configured engine.
+- E-mails now include Date and Message-ID headers, a plain-text alternative part and base64 body encoding (all common spam-score factors), attachments finally work over SMTP, and connections have proper timeouts.
+
+---
+
 ## [2.66.5] - 2026-08-15  ·  _Minor_
 **Ad manager overhaul: every slot now works, new revenue placements, premium controls**
 
