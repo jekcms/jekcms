@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.3] - 2026-08-15  ·  _Patch_
+**Disk hygiene: every cache now cleans up after itself**
+
+### Fixed
+- Rate-limit counter files (one tiny file per visitor IP) could pile up indefinitely on hosts where daily maintenance never runs — a real concern on shared hosting with inode quotas. The limiter now sweeps stale counters opportunistically on a small fraction of requests (the same pattern PHP uses for session cleanup), and the daily maintenance covers both counter formats instead of one.
+- The daily cleanup used to delete rate counters after just one hour, silently resetting live 24-hour limits; it now waits until a counter can no longer be active.
+- Requesting a comments feed for a non-existent post ID used to write a cache file every time — an attacker could mint unlimited files. Invalid IDs now return 404 and write nothing.
+- Feeds requested with a custom ?limit are now generated fresh instead of each size writing its own cache file (up to 100 files per feed).
+- Stale feed and sitemap cache files left behind by key changes were never deleted; the daily maintenance now sweeps them.
+- Expired session files could linger for months on quiet sites (PHP's own cleanup is probabilistic); maintenance now removes sessions past their 30-day lifetime deterministically.
+
+---
+
 ## [2.66.2] - 2026-08-15  ·  _Patch_
 **Comments in four more themes + newsletter popup fixed to once a day**
 
