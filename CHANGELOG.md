@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.2] - 2026-08-15  ·  _Patch_
+**Comments in four more themes + newsletter popup fixed to once a day**
+
+### Added
+- The Lifestyle, Minimalist and Tech themes now have a full comment section (list with replies, moderation-aware form, spam protection) designed in each theme's own visual language; the Starter theme's dormant comment code was wired up and completed. All four respect the global comments setting and the per-post comment status.
+
+### Fixed
+- The newsletter signup popup could reappear on every page: the Finance theme only remembered the popup after the visitor clicked the close button, and the plugin popup reset at midnight. Both now remember the moment the popup is shown and stay quiet for a full 24 hours; subscribers never see it again.
+- The Finance popup's subscribe form pointed to a root-absolute address that broke on subdirectory installs.
+
+---
+
 ## [2.66.1] - 2026-08-15  ·  _Patch_
 **System-wide audit: privacy, SEO and reliability fixes**
 
