@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.7] - 2026-08-16  ·  _Minor_
+**Security hardening: 2FA replay protection, backup codes, secret handling**
+
+### Added
+- Backup recovery codes: enabling 2FA now generates ten single-use codes shown once. If you lose your authenticator device you can still sign in — no more lockout requiring server access. Codes can be regenerated with a current code.
+- Mandatory 2FA policy: a new toggle can require every administrator to use two-factor authentication; admins without it are guided to set it up at login and can't disable it while the policy is on.
+- The File Integrity Monitor now shows a distinct “monitoring inactive” state when no manifest has been created yet, instead of falsely reporting “clean”.
+
+### Security
+- Two-factor codes can no longer be reused: each 6-digit code is now single-use within its time window (a captured code can't be replayed on another session).
+- The reCAPTCHA secret key is now encrypted at rest and no longer written back into the settings form's HTML — previously it sat in the page source in plain text, like a leaked password.
+- Two-factor secrets are now stored encrypted (same protection as mail/API secrets), so a database leak no longer hands over working 2FA seeds.
+- reCAPTCHA on the admin login now fails closed: if Google's verification service is unreachable, login is blocked rather than silently waved through (comment/contact forms still fail open so real visitors aren't blocked; this is configurable).
+- Re-keying an already-enabled 2FA now requires the current code, so a hijacked session can't quietly move 2FA to the attacker's device.
+
+---
+
 ## [2.66.6] - 2026-08-15  ·  _Patch_
 **Mail overhaul: honest delivery status, diagnostic errors, deliverability tools**
 
