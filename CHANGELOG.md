@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.4] - 2026-08-15  ·  _Patch_
+**Maintenance cleanup is now actually scheduled**
+
+### Fixed
+- A re-audit found that the daily maintenance cleanup (expired cache, rate counters, stale feed/sitemap files, old sessions, log trimming) lived only in a legacy cron script that nothing ever invoked — so in practice none of it ran. It is now wired into the real scheduler body that both server cron and the visitor-triggered fallback execute, with its own 24-hour interval guard. Verified end-to-end: planted stale files were swept, fresh files and still-valid caches were left untouched.
+
+---
+
 ## [2.66.3] - 2026-08-15  ·  _Patch_
 **Disk hygiene: every cache now cleans up after itself**
 
