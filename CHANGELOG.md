@@ -8,6 +8,27 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.5] - 2026-08-15  ·  _Minor_
+**Ad manager overhaul: every slot now works, new revenue placements, premium controls**
+
+### Added
+- New “End of Article” slot — the ideal spot for an AdSense Multiplex unit, monetizing readers who finish a post. Works in every theme automatically.
+- Four previously dead slots now work in ALL 14 themes with zero theme edits: mobile bottom anchor (with a dismiss button), mobile top banner, sidebar top and sticky sidebar — the core injects them universally.
+- Revenue Settings panel: in-content ad interval (every N paragraphs, following the 300–500 word rule) with a per-page cap, lazy loading for below-fold ads (protects Core Web Vitals), a GDPR consent gate that holds custom ad codes until the visitor accepts cookies, and an editor for extra ads.txt lines (non-Google networks/resellers).
+- The Banner Manager's [banner id=N] shortcode finally renders on the site — it previously appeared as plain text because no frontend handler existed.
+- Slots in the admin are now ordered and badged by earning power (in-article and above-the-fold first), and slots the active theme can't print are labeled clearly.
+
+### Fixed
+- In-article ads no longer appear in 3-paragraph posts (a counting quirk made the threshold more aggressive than documented) and never land right before the article-end ads (no stacking).
+- The Pets theme printed the in-article ad at the very end of the post, stacked on top of the bottom ad — it now flows between paragraphs like every other theme.
+- Ad styles were emitted up to three times per page; now exactly once.
+- List ads (in-feed) filled their gaps: Travel archives, search results in five themes and homepages in seven themes now show the between-posts slot.
+- Post descriptions in structured data no longer leak raw shortcodes like [banner id=3].
+- Deleting a banner now uses a POST request (the CSRF token no longer travels in the URL).
+- Side discovery: the spam settings save path called a function that did not exist anywhere — saving spam settings or the auto-blacklist would have crashed. Defined properly.
+
+---
+
 ## [2.66.4] - 2026-08-15  ·  _Patch_
 **Maintenance cleanup is now actually scheduled**
 
