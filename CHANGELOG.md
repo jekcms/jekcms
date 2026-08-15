@@ -8,6 +8,38 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.1] - 2026-08-15  ·  _Patch_
+**System-wide audit: privacy, SEO and reliability fixes**
+
+### Improved
+- Duplicate structured data removed: author pages in the Health theme and recipe pages no longer emit the same schema twice with conflicting IDs.
+- Content boxes across six themes were restyled from the left-accent-bar look to cleaner top-accent panels.
+- Recipes theme post pages now get the shared content typography (image alignment, figures, captions).
+- Support API endpoints now require a domain that is actually activated on the license before showing or changing tickets, with per-IP rate limits.
+- Four confirmed-dead legacy files were removed after a three-week production probe; the update tooling now automatically covers every plugin's admin pages.
+
+### Fixed
+- An anonymous “?limit=1” request could shrink the site's RSS feed to a single item for every reader for 30 minutes — the feed cache now keys on the requested size.
+- Feeds now use the actual publish date for ordering and timestamps, so scheduled posts appear correctly (matching the sitemap's logic).
+- Sitemap family: the news sitemap's index entry now uses the same publish-date window as its content; the video sitemap now really lists posts with YouTube embeds (it was announced but empty); noindex pages are no longer announced; the homepage's last-modified date reflects real content changes instead of “today”; image entries carry the post title instead of the slug.
+- Comment forms in the Recipes and Travel themes posted to a non-existent address — comments could never be submitted. They now reach the comment handler, and six themes additionally hide the form when comments are closed for that post.
+- The Trends theme now runs post content through the full content pipeline — shortcodes (forms, downloads, quizzes…), FAQ/how-to boxes and the final safety filter all work there now.
+- Tables of contents across seven themes no longer skip or mislink headings that already have an ID.
+- The “posts per page” reading setting is now honoured by archive and search pages in eight more themes.
+- Database migrations now actually record their progress, run in numeric order and log failures (previously every migration silently re-ran on each update).
+- Sending a newsletter from two overlapping runs could deliver the same campaign twice to a subscriber — queue rows are now claimed atomically and the cron entry point takes a lock.
+- Deactivating a plugin now really turns off its public endpoints (forms, quiz submissions, download links, A/B redirects…).
+- Date archives (/archive/2026) rendered as 404 even in themes that support them.
+- Percent-encoded URLs (e.g. slugs with Turkish characters typed encoded) no longer 404.
+
+### Security
+- Private posts stayed truly private everywhere: posts imported from WordPress as “private” could previously be opened at their direct URL and could appear in theme lists, related-posts blocks, search results, the llms.txt export, weekly digest emails, auto-shared social posts and the Stories bar. Every one of those paths now respects the post's visibility.
+- The Atom feed no longer publishes author e-mail addresses — they were an open invitation to spam harvesters and had no SEO value.
+- Locking out repeated failed logins now also works when signing in with a username instead of an e-mail address.
+- AVIF uploads are now validated as real images (previously they skipped both the image check and the content scan).
+
+---
+
 ## [2.66.0] - 2026-08-15  ·  _Minor_
 **More resilient automatic updates**
 
