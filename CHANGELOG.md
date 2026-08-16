@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.17] - 2026-08-16  ·  _Patch_
+**Built-in pages: stable dates instead of a false freshness signal**
+
+### Fixed
+- Pages served from a theme template rather than a stored record announced the current moment as their publish and modification date, so the structured data changed on every single request — two requests three seconds apart reported two different timestamps. Search engines were told the page had just been edited every time they fetched it. These pages now carry a stable date taken from the template that produces their text, so the date only moves when the text actually changes.
+- The same pages were listed in the sitemap with today's date every day, the same "permanently fresh" signal the homepage and category listings were corrected for earlier. Their sitemap entry now uses the same stable date.
+
+---
+
 ## [2.66.16] - 2026-08-16  ·  _Patch_
 **Pages: duplicate legal URLs, sitemap gaps and SEO visibility**
 
