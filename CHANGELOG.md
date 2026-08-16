@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.16] - 2026-08-16  ·  _Patch_
+**Pages: duplicate legal URLs, sitemap gaps and SEO visibility**
+
+### Improved
+- The legal page status table now shows how each page actually appears to search engines: its canonical address, whether it is indexable, whether it is in the sitemap, and its meta description length — with a plain-language note when something needs attention.
+
+### Fixed
+- Legal pages served from the theme template — the default state of a fresh site — answered on both their Turkish and English addresses with identical content, and each address declared itself canonical. Measured: /privacy and /gizlilik returned the same page byte for byte as two indexable URLs. Every alias now collapses onto one address per document, chosen by the site language, exactly as it already did once a page existed in the CMS.
+- Those same pages were missing from the sitemap: live, indexable, but never submitted, because the sitemap only listed pages stored in the database. Privacy, terms, cookie policy, disclaimer, about and contact are now listed whenever they are served, and a page stored in the CMS replaces the built-in entry instead of being listed twice.
+- Legal, about and contact pages served from a theme template carried the site-wide meta description — the same sentence as the homepage — because the route never handed the page's identity to the theme. Each now carries its own description; verified across all 14 themes.
+- The legal page editor screen answered with a server error on every install: it queried a table that belongs to the jekcms.com marketing site and does not exist in the CMS. The address now redirects to the page it was meant to open.
+- Generated legal pages calculated reading time with a counter that splits Turkish words, inflating the estimate by roughly 40%.
+
+### Security
+- The Pages hub now requires the page-editing capability. It previously checked only that someone was signed in, which gave accounts holding lesser roles more reach over published legal text than intended.
+
+---
+
 ## [2.66.15] - 2026-08-16  ·  _Patch_
 **Menus: second menu could not be created, plus icon support**
 
