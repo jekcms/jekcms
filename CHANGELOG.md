@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.12] - 2026-08-16  ·  _Patch_
+**AdSense readiness: aligned with current approval criteria**
+
+### Added
+- New audit check: the privacy policy is now scanned for Google's "Required content" disclosures — cookie use, the third-party (Google) advertising-cookie statement and the personalized-ads opt-out link. If you rewrote the generated legal pages and dropped these sections, the audit catches it.
+- New audit group: ad-click encouragement phrases ("click the ads", "reklamlara tıklayın") are now scanned in titles, slugs and bodies — the clearest program-policy violation there is.
+- New sidebar card: applicant requirements (18+ age rule, the 6-month site-ownership rule that applies in some countries, HTML source access).
+
+### Improved
+- The consent-banner check now explains the certified-CMP rule accurately: since January 2024, serving ads to EEA/UK/Switzerland visitors requires a Google-certified CMP (IAB TCF) — the built-in banner covers the GDPR baseline but does not replace it; enabling Google's own consent message under AdSense → Privacy & messaging after approval satisfies the rule. The application-day checklist gained the same step.
+- The policy-scan pass message now states its honest scope: Google's prohibited-content list is broader (hate speech, misleading health/election claims, deceptive practices) than what pattern scanning can detect.
+
+### Fixed
+- Policy patterns containing the Turkish dotless "ı" (e.g. "şifre kırma", "sızma testi") were silently missed in ALL-CAPS titles because uppercase "I" lowercases to "i", not "ı". The scanner now folds both the text and the patterns to a shared canonical form, so case no longer hides a match.
+
+---
+
 ## [2.66.11] - 2026-08-16  ·  _Patch_
 **Settings audit: SVG hardening in the branding preview**
 
