@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.15] - 2026-08-16  ·  _Patch_
+**Menus: second menu could not be created, plus icon support**
+
+### Added
+- Menu items can carry an icon (emoji), set next to the title in the menu editor and shown in every theme's navigation.
+- Menu items whose parent was removed used to vanish from the navigation; they are now shown at the top level instead of being silently dropped.
+
+### Fixed
+- Creating a second menu failed with a server error. Menus carry a unique slug, but the create/update code never wrote one: the first new menu was stored with an empty slug and every menu after it collided with it. Menus now get a unique slug derived from their name, and existing rows with an empty slug are repaired automatically. Renaming a menu keeps its slug, so nothing that points at it breaks.
+- The Tech theme ignored the menu module completely — its header always printed the first five categories, so nothing configured under Menus ever appeared. It now publishes the assigned menu and falls back to categories only when no menu exists.
+- A menu assigned to the "Main" location was invisible on every theme, because themes read the "Header" location. "Main" is now treated as an alias of the header location, so existing menus start working without being touched, and the location list only offers what themes actually render.
+- When two menus shared one location, which of them appeared was left to chance. The site now consistently shows the older one, and the Menus screen warns that the others stay hidden.
+
+### Security
+- Menu links are now restricted to safe schemes: a `javascript:` or `data:` link saved into a menu was served to every visitor, since themes print the href as-is. Such links are stored and rendered as an inert "#".
+
+---
+
 ## [2.66.14] - 2026-08-16  ·  _Patch_
 **SERP site name: save defect fixed, end-to-end identity checks**
 
