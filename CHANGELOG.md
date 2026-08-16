@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.21] - 2026-08-17  ·  _Patch_
+**Spam protection: one shared surface for every public form**
+
+### Added
+- Public forms now share a single anti-spam surface. Comments, the contact form, the newsletter box and the form builder each had their own hand-built protection, and they had drifted apart. One component now renders the hidden protection fields and one function runs the shared checks, so a new form is protected by construction rather than by remembering to repeat the work.
+
+### Improved
+- Bot catches are now recorded. Honeypot hits, instant submissions and flood blocks were silently discarded on the comment channel, so there was no way to tell working protection from absent protection; they are logged now.
+
+### Fixed
+- The timing check that catches instant bot submissions was inactive on five themes and the newsletter box, because the field it reads was never rendered there; one theme's comment form had no honeypot at all. Every public form now carries all three protection fields.
+- The newsletter box never sent its hidden fields at all: the script assembled its own payload from just the e-mail address, so the honeypot on that form could never trip. The whole form is submitted now.
+- Messages flagged as spam by the contact form were stored with an invalid status, because the column had never been extended with a spam value. They appeared in no folder — including the ones caught by mistake, which is exactly what the spam folder exists to prevent. The column is repaired automatically and previously mis-stored messages are recovered.
+- One theme's comment form posted to an address that does not exist, so signed-in readers' comments went nowhere.
+- Comment length limits counted bytes rather than characters, so Turkish text was measured incorrectly — a long comment could be refused while a single-letter name passed. Both channels now measure the same way.
+- Names and subjects accepted line breaks, which single-line fields should never carry. Outgoing mail was already protected, but the raw value reached the database and the admin screens; it is now cleaned on the way in.
+
+---
+
 ## [2.66.20] - 2026-08-16  ·  _Patch_
 **Tags no longer lead nowhere, and images declare their size**
 
