@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.10] - 2026-08-16  ·  _Patch_
+**License & update audit: free-tier update channel repaired**
+
+### Fixed
+- Free-tier installations could not install core updates: the server correctly serves the free package, but the signed update manifest only listed the full package's checksum, so the client's tamper check rejected the legitimate free download as a mismatch. The manifest now carries a signed entry for the free package too, and the client accepts either signed checksum — the tamper protection itself is unchanged.
+- The update manifest no longer embeds full internal catalog rows (IDs, file paths, changelog text); it now carries exactly the fields clients verify, which also makes the signed payload much smaller.
+
+### Security
+- Update availability queries without a license key are now treated as the lowest tier and only see the core release, matching the existing rule for unknown keys.
+- The license heartbeat endpoint no longer includes internal error details in its 500 responses outside debug mode.
+- The tripwire reporting endpoint now has an IP rate limit, closing an unbounded-log disk-fill vector.
+- Expired one-time download tokens are now swept opportunistically instead of accumulating forever.
+
+---
+
 ## [2.66.9] - 2026-08-16  ·  _Patch_
 **Redirect manager overhaul: 404 suggestion engine revived, URL matching fixed**
 
