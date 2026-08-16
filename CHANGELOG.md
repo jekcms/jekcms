@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.14] - 2026-08-16  ·  _Patch_
+**SERP site name: save defect fixed, end-to-end identity checks**
+
+### Added
+- SERP Identity Check now verifies the whole live chain Google reads for the site name — homepage reachability and indexability, the title, og:site_name, the WebSite schema name/url/alternateName, the canonical, the favicon, and whether the www variant consolidates onto one host — so a broken link in the chain shows up without waiting for a re-crawl.
+- Settings → General now flags a site name that is empty, generic, or a literal copy of the domain right next to the field, since Google falls back to showing the domain in those cases, plus a direct link to the identity check.
+
+### Improved
+- The identity check no longer reports internal state rows (plugin schema markers, heal flags, cached audit payloads) as autoload defects — they are excluded by design, so the check can now actually report a clean install and a real defect stands out.
+
+### Fixed
+- A setting could fail to save entirely when its stored row lived under a different group label: the settings table keeps `key` globally unique, but the shared save helper looked the row up by group plus key, found nothing, and then tried to insert — hitting a duplicate-key error. The value silently never applied, which for the site name meant search results kept showing the domain. The save path now resolves by key (as the read path already did) and moves the row to the requested group.
+- Breadcrumbs on Turkish sites announced the root as "Home" even though the site declared itself Turkish. Google shows breadcrumbs in search results, so the trail now uses the site's own language ("Ana Sayfa").
+
+---
+
 ## [2.66.13] - 2026-08-16  ·  _Patch_
 **SEO audit: pagination signals and robots consistency**
 
