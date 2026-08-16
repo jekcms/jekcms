@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.18] - 2026-08-16  ·  _Patch_
+**Media: half-rendered screen on an empty library, and file types**
+
+### Fixed
+- The media library stopped rendering half-way down the page whenever the library was empty — which is exactly the state of a brand-new site. The file counters are produced with SQL sums, and a sum over zero rows is empty rather than zero; feeding that empty value into the counter text raised an error that ended the response early, so the page arrived without its grid, upload button or closing markup. The counters are now normalised to zero, and the translation layer no longer lets an empty value end a page.
+- Every uploaded file was recorded as an image, whatever it was: PDFs, documents, spreadsheets, archives and text files all carried the image type in the library records. The type is now derived from the file itself, and existing records are corrected once during routine maintenance.
+- The Video tab listed the entire library instead of videos, because that tab had no filter of its own. Video and audio now filter correctly, the Documents tab no longer mixes media files in, and the item count matches what the tab actually shows.
+
+---
+
 ## [2.66.17] - 2026-08-16  ·  _Patch_
 **Built-in pages: stable dates instead of a false freshness signal**
 
