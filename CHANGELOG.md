@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.13] - 2026-08-16  ·  _Patch_
+**SEO audit: pagination signals and robots consistency**
+
+### Improved
+- rel=prev/next pagination links are now emitted centrally for every theme — including the four themes whose headers never passed pagination context.
+- Page 2+ of the home/blog feed now carries the page number in its title instead of duplicating page 1's title.
+
+### Fixed
+- Out-of-range pagination URLs (?page=N beyond the last page) returned an empty archive with HTTP 200 and a self-referencing canonical — an infinite, indexable space of thin duplicate pages. Every paginated list (home feeds, category/tag archives, author pages, all 14 themes) now returns a real 404.
+- The personal theme stamped paginated archive pages with an extra "noindex, follow" robots tag next to the core's "index, follow" — conflicting directives, and search engines pick the restrictive one, silently dropping page 2+ from the index. Paginated archive pages are all indexable again with a single robots tag.
+- A per-post robots value saved as plain "index, follow" wiped the core defaults' max-image-preview:large directive, costing those posts large-thumbnail eligibility in Google Discover. Indexable robots values without max-* directives now get the default set appended.
+- URLs of non-paginated pages (a single post, a fixed homepage) with a stray ?page=999 served identical content that declared itself canonical — the canonical now keeps ?page only on genuinely paginated templates and consolidates everything else onto the clean URL.
+
+---
+
 ## [2.66.12] - 2026-08-16  ·  _Patch_
 **AdSense readiness: aligned with current approval criteria**
 
