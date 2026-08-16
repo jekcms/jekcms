@@ -8,12 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.20] - 2026-08-16  ·  _Patch_
+**Tags no longer lead nowhere, and images declare their size**
+
+### Fixed
+- Tag links led to a bare “410 Gone” screen. Themes show tags in several places — under the article, in the sidebar cloud, on archive and search pages — but tag pages were only served when tag archives were switched on, which they are not by default. Every tagged article therefore carried several dead internal links, and a reader who clicked one landed on an unstyled error page. Tag pages are now always served with the site's own design; the setting decides only whether search engines may index them. With it off they are shown to readers but marked noindex and left out of the sitemap, exactly as before.
+- Images inside articles were rendered without their dimensions, so the page reflowed as they loaded — the layout shift that Core Web Vitals measures. Both the article's main image and images inside the text now declare their size, taken from the media library, across every theme. In-text images also load lazily while the leading image stays eager, which is what browsers need for the largest element to appear quickly.
+
+---
+
 ## [2.66.19] - 2026-08-16  ·  _Patch_
 **Legal pages: updated details now apply, duplicate date and mangled e-mail fixed**
 
 ### Fixed
 - Correcting your contact e-mail, address or business name and generating the legal pages again left the pages unchanged, still showing the details from installation. The generator kept any page that was long enough, to avoid overwriting text you had written yourself — but that also protected the untouched pages that shipped with the install. The generator now recognises a page you have never edited and refreshes it with your new details, while a page you edited by hand is still kept, and now says so and points to the overwrite option.
-- Legal pages showed the last-updated line twice, with two different dates: the generator wrote one into the page text while the theme printed its own. The line now comes from the theme only, and pages that were never edited have the leftover line removed automatically during maintenance.
+- Legal pages showed the last-updated line twice, with two different dates: the generator wrote one into the page text while the theme printed its own. The line now comes from the theme only, and pages that were never edited have the leftover line removed automatically when the Pages screen is opened and during maintenance.
 - The last-updated date always showed today, on every theme, even for a page that had not changed in months — a misleading claim on a legal page. It now reflects when the page was actually last saved.
 - Turkish spelling correction in the generated text ran across the whole page, including e-mail addresses and links, so an address such as iletisim@example.com could be rewritten into an invalid one. Addresses and links are now left untouched while the surrounding text is still corrected.
 
