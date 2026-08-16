@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.11] - 2026-08-16  ·  _Patch_
+**Settings audit: SVG hardening in the branding preview**
+
+### Security
+- The generated-logo and favicon SVG fields are now sanitized before they are stored and before they are rendered in the branding preview. These are hidden form fields, so a tampered value could previously carry an event handler (e.g. onload) or script into the admin branding screen; the old check only rejected literal tags and the preview printed the markup raw. Legitimate generated logos are unaffected.
+
+---
+
 ## [2.66.10] - 2026-08-16  ·  _Patch_
 **License & update audit: free-tier update channel repaired**
 
