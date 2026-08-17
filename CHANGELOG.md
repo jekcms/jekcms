@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.22] - 2026-08-17  ·  _Patch_
+**Spam Protection screen rebuilt, and its settings now save reliably**
+
+### Fixed
+- The Spam Protection screen was built with a layout system the admin panel does not use, so none of its structure applied: the four summary figures stacked into four full-width bands down the page, the settings sat in a single narrow column, and the icons never appeared. The screen is rebuilt with the panel's own components and now reads as one page: summary cards across the top, settings in the main column, quick actions and blocked addresses alongside.
+- A status line at the top now states plainly whether protection is on. Every threshold on the page is meaningless while the master switch is off, and nothing on the old screen said so.
+- Turning protection off was never saved: the screen decided the switch's state from the presence of the field rather than its value, so the setting stayed on no matter what was chosen.
+- Turning the master switch off also erased the thresholds underneath it — link limit, submit time, flood caps all fell back to factory numbers, because disabled fields are not submitted by the browser and the screen treated a missing field as a request to reset. A missing field now keeps the saved value.
+- Out-of-range values were stored as typed; they are now kept within the limits the screen advertises.
+- The minimum submit time was an admin setting the guard did not read: the screen could say five seconds while the server decided at three. The configured value is now the one that applies.
+- Spam catches were being written to a table that some installs never had. The repair routine existed but was never called from anywhere, so on those sites every caught bot vanished without trace and the screen reported nothing. The table is now created on demand and the write is retried.
+- Several English labels on this screen showed placeholder text generated from their internal names; they have been written properly. Two Turkish descriptions described the wrong thing.
+
+---
+
 ## [2.66.21] - 2026-08-17  ·  _Patch_
 **Spam protection: one shared surface for every public form**
 
