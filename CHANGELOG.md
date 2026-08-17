@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.24] - 2026-08-17  ·  _Patch_
+**API settings: quotas now apply to content generation, and usage statistics finally count it**
+
+### Added
+- The API tab now opens with the automation entry points it is named after: a link to the REST API keys used by n8n, Zapier or your own script, and one to the ready-made n8n workflows. Both had moved to other screens with no way back from here.
+- Each AI setting now states what it governs — which calls a quota covers, that the token limit applies to analysis rather than article length, and what the cache window actually caches.
+
+### Fixed
+- The daily and per-account AI quotas were only applied to SEO analysis. Article generation — the path that actually spends most of the tokens — ignored them completely, so a site set to 200 calls a day could make thousands, and on a paid provider that lands straight on the owner's bill. Both quotas now cover every AI call, and the screen shows how much is left.
+- The usage statistics counted the same narrow path, so most sites saw zeros no matter how much they generated. Every generation call is now recorded with its provider, model, token count and duration.
+- The temperature slider did not reach article generation either: that code carried a fixed value and the setting only affected analysis. The configured value now applies everywhere it is accepted.
+- An author or editor could trigger the API key test endpoints. Those calls run against the site's stored key, so anyone with a content account could spend the owner's provider credit and read the provider's raw error text. The endpoints now require an administrator, like the screen that calls them.
+- The model field accepted an empty value and stored it, which left every later request pointing at no model at all — generation failed with nothing on screen to explain why. Empty and malformed values now fall back to the saved model.
+- The default provider field accepted any text. An unrecognised value made the site report "no AI key connected" while the key sat there saved.
+- Choosing a provider hid the other providers' key fields, and they could not be reached again without reloading — even though keys are stored per provider and several can be filled in. Nothing is hidden now; the default provider is marked instead.
+- With a provider other than Gemini selected, the panel claimed the integration was off and asked for a Gemini key although generation was working. The status now follows the provider actually in use.
+
+---
+
 ## [2.66.23] - 2026-08-17  ·  _Patch_
 **User management: lockout protection, account status and a single password rule**
 
