@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.25] - 2026-08-18  ·  _Patch_
+**Image dimensions everywhere, and archives now list their posts in structured data**
+
+### Added
+- Category, tag and author archives now publish the list of posts they show as structured data. The page already declared itself a collection, but never said what was in it; the list is built from the same query the theme uses, so it cannot drift from what a visitor sees.
+
+### Fixed
+- Resized image variants never received width and height. The lookup stripped the size suffix from the filename but removed the file extension along with it, so the name it searched for could never match a stored one — a comparison that could not succeed by construction. Every related-post card and listing thumbnail was therefore published without dimensions, and those are the most numerous images on a page: each one shifted the layout while it loaded. Sizes now come from the file itself, so the variant reports its own true dimensions.
+- Author avatars and site logos were skipped entirely. They are not stored in the media library, so no size was ever known for them, and an avatar can appear half a dozen times on a single article. They are measured now — layout treatment for them stays unchanged, only the dimensions are added.
+- The featured image went into the structured data without dimensions on sites whose images predate the media library, even though the in-content images had them. That is the one image search engines look at first.
+- The single post page now declares its author and section to social networks as well. Publication and modification times were already sent; the author was only in the structured data, so shared links carried no author attribution.
+
+---
+
 ## [2.66.24] - 2026-08-17  ·  _Patch_
 **API settings: quotas now apply to content generation, and usage statistics finally count it**
 
