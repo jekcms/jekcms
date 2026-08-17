@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.23] - 2026-08-17  ·  _Patch_
+**User management: lockout protection, account status and a single password rule**
+
+### Added
+- Accounts can now be deactivated instead of deleted. The account status was stored and enforced everywhere — an inactive account cannot sign in and is hidden from author pages — but there was no way to set it from the panel, so the only way to stop someone from signing in was to delete their account along with everything attached to it.
+- Locked accounts can be released from the user's edit screen. After five failed sign-in attempts an account locks for fifteen minutes, and the counter only cleared on a successful sign-in — so someone who could not remember their password stayed locked out with no way for an administrator to help. The current lock state and the failed-attempt counter are now shown, with a control to clear both.
+- The user list now marks inactive, banned and locked accounts, so "why can't I sign in?" has a visible answer.
+
+### Fixed
+- The last administrator could lock themselves out of their own site. Changing your own role to subscriber, deactivating your own account or deleting the only administrator was accepted without a word — and afterwards nobody could reach user management again, with no way back except editing the database by hand. All three paths are now refused while no other active administrator remains.
+- The role field accepted any value that was posted. A value outside the four known roles silently emptied the role — leaving an account that could sign in but had no permissions at all — and on databases in strict mode it broke the save outright. Role and status are now checked against their allowed values.
+- Usernames were stored exactly as typed, including spaces and slashes, even though the username is also the author page address. A username can no longer be set to an e-mail address either: the sign-in screen accepts both a username and an e-mail, so the two would collide.
+- Changing a username left the old author page as a dead address; it now redirects to the new one, the same way category addresses already did.
+- The user screen enforced no password rule at all — "123" was accepted. Both the user screen and My Profile now apply one shared rule: at least eight characters with a letter and a digit, and obvious passwords are refused.
+- Changing a password did not end that account's "remember me" session. Since a password is usually reset precisely because an account was compromised, the old browser cookie kept working for another thirty days. The session is now dropped on both screens.
+- With a role filter active, the "All" tab showed the filtered number rather than the total, and paging through search results silently dropped the search.
+- Deleting a user left their avatar file behind on disk.
+
+---
+
 ## [2.66.22] - 2026-08-17  ·  _Patch_
 **Spam Protection screen rebuilt, and its settings now save reliably**
 
