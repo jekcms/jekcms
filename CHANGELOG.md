@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.26] - 2026-08-18  ·  _Minor_
+**Article pages stop being dead ends, and the ad-readiness panel now sees template repetition**
+
+### Added
+- Shared sidebar modules — categories, topics and recent posts — that any theme can use without carrying its own copy. A theme that ships its own version keeps it; the shared one only fills the gap.
+- Three new checks in the ad-readiness panel, covering what it could not see before: how much of the site shares one title pattern or one section skeleton, how many posts run without a single image in the body, and whether a large batch of posts was published on one day. These are the traits that make a site read as machine-produced regardless of how well each article is written.
+
+### Fixed
+- One theme had its tag list switched off in code. The line dated back to when tag pages returned “gone”, and it was never revisited after those pages started serving again — so a site whose every post carried tags published not a single tag link. The list is back.
+- Three themes never printed tags at all, although most of their posts were tagged. An article that ends without a single onward link is a dead end for the reader and for a crawler alike.
+- The personal theme shipped its category, tag and recent-post modules switched off, so the sidebar of an article carried three links in total. The same article rendered by the theme that did get ad approval carries thirty-nine. The modules are on by default now.
+- The travel theme's article rail held only a table of contents, share buttons and a back-to-top button; the theme's own richer sidebar was never included on article pages. Category, tag and recent-post navigation now sits in the rail.
+
+---
+
 ## [2.66.25] - 2026-08-18  ·  _Patch_
 **Image dimensions everywhere, and archives now list their posts in structured data**
 
