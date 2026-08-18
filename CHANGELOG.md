@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.28] - 2026-08-19  ·  _Patch_
+**Advanced SEO panel: tools that had quietly disappeared are back**
+
+### Improved
+- Long tool tables no longer scroll inside their own frame. The panel measures the tool it is showing and grows to fit, so the slug repair and content SEO lists — hundreds of rows — scroll with the page instead of trapping a second scrollbar inside it.
+
+### Fixed
+- The heading hierarchy screen could not be opened from anywhere in the panel. It lists every published article whose headings start at the wrong level and fixes them in one click — on a test site it had findings for two hundred articles — but when the SEO tools were gathered into a single panel, this one screen was left off the menu, and the panel hides each tool's own tabs. It is now a module of its own, under Content.
+- On installations where the Advanced SEO plugin is switched off, eight tools became unreachable: the SEO overview, heading fixer, content optimiser, internal linking, featured images, slug repair, orphan content and the year updater. They were removed from the main menu when the panel took over as their single entry point, so switching the panel off left the files installed and invisible. Five sites were in exactly that state. The menu now falls back to an "SEO Tools" entry whenever the panel is unavailable.
+- The panel listed every tool it knows about, whether or not that screen exists in the installation at hand. A missing screen produced an empty white frame with no explanation, because a page that is not found says nothing inside a frame. The panel now lists only the tools it can actually open.
+- Fixes to the panel screen itself never reached existing sites: the update tool carried the plugin's code but not the page that draws it. It is now on the list.
+
+---
+
 ## [2.66.27] - 2026-08-18  ·  _Patch_
 **Critical: the installer failed on its final step**
 
