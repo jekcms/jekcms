@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.30] - 2026-08-19  ·  _Patch_
+**A/B tests: the numbers are now real visitors' numbers**
+
+### Fixed
+- A/B test results counted search engines and automated crawlers as if they were readers: every crawl added impressions, and a crawler following the conversion link added conversions. A test could crown the wrong winner on traffic no human ever saw. Crawlers still see the page content as before, but they no longer touch the statistics.
+- On a site installed in a subfolder, a conversion goal written as a plain path ("/contact") redirected the visitor to the server's root instead of the site's own page — usually a 404. Plain paths now resolve against the site's own address.
+- Behind services like Cloudflare, every visitor appeared to arrive from the same address, so which variant a visitor saw depended almost entirely on their browser make — most people got the same variant and the split was badly lopsided. The variant assignment now uses the visitor's real address when a trusted proxy provides it; sites not behind a proxy are unaffected.
+- Turning a plugin off left its placement codes ("[ab id=3]", "[form id=5]"…) sitting in the middle of published posts as raw text for every reader. Leftover placement codes from an inactive plugin are now removed from the page.
+- Plugin placement codes also leaked as raw text into the RSS, Atom and JSON feeds, because feeds deliberately skip the plugin rendering step. Feeds now clean them out at the source.
+
+---
+
 ## [2.66.29] - 2026-08-19  ·  _Patch_
 **Analytics: the settings on the screen now actually do something**
 
