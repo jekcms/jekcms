@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.27] - 2026-08-18  ·  _Patch_
+**Critical: the installer failed on its final step**
+
+### Fixed
+- New installations failed at the last step of the wizard. The installer carries its own copy of a small helper for reading PHP size limits, and the core gained a function with the same name on 7 August — so the moment the wizard loaded the core to finish setting up, PHP refused the duplicate and the install stopped with a server error. The installer's copy now has its own name, which also keeps its behaviour independent of the core's version. Anyone who downloaded the package between 7 and 18 August should download it again.
+- The end-to-end install test that would have caught this now runs against the packaged installer, and its error detection no longer trips over the words "server error" appearing inside a script comment — a false alarm that masked whether the page was actually broken.
+
+---
+
 ## [2.66.26] - 2026-08-18  ·  _Minor_
 **Article pages stop being dead ends, and the ad-readiness panel now sees template repetition**
 
