@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.29] - 2026-08-19  ·  _Patch_
+**Analytics: the settings on the screen now actually do something**
+
+### Improved
+- Every page of every site ran three table-creation statements and nine setting inserts before rendering, on every single request. That check now happens once and remembers the answer; the admin screens still repair themselves on demand.
+
+### Fixed
+- The analytics master switch did nothing. Turning tracking off left the counting script on every page and the receiving endpoint still wrote every visit to the database, even though the screen said no data would be collected. The endpoint that receives visits now reads the settings before it stores anything, so off means off. The excluded-IP and excluded-path lists were dead in the same way and now work too.
+- The free edition collected visitor data with no way to see it and no way to stop it: the analytics screens are not part of that package, but the counting script and the receiving endpoint were. Neither runs now unless the analytics module is installed.
+- Any other website could post fake visits to the receiving endpoint from a visitor's browser and skew the reports. Requests that identify themselves as coming from somewhere else are now refused.
+- Every comparison figure was biased upward. "7 days" actually measured eight calendar days and compared them against a seven-day span, so the up-and-down badges on the cards flattered the current period on every range. Both windows are now the same length.
+- The same page was counted several times over: an address with "?page=2" or a campaign tag on the end became its own row in the most-viewed list. Addresses are now reduced to the page itself, for existing history as well as new visits, and web-encoded characters in Turkish addresses are decoded so they read normally and match the right article.
+- Daily totals were being lost for good. The receiving endpoint and the housekeeping task both rotate the daily privacy key, and whichever got there first made the other skip that day's summary — one site had summaries for only 42 of its 83 days. Summarising no longer depends on the key, and missing days are recomputed from the raw records that are still within the retention window.
+- Analytics silently collected nothing on installations where the first database file the endpoint found was not the one in use — it gave up instead of trying the next one. It now uses the first connection that actually works.
+- The bounce rate loaded every visit session of the selected period into memory to count them; on ninety days of a busy site that is tens of thousands of rows for a single percentage. The database does the counting now.
+- A malformed address in the browser bar ("?range[]=x") crashed the analytics screen with a server error.
+- Saving the analytics settings and then refreshing the page submitted the form again.
+
+---
+
 ## [2.66.28] - 2026-08-19  ·  _Patch_
 **Advanced SEO panel: tools that had quietly disappeared are back**
 
