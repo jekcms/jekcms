@@ -8,6 +8,38 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.39] - 2026-08-20  ·  _Patch_
+**Plugin review, round four: social, forms, CRM, analytics**
+
+### Improved
+- Social & Video: YouTube uploads use a tighter per-chunk timeout so a single slow chunk can no longer tie up a worker; the upload simply resumes where it left off.
+- Analytics: the tracking beacon no longer re-checks the database structure on every single page view — it only sets things up if something is actually missing.
+- Audience (CRM): segment sizes are now counted directly in the database instead of loading every matching contact into memory, so the Segments screen stays fast on large lists.
+- A/B tests: a winner is now declared only once every variant has reached the full sample size, matching what the screen tells you to wait for.
+- Forms: spam submissions can no longer grow without bound — only the most recent are kept per form.
+
+### Fixed
+- Social: the connected app's client secret is now stored encrypted, matching how access tokens are already protected.
+- Video Studio: the 90-second limit is now enforced on the server too, so an over-long video can't slip through and be rejected by Instagram — you're asked to shorten the script and re-render instead.
+- Contact form: on older installs, clicking "Spam" on a message could silently lose it; the message list now repairs the underlying field first so the message is safely kept.
+- Forms: dropdown / radio / checkbox answers are now validated on the server against the defined options, so a made-up value can't be slipped past the form.
+
+---
+
+## [2.66.38] - 2026-08-20  ·  _Patch_
+**Plugin review, round three: push notifications, downloads, AdSense checker**
+
+### Improved
+- AdSense readiness checker: the scan no longer loads every post into memory at once, so it runs reliably on sites with thousands of posts.
+
+### Fixed
+- Push notifications: the list of trusted push services is now matched strictly, so a look-alike address (a domain merely ending in a trusted name) can no longer register and receive your notifications, and only secure addresses are accepted.
+- Push notifications: publishing a post no longer waits for every subscriber to be notified before the save completes — the save finishes at once and notifications are sent right after, within a time budget so a large subscriber list can never stall or crash the publish.
+- Downloads: a download link with a set limit can no longer be pushed past its limit by firing several downloads at the exact same moment.
+- Editorial calendar & recipes: the admin permission check on these screens is now unconditional, closing a theoretical gap where it could have weakened if the code were loaded differently.
+
+---
+
 ## [2.66.37] - 2026-08-20  ·  _Patch_
 **Plugin review, round two: quizzes, Google, recipes, Cloudflare**
 
