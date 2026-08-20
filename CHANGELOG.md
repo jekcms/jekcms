@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.31] - 2026-08-20  ·  _Patch_
+**Comments and the contact form: lost messages found their way back**
+
+### Fixed
+- On the Personal theme the contact form posted to an address that did not exist: every message a visitor sent ended in a 404 and was never stored anywhere. The address now reaches the protected handler, and when JavaScript is off the visitor is brought back to the page with a clear "received" or "failed" notice instead of a raw code screen.
+- On the Entertainment theme comments were broken twice over: approved comments were never shown (the list pulled in a file that did not exist), and a signed-in reader's comment was always rejected asking for a name the form never collects. The list renders again and the handler now fills in the reader's name and email from their account.
+- On eight of fourteen sites the spam capture log still had an old table layout, so every catch failed silently: blocked bots left no trace, the admin screen showed zero blocks, and the "repeat offender" signal never fired. The table now completes its own missing columns on first use.
+- Thirteen themes' comment forms used a spam-trap field literally named "website" (one theme even added "phone"). Browsers recognise those names and auto-fill them — and a real reader whose browser did so had their comment silently thrown away. The trap fields now use a neutral name browsers ignore.
+- Every comment and contact submission was counted twice against the flood limits, so the caps the admin configured were effectively halved.
+- All three settings on the contact form panel were dead: the recipient address was saved but notifications kept going to the general address, the custom success message was never shown, and the auto-reply was never sent at all. All three now do what the screen says — auto-replies also carry a once-per-hour-per-address brake.
+- The site-wide comments feed included comments — with post titles — from draft and hidden posts. It is also reachable now: the feed advertised its own address but the address had no route and bounced to the home page.
+- The comment moderation screen and the panel reply endpoint only required being logged in — an author or subscriber account could open them by URL and approve or delete any comment. Moderation permission is now enforced.
+- A reply written from the panel did not update the post's comment counter, and the person being replied to never got the "someone replied to you" email even when that notification was switched on.
+- Comment notification emails were always in Turkish, even on English sites; they now follow the site language. The contact form's success and error notices also had no colour in themes without their own styling.
+
+---
+
 ## [2.66.30] - 2026-08-19  ·  _Patch_
 **A/B tests: the numbers are now real visitors' numbers**
 
