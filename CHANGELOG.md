@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.32] - 2026-08-20  ·  _Minor_
+**New: Video Studio — turn posts into narrated Shorts and Reels**
+
+### Added
+- Video Studio (in the Social plugin): pick a post and the studio writes a ~60-second narration script in your site's language, reads it aloud with a natural AI voice (30 voices, Turkish included — uses your existing Gemini key's free tier, so it costs nothing), and renders a 1080×1920 vertical video with your post's images, animated captions and your site's name — right in your browser. No server video software is needed, so it works on ordinary shared hosting; rendering requires Chrome or Edge.
+- One-click publishing to YouTube Shorts and Instagram Reels through the existing social queue, with retries and rate limiting handled for you. Instagram connects with your own Meta app in development mode — publishing to your own account needs no app review. For YouTube, connect your own Google Cloud app; note Google locks videos from unverified API projects to private, so until you complete Google's verification the studio's "Download + open YouTube Studio" button is the recommended path — it saves the video, copies the title and description to your clipboard and opens YouTube Studio, making manual upload a 30-second task.
+- Every text the studio produces — narration, YouTube title and description, Instagram caption, hashtags — is fully editable before anything is voiced, rendered or published. A "draft job" can be opened automatically whenever you publish a post, so fresh posts wait for you in the studio.
+
+---
+
 ## [2.66.31] - 2026-08-20  ·  _Patch_
 **Comments and the contact form: lost messages found their way back**
 
