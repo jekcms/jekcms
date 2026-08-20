@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.34] - 2026-08-20  ·  _Patch_
+**Video Studio: sturdier YouTube and Instagram publishing**
+
+### Fixed
+- A Reels or Shorts upload that got stuck while the platform was still processing it could keep polling for up to a day. Such a job now gives up after a reasonable window and is marked failed, so one stuck upload no longer ties up the publishing queue or the daily quota.
+- A video scheduled for a future time is no longer mistakenly timed out because of the wait before its scheduled moment — the timeout window now starts from the scheduled time, not from when the job was created.
+- The full multi-step publishing flow for both platforms — Instagram's create / wait / publish sequence and YouTube's resumable upload that continues after an interruption — was verified end to end, including recovery when a connection drops or a session expires.
+
+---
+
 ## [2.66.33] - 2026-08-20  ·  _Patch_
 **License security hardening**
 
