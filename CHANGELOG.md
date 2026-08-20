@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.37] - 2026-08-20  ·  _Patch_
+**Plugin review, round two: quizzes, Google, recipes, Cloudflare**
+
+### Improved
+- Google: the plugin no longer re-checks its database structure on every admin page load — it does so only once per version.
+- Cloudflare: clearing the cache after you publish or edit a post no longer holds up the save while Cloudflare responds — the save finishes immediately and the purge runs right after.
+
+### Fixed
+- Quizzes: a page containing an embedded quiz could fail to load because the view counter had nowhere to record to. The counter now has its place, is added automatically to older sites, and can never take a page down again.
+- Quizzes: a published quiz now has its own shareable page, so the "View" link in the admin opens the quiz instead of a "not found" error.
+- Quizzes: the WordPress importer now refuses image and page addresses that point back into the server's own network, and verifies the remote site's certificate.
+- Google: the "automatically notify Google when new content is published" checkbox now genuinely turns the feature on — before, it looked enabled but every submission was quietly refused.
+- Google: the manual "submit for indexing" action now only accepts addresses on your own site.
+- Recipes: a recipe with no usable image no longer publishes structured data that Google would reject — the recipe rich-result is emitted only when it will actually validate.
+- Cloudflare: applying the recommended security rules can no longer wipe your own custom firewall rules if reading the current rules momentarily fails — the change is aborted instead.
+
+---
+
 ## [2.66.36] - 2026-08-20  ·  _Patch_
 **Plugin review, round one: safer AI images, newsletter and notifications**
 
