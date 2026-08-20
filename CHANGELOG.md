@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.33] - 2026-08-20  ·  _Patch_
+**License security hardening**
+
+### Fixed
+- The admin license screen printed the full license key on the page; anyone who could see that screen (a screenshot, a shared or demo admin) could copy it. Only a masked version is shown now.
+- The license page accepted activate and deactivate actions from anonymous visitors when a site had no active license yet — meaning a freshly installed, not-yet-licensed site could be activated or deactivated by anyone on the internet. Both actions now require an admin login.
+- A demo license could be activated on any site by faking the site's address in the request header. The check now uses the site's configured address, which a request header cannot spoof.
+- Premium features, plugins and themes stayed unlocked on installs that had no license token at all. They now follow the installed edition: a paid package (already purchased to download) keeps everything unlocked even if its token lapses, while the free package is correctly limited.
+- The update-download endpoint had no rate limit and echoed back any calling origin. It now rate-limits per address and no longer reflects arbitrary origins.
+
+---
+
 ## [2.66.32] - 2026-08-20  ·  _Minor_
 **New: Video Studio — turn posts into narrated Shorts and Reels**
 
