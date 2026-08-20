@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.35] - 2026-08-20  ·  _Patch_
+**Video Studio: 90-second cap so videos stay Reels-eligible**
+
+### Improved
+- Studio videos are now capped at 90 seconds. Instagram only places videos of 90 seconds or less in the Reels tab; a longer one would post as an ordinary video instead. The narration is already about a minute, so this only affects manually lengthened scripts — and when it does, both the picture and the sound are trimmed at the same point, so the file really stays within the limit. The script step notes the limit as you type.
+
+---
+
 ## [2.66.34] - 2026-08-20  ·  _Patch_
 **Video Studio: sturdier YouTube and Instagram publishing**
 
