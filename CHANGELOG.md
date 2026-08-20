@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.36] - 2026-08-20  ·  _Patch_
+**Plugin review, round one: safer AI images, newsletter and notifications**
+
+### Improved
+- Web notifications: subscriber records are handled more efficiently, without needless database work on every visit.
+
+### Fixed
+- AI images: a picture returned by the image provider is now downloaded only from a safe public address; an address that points back into the server's own private network is refused.
+- AI images: when generation fails, the error message no longer risks showing your API key — the key is now hidden.
+- AI images: if the daily image limit can't be read for a moment, the system now stops generating rather than continuing without a limit, so you are never billed past your cap by accident.
+- Newsletter: an email template you edited by hand is no longer overwritten by an update — only templates you never touched are refreshed.
+- Newsletter: the weekly digest is now sent only once even if two runs happen to start at the same moment.
+- Newsletter: the sign-up form no longer reveals whether an address is already on the list — the reply is the same either way.
+- Web notifications: the subscribe endpoint is now protected against being flooded with fake entries.
+- Stories: reaction counts now change only from a genuine visitor tap, and a reaction sent from another site is ignored.
+
+---
+
 ## [2.66.35] - 2026-08-20  ·  _Patch_
 **Video Studio: 90-second cap so videos stay Reels-eligible**
 
