@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.41] - 2026-08-21  ·  _Minor_
+**Recipe card: servings scaler, card image fix, sturdier rich results**
+
+### Added
+- Recipe cards now have a servings adjuster: readers tap − / + to change the number of servings and the ingredient amounts scale automatically. Whole numbers, decimals and fractions (½, 1½, 1/2) are all handled and shown back as neat fractions; anything that isn't a plain amount ("a pinch", "2–3") is left untouched.
+
+### Fixed
+- A recipe with only a cover image (no separate step photo) now shows that image on the card. Before, the card's image was computed but never displayed unless a separate process photo was set, so many cards appeared with no picture.
+- The recipe's star-rating rich result is now emitted only when the rating is a real number within range and has at least one vote — a stray or out-of-range value could previously invalidate the whole recipe rich result in Google.
+- A recipe with an unreadable publish/update date no longer stamps the structured data with a 1970 date; the field is simply left out instead.
+- Prep/cook/total times written with a day component (for long-rested recipes) are now counted correctly instead of reading as zero.
+
+---
+
 ## [2.66.40] - 2026-08-20  ·  _Patch_
 **Quizzes: fairer scoring, answer explanations, cleaner personality results**
 
