@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.40] - 2026-08-20  ·  _Patch_
+**Quizzes: fairer scoring, answer explanations, cleaner personality results**
+
+### Fixed
+- A question with more than one correct answer is now scored fairly: picking any of the correct answers counts as right. Before, only one of them was accepted and a reader choosing an equally-correct answer was marked wrong.
+- The "Show explanation" option now actually works — when it's on, each question's explanation appears in the results review after finishing. It had no effect before.
+- The "Auto-scroll" option now works too: moving to the next question gently scrolls the quiz back into view, which helps on phones. It was also previously inactive.
+- Personality quizzes no longer show a "3/10 correct" score or right/wrong marks — those don't apply to result-based quizzes, so now only the result card is shown.
+
+---
+
 ## [2.66.39] - 2026-08-20  ·  _Patch_
 **Plugin review, round four: social, forms, CRM, analytics**
 
