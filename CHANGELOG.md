@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.51] - 2026-08-22  ·  _Patch_
+**Editor SEO assistant: score verified live + 4 new checks**
+
+### Added
+- The post editor's SEO assistant gained four new checks, shown only when the issue actually exists: a stale year in the title (e.g. "2024 guide" in 2026), heading sections with no content under them, generic link text like "click here", and long articles (1000+ words) with fewer than two images.
+
+### Improved
+- The SEO score engine was verified end to end in a real browser: a blank draft scores exactly 0, Turkish dotted-İ keyword matching and inflected-word density counting work, over-density and readability warnings fire correctly, and on every scenario the dial score matches the sum of the per-category points exactly. The computed score is also confirmed to be saved with the post and shown in the post list.
+
+---
+
 ## [2.66.50] - 2026-08-21  ·  _Patch_
 **Newsletter: campaigns now send themselves**
 
