@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.55] - 2026-08-22  ·  _Patch_
+**AI Images audit: pin domain fixed + scaling and provider improvements**
+
+### Improved
+- The visual-concept helper now uses the same hardened network settings as image generation (strict TLS, no redirects, response size cap), and the generation log cleans up entries older than 180 days by itself. The whole plugin was re-verified live: concurrency lock, daily cap, image validation, oversized-response cut-off and redirect refusal all confirmed working.
+
+### Fixed
+- The "Pinterest / Recipes pin" style rendered a fixed website address into the bottom strip of every generated pin — regardless of which site generated it. The pin now carries the site's own domain automatically.
+- The "posts with missing images" list loaded the full content of every published post into memory to count images; on a site with thousands of posts that could exhaust memory. Counting now happens inside the database and the screen stays fast at any size.
+- With OpenRouter selected as provider, the settings screen still warned "no Gemini API key" and style-preview generation insisted on a Gemini key. Both now follow the selected provider.
+
+---
+
 ## [2.66.54] - 2026-08-22  ·  _Patch_
 **jekcms.com audit: contact form repaired + language redirect fixed**
 
