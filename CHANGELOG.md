@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.52] - 2026-08-22  ·  _Patch_
+**Customer accounts: clear verification flow + session security**
+
+### Improved
+- One password policy across the whole customer portal (register, reset, profile, sign-up modal): at least 8 characters with a letter and a digit, and obvious passwords are rejected — "12345678" is no longer a valid password for an account that holds licenses and purchase history. Both blog-site user management and the customer portal were audited end to end on a live environment: brute-force lockouts, role whitelists, IDOR scoping on orders/tickets/invoices/licenses, OAuth account-linking protections and 2FA flows all verified working.
+
+### Fixed
+- An unverified customer account was silently bounced back to the sign-in page in an endless loop with no explanation — right after registering, after signing in with the correct password, and after changing the email address on file. Every entry point now explains what happened and links to "resend verification email"; registration no longer opens a session that gets dropped one request later, and changing your email signs you out cleanly with a clear note instead of appearing to crash.
+- Changing the account password from the customer profile did not invalidate other signed-in sessions: if an attacker had an open session, it survived the password change for up to 30 days. Profile password changes and admin-side password resets now bump the session version, so every other device is signed out immediately — only the device that changed the password stays in.
+
+---
+
 ## [2.66.51] - 2026-08-22  ·  _Patch_
 **Editor SEO assistant: score verified live + 4 new checks**
 
