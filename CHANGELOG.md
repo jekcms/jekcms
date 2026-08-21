@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.45] - 2026-08-21  ·  _Patch_
+**Both languages everywhere: 10 themes + admin panel fully TR/EN**
+
+### Added
+- A live bilingual audit tool now logs into the panel and crawls the critical admin screens and public pages of every site in BOTH languages, catching raw dictionary keys, Turkish text in English mode and English text in Turkish mode — 140 fleet checks and 45 deep checks all pass.
+
+### Fixed
+- Around 1,100 hard-coded interface strings across ten themes (travel, pets, finance, minimalist, recipes, crypto, tech, entertainment, health, starter) now follow the site language: comment forms, newsletter boxes, search, 404 pages, pagination, reading time, share labels and screen-reader labels all render in Turkish on Turkish sites and English on English sites.
+- The admin panel now honours the admin language setting consistently: the login screen tagline, every date (month names were printed in Turkish even in the English admin), the media upload box and the license screen no longer mix languages.
+- Thirteen dictionary entries that displayed their internal key instead of text (e.g. the date filters on the Posts screen) and nine English dictionary entries that contained broken Turkish text (e.g. the login subtitle) were repaired in both languages.
+- A site language saved as a regional code like "en-US" was silently falling back to Turkish; regional codes are now normalised, so an English site no longer renders a Turkish interface.
+- Two sites were running theme copies months behind the product (missing every rollout since the layout engine); all fleet theme copies are now byte-identical with the product and a new sync tool keeps them that way.
+
+---
+
 ## [2.66.44] - 2026-08-21  ·  _Patch_
 **SEO: AI visibility audit (llms.txt + AI crawler policy)**
 
