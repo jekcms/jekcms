@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.48] - 2026-08-21  ·  _Patch_
+**Theme audit: broken-image safety net + graceful demo-media fallback**
+
+### Added
+- A new deep theme audit exercises all 13 themes across eight page types each — checking rendering, single H1, canonical tags, encoding, leaked shortcodes, layout-section contracts and every referenced asset. All 517 checks pass on both an English and a Turkish site.
+
+### Improved
+- The travel theme's showcase images (front-page slider, about page, archive banners) now appear only when the files actually exist on the installation; sites without the demo media pack get a clean dark banner instead of broken image icons.
+
+### Fixed
+- Content written on a development machine could carry "localhost" image addresses into the live site, showing readers broken images (one live post was affected and has been repaired). Rendering now silently rewrites such development addresses to the site's real address — only inside image and link attributes, so articles that mention localhost in their text or code samples are untouched.
+- The finance theme linked an apple-touch icon file that doesn't ship with the theme, producing a broken request on every page; the icon already comes from the site's central favicon pipeline, so the stray link was removed.
+
+---
+
 ## [2.66.47] - 2026-08-21  ·  _Patch_
 **Site Versions screen + lasting analytics history + cleanup**
 
