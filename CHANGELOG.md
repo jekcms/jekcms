@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.44] - 2026-08-21  ·  _Patch_
+**SEO: AI visibility audit (llms.txt + AI crawler policy)**
+
+### Added
+- SEO Health Check gained an "AI Visibility" group: it now verifies that llms.txt and llms-full.txt (the site summaries ChatGPT, Claude and Perplexity read) are actually being served, summarises your AI crawler policy (how many of the 13 known AI bots are allowed), and confirms the live robots.txt really reflects that policy — so a stray static robots.txt file can no longer silently override your choice.
+
+### Fixed
+- Advanced SEO propagation lists were completed: the plugin's activation file joined the fleet sync list and two installations missing from the dedicated sync tool's target list were added, so future panel fixes reach every site instead of silently skipping some.
+
+---
+
 ## [2.66.43] - 2026-08-21  ·  _Patch_
 **Audience (CRM): export a segment, faster counters, tighter access**
 
