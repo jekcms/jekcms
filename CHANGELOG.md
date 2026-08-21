@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.47] - 2026-08-21  ·  _Patch_
+**Site Versions screen + lasting analytics history + cleanup**
+
+### Added
+- License server: a new "Site Versions" screen lists every licensed installation that checks in with the update server — its domain, last reported version, PHP version and last-seen time — and flags at a glance which sites are up to date, which are running behind, and which have gone silent for two weeks. Check-ins are recorded only for valid licenses actively bound to the reporting domain.
+
+### Improved
+- Analytics: the daily trend chart now also reads the permanent daily summaries, so date ranges older than the raw-data retention window (90 days by default) show real history instead of an empty chart. The summaries had been collected all along but were never displayed.
+- The demo site now applies updates automatically every day and its nightly reset preserves that setting, so the public demo always showcases the current release.
+
+### Fixed
+- Eight plugins registered an admin-menu hook that the panel never fires; the dead registrations were removed (menu entries continue to come from the panel's own list, nothing visible changes).
+- The internal schema check misread SQL comments and nested data blocks, hiding real columns and reporting phantom ones; with the parser fixed and three schema reference files brought up to date, the known-issues backlog dropped from twelve to zero.
+
+---
+
 ## [2.66.46] - 2026-08-21  ·  _Patch_
 **General audit: silent log flood stopped + plugin registration repair**
 
