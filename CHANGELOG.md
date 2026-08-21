@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.50] - 2026-08-21  ·  _Patch_
+**Newsletter: campaigns now send themselves**
+
+### Improved
+- The whole subscription pipeline was audited end to end on a live site: sign-up protections (honeypot, rate limit, spam filter, mail-bomb cap, address-disclosure parity), double opt-in with token rotation, one-click unsubscribe headers, open/click counters with signed links, and bounce pre-flight all verified working.
+
+### Fixed
+- Newsletter campaigns only went out while an admin kept clicking "send next batch", or on servers with a manually configured cron job; on a typical installation a campaign larger than one batch — and every automatic new-post notification — sat in the queue forever. The queue is now processed automatically: the built-in scheduler drains it in small batches as the site gets visits, and the server cron (where present) drains it in full — with row-level locking so the two never send the same email twice, and nothing is sent while the newsletter is disabled or the plugin is deactivated.
+
+---
+
 ## [2.66.49] - 2026-08-21  ·  _Patch_
 **Visual theme audit: readability and dark-mode fixes**
 
