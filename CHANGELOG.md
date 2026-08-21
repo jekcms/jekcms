@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.49] - 2026-08-21  ·  _Patch_
+**Visual theme audit: readability and dark-mode fixes**
+
+### Fixed
+- Every theme was rendered in a real browser in both light and dark mode and measured for text readability; unreadable spots were corrected across nine themes — badge and button text on bright brand colors, faded date/muted text, table-of-contents boxes and post cards that stayed white in dark mode, a newsletter band whose white text vanished on its yellow gradient, and an oversized content image that forced horizontal scrolling.
+- When you pick a light brand color in the customizer, badge/button text on that color now switches to dark automatically (and link-style brand text is deepened just enough to stay readable) instead of staying white and disappearing.
+- The travel theme's default menu no longer links to pages that don't exist on the site; "Destinations/Tips" entries appear only when a matching category exists and point straight to it.
+- The shared sidebar widgets (tags, categories, recent posts) now stay readable in dark mode on every theme, even when a theme doesn't define its own dark palette for them.
+
+---
+
 ## [2.66.48] - 2026-08-21  ·  _Patch_
 **Theme audit: broken-image safety net + graceful demo-media fallback**
 
