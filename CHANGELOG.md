@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.43] - 2026-08-21  ·  _Patch_
+**Audience (CRM): export a segment, faster counters, tighter access**
+
+### Added
+- Each saved segment now has its own "Export CSV" button, so you can download exactly the contacts a segment covers in one click — not just the whole list.
+
+### Improved
+- The audience summary counters (total plus one per source) are now computed in a single database pass instead of five separate scans, so the Audience screen stays fast on large contact lists.
+
+### Fixed
+- The admin-only access check on the Audience screen is now unconditional, closing a theoretical gap where the contact list (personal e-mail addresses) could have been reachable by a lower-privileged user if the code were loaded differently.
+
+---
+
 ## [2.66.42] - 2026-08-21  ·  _Patch_
 **Social: non-blocking Instagram/Threads publishing + Pinterest image fix**
 
