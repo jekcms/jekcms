@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.53] - 2026-08-22  ·  _Patch_
+**General audit: post reactions/ratings completed + silent error floods ended**
+
+### Improved
+- The whole automated test battery was run end to end — 65+ suites, 2,000+ checks, all green — covering plugins, themes, mail, licensing, installers, customer portal and admin access controls.
+
+### Fixed
+- The Entertainment theme's reaction buttons (🔥 ❤️ 😮) and star ratings were half-built: the interface was drawn and clicks were sent to the server, but the receiving endpoint never existed and the database tables were never created — counts always showed zero, reverted on reload, and every page view silently wrote errors to the log. The feature is now real end to end: one reaction and one rating per visitor (updatable), public-published posts only, rate-limited, and the tables create themselves on first use.
+- The settings-change timeline (who changed which setting, with undo) had never worked: its query joined a table name that doesn't exist in the product, so the history always came back empty and every dashboard load added another silent error to the log. The audit found 1,600+ recorded changes that are now actually visible.
+- Small persistent warnings cleaned up across jekcms.com: the admin invoice list read a wrong column name for due dates (overdue highlighting never fired), 404 pages warned about a missing canonical URL, the blog listing warned on every load, and two 2.65-era changelog entries had no title and rendered a warning on the public changelog page.
+
+---
+
 ## [2.66.52] - 2026-08-22  ·  _Patch_
 **Customer accounts: clear verification flow + session security**
 
@@ -841,6 +854,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.65.95] - 2026-08-13  ·  _Patch_
+**Critical: plugin admin pages could crash with a 500**
 
 ### Fixed
 - Fixed a 500 error that could break plugin admin pages. The admin header's update check caught its exception into a variable named $e — the same name pages use for their HTML-escaping helper — so whenever that check failed (e.g. a slow update server or a stale database), the page's next output call crashed with “Object of type … is not callable”. The header and sidebar now use private catch variables, so a failed background check never takes the page down.
@@ -849,6 +863,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.65.94] - 2026-08-13  ·  _Patch_
+**CSV exports hardened against formula injection**
 
 ### Improved
 - The admin sidebar now shows the newest modules (Forms, Downloads, Web Push, Editorial Calendar, Audience/CRM, A/B Tests) with proper localized names and their own icons, instead of an English name and a generic icon.
