@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.42] - 2026-08-21  ·  _Patch_
+**Social: non-blocking Instagram/Threads publishing + Pinterest image fix**
+
+### Fixed
+- The per-post Pinterest image field in the editor now saves. It was posting to an address that had no route, so the value was silently dropped — the pin image you set was never stored.
+- Publishing a photo, story or carousel to Instagram — and a post to Threads — no longer holds a worker busy waiting for the platform to finish processing. Ready posts go out immediately; ones still processing are picked up on the next pass, the same way Reels already worked. Before, a single post could tie up a worker for up to half a minute.
+- When a social post succeeds, its remote post id and publish time are now recorded on the queue entry itself (not only in the log), so the published-at time and a link back to the post are available.
+
+---
+
 ## [2.66.41] - 2026-08-21  ·  _Minor_
 **Recipe card: servings scaler, card image fix, sturdier rich results**
 
