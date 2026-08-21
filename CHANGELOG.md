@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.54] - 2026-08-22  ·  _Patch_
+**jekcms.com audit: contact form repaired + language redirect fixed**
+
+### Improved
+- The marketing site was audited top to bottom: 38 pages in both languages (render integrity, silent log noise, titles, canonical and hreflang tags, single H1), all 88 internal links, sitemap/robots/feeds/docs search, payment checkout links and both forms — everything else came back healthy. The "Try the admin panel live" band on the themes page now sits below the theme list, and a new automated suite guards the form pipeline against regressions.
+
+### Fixed
+- The jekcms.com contact form rejected every single submission with a "security token mismatch" error: the page stored its security token in one session while the receiving endpoint checked a different one, so the two could never match. The form now fetches a fresh token at the moment of submission — messages actually arrive and open a support ticket. The footer newsletter form carried a lighter version of the same risk and now uses the same always-fresh-token pattern.
+- Opening a jekcms.com page with the ?lang=tr shortcut on a direct .php address redirected to a dead URL (for example /blog.php?lang=tr landed on a 404). The Turkish redirect target is now normalized to the clean address, and subdirectory installs no longer produce doubled paths.
+
+---
+
 ## [2.66.53] - 2026-08-22  ·  _Patch_
 **General audit: post reactions/ratings completed + silent error floods ended**
 
