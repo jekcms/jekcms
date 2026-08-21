@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.46] - 2026-08-21  ·  _Patch_
+**General audit: silent log flood stopped + plugin registration repair**
+
+### Improved
+- Four plugin distribution tools were missing two installations from their target lists, so future fixes for those plugins would silently skip them; the lists were completed (the same gap was fixed for the SEO panel earlier).
+
+### Fixed
+- The admin dashboard queried social and push-notification tables even on installations where those plugins were never activated; the page rendered fine, but every single dashboard visit silently appended errors to the database log (one installation had accumulated 47,000 lines). The dashboard now checks the schema first and simply shows zeros, and it also adapts to older social-queue schemas instead of failing.
+- The Google Console plugin's activation script used a wrong column name when registering itself, so it logged an error on every update and could fail to register on a fresh site; the column name was corrected.
+- Two internal quality checks had fallen out of date after recent changes (quiz answer response and content-filter wiring) and reported false alarms; they now verify the actual behaviour instead of exact source text, and five already-resolved records were cleaned out of the schema check's known-issues list.
+
+---
+
 ## [2.66.45] - 2026-08-21  ·  _Patch_
 **Both languages everywhere: 10 themes + admin panel fully TR/EN**
 
