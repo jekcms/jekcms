@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.62] - 2026-08-23  ·  _Minor_
+**Contact Form: reply from the panel + bulk actions + CSV export + phone field**
+
+### Added
+- Reply from the inbox: write your reply under the message and send it by e-mail without leaving the panel — the visitor receives it with their original message quoted, and the message is marked "replied" with the reply stored on the record. (The "replied" status existed but nothing ever set it; the old Reply button just opened your mail app.)
+- Bulk actions: select multiple messages and mark read / spam / archive / delete in one go, plus one-click CSV export of the inbox (Excel-ready, with spreadsheet-formula injection neutralized).
+- Optional phone field: enable it in settings and the form shows a phone input (validated loosely for international formats); the number appears under the sender in the panel and in the notification e-mail. Themes that pass their own field list are unaffected.
+- Auto-reply personalization: the {name} tag in the auto-reply subject and body is replaced with the sender's name.
+- Field-level error display on the form: validation errors now appear under the exact field and the first one is focused — the styling for this existed but was never used; visitors only saw a generic "check the form".
+
+### Fixed
+- Spam-flagged messages were stored without any cap — a bot flood could grow the table indefinitely (the "no message is ever lost" design kept everything). The newest 300 spam records are now kept and older ones pruned, matching the Form Builder's protection.
+
+---
+
 ## [2.66.61] - 2026-08-23  ·  _Minor_
 **Form Builder: conditional logic + multi-step forms + smarter validation**
 
