@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.63] - 2026-08-23  ·  _Minor_
+**Google Console: weekly email digest + rising/declining queries + opportunity list + cache fix**
+
+### Added
+- Weekly performance digest by e-mail: every week the plugin compares the last 7 days of Search Console, Analytics and AdSense with the previous week and sends a compact summary (with ▲▼ trends and the week's top queries) in the site language. Enable it in Settings; runs on the server cron, retries gracefully and never double-sends.
+- Rising / declining queries: the Search Console tab now compares the selected period with the previous one and lists the queries that gained and lost the most clicks — including queries that disappeared entirely.
+- Opportunity queries: keywords that show often in Google (ranking 4-20) but get few clicks — the fastest wins for title/description improvements, sorted by impressions.
+- Pages losing traffic: content-refresh candidates ranked by click loss versus the previous period.
+
+### Fixed
+- The API response cache effectively never worked on servers where PHP and MySQL run in different time zones: expiry times were written with the PHP clock but checked against the MySQL clock, so every cached entry was born already expired (by the zone offset) and every panel visit hit Google's APIs live — this is why the panel could feel slow or unstable. Expiry is now computed on the database clock.
+
+---
+
 ## [2.66.62] - 2026-08-23  ·  _Minor_
 **Contact Form: reply from the panel + bulk actions + CSV export + phone field**
 
