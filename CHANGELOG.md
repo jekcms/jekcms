@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.61] - 2026-08-23  ·  _Minor_
+**Form Builder: conditional logic + multi-step forms + smarter validation**
+
+### Added
+- Conditional logic: any field can be shown only when another field meets a condition (equals / does not equal / is empty / is not empty / contains). Hidden fields are skipped by validation and never stored — the server re-evaluates every condition itself, so hand-crafted requests can't smuggle values in.
+- Multi-step forms: drop a "page break" between fields and the form turns into steps with a progress indicator and back/next buttons; each step validates before advancing, and with JavaScript off everything gracefully falls back to a single long form.
+- Per-field error display: validation errors now appear under the exact field (with the wizard jumping back to the right step and focusing it) instead of a single generic message.
+- Multi-checkbox groups: a checkbox field with options now renders one checkbox per option, with "at least one required" enforced in the browser and on the server. Previously the options were validated but never rendered — the form always showed a single box.
+- Duplicate form action in the list, and "redirect after submit" now actually redirects in the no-page-reload (AJAX) flow too.
+
+### Fixed
+- A field saved without a width value (via the API or programmatically) crashed the save with an "Undefined array key" error; the admin form always sent a width, which masked it.
+- The confirmation redirect URL is now validated when saving — non-http(s) addresses are rejected instead of being passed to the browser.
+
+---
+
 ## [2.66.60] - 2026-08-23  ·  _Minor_
 **Web Push: campaign composer + click statistics + welcome notification + background secret-decryption fix**
 
