@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.59] - 2026-08-22  ·  _Minor_
+**Quiz: premium engine (timer, instant feedback, question bank, weighted personality) + fixes**
+
+### Added
+- Time limit per quiz: a countdown runs while playing and the quiz auto-submits with the answers picked so far when time runs out.
+- Instant feedback mode: as soon as the reader picks an answer, right/wrong (and the explanation, if enabled) is shown before moving on. Correct answers still never appear in the page source — each check is answered by the server, and the endpoint only responds for quizzes that opted in.
+- Question bank: shuffle question order and/or serve a fixed number of questions from the pool on every run — each play gets a different quiz. Scoring uses the served count, not the pool size.
+- Weighted personality engine: every answer can carry points and the result card is chosen by the point total — the standard model of premium personality quizzes. Trivia scoring is unchanged.
+- Result sharing: copy link, X, WhatsApp and Facebook buttons on the result screen, with the score or personality result in the share text.
+- Duplicate quiz action in the admin list, drag-to-reorder questions in the editor, and a working media picker for quiz, question and answer images (the old "Browse" button always fell back to "enter the URL manually").
+- The standalone quiz page now emits Quiz schema (JSON-LD) — deliberately without questions or answers, so correct answers stay out of the page source.
+
+### Fixed
+- On themes that pre-parse content (e.g. to build a table of contents), the embedded quiz lost its stylesheet and script — questions never rendered. The assets now travel with every embed, and the view counter no longer double-counts on those themes.
+- When editing an existing quiz, the field labels showed raw template code ("${QI18N.qText}") instead of text.
+- The admin quiz screens mixed Turkish and English ("No quiz plays yet yok.", untranslated settings and buttons); the share image URL of the standalone quiz page was relative, so social preview cards came out empty.
+
+---
+
 ## [2.66.58] - 2026-08-22  ·  _Minor_
 **Recipe Cards: visual recipe editor in the post editor + premium card features**
 
