@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.58] - 2026-08-22  ·  _Minor_
+**Recipe Cards: visual recipe editor in the post editor + premium card features**
+
+### Added
+- The post editor gained a full Recipe panel: structured ingredient rows (quantity, unit, name, note) with group headings ("For the sauce"), drag-to-reorder steps with optional step photos, minute-based time fields with automatic total, servings, difficulty, course/cuisine suggestions, nutrition facts and an FAQ builder. Until now this rich recipe data could only be produced by the AI content pipeline — writing a recipe by hand meant raw ISO-8601 duration codes in the SEO schema panel.
+- Bulk paste: paste a plain ingredient list ("200 g flour") or numbered steps and the panel splits quantity, unit and name into rows automatically.
+- Recipe video support: paste a YouTube, Vimeo or mp4 link — the card embeds the player and YouTube videos are added to the Recipe schema as a VideoObject (eligible for video rich results).
+- Cook mode on the recipe card: one tap keeps the phone screen awake while cooking (on supported browsers; the button hides itself elsewhere).
+- "Copy list" button on the card copies the ingredient list — including scaled quantities when the reader changed the serving count.
+- Printing now prints only the recipe card, not the whole page; a Notes/tips box and step photos are shown on the card as well.
+- The [recipe] shortcode places the card wherever you want inside the content — and works on every theme, not just the recipes theme.
+
+### Fixed
+- On a recipe post without a usable image, the plugin correctly skipped the Recipe schema node but silently dropped the FAQ schema with it — FAQ rich results were lost on exactly the posts that needed them. The FAQ schema is now emitted independently.
+- Recipe difficulty was displayed in raw English data tokens ("easy") on Turkish sites; known values are now shown in the site language.
+- Step photos were included in the schema but never shown to readers on the card; they now appear under their step.
+
+---
+
 ## [2.66.57] - 2026-08-22  ·  _Patch_
 **Stories audit: "Latest Posts" statistics + navigation fix**
 
