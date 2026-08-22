@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.57] - 2026-08-22  ·  _Patch_
+**Stories audit: "Latest Posts" statistics + navigation fix**
+
+### Improved
+- The whole plugin was re-verified live: poll vote integrity, per-visitor replay windows, reaction-switch accounting, slide ownership checks and the sanity of the new virtual-story validation (unknown posts rejected, polls not accepted on the automatic story).
+
+### Fixed
+- Views, link clicks and emoji reactions on the automatic "Latest Posts" story were silently discarded by the server — visitors saw the reaction animation but nothing was ever counted, and the statistics page had no trace of the story most sites use the most. These events are now recorded (with the same replay protection as manual stories), reactions show up in the ambient emoji stream, and the statistics page gained a dedicated "Latest Posts" card breaking performance down per post.
+- With "auto-advance to next story" turned off, swiping or tapping to the next story closed the viewer entirely instead of advancing. That setting now only controls what happens when a story finishes on its own — manual navigation always moves to the next story.
+
+---
+
 ## [2.66.56] - 2026-08-22  ·  _Patch_
 **Web Push audit: no subscriber misses a notification + dead-subscription cleanup**
 
