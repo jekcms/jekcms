@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.56] - 2026-08-22  ·  _Patch_
+**Web Push audit: no subscriber misses a notification + dead-subscription cleanup**
+
+### Improved
+- When the browser rotates a push subscription, the service worker now re-subscribes automatically instead of silently going quiet. Sending got faster on large lists (the signed authorization is computed once per push service instead of per subscriber) and the delivery connection is explicitly TLS-verified with redirects refused. The whole plugin was re-verified live against a mock push service: crypto self-test, dead-endpoint pruning, budget cursor, tick lock and intake validation all confirmed.
+
+### Fixed
+- On sites with many push subscribers, publishing a post only notified as many browsers as fit into the sending time window — the rest simply never received that notification. Sending now remembers exactly where it stopped and continues in the background (server cron and page-triggered fallback, with a lock so no browser is ever notified twice) until every subscriber has been reached.
+- Subscriptions that kept failing without properly expiring (persistent errors, unreachable endpoints) were retried forever on every publish, eating the sending window. After 8 consecutive failures a subscription is now cleaned up automatically.
+- A subscription registered with a valid push service but corrupt encryption keys was accepted and then failed on every send; keys are now validated byte-for-byte at registration.
+
+---
+
 ## [2.66.55] - 2026-08-22  ·  _Patch_
 **AI Images audit: pin domain fixed + scaling and provider improvements**
 
