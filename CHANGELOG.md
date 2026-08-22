@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.60] - 2026-08-23  ·  _Minor_
+**Web Push: campaign composer + click statistics + welcome notification + background secret-decryption fix**
+
+### Added
+- Campaign composer: write and send any notification (title, message, target URL, large image) to all subscribers from the admin panel — until now the panel could only send a fixed test message.
+- Broadcast history with click tracking: every send (new post, campaign, test) is logged with delivered/failed counts, clicks and CTR. Clicks are counted by a lightweight beacon from the notification itself — no third-party service, no personal data.
+- Welcome notification: optionally greet each new subscriber with a one-time, customizable notification the moment they subscribe — they immediately see that notifications work.
+- Configurable opt-in button: position (bottom left/right), custom label, show delay, and a dismiss (✕) that snoozes the prompt for a configurable number of days. Previously the button was fixed, undismissable and shown forever.
+- Rich notifications: new-post pushes now carry the post's featured image as a large picture on supported platforms; campaigns can attach one too.
+- Subscriber analytics on the panel: growth in the last 7/30 days and a browser breakdown.
+
+### Fixed
+- Background jobs (cron, deferred sending after the page is delivered) could silently fail to decrypt stored secrets: if any output had already been produced when the security layer initialised, session setup threw and decryption returned empty — for Web Push this meant the whole broadcast was silently skipped with an unusable VAPID key. Session configuration now degrades gracefully after output has started, so encrypted secrets remain readable in every background context.
+
+---
+
 ## [2.66.59] - 2026-08-22  ·  _Minor_
 **Quiz: premium engine (timer, instant feedback, question bank, weighted personality) + fixes**
 
