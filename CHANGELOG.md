@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.64] - 2026-08-24  ·  _Patch_
+**Critical: image uploads were completely broken on some servers**
+
+### Fixed
+- On hosting where PHP's optional "fileinfo" extension is disabled, every image upload failed with a "mime_content_type" error — the editor's image dialog, the Pinterest image and the media library were all affected. The file type is now detected through a chain of safe fallbacks (including reading the image header directly), so uploads work on every hosting configuration. If your uploads were failing, update and try again — no other action needed.
+
+---
+
 ## [2.66.63] - 2026-08-23  ·  _Minor_
 **Google Console: weekly email digest + rising/declining queries + opportunity list + cache fix**
 
