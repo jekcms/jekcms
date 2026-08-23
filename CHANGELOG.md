@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.66] - 2026-08-24  ·  _Patch_
+**Compatibility: deep sweep for PHP 8.0 servers and lean setups**
+
+### Fixed
+- On servers running PHP 8.0 (the minimum supported version), several areas used a function that only exists in newer PHP: the site footer, the Personal theme and — most critically — the auto-update engine could crash. These now work on every supported PHP version.
+- Publishing a post no longer depends on optional server pieces: the search-engine ping, encoding repair tools and the RSS import endpoint all degrade gracefully when a server component is missing, instead of stopping the whole operation.
+- The installer now tells the truth about requirements: the cURL component (needed by updates, licensing and integrations) is checked as required rather than merely recommended, so problems surface at install time instead of weeks later.
+- The pre-release safety check was deepened: it now also blocks any new code that would require a newer PHP than the product promises, alongside the existing optional-component guard.
+
+---
+
 ## [2.66.65] - 2026-08-24  ·  _Patch_
 **Resilience: missing server components can no longer crash any operation**
 
