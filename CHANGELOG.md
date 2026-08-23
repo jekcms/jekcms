@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.65] - 2026-08-24  ·  _Patch_
+**Resilience: missing server components can no longer crash any operation**
+
+### Fixed
+- Following yesterday's upload fix, the entire product was swept for the same class of failure — features assuming an optional PHP server component is present. On lean hosting setups this could crash: WebP image reading during WordPress import, migration and Pinterest image generation; AVIF/WebP saving in thumbnail regeneration and the media optimizer; image processing entirely on servers without the GD component (the upload now keeps the original file instead of failing); and update, backup and package operations if the zip component is disabled. Every path now checks first and degrades gracefully with a clear message instead of a server error.
+- This protection is now permanent: an automated check runs before every release and blocks any new code that uses an optional server component without a safety check.
+
+---
+
 ## [2.66.64] - 2026-08-24  ·  _Patch_
 **Critical: image uploads were completely broken on some servers**
 
