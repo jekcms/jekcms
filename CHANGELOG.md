@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.67] - 2026-08-24  ·  _Patch_
+**Security hardening: broad audit across the product and site**
+
+### Security
+- Uploaded files are kept strictly non-executable everywhere: the upload-folder protection is now stronger and can no longer be weakened by normal use, and the blocked-extension list closes disguised-file tricks (e.g. name.php8.jpg).
+- Content upload endpoints now require an explicit upload permission, so a low-privilege account (including auto-created social-login accounts) can no longer write files.
+- Editor/API secrets (AI provider keys, SMTP password, webhook secrets) are no longer written into admin page HTML; fields show a “saved” state and only change when you type a new value.
+- Order pages are tightened: an order can only be cancelled by its owner via a confirmed action, and a guest checkout can no longer attach an order to someone else’s account by guessing their email.
+- Anti-abuse limits are now server-side (can’t be reset by clearing cookies) on the contact form, verification-email resend, comment likes, newsletter signup and article voting.
+- Payment confirmation now verifies the paid amount and currency against the order before completing it.
+- The one-click Google connection now only works from a licensed customer domain, and several login/authorization edge cases were closed.
+- Error responses no longer expose internal technical details to anonymous visitors, and internal maintenance/report files are kept out of public deployments.
+
+---
+
 ## [2.66.66] - 2026-08-24  ·  _Patch_
 **Compatibility: deep sweep for PHP 8.0 servers and lean setups**
 
