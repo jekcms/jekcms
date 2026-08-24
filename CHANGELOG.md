@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.70] - 2026-08-24  ·  _Patch_
+**SEO verification pass: second-round hardening**
+
+### Fixed
+- Database sessions now share the site's timezone, so a freshly published post appears in sitemaps immediately on every host instead of hours later on servers whose database clock runs in UTC.
+- Sitemap index announcements now use exactly the same filters as the sitemap files themselves — no more announced-but-empty news/video maps, and trashed marketing posts finally disappear from the public blog, feed and sitemap.
+- Old WordPress-style category/post addresses now hop straight to the real post, and every remaining "redirect to somewhere that 404s" chain (authors, categories, attachments, feeds, year archives) returns an honest not-found instead.
+- The maintenance page now sends proper no-cache headers, uses the active theme's template, and error pages exist for every status the error route accepts.
+- The theme demo gallery moved to a stable address (/demos) — its old address was shadowed on the server and had been unreachable from the navigation.
+- Upload-folder protection files are written Apache-2.4-safe everywhere; on hosts without the legacy compatibility module they used to turn whole media folders into server errors. A permanent release-gate check now guards this class.
+
+---
+
 ## [2.66.69] - 2026-08-24  ·  _Patch_
 **Deep SEO audit: crawling, presentation and media layer**
 
