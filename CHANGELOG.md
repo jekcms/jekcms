@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.69] - 2026-08-24  ·  _Patch_
+**Deep SEO audit: crawling, presentation and media layer**
+
+### Improved
+- Crawlers can now fetch core stylesheet/script assets and search pages, so pages are rendered and evaluated with their real design and noindex hints are actually readable.
+- Sitemaps got stricter: entry dates no longer drift on every visit, image entries always point at working files, scheduled/future content never appears early, and news/video sitemaps respect per-post indexing choices.
+- Titles across all themes now follow the configured separator, add a page number on paginated archives, and no longer repeat the site name twice; archive descriptions can come from the tag or author's own text.
+- Structured data is more consistent: language, titles and image formats now match across the page's tags, FAQ/HowTo blocks can no longer be emitted twice, and the publisher logo is a raster image with its true dimensions.
+- Modern-format (AVIF/WebP) image sources are only offered when the file really exists — on hosts without those formats the browser now always gets a working image instead of a blank box.
+- More images carry explicit dimensions and descriptive alt text, the correct hero image gets load priority on every theme, and automatic internal links open in the same tab as expected.
+
+### Fixed
+- Addresses that do not exist now return a real "not found" status everywhere instead of silently redirecting to the homepage, so search consoles report them correctly and they drop out of indexes.
+- Error responses are never cached as healthy pages anymore, and error/410 pages are proper, readable pages with charset, language and a link home.
+- Duplicate-address cleanups: uppercase blog links, retired tag aliases, alternate sitemap/robots/feed addresses and www+http visits each collapse to a single canonical address in one redirect hop.
+- Date archives are validated (invalid years return "not found") and marked not-to-be-indexed, closing a duplicate-content surface.
+
+---
+
 ## [2.66.68] - 2026-08-24  ·  _Patch_
 **Verification pass: admin panel fixes**
 
