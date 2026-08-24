@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.68] - 2026-08-24  ·  _Patch_
+**Verification pass: admin panel fixes**
+
+### Fixed
+- Some admin confirmation and validation messages (for example the new password-policy warning when adding a user) were saved but never shown on screen; the panel now displays messages from both internal channels.
+- On installations whose database was missing two optional pieces, the settings page could cut off mid-render and adding a user could fail with a server error; the missing pieces are now provisioned and both flows were verified end-to-end.
+
+### Security
+- Saved AI keys in the multi-key list are no longer written into admin page HTML; rows show a masked “saved” state and each key only changes when you type a new value — leaving a row untouched keeps the stored key.
+
+---
+
 ## [2.66.67] - 2026-08-24  ·  _Patch_
 **Security hardening: broad audit across the product and site**
 
