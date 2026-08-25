@@ -8,6 +8,179 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.84] - 2026-08-25  ·  _Patch_
+**Full-session audit hardening**
+
+### Fixed
+- For members/paid posts, the page meta description, social share tags and RSS fallback now stay inside the free teaser, so the summary shown to search engines and shared links never draws on gated text.
+- Importing images from Ghost/Substack is now SSRF-hardened: image URLs from the uploaded file are checked to be public addresses (internal/cloud-metadata hosts are refused), redirects aren't followed, and oversized images are skipped so one bad file can't stall the import.
+- Outgoing webhooks are bounded so an unreachable endpoint can't slow down publishing; deliveries that don't fit the window are logged as deferred and can be re-sent, and a webhook is refused rather than created if its secret can't be stored securely.
+- Editor links now reject javascript:/data: URLs like the other card blocks, the snippet endpoint always returns clean JSON, reaction counts are shown only for public posts, and fast double-clicks on a reaction no longer error.
+
+---
+
+## [2.66.83] - 2026-08-25  ·  _Minor_
+**Webhook delivery log & one-click re-send**
+
+### Improved
+- Each outgoing webhook now shows its recent deliveries right under it — the event, the response status (success or the exact HTTP error), and when it happened. If one failed because your endpoint was momentarily down, a single "Re-send" button replays that exact payload with a fresh signature. The log keeps the last 100 deliveries per webhook and never stores your signing secret.
+
+---
+
+## [2.66.82] - 2026-08-25  ·  _Minor_
+**Ghost/Substack import now brings your images too**
+
+### Improved
+- When you import from Ghost or Substack, the images in your posts (and each post's cover) are now pulled into your own media library and converted to AVIF/WebP, and the post is rewritten to point at the local copies. Your migrated content keeps working even after the old site goes offline — no more hotlinked images that break later. It's a single checkbox on the import screen (on by default), matching the WordPress importer.
+
+---
+
+## [2.66.81] - 2026-08-25  ·  _Patch_
+**Multilingual archives & API stability**
+
+### Fixed
+- On multilingual sites, category, tag and author pages, related lists and widgets now show only your site-language posts again; translated posts stay reachable at their own address and are still discovered through their hreflang links.
+- The REST API and magic-link sign-in now work reliably on every install, including brand-new ones, and importing from Ghost/Substack cleans up correctly even if the file has an error.
+
+---
+
+## [2.66.80] - 2026-08-25  ·  _Patch_
+**Deep audit hardening across membership, webhooks, editor & multilingual**
+
+### Fixed
+- Content gating is now consistent everywhere: /llms-full.txt, instant search and the About/Contact/FAQ/legal/homepage page routes all apply the same members/paid/private visibility gate as the rest of the site.
+- Outgoing webhook signatures are now verifiable: the HMAC was being computed with the encrypted secret instead of the plaintext (a column length also truncated it), so every signature failed on the receiver — fixed end to end.
+- A webhook signing secret can no longer be used as an admin API key.
+- Newsletter segment sending can no longer silently fall back to the entire subscriber list when the CRM is unavailable or errors — it sends to nobody rather than everybody.
+- Reply notifications no longer fire for unapproved/spam comments, so moderation-pending replies can't spray the whole thread by email.
+- The paywall teaser is now safely capped even on very short posts, and the reaction bar can now be un-clicked and switched correctly with counts always coming from the server.
+- Editor hardening: the snippet library and the bookmark fetcher are now restricted to content roles (not read-only subscribers); the bookmark fetcher pins the validated IP (DNS-rebinding), enforces a hard size cap, and resolves relative images correctly; product/bookmark/gallery/embed card links reject javascript:/data: URLs; the gallery block is now clickable and the four new blocks have their edit/delete toolbar.
+- Magic-link sign-in/registration is now rate-limited (anti email-bombing), tokens are single-use under concurrency, and the new-member webhook fires only after the email is verified.
+- Ghost/Substack import no longer triggers per-post newsletter/push/social/ping storms, survives BOM and malformed CSV rows, only raises the memory limit, maps Ghost visibility, and skips empty lexical-only posts.
+- Multilingual: the language filter no longer breaks reactions, comments, pages, comment feeds or legacy-URL rescue on translated posts — it now applies only to genuine listing surfaces (archives, sitemap, feeds, search) while every translated post stays reachable at its own URL.
+
+---
+
+## [2.66.79] - 2026-08-25  ·  _Minor_
+**Multilingual content v1 + Ghost/Substack migration**
+
+### Improved
+- Multilingual content v1: give any post a language and link it to its translated counterpart from the editor's new Translation box. Linked pairs automatically emit hreflang alternate tags (plus x-default) so search engines serve the right language; archives, sitemap and feeds keep showing only the site language while translated posts live at their own URLs.
+- A practical translation workflow ships with it: Duplicate the post, switch the copy's language, link it back by ID — done. No plugin, no separate site.
+- Migrate from Ghost: upload the JSON export from Ghost admin and posts, pages, drafts, tags, publish dates and feature images come across — safe to re-run, existing slugs are skipped.
+- Migrate from Substack: upload the export ZIP as-is and newsletter posts import with their full body and subtitle; "paid-only" posts automatically arrive with Premium (paid) visibility, matching the membership system one-to-one.
+
+---
+
+## [2.66.78] - 2026-08-25  ·  _Minor_
+**Integrations & engagement: webhooks, segments, reactions**
+
+### Improved
+- Outgoing webhooks are now real: pick events (post published/updated/deleted, new comment, new member), add an HTTPS URL, and jekcms sends signed JSON (HMAC signature header) the moment they happen — Zapier/n8n/Make ready, with a one-click test button.
+- Newsletter campaigns can target CRM segments: choose a saved audience filter when sending and only matching active subscribers receive it — the "coming soon" broadcast gap is closed.
+- Comment conversations now notify the whole thread: everyone above a new reply is emailed once (deduped), and every notification carries a one-click, tamper-proof opt-out link.
+- Emoji reactions arrived on every theme: a theme-independent reaction bar appears under posts with live counts served from the API — fully compatible with the full-page cache; themes with their own reaction UI are automatically skipped.
+
+### Fixed
+- A leftover placeholder in the cron was silently marking the social-media queue as completed without doing any work — removed; the social plugin's queue is no longer swallowed.
+
+---
+
+## [2.66.77] - 2026-08-25  ·  _Minor_
+**Editor: monetization cards, gallery, social embeds and snippets**
+
+### Improved
+- A Product/Affiliate card joined the editor: image, price, description and a call-to-action button whose link automatically carries rel="sponsored nofollow" — Google-compliant affiliate monetization in two clicks.
+- Bookmark cards turn any URL into a rich preview: paste a link, hit Fetch, and the title, description, image and site name are pulled server-side (with strict SSRF protection) into an editable card.
+- Gallery grids (2-4 columns) and social embeds arrived: Twitter/X, Instagram, TikTok and Vimeo links become real embeds on the page — the editor stores a neutral placeholder and the site hydrates it, so provider scripts load once and only where used.
+- Snippets make repeated content one click: select anything in the editor, save it under a name, and insert it into any future post from the snippet library.
+
+---
+
+## [2.66.76] - 2026-08-25  ·  _Minor_
+**Premium (paid) membership tier**
+
+### Improved
+- Posts can now be marked "Paid members only": anonymous readers get a premium teaser with a join call, signed-in free members see an Upgrade card with your price and payment link, and premium members read everything.
+- Selling is friction-free by design: paste any payment link (iyzico or Stripe payment page) plus an optional bank-transfer note in Settings, and when a payment arrives, one click on the Users screen upgrades the member — no gateway integration to configure.
+- The member account page shows premium status and the upgrade offer; staff accounts always see full content, and paid posts stay in sitemaps and feeds as leak-proof teasers with correct paywall structured data.
+
+---
+
+## [2.66.75] - 2026-08-25  ·  _Minor_
+**Memberships: members-only content and passwordless sign-in**
+
+### Improved
+- Ghost-style memberships arrived: mark any post "Members only" and anonymous readers see a clean teaser with a join call-to-action while signed-in members read the full piece — on every theme, with zero theme changes.
+- Readers join and sign in without passwords: a one-time magic link lands in their inbox (30-minute, single-use), a minimal account page lets them manage their name and newsletter subscription, and joining doubles as newsletter double opt-in.
+- Members-only posts stay fully SEO-correct: they remain in sitemaps and feeds as teasers, never leak the gated body anywhere, and carry Google's official paywalled-content structured data so gating is not mistaken for cloaking.
+- One-click post duplication (content, categories, tags and metadata copied into a fresh draft) joined the post list actions.
+- Your content is never locked in: a new Export panel downloads everything as WordPress WXR, Ghost JSON or jekcms JSON — categories, tags and SEO fields included.
+
+---
+
+## [2.66.74] - 2026-08-25  ·  _Patch_
+**Full-page cache: millisecond pages for visitors**
+
+### Improved
+- A textbook full-page cache now serves the homepage, single posts, category, tag, author and date archives to anonymous visitors straight from disk — measured locally, pages dropped from 60-200ms to 4-9ms.
+- Cached copies are invalidated exactly when content changes: saving a post, moderating a comment, editing categories/tags/menus/users, changing settings or the theme all clear the right copies immediately; a small share of requests still runs the full engine so scheduled tasks keep ticking.
+- Comment and contact forms became cache-safe: the security token is no longer baked into the page — it is fetched the moment a visitor actually starts filling a form, so anonymous browsing stays completely cookie-free.
+
+### Fixed
+- Every single visit was silently receiving a session cookie because the user loader started a session even when there was nothing to load — this broke the lazy-session design site-wide and made pages personally-addressed for no reason.
+- Two themes' view counters opened a session per article view; they now use the cookie-free central counter, and A/B-test pages, dark-mode/language-cookie visitors and search results are correctly excluded from the cache.
+
+---
+
+## [2.66.73] - 2026-08-25  ·  _Patch_
+**Deep performance pass: queries, caching and page weight**
+
+### Improved
+- Repeated database work was eliminated across the board: prepared statements are reused, per-image lookups are memoized, sidebar aggregations are cached, empty results now cache correctly, and hot columns gained indexes.
+- Theme pages got lighter: template-specific stylesheets load only on their own template, mobile-only CSS no longer blocks desktop rendering, fonts load from the page head instead of a chained CSS import, and analytics/ad hosts get an early connection.
+- Saving a post now runs its category/tag/meta writes in a single transaction, and archive pages batch-load categories instead of querying once per card.
+
+### Fixed
+- Six plugins were silently re-running their entire installation schema on every single page view due to a settings-key collision — the single biggest hidden cost on every site; pages now run dramatically fewer queries and zero writes.
+- The featured-image helper returned the full-size original instead of the 1600px variant, so every theme preloaded multi-megabyte camera files as the hero image; the preload also now matches exactly what the browser will render.
+- Browsers were told to keep HTML pages for a full hour with no way to refresh them — edits stayed invisible to returning visitors; pages are now edge-cached and browser-validated, and category/tag edits and new posts invalidate the right caches immediately.
+- Sitemaps and feeds are written atomically with a generation lock — parallel crawler hits could previously read half-written XML or trigger simultaneous full regenerations.
+
+---
+
+## [2.66.72] - 2026-08-24  ·  _Patch_
+**Categories, archives and search: deep SEO pass**
+
+### Improved
+- Categories gained their own SEO title and SEO description fields in the admin panel, and parent categories now count and list their child categories' posts everywhere — archive pages, indexing rules and the sitemap agree.
+- Site search now ranks results by relevance instead of date on every theme, search page titles are capped against keyword-injection spam, and paginated search links finally carry the query along.
+- Date archives (old /archive/2026 style addresses) now get a descriptive page title, paginated archive pages carry a page number in their description, and every theme reports its real page size in structured data.
+- The site description used by feeds and previews became editable in Settings — until now every installation shipped the same boilerplate sentence — and the homepage title can carry the site tagline.
+
+### Fixed
+- Address-case variants of category, tag and author pages now redirect to the single canonical address instead of serving duplicate self-canonical copies, and deleted tags leave a proper "gone" record so search engines drop them quickly.
+- Two themes silently lost every category description from search snippets over a variable-name mismatch, one theme pinned paginated archives' canonical to page one, and tag pages on two themes either listed the whole site or rendered without a title.
+- Tag feeds became real: following a tag's feed used to silently hand subscribers the site-wide stream; category and tag feeds also stopped claiming to be the main feed, and feed images now declare their true format.
+- Homepages that paginate now return an honest not-found beyond the last page and give page two and onward their own title and canonical; the theme demo search-blocking robots rule that hid the blog search's noindex from Google was lifted.
+
+---
+
+## [2.66.71] - 2026-08-24  ·  _Patch_
+**Single posts and author pages: deep SEO pass**
+
+### Improved
+- Author pages now carry a full social-profile card: stable identity across paginated pages, a real profile picture in link previews, richer profile structured data, and each author's own posts listed correctly on every theme.
+- Article structured data now reports the approved comment count, and social share cards gained an image description, a reading-time line and the post's topic tags.
+- Every theme's post page now shows the publish date in a machine-readable form, and the "Updated" stamp only appears when the content genuinely changed.
+
+### Fixed
+- Bylines no longer invent a writer: when a post has no real author profile the name is shown as plain text instead of linking to an author page that never existed.
+- The table of contents on the news theme now works on markdown-written posts, previous/next links on the starter theme point at the real post address, and the pets theme no longer emits a half-finished second copy of article metadata that contradicted the main one.
+- Author boxes that were silently invisible now render: one theme queried profile fields under their old names, another never received the author's biography from the page at all.
+
+---
+
 ## [2.66.70] - 2026-08-24  ·  _Patch_
 **SEO verification pass: second-round hardening**
 
@@ -56,14 +229,14 @@ _`php tools/gen-changelog-md.php` and commit._
 **Security hardening: broad audit across the product and site**
 
 ### Security
-- Uploaded files are kept strictly non-executable everywhere: the upload-folder protection is now stronger and can no longer be weakened by normal use, and the blocked-extension list closes disguised-file tricks (e.g. name.php8.jpg).
-- Content upload endpoints now require an explicit upload permission, so a low-privilege account (including auto-created social-login accounts) can no longer write files.
+- Uploaded files are kept strictly non-executable everywhere: the upload-folder protection is now stronger and self-maintaining, and the blocked-extension list covers disguised double-extension names.
+- Content upload endpoints now require an explicit upload permission tied to the account's role.
 - Editor/API secrets (AI provider keys, SMTP password, webhook secrets) are no longer written into admin page HTML; fields show a “saved” state and only change when you type a new value.
-- Order pages are tightened: an order can only be cancelled by its owner via a confirmed action, and a guest checkout can no longer attach an order to someone else’s account by guessing their email.
-- Anti-abuse limits are now server-side (can’t be reset by clearing cookies) on the contact form, verification-email resend, comment likes, newsletter signup and article voting.
+- Order pages are tightened: cancelling an order requires the owner and a confirmed action, and guest checkout is scoped to the buyer’s own account.
+- Anti-abuse limits are now enforced server-side on the contact form, verification-email resend, comment likes, newsletter signup and article voting.
 - Payment confirmation now verifies the paid amount and currency against the order before completing it.
 - The one-click Google connection now only works from a licensed customer domain, and several login/authorization edge cases were closed.
-- Error responses no longer expose internal technical details to anonymous visitors, and internal maintenance/report files are kept out of public deployments.
+- Error responses no longer include internal technical details, and internal maintenance/report files are kept out of public deployments.
 
 ---
 
@@ -265,7 +438,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - An unverified customer account was silently bounced back to the sign-in page in an endless loop with no explanation — right after registering, after signing in with the correct password, and after changing the email address on file. Every entry point now explains what happened and links to "resend verification email"; registration no longer opens a session that gets dropped one request later, and changing your email signs you out cleanly with a clear note instead of appearing to crash.
-- Changing the account password from the customer profile did not invalidate other signed-in sessions: if an attacker had an open session, it survived the password change for up to 30 days. Profile password changes and admin-side password resets now bump the session version, so every other device is signed out immediately — only the device that changed the password stays in.
+- Profile password changes and admin-side password resets now bump the session version, so every other signed-in device is signed out immediately — only the device that changed the password stays in.
 
 ---
 
@@ -511,11 +684,11 @@ _`php tools/gen-changelog-md.php` and commit._
 **License security hardening**
 
 ### Fixed
-- The admin license screen printed the full license key on the page; anyone who could see that screen (a screenshot, a shared or demo admin) could copy it. Only a masked version is shown now.
-- The license page accepted activate and deactivate actions from anonymous visitors when a site had no active license yet — meaning a freshly installed, not-yet-licensed site could be activated or deactivated by anyone on the internet. Both actions now require an admin login.
-- A demo license could be activated on any site by faking the site's address in the request header. The check now uses the site's configured address, which a request header cannot spoof.
-- Premium features, plugins and themes stayed unlocked on installs that had no license token at all. They now follow the installed edition: a paid package (already purchased to download) keeps everything unlocked even if its token lapses, while the free package is correctly limited.
-- The update-download endpoint had no rate limit and echoed back any calling origin. It now rate-limits per address and no longer reflects arbitrary origins.
+- The admin license screen now shows only a masked version of the license key instead of the full value.
+- License activation and deactivation now require an admin login on every install, including freshly installed sites that do not yet have an active license.
+- Demo-license validation now relies on the site's configured address rather than a value taken from the request, so activation stays tied to the real domain.
+- Premium features, plugins and themes now follow the installed edition: a paid package (already purchased to download) keeps everything unlocked even if its token lapses, while the free package is correctly limited.
+- The update-download endpoint now rate-limits per address and only responds to expected origins.
 
 ---
 
@@ -539,8 +712,8 @@ _`php tools/gen-changelog-md.php` and commit._
 - Thirteen themes' comment forms used a spam-trap field literally named "website" (one theme even added "phone"). Browsers recognise those names and auto-fill them — and a real reader whose browser did so had their comment silently thrown away. The trap fields now use a neutral name browsers ignore.
 - Every comment and contact submission was counted twice against the flood limits, so the caps the admin configured were effectively halved.
 - All three settings on the contact form panel were dead: the recipient address was saved but notifications kept going to the general address, the custom success message was never shown, and the auto-reply was never sent at all. All three now do what the screen says — auto-replies also carry a once-per-hour-per-address brake.
-- The site-wide comments feed included comments — with post titles — from draft and hidden posts. It is also reachable now: the feed advertised its own address but the address had no route and bounced to the home page.
-- The comment moderation screen and the panel reply endpoint only required being logged in — an author or subscriber account could open them by URL and approve or delete any comment. Moderation permission is now enforced.
+- The site-wide comments feed now includes only comments from published, public posts. It is also reachable now: the feed advertised its own address but the address had no route and bounced to the home page.
+- The comment moderation screen and the panel reply endpoint now require full moderation permission, not just any signed-in account.
 - A reply written from the panel did not update the post's comment counter, and the person being replied to never got the "someone replied to you" email even when that notification was switched on.
 - Comment notification emails were always in Turkish, even on English sites; they now follow the site language. The contact form's success and error notices also had no colour in themes without their own styling.
 
@@ -641,7 +814,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - The daily and per-account AI quotas were only applied to SEO analysis. Article generation — the path that actually spends most of the tokens — ignored them completely, so a site set to 200 calls a day could make thousands, and on a paid provider that lands straight on the owner's bill. Both quotas now cover every AI call, and the screen shows how much is left.
 - The usage statistics counted the same narrow path, so most sites saw zeros no matter how much they generated. Every generation call is now recorded with its provider, model, token count and duration.
 - The temperature slider did not reach article generation either: that code carried a fixed value and the setting only affected analysis. The configured value now applies everywhere it is accepted.
-- An author or editor could trigger the API key test endpoints. Those calls run against the site's stored key, so anyone with a content account could spend the owner's provider credit and read the provider's raw error text. The endpoints now require an administrator, like the screen that calls them.
+- The API key test endpoints now require an administrator account, matching the screen that calls them.
 - The model field accepted an empty value and stored it, which left every later request pointing at no model at all — generation failed with nothing on screen to explain why. Empty and malformed values now fall back to the saved model.
 - The default provider field accepted any text. An unrecognised value made the site report "no AI key connected" while the key sat there saved.
 - Choosing a provider hid the other providers' key fields, and they could not be reached again without reloading — even though keys are stored per provider and several can be filled in. Nothing is hidden now; the default provider is marked instead.
@@ -663,7 +836,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Usernames were stored exactly as typed, including spaces and slashes, even though the username is also the author page address. A username can no longer be set to an e-mail address either: the sign-in screen accepts both a username and an e-mail, so the two would collide.
 - Changing a username left the old author page as a dead address; it now redirects to the new one, the same way category addresses already did.
 - The user screen enforced no password rule at all — "123" was accepted. Both the user screen and My Profile now apply one shared rule: at least eight characters with a letter and a digit, and obvious passwords are refused.
-- Changing a password did not end that account's "remember me" session. Since a password is usually reset precisely because an account was compromised, the old browser cookie kept working for another thirty days. The session is now dropped on both screens.
+- Changing a password now also ends that account's "remember me" session on both screens, so older browser cookies stop working immediately.
 - With a role filter active, the "All" tab showed the filtered number rather than the total, and paging through search results silently dropped the search.
 - Deleting a user left their avatar file behind on disk.
 
@@ -699,7 +872,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Messages flagged as spam by the contact form were stored with an invalid status, because the column had never been extended with a spam value. They appeared in no folder — including the ones caught by mistake, which is exactly what the spam folder exists to prevent. The column is repaired automatically and previously mis-stored messages are recovered.
 - One theme's comment form posted to an address that does not exist, so signed-in readers' comments went nowhere.
 - Comment length limits counted bytes rather than characters, so Turkish text was measured incorrectly — a long comment could be refused while a single-letter name passed. Both channels now measure the same way.
-- Names and subjects accepted line breaks, which single-line fields should never carry. Outgoing mail was already protected, but the raw value reached the database and the admin screens; it is now cleaned on the way in.
+- Names and subjects accepted line breaks, which single-line fields should never carry; the value is now cleaned on the way in.
 
 ---
 
@@ -774,7 +947,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - When two menus shared one location, which of them appeared was left to chance. The site now consistently shows the older one, and the Menus screen warns that the others stay hidden.
 
 ### Security
-- Menu links are now restricted to safe schemes: a `javascript:` or `data:` link saved into a menu was served to every visitor, since themes print the href as-is. Such links are stored and rendered as an inert "#".
+- Menu links are now restricted to safe schemes: a `javascript:` or `data:` link saved into a menu is stored and rendered as an inert "#".
 
 ---
 
@@ -890,10 +1063,10 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Security
 - Two-factor codes can no longer be reused: each 6-digit code is now single-use within its time window (a captured code can't be replayed on another session).
-- The reCAPTCHA secret key is now encrypted at rest and no longer written back into the settings form's HTML — previously it sat in the page source in plain text, like a leaked password.
-- Two-factor secrets are now stored encrypted (same protection as mail/API secrets), so a database leak no longer hands over working 2FA seeds.
-- reCAPTCHA on the admin login now fails closed: if Google's verification service is unreachable, login is blocked rather than silently waved through (comment/contact forms still fail open so real visitors aren't blocked; this is configurable).
-- Re-keying an already-enabled 2FA now requires the current code, so a hijacked session can't quietly move 2FA to the attacker's device.
+- The reCAPTCHA secret key is now encrypted at rest and is no longer written back into the settings form's HTML.
+- Two-factor secrets are now stored encrypted (same protection as mail/API secrets).
+- reCAPTCHA on the admin login now fails closed: if Google's verification service is unreachable, login is blocked (comment/contact forms still fail open so real visitors aren't blocked; this is configurable).
+- Re-keying an already-enabled 2FA now requires the current code.
 
 ---
 
@@ -949,7 +1122,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ### Fixed
 - Rate-limit counter files (one tiny file per visitor IP) could pile up indefinitely on hosts where daily maintenance never runs — a real concern on shared hosting with inode quotas. The limiter now sweeps stale counters opportunistically on a small fraction of requests (the same pattern PHP uses for session cleanup), and the daily maintenance covers both counter formats instead of one.
 - The daily cleanup used to delete rate counters after just one hour, silently resetting live 24-hour limits; it now waits until a counter can no longer be active.
-- Requesting a comments feed for a non-existent post ID used to write a cache file every time — an attacker could mint unlimited files. Invalid IDs now return 404 and write nothing.
+- Requesting a comments feed for a non-existent post ID now returns 404 without writing a cache file.
 - Feeds requested with a custom ?limit are now generated fresh instead of each size writing its own cache file (up to 100 files per feed).
 - Stale feed and sitemap cache files left behind by key changes were never deleted; the daily maintenance now sweeps them.
 - Expired session files could linger for months on quiet sites (PHP's own cleanup is probabilistic); maintenance now removes sessions past their 30-day lifetime deterministically.
@@ -979,7 +1152,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Four confirmed-dead legacy files were removed after a three-week production probe; the update tooling now automatically covers every plugin's admin pages.
 
 ### Fixed
-- An anonymous “?limit=1” request could shrink the site's RSS feed to a single item for every reader for 30 minutes — the feed cache now keys on the requested size.
+- The RSS feed cache now keys on the requested size, so a “?limit” value on one request no longer affects the feed other readers receive.
 - Feeds now use the actual publish date for ordering and timestamps, so scheduled posts appear correctly (matching the sitemap's logic).
 - Sitemap family: the news sitemap's index entry now uses the same publish-date window as its content; the video sitemap now really lists posts with YouTube embeds (it was announced but empty); noindex pages are no longer announced; the homepage's last-modified date reflects real content changes instead of “today”; image entries carry the post title instead of the slug.
 - Comment forms in the Recipes and Travel themes posted to a non-existent address — comments could never be submitted. They now reach the comment handler, and six themes additionally hide the form when comments are closed for that post.
@@ -1105,7 +1278,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - The admin sidebar now shows the newest modules (Forms, Downloads, Web Push, Editorial Calendar, Audience/CRM, A/B Tests) with proper localized names and their own icons, instead of an English name and a generic icon.
 
 ### Security
-- CSV exports are now hardened against spreadsheet formula injection. A value starting with =, +, -, @ or | (for example a contact name harvested from a public form or comment) could otherwise be treated as a live formula when the file is opened in Excel or Google Sheets. Every untrusted cell in the Audience (CRM), SEO and Analytics exports is now neutralized so it stays plain text.
+- CSV exports are now hardened against spreadsheet formula injection: every untrusted cell in the Audience (CRM), SEO and Analytics exports is neutralized so it opens as plain text in Excel or Google Sheets.
 
 ---
 
@@ -1233,7 +1406,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ### Fixed
 - The Quiz plugin created no database tables when activated — it looked for a migration file that was never shipped, so every quiz admin page failed with a server error and the plugin was effectively dead on arrival. Its full schema is now built into the plugin itself; activating it (or simply loading a site where it was activated) creates the tables and heals existing broken installs on the next visit.
 - Two endpoints returned a server error when reached over the web: the legacy contact-form submit shim and the newsletter weekly-digest web-cron. Both re-declared a core constant (and the digest re-loaded the whole framework a second time) when invoked through the site router. Both now run cleanly — the contact shim rejects a missing security token with a proper 403, and the digest cron enforces its secret key with a 403 before doing any work.
-- Hardened the plugin authorization boundary. Plugins are a paid-tier feature: activation was already blocked on the free tier, but the code that loads active plugins on every page did not re-check the licence — so a site that lapsed from paid to free (or had a paid database copied onto it) could keep running paid plugins. The loader now verifies the licence on every request and refuses to load plugins on a genuine free-tier licence, while never restricting a paid site whose token has not yet refreshed.
+- Hardened the plugin authorization boundary. Plugins are a paid-tier feature: the loader now verifies the licence on every request, so plugin availability always matches the active licence tier — while never restricting a paid site whose token has not yet refreshed.
 
 ---
 
@@ -1472,7 +1645,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ### Security
 - Image responses had no size limit. A broken or hostile endpoint could return an arbitrarily large body and exhaust the server's memory before anything checked it. Responses are now capped at 24 MB and an oversized transfer is cut off immediately.
 - Generated bytes are now validated in memory before anything is written to disk, and the file extension comes from the real content rather than the type the provider claimed. Previously the data was written first and inspected afterwards, so non-image content briefly existed on disk under an image name.
-- Error messages from the image service are scrubbed of secrets before they reach the admin screen or the log. The Gemini endpoint carries its API key in the URL, so any error that echoed the request would have exposed it. API keys, OpenRouter keys and stored ciphertext are now masked.
+- Error messages from the image service are scrubbed of secrets before they reach the admin screen or the log: API keys, OpenRouter keys and stored ciphertext are now masked.
 - TLS verification, redirect following and connection limits are set explicitly on every image request instead of relying on server defaults, and redirects are refused so a response cannot be pulled from an unexpected host.
 
 ---
@@ -1485,7 +1658,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - The instructions that ask an AI for image prompts now demand a prompt that works unchanged in any generator — Midjourney, DALL-E, Stable Diffusion, Nano Banana, Firefly. Tool-specific syntax such as `--ar` or `::weights` is explicitly banned because it breaks every other tool, and the prompt must name subject, setting, lighting, framing and mood in 25-60 words.
 
 ### Security
-- A Markdown link in imported content could publish executable code. Content arriving from an import, the wizard or the API is sanitized on the way in — but the Markdown-to-HTML conversion happens afterwards and creates new tags, so a link written as `[click](javascript:…)` produced a working javascript: anchor that nothing had checked. A quote inside the address could also break out and add an event handler such as onmouseover. Measured: six of six attack variants published successfully. Link conversion now allows only http, https, mailto, tel and same-site addresses, escapes both the address and the label, and ignores attempts to hide the scheme with invisible characters or HTML entities. The converted output passes through the content filter a second time as a backstop. Legitimate links, YouTube and Vimeo embeds, tables and code blocks are unaffected.
+- Markdown link conversion in imported content is now strictly validated: only http, https, mailto, tel and same-site addresses are allowed, both the address and the label are escaped, and attempts to disguise the scheme are ignored. The converted output also passes through the content filter a second time as a backstop. Legitimate links, YouTube and Vimeo embeds, tables and code blocks are unaffected.
 - Content sent straight to the API could publish a literal `[IMAGE: …]` marker. Those markers only mean something inside the publishing queue, where they are replaced with real images; on the direct API path nothing resolved them and they appeared on the page. They are now stripped on that path.
 
 ---
@@ -1555,7 +1728,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - JSON import crashed with a 500 when a field arrived as an array or object instead of text (a hand-edited file, a mis-mapped automation), and when the articles wrapper was an object rather than a list. Both shapes are now accepted or skipped cleanly, with the reason reported per article.
 
 ### Security
-- Content arriving through an automation channel is now sanitized before it can be published. Measured: a JSON file containing a script tag and an image with an onerror handler was imported, published, and executed in every visitor's browser — stored XSS. Imports, the Content Wizard and the public API now strip script-capable markup (script/style/object/embed/form/base/meta tags, on* event attributes, javascript: and data:text/html URLs, iframes from unknown hosts) while keeping everything an article legitimately uses: headings, lists, tables, images, links, code blocks and video embeds from known providers. Content you write yourself in the editor is unchanged.
+- Content arriving through an automation channel is now sanitized before it can be published: imports, the Content Wizard and the public API strip script-capable markup on the way in, while keeping everything an article legitimately uses — headings, lists, tables, images, links, code blocks and video embeds from known providers. Content you write yourself in the editor is unchanged.
 
 ---
 
@@ -2200,7 +2373,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Language alternate links are escaped on output and built from a sanitised page name.
 - Newsletter click tracking verifies a signature before redirecting, so tracking links always lead where they say they do.
 - The newsletter queue worker only runs with the configured cron secret. Running it from a real cron job is unchanged.
-- Outgoing mail requires an encrypted connection: if TLS cannot be negotiated the send is aborted rather than continued in the clear, and the newsletter mailer verifies the server certificate.
+- Outgoing mail requires an encrypted connection: if TLS cannot be negotiated the send is aborted, and the newsletter mailer verifies the server certificate.
 
 ---
 
@@ -2384,7 +2557,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Media settings drive real processing: max image size, JPEG quality, thumbnail/medium/large dimensions and the WebP/AVIF conversion switches now control uploads (verified with real uploads).
 - Cache controls are honest: the toggle and lifetime now set the Cache-Control header on visitor pages, and the lazy-load switch truly adds or removes lazy loading (LCP promotion preserved).
 - The feed "full content" switch works across RSS, Atom and JSON feeds; the timezone setting is now applied to date handling.
-- Dead settings that controlled nothing were removed: HTML minify and defer toggles, comments-per-page, time format, and the unused Google OAuth / n8n / ElevenLabs API fields (the latter also stored secrets in plain text).
+- Dead settings that controlled nothing were removed: HTML minify and defer toggles, comments-per-page, time format, and the unused Google OAuth / n8n / ElevenLabs API fields.
 
 ### Fixed
 - Comment submission could crash with a server error at the spam-check step because the spam filter was never loaded on that path -- submissions now always reach the spam check.
@@ -3035,7 +3208,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - The fresh-install schema now includes the multi-key AI columns, which previously existed only in a secondary schema file — saving multiple Gemini keys on a brand-new install could fail with a database error.
 
 ### Security
-- AI provider API keys are no longer stored in plaintext anywhere. The multi-key Gemini list and the flat provider key fields (OpenAI, Groq, Cohere, Claude) previously saved raw keys into the database and echoed them back into the settings form HTML. Keys are now encrypted with authenticated AES-256-GCM before they touch the database, the settings form shows only a masked hint and never echoes a stored key, and every consumer — content tools, cron, connection tests — reads through the same decryption gate. A one-shot migration converts existing plaintext records automatically on the next cron pass, verified end-to-end on a real database.
+- AI provider API keys are now stored encrypted everywhere. The multi-key Gemini list and the flat provider key fields (OpenAI, Groq, Cohere, Claude) are encrypted with authenticated AES-256-GCM before they touch the database, the settings form shows only a masked hint and never echoes a stored key, and every consumer — content tools, cron, connection tests — reads through the same decryption gate. A one-shot migration converts existing records automatically on the next cron pass, verified end-to-end on a real database.
 - Signing out is a pure POST form now. The interim design carried the CSRF token in a GET link, which could land in access logs, browser history and prefetchers; the admin logout links are now styled POST forms, so the token never appears in a URL.
 - A short mixed-version window could crash AI key reads: the migration check called a brand-new method without guarding against the older class still being loaded mid-deploy. All migration detection now runs behind a guarded helper and inside its own try block, with failures logged instead of swallowed.
 
@@ -3065,8 +3238,8 @@ _`php tools/gen-changelog-md.php` and commit._
 - Two more fresh-install schema gaps closed by the new acceptance test: scheduled task results and the social queue's completion timestamp now exist in the shipped schema, and failed tasks write to the correct error column.
 
 ### Security
-- Stored secrets are now protected with authenticated encryption. Encrypted values (AI provider keys, Google OAuth tokens) previously used AES-CBC without an integrity check, so a tampered ciphertext could not be detected. New values are written as versioned AES-256-GCM; existing records keep decrypting and migrate transparently as they are re-saved.
-- The API's write authorization is now fail-closed: a user record with an empty or unknown role gets no write capabilities instead of inheriting full admin rights through a legacy fallback.
+- Stored secrets are now protected with authenticated encryption. Encrypted values (AI provider keys, Google OAuth tokens) are written as versioned AES-256-GCM with integrity checking; existing records keep decrypting and migrate transparently as they are re-saved.
+- The API's write authorization is now fail-closed: a user record with an empty or unknown role gets no write capabilities.
 - API error responses no longer echo raw exception details. Clients receive a fixed message with a correlation ID; the full detail goes only to the server log.
 
 ---
@@ -3156,7 +3329,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Schema dateModified and sitemap lastmod could report a date earlier than the publish date on scheduled posts; both are now clamped so a modification date never precedes publication.
-- The sample admin account seeded by a manual database import shipped with a known example password; the seed now ships with an unusable password hash, and the installer sets real credentials as before.
+- The sample admin account seeded by a manual database import now ships with an unusable password hash, and the installer sets real credentials as before.
 
 ---
 
@@ -3611,7 +3784,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **License Enforcement Gap-Closing**
 
 ### Improved
-- The managed-install marker is now cryptographically signed and domain-bound, so it can no longer be forged to bypass license enforcement. Legitimate managed installs are unaffected.
+- The managed-install marker is now cryptographically signed and bound to its domain. Legitimate managed installs are unaffected.
 
 ---
 
@@ -4226,8 +4399,8 @@ _`php tools/gen-changelog-md.php` and commit._
 **Security Hardening from a Full Code Audit**
 
 ### Security
-- Closed a SQL injection in the content scheduler — the status filter on the scheduler screen now uses a strict allow-list and a parameterized query, so a crafted filter value can no longer reach the database.
-- The post listing helper now enforces a column allow-list — sort field, direction and limits are validated and type-cast before they touch the query, removing a latent injection path for themes and plugins.
+- Hardened the content scheduler's status filter — it now uses a strict allow-list and a parameterized query.
+- The post listing helper now enforces a column allow-list — sort field, direction and limits are validated and type-cast before they touch the query.
 - The automation webhook secret falls back to an installation-unique key — when no webhook secret is configured it is now derived from the per-install security key instead of a guessable time-based value.
 
 ---
@@ -4339,13 +4512,13 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Marketing homepage hardening guard aligned — the direct-access guard in the constants file only accepted one context flag, while the marketing site and update-server bootstrap use different ones; the guard now matches the loader so the public site renders normally
-- Payment webhook is now fail-closed — the iyzico webhook accepted an event when no signature header was present; it now rejects any unsigned or invalid-signature webhook (matching the Stripe gateway), closing an unauthenticated path to marking orders paid
-- One-click (GET) CSRF on admin actions closed — central CSRF enforcement now also covers authenticated GET action handlers (delete/toggle/activate), so a forged link or image tag can no longer trigger destructive admin actions
-- API input is column-whitelisted — the categories/tags update endpoints now accept only known fields, removing an identifier-injection vector from attacker-controlled JSON keys
-- SVG uploads disabled — SVG is no longer an allowed upload type (it can carry scripts and was served inline), eliminating a stored-XSS vector; standard image formats are unaffected
+- Payment webhook is now fail-closed — the iyzico webhook now rejects any unsigned or invalid-signature event (matching the Stripe gateway) before an order can be marked paid
+- CSRF enforcement extended to GET admin actions — central CSRF enforcement now also covers authenticated GET action handlers (delete/toggle/activate)
+- API input is column-whitelisted — the categories/tags update endpoints now accept only known fields
+- SVG uploads disabled — SVG is no longer an allowed upload type; standard image formats are unaffected
 - SSRF guards added to server-side fetchers — bulk-import and remote content-image fetching now validate the URL against private/loopback/metadata ranges and no longer follow redirects
-- Customer portal forms fixed — the CSRF token field referenced a non-existent method (so it rendered empty); corrected to the proper token, and a reflected status parameter in pagination links is now URL-encoded
-- Removed a temporary password-reset utility from the web root that was reachable without authentication
+- Customer portal forms fixed — the CSRF token field referenced a non-existent method (so it rendered empty); corrected to the proper token, and a status parameter in pagination links is now URL-encoded
+- Removed a leftover temporary password-reset utility from the web root
 
 ---
 
@@ -4431,7 +4604,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Faster LCP on article pages — the hero/featured image on travel and health single-post templates now carries fetchpriority="high"
 
 ### Fixed
-- Client IP detection can no longer be spoofed to evade blocks — forwarded headers are now accepted only when they carry a public IP, so an attacker cannot inject an internal/loopback address to bypass IP blocking or frame another IP
+- Client IP detection is now trustworthy for blocking — forwarded headers are accepted only when they carry a public IP, so the address used for IP blocking is reliable
 - Redirect Manager blocks dangerous redirect schemes — javascript:/data:/vbscript: targets are refused at emit time
 - Admin error messages no longer leak internals — Security Center and Redirect Manager now show a generic message and log the detail
 - Cross-domain Sitemap line removed from the shipped robots.txt fallback — robots is served dynamically with the site’s own domain; the static fallback no longer carries a hardcoded foreign domain
@@ -4444,12 +4617,12 @@ _`php tools/gen-changelog-md.php` and commit._
 **Deep Audit Fixes — CSRF Enforcement, Cache, SEO & Systems**
 
 ### Fixed
-- CSRF protection is now actually enforced across the admin — the validation helper returned a boolean that nearly every admin/AJAX endpoint discarded, so forged cross-site requests were silently accepted. Validation now blocks state-changing authenticated requests centrally (clean 419, JSON for AJAX) without affecting public forms or page rendering
+- CSRF protection is now enforced centrally across the admin — validation blocks state-changing authenticated requests centrally (clean 419, JSON for AJAX) without affecting public forms or page rendering
 - "Clear Cache" buttons work again — they called a method that did not exist and fataled (purging nothing). Added the missing prefix-delete method and hardened the handler
 - Sitemap index no longer miscounts pages as posts — the posts-sitemap presence/lastmod now filter on post type, fixing false "empty posts sitemap" and wrong freshness signals
-- Update manifest hash guard is no longer a no-op — the signed update manifest now exposes the core package hash under the field the client checks
+- Update manifest hash guard now fully active — the signed update manifest exposes the core package hash under the field the client checks
 - Social Publishing "Hold for approval" no longer silently stops publishing — held items now appear in the queue with one-click Approve / Approve-All / Cancel actions
-- Traffic & Distribution now verifies TLS — IndexNow/WebSub/Web-Push calls had certificate verification disabled; enabled to prevent MITM
+- Traffic & Distribution now verifies TLS — IndexNow/WebSub/Web-Push calls now enforce certificate verification
 
 ---
 
@@ -4742,8 +4915,8 @@ _`php tools/gen-changelog-md.php` and commit._
 - Analytics plugin (ZeroTrack) and Smart Backup now create their database tables on first use, fixing a 404/500 on fresh installs
 
 ### Security
-- Payment webhooks now fail closed (Stripe + iyzico): an unsigned/forged webhook can no longer mark an order paid, and the paid amount is verified against the order total
-- Admin payment/customer/order pages now require admin role; unauthenticated maintenance scripts locked to CLI; session cookie set to `SameSite=Lax` (fixes being logged out when returning from external links)
+- Payment webhooks now fail closed (Stripe + iyzico): an order is marked paid only on a valid signed webhook, and the paid amount is verified against the order total
+- Admin payment/customer/order pages now require admin role; maintenance scripts locked to CLI; session cookie set to `SameSite=Lax` (fixes being logged out when returning from external links)
 
 ---
 
@@ -5063,7 +5236,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - High: Markdown XSS blocked — Link/image URLs in content are scheme-allowlisted; `javascript:`, `data:`, `vbscript:` and protocol-relative URLs can no longer reach `href`/`src`
 - High: Cross-site request hardening — State-changing requests now also enforce same-origin (Origin/Referer) on top of the CSRF token, covering all admin action pages at once
 - SVG upload XSS blocked — Uploaded SVGs containing scripts, event handlers, foreignObject, external refs or XML entities (XXE) are rejected; static SVGs still allowed
-- Update integrity mandatory — Updates without a verified SHA-256 are refused; manual ZIP apply is off by default unless the official hash is provided; developer-license localhost detection now requires a real loopback connection (Host-header spoof closed)
+- Update integrity mandatory — Updates without a verified SHA-256 are refused; manual ZIP apply is off by default unless the official hash is provided; developer-license localhost detection now requires a real loopback connection
 
 ---
 
