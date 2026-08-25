@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.87] - 2026-08-25  ·  _Patch_
+**Concurrency, scale & integrity deep-audit**
+
+### Fixed
+- A scheduled post is now published exactly once even if two schedulers happen to run at the same moment, so it can no longer fire duplicate auto-shares, duplicate newsletter sends or duplicate push notifications.
+- Deleting a category through the API now refuses when posts are still attached (matching the admin panel), instead of silently stripping those posts of their category.
+- Newsletter open and click counts are now counted atomically, so inbox pre-fetching (Gmail/Apple Mail) can no longer inflate the numbers with duplicate counts.
+- Comment threads with thousands of replies now build in milliseconds instead of seconds — the threading was rebuilt to scale linearly.
+- Dates that can't be parsed (e.g. a malformed or empty value from an old import) now render as blank instead of "1 January 1970", and a post scheduled with an unparseable date is held as scheduled instead of quietly going live immediately.
+- Hardening & cleanup: the analytics beacon now ignores spoofed forwarded-IP headers and is flood-limited; the A/B conversion link only counts same-site clicks; saving a site-wide OG image now requires an admin; permanently deleting a post cleans up its view/reaction/rating rows; and login-link tokens plus old newsletter queue rows are now pruned so they don't grow forever.
+
+---
+
 ## [2.66.86] - 2026-08-25  ·  _Patch_
 **Search, ads, quiz & security sweep**
 
