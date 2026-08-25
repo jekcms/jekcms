@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.86] - 2026-08-25  ·  _Patch_
+**Search, ads, quiz & security sweep**
+
+### Fixed
+- Instant search now actually uses the fast full-text index instead of silently falling back to a slow full-table scan on every keystroke, and the endpoint is rate-limited so it can't be hammered.
+- Device-targeted ads are no longer frozen across devices by the page cache: the cache now keeps a separate copy per device class, so mobile visitors get mobile ads and desktop visitors get desktop ads instead of whichever device loaded the page first.
+- Members/paid posts no longer leak their in-body images and embedded videos through the image and video sitemaps — only genuinely public posts contribute body media there (the cover image still appears, as before).
+- Two-factor setup now refuses to enable if the secret can't be stored encrypted, instead of quietly saving it in plain text.
+- Deleting a media file that's still used in posts now warns you it was in use (so broken image links aren't a silent surprise), and the download store limits how often the same email address can be sent a link (stops link-spam to someone else's inbox).
+- Contact/lead forms: the form-builder honeypot no longer uses a field name that browsers autofill, which was silently dropping some genuine submissions; the quiz block now prints its stylesheet/script once per page even with multiple quizzes.
+
+---
+
 ## [2.66.85] - 2026-08-25  ·  _Patch_
 **Editor, cache & membership audit**
 
