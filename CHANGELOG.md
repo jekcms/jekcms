@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.85] - 2026-08-25  ·  _Patch_
+**Editor, cache & membership audit**
+
+### Fixed
+- Autosave no longer touches a published post's live body: while you edit a post that's already online, the background save keeps your draft in the revisions list instead of pushing half-finished edits to the live page — nothing goes public until you press Update. New pages also keep their type instead of turning into blog posts.
+- Members/paid recipe posts now keep the ingredient list, steps and structured recipe data behind the paywall — the card, the FAQ and the page's recipe schema are shown only to signed-in members, matching how the article body is gated.
+- The page cache now refreshes correctly when you trash or restore a post or add a redirect, so removed content and new redirects take effect immediately instead of lingering for the cache lifetime. Cookie-free visitors also always get the site's default language, ending a case where the first visitor's language could stick for others.
+- Editor hardening: the button block now rejects javascript:/data: links like the other blocks, content saved by non-admin authors is cleaned server-side, the SEO panel escapes check text, and restoring a revision keeps your hand-picked URL instead of regenerating it from the title.
+- Importing images from another site is bounded and hardened further — a per-image size ceiling, certificate verification, and a pinned resolved address stop an oversized or tampered image from stalling the import.
+- Storefront: the checkout success page now shows the license key only in a short window right after payment (it's always in your email and portal too), and the update-check endpoint is rate-limited and no longer reflects arbitrary origins.
+
+---
+
 ## [2.66.84] - 2026-08-25  ·  _Patch_
 **Full-session audit hardening**
 
