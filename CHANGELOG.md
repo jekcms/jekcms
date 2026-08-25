@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.88] - 2026-08-26  ·  _Patch_
+**API authorization & content hardening**
+
+### Fixed
+- The automation/REST API now enforces the same role permissions everywhere: creating or deleting posts through the webhook endpoints, and managing categories, tags or comment moderation, now require the proper role — previously any valid API token could do these regardless of the account's role.
+- Automation endpoints can no longer edit or delete another author's post, reassign a post's author, or save unsanitized HTML through the bulk publish/import paths (which could inject scripts) — ownership, byline and content cleaning now apply on those paths too.
+- The bulk AI analysis job (which sends every post to the AI provider) now requires an administrator, and the per-post AI analysis is rate-limited, so a lower-privileged account can't burn through the site's AI key or quota.
+- Search result pages on three themes now count matches the same way the list is built, so the pagination total is accurate and no empty "phantom" pages are produced.
+- The marketing newsletter sign-up rate limit is now server-side (it could previously be reset by clearing cookies), the blog RSS feed pins its URLs to the real domain, and a saved post with an unparseable status value defaults safely instead of erroring.
+
+---
+
 ## [2.66.87] - 2026-08-25  ·  _Patch_
 **Concurrency, scale & integrity deep-audit**
 
