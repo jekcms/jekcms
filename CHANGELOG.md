@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.92] - 2026-08-26  ·  _Patch_
+**SEO plugins audit: social, distribution, Google, recipe**
+
+### Improved
+- Hardening across the SEO surface: social share links now use the canonical URL (so shared and syndicated links never point at a redirect), recipe structured-data text fields are stripped to plain text as Google expects, the browser-push subscribe endpoint is restricted to real push services (SSRF hardening) with a proper per-IP rate limit, and shipped recipe/quiz scripts and push fallback text no longer leak Turkish onto English sites.
+
+### Fixed
+- Auto-publishing to social networks no longer broadcasts private, members-only, paid or password-protected posts — only fully public posts are shared, and a gated post's social description can never fall back to its full body (which also protected the Dev.to/Hashnode full-body syndication).
+- The Google panel's GA4 / Tag Manager / AdSense settings actually take effect now — they were wired to a hook the themes never call, so enabling analytics in that panel injected nothing. They now flow through the site's single, consent-aware analytics injector, so there is one tag set (no double-counting) and cookie-consent is respected.
+- The IndexNow "ping on publish" switch is now a real switch — instant indexing could not actually be turned off before, and the panel's "last submit" status was always blank; it now reflects real submissions.
+
+---
+
 ## [2.66.91] - 2026-08-26  ·  _Patch_
 **Quiz plugin: premium polish and reliability**
 
