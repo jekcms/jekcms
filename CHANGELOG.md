@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.89] - 2026-08-26  ·  _Patch_
+**Newer-plugin audit: audience, editorial, edge & forms**
+
+### Improved
+- The editorial kanban board now supports real drag & drop between stages (the card's owner, date and note are preserved), overdue due-dates are highlighted, and editors — not just administrators — can use the board; plugin shortcuts in the admin sidebar are shown only to roles that can open them.
+- CRM quality-of-life: a per-contact delete button (for erasure requests), segments show how many members are actually e-mailable, the contact list says when it is truncated, and the activity timeline no longer mixes in other people's form submissions for addresses containing wildcard characters.
+- A/B tests: editing, activating or deleting an experiment now clears the page cache immediately (a just-activated test could look dead for the cache lifetime), the winner trophy waits for a sufficient sample, and equal conversion rates are compared exactly.
+- Digital downloads and form autoresponders now throttle outgoing e-mail per recipient/site-wide, form values have a sane length cap, and the Cloudflare panel explains that HTML is only edge-cached if you add a Cache Rule.
+
+### Fixed
+- Audience (CRM): unsubscribed and bounced newsletter contacts are no longer pulled into the audience or its CSV export, the export now carries a newsletter-consent column and streams any list size, contacts deleted at their source are removed on the next refresh, and the audience is refreshed automatically right before a segment broadcast so late subscribers are included.
+- Editorial calendar: scheduled posts now actually appear on the calendar on their scheduled day (they were invisible before), a post set to pending elsewhere shows in the Review column, moving a card can no longer race a simultaneous publish, and permanently deleting a post cleans up its planning card.
+- Web push: the plugin's settings no longer share storage keys with other plugins (toggling ZeroTrack could silently switch push off and vice versa — existing settings migrate automatically and VAPID keys are preserved so subscribers stay valid), the click counter only accepts clicks for real recent broadcasts with sane limits, and clearly-rejected fake subscriptions are pruned faster.
+- Cloudflare: turning "I'm Under Attack" on now reports an error if the API call failed instead of a false success, edge cache purges no longer block post/settings saves (they are queued and sent once per request, also removing duplicate purge calls), scheduled posts published by a real system cron now purge the edge too, and a failed reconnect no longer leaves the panel in a half-connected demo state.
+- Analytics real-IP: on sites directly behind Cloudflare, visitor IPs are now resolved from the edge header (validated against Cloudflare's official ranges), so unique-visitor counts, IP exclusions and the flood limiter work correctly instead of collapsing onto a handful of edge IPs.
+- Form Builder: renaming a field's label no longer silently detaches historical submissions from their CSV/archive column (machine names are now persisted), field names can't collide with the hidden system fields, and forms embedded on cached pages no longer double-submit with a failed first attempt.
+
+---
+
 ## [2.66.88] - 2026-08-26  ·  _Patch_
 **API authorization & content hardening**
 
