@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.90] - 2026-08-26  ·  _Patch_
+**Theme customizer: numeric dropdowns now save correctly**
+
+### Fixed
+- In the theme customizer, dropdown fields whose choices are numbers (for example the Recipes and Travel themes' "Grid columns" 2/3/4 selector) silently reverted to the default whenever you picked a different value — the saved value now sticks. All 14 themes' customizer fields were verified end to end (513 fields across colors, fonts, ranges, toggles, selects, code and image inputs) and theme switching, preview and one-click rollback were confirmed to keep a single clean settings row.
+
+---
+
 ## [2.66.89] - 2026-08-26  ·  _Patch_
 **Newer-plugin audit: audience, editorial, edge & forms**
 
