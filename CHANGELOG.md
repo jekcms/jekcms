@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.91] - 2026-08-26  ·  _Patch_
+**Quiz plugin: premium polish and reliability**
+
+### Improved
+- Result sharing is more robust: X, WhatsApp and Facebook buttons always appear (previously the whole share row vanished on some browsers), a native share sheet is offered on mobile, and copy-link stays where the clipboard is available.
+- Keyboard support: press 1–9 to pick an answer and Enter to advance — faster and more accessible play.
+- The public play endpoints are now rate-limited against flooding, the instant-feedback endpoint too, and answer keys are returned only for the questions actually answered (no leaking a whole question bank).
+- Completion IP addresses in the stats screen are now masked for privacy, and the standalone quiz page no longer shows its title twice.
+
+### Fixed
+- Embedded quizzes could render with no styling and never start on themes that build a table of contents (they parse the post twice) — the quiz's stylesheet and script are now emitted on every embed, so quizzes always work wherever [quiz] is placed.
+- The question/answer image picker stored an absolute URL that the front-end then prefixed again, producing broken images; picked images are now stored correctly and existing broken paths are healed automatically.
+- Deleting a quiz now removes its questions, answers, result bands and play records instead of leaving them orphaned, and editing a quiz no longer accumulates dead answer rows; a one-time cleanup clears any leftovers on upgrade.
+- Typing a slug that already belongs to another quiz no longer errors and loses your edit — it is made unique automatically.
+- Personality quizzes ignore the question-bank subset setting so every result band stays reachable and two identical answer sets always give the same result.
+
+---
+
 ## [2.66.90] - 2026-08-26  ·  _Patch_
 **Theme customizer: numeric dropdowns now save correctly**
 
