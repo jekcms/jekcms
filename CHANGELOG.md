@@ -8,6 +8,32 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.95] - 2026-08-26  ·  _Patch_
+**Advanced SEO panel: deep audit of all 16 tools**
+
+### Improved
+- SEO Health Check is faster and more honest: on hosts where the site cannot reach itself it stops after one connection attempt instead of blocking for a minute, marks the affected checks as "could not be measured" instead of inventing phantom schema errors, and category/author/content-quality counts now use the same visibility rules as the real sitemap.
+- SERP Identity Check never certifies "clean" when the live chain could not be measured, failing checks now show the expected-vs-actual values, and its HTML parsing tolerates attribute order and single quotes (fewer false alarms with custom themes).
+- Generated image alt text is Turkish-aware (İstanbul stays İstanbul), media-library fallbacks no longer keep the file extension, and the alt fixer no longer produces a duplicate alt attribute when the image tag lists alt before src.
+- The SEO tools' heavy statistics scans now run only on the tabs that display them, making the other tabs noticeably faster on large sites.
+
+### Fixed
+- Heading Fixer no longer flattens sub-headings: content starting at H3 keeps its H4/H5 structure when shifted up (previously every heading could end up as H2, which also broke theme-generated tables of contents).
+- "Send All Posts to IndexNow" now submits only publicly visible, indexable posts — member-only, private and noindex posts are excluded from the batch and from the counter.
+- The single-post "Fix" button on the Content SEO tab now fills only the missing meta fields, matching "Fix All" — a hand-written meta title is no longer replaced when only the description was missing.
+- The inline meta editor caps titles and descriptions at the real database budget (70/160 characters), so very long entries save cleanly instead of failing with a generic error.
+- "Ping Sitemap" reports the real result: the retired Google/Bing ping endpoints no longer produce a false green success — the button now submits the sitemap via IndexNow and shows what actually happened.
+- Slug Repair keeps its promise: repaired slugs now create automatic 301 redirects, only genuinely broken slugs are touched by default (hand-tuned slugs stay), and a new opt-in mode regenerates everything from titles when you really want that.
+- Year Updater now also updates the SEO title used in Google results (previously only the on-page heading changed while the search snippet kept the old year), and running it back and forth can no longer create redirect loops.
+- Redirect manager refuses rules that would loop (A→B while B→A exists, or a redirect pointing at itself via the full site URL) — these previously took the page down with an endless redirect.
+- The "fix old URLs" scanner and fixer now share one pattern list built from your own site address, so the banner count and the actual fix always agree (the fixer previously used a stale fixed list and fixed nothing on most sites).
+- Batch scans (strip links, fix URLs) use cursor paging so a row the transform cannot change no longer makes the progress loop run forever.
+- Auto-linker and Orphan Content now handle Turkish İ/ı correctly — titles containing İ (İstanbul, İş...) can finally receive automatic internal links — and only publicly visible posts are suggested or linked.
+- Content Optimizer preserves code blocks: cleanup no longer collapses indentation inside pre/code samples, keeps intentionally empty anchor/placeholder elements, and "reset" no longer deletes the content backups that make revert possible.
+- Several admin listing screens in the SEO tools now escape post titles and scan results before rendering, and a few tool endpoints that write content are now administrator-only.
+
+---
+
 ## [2.66.94] - 2026-08-26  ·  _Patch_
 **Post SEO analyzer: accuracy fixes and new checks**
 
