@@ -8,6 +8,29 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.96] - 2026-08-26  ·  _Patch_
+**Advanced SEO: second deep pass (contracts + content-torture)**
+
+### Improved
+- On installs without the Advanced SEO plugin (or with it disabled), the SEO Overview page now shows a "More SEO tools" strip linking Heading Fixer, Auto Internal Links, Featured Images, Orphan Content, Year Updater, Slug Repair and the redirect manager — previously those shipped but were unreachable.
+- The auto-linker progress log is now fully bilingual for English admins.
+- The two SEO score engines (editor dial vs SEO panel) now use the same title/description length thresholds, so a post no longer shows two different scores in the two places.
+- Meta text truncation is multibyte-safe (an em-dash at the cut boundary can no longer produce a broken character), and the AI image generator now stores featured images as an uploads-relative path so size variants and AVIF/WebP negotiation work and no dev URL leaks into social cards or the sitemap.
+- The auto-link ledger is no longer age-pruned, so posts linked months ago don't revert to "orphan" and get a duplicate link.
+
+### Fixed
+- The editor's "Canonical URL", "OG Title/Description" and "Twitter Title/Description" fields now actually take effect on the live page — they were saved and shown in the admin preview but no theme ever emitted them, so republished/syndicated posts could not point search engines at the original source and social cards ignored your custom titles.
+- Auto-generated focus keywords are Turkish-correct: a title containing İ (İstanbul, İş…) no longer produces a keyword with an invisible combining character that failed the analyzer's own "keyword in title" check and silently cost score points.
+- The image alt-text fixer no longer corrupts alt values containing a dollar sign (deal/price titles) and no longer stamps the wrong description onto a different image whose filename ends with the same name ("a.jpg" vs "data-a.jpg"); it also stops mistaking a "data-alt" attribute for a real alt.
+- Heading Fixer and Content Optimizer now leave headings inside HTML comments and code samples untouched, so a commented-out heading can no longer skew the fix and code examples are never rewritten.
+- Renaming a post's slug and then renaming it back no longer creates an infinite redirect loop that made the post unreachable (the same loop-hygiene the year tool already had is now in the core rename path and slug-repair tool).
+- SEO CSV import now maps columns by their header names instead of fixed positions, so a file built from the on-screen help no longer writes values into the wrong fields; it enforces the character limits, only touches non-empty cells (an empty cell no longer erases an existing value), validates robots/schema values, recomputes the score, and reports per-row errors.
+- SEO Health Check no longer hides real "missing core file" errors as "could not be measured" when the site can't reach itself, and it no longer pulls the entire post corpus into memory when scanning for numbered lists.
+- Redirect targets keep their query string, and a legacy protocol-relative redirect can no longer become an open redirect on the marketing site.
+- SERP Identity Check reads values containing an apostrophe correctly ("Maggie's Kitchen" no longer reports a false mismatch).
+
+---
+
 ## [2.66.95] - 2026-08-26  ·  _Patch_
 **Advanced SEO panel: deep audit of all 16 tools**
 
