@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.93] - 2026-08-26  ·  _Patch_
+**Migration/import and support module hardening**
+
+### Improved
+- The WordPress migrator plugin (for exporting a WordPress site) now writes its export into a private, per-run randomized folder and deletes the intermediate data files right after packaging, so an export can't be pulled from a predictable URL on servers where directory rules aren't enforced.
+
+### Fixed
+- Imported content from every WordPress path (CSV, package and REST) now passes through the same content-cleaning step the editor uses, so a hand-edited export or a compromised source site can no longer smuggle active markup into your published posts.
+- The REST and wizard migration tools are now administrator-only (they create posts and users and fetch remote content), and the wizard's per-post import step now requires a valid security token — matching the rest of the admin panel.
+- Imported posts with an unknown status now land as drafts (in the review queue) instead of going straight live.
+- Support ticket attachments can be downloaded again — the download link pointed at a page that did not exist, so staff could attach files but never open them; downloads are now served admin-only through a path-checked handler.
+- Support ticket status and priority updates are validated against the allowed set, and the average-resolution-time metric now uses the real resolved/closed timestamps.
+
+---
+
 ## [2.66.92] - 2026-08-26  ·  _Patch_
 **SEO plugins audit: social, distribution, Google, recipe**
 
