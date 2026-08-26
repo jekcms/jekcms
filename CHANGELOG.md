@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.94] - 2026-08-26  ·  _Patch_
+**Post SEO analyzer: accuracy fixes and new checks**
+
+### Improved
+- Two new writing checks in the SEO analyzer: a transition-word check (are your sentences connected for flow?) and a long-section check (a stretch of 300+ words with no subheading is now suggested for a subheading) — both work in Turkish and English.
+
+### Fixed
+- The live SEO score now judges the title by its full rendered length (your title plus the " | Site Name" the theme adds), so a title that looked fine but gets cut off in Google is now flagged — and the SERP preview's length number matches what is actually shown.
+- Internal vs external link counting is corrected: a protocol-relative link to another site ("//example.com/…") is no longer miscounted as an internal link.
+
+---
+
 ## [2.66.93] - 2026-08-26  ·  _Patch_
 **Migration/import and support module hardening**
 
