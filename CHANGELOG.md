@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.99] - 2026-08-27  ·  _Patch_
+**Affiliate + Search Console Insights: polish and fixes**
+
+### Improved
+- Small polish: the Search Console Insights "new" badge is now localized for English sites, the affiliate panel and schema check are lighter (one fewer query per request), and a couple of dead code paths were removed.
+
+### Fixed
+- Affiliate cloak links now use only temporary redirects (302/307): a permanent 301 could be cached indefinitely by browsers and CDNs, which would stop counting clicks and prevent you from repointing a link — the two things the feature is for. Any existing 301 link is served as 302 from now on.
+- Affiliate targets containing control characters (a pasted URL with hidden line breaks) are now rejected on save instead of producing a broken, destination-less redirect.
+- Auto-cloak matching now lowercases only the host, not the path — case-sensitive affiliate paths (e.g. Amazon product IDs) can no longer collide and cloak a link to the wrong destination.
+
+---
+
 ## [2.66.98] - 2026-08-27  ·  _Minor_
 **Affiliate Links: a new revenue channel**
 
