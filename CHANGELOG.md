@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.97] - 2026-08-27  ·  _Minor_
+**Search Console Insights: data-driven SEO**
+
+### Added
+- New "Insights" tab in Google Console that turns your real Search Console history into an action list — no more guessing which post to update. It keeps a daily history (previously the panel only showed a live snapshot) and every day highlights: Declining pages (clicks dropped ≥30% — top refresh priority), Striking-distance keywords (ranking 8–20 with high impressions — a small push lands them on page one), Keyword cannibalization (multiple pages competing for the same query), and Rising pages (what's working — make more like them).
+- Each page row links straight to the post editor, so you go from "this is declining" to editing it in one click.
+- The history is fetched automatically once a day in the background; a "Fetch now" button pulls it on demand. Insights keep showing even if the Google connection later expires (your history stays valuable), with a clear "reconnect to keep updating" notice.
+- Built entirely on the existing Google connection — no new setup, no extra permissions. Reuses the same one-click OAuth and encrypted token storage.
+
+---
+
 ## [2.66.96] - 2026-08-26  ·  _Patch_
 **Advanced SEO: second deep pass (contracts + content-torture)**
 
