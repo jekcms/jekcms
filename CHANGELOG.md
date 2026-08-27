@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.70.3] - 2026-08-28  ·  _Patch_
+**SEO core: multilingual sitemap discovery + consistency fixes**
+
+### Added
+- Multilingual sites are now fully discoverable: the posts sitemap lists published posts in EVERY public language (previously only the site language, which left translated posts — and any post in another language without a pair — invisible to crawlers), and translation pairs are announced with xhtml:link hreflang alternates including x-default, the format Google recommends.
+
+### Fixed
+- Category and tag sitemap entries no longer count future-dated scheduled-style posts: that mismatch could announce an archive in the sitemap while the page itself said noindex (a "submitted but noindex" contradiction in Search Console) and could even emit a future lastmod date.
+- A parent category whose posts all live in child categories is now announced in the sitemap index consistently with the category sitemap itself.
+- Posts embedding YouTube via iframe embed URLs now get VideoObject structured data on the page, matching what the video sitemap already announced.
+- /feed.xml and /rss.xml now 301-redirect to the canonical /feed instead of serving duplicate copies of the feed.
+- The installer's sample welcome post is now marked noindex — identical text across thousands of installs should not enter search indexes, and deleting it leaves no index residue.
+
+---
+
 ## [2.70.2] - 2026-08-28  ·  _Patch_
 **First-install experience polish + plugin management fix**
 
