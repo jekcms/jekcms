@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.70.2] - 2026-08-28  ·  _Patch_
+**First-install experience polish + plugin management fix**
+
+### Added
+- New sites start friendlier: the installer now localizes the default category to your site language (Genel/General instead of "Uncategorized") and seeds an editable welcome post with first-step tips — so the homepage is alive from minute one instead of empty. WordPress migrations remove the sample post automatically once real content arrives.
+- /rss now 301-redirects to the canonical /feed, so readers and tools typing the WordPress-style address no longer hit a 404.
+
+### Fixed
+- Activating or deactivating a plugin from the admin panel works again: a token-name mismatch introduced by an earlier security hardening made every plugin toggle fail with "Invalid security token" on fresh installs. The page now validates the token explicitly, and the shared helper accepts both token field names so the same class of mismatch cannot recur.
+
+---
+
 ## [2.70.1] - 2026-08-28  ·  _Patch_
 **Ad A/B, RUM and Critical CSS: measurement accuracy and hardening**
 
