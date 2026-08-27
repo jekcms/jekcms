@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.70.1] - 2026-08-28  ·  _Patch_
+**Ad A/B, RUM and Critical CSS: measurement accuracy and hardening**
+
+### Fixed
+- Ad A/B click counting is now much more accurate: starting a scroll gesture on an ad box no longer registers as a click on touch devices, switching tabs while hovering an ad is no longer mistaken for an ad click, and an empty ad container (ad blocker or unfilled ad) no longer counts as an impression — so CTR comparisons between variants reflect real behavior.
+- The Ad A/B panel no longer shows "Test ACTIVE" when the ad slot itself is disabled (which silently produced zero data); it now shows a clear "slot disabled" warning. Variant changes also flush the full-page cache immediately, so old variants stop being served the moment you edit the test.
+- RUM now records a perfect CLS score of 0 correctly. Previously only visits with some layout shift were counted, which made the CLS p75 look worse than reality; browsers without layout-shift support are recorded as "no data" instead of a fake perfect score.
+- Posts whose slug merely starts with "ara", "api" or "admin" (e.g. /araba-bakimi, /api-design) are no longer misclassified in RUM page types or silently excluded from analytics collection.
+- Critical CSS extraction keeps more valid selectors: :is()/:not() lists with commas, escaped class names and non-ASCII class names are no longer dropped (which could cause a brief unstyled flash), a stylesheet link inside an HTML comment can no longer confuse the transform, and a single unusually small page can no longer permanently disable critical CSS for the whole site.
+
+---
+
 ## [2.70.0] - 2026-08-28  ·  _Minor_
 **Critical CSS: inline above-the-fold styles with async theme stylesheets**
 
