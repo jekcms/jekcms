@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.68.0] - 2026-08-27  ·  _Minor_
+**Ad A/B testing: placement and size variants with impression/click measurement**
+
+### Added
+- Ad slots can now run A/B tests: define two or more code variants (different sizes, formats or layouts) for any slot under Ads → Ad A/B Testing, with per-variant traffic weights. Each visitor gets a sticky, cookieless variant assignment, so the same person always sees the same variant.
+- Impressions (counted when the ad is at least half visible) and clicks are now measured per variant, with bots filtered out. The panel shows 30-day impressions, clicks and CTR per variant, plus an estimated revenue column driven by a manually entered RPM.
+- The variant is chosen in the browser, so full-page caching keeps working at full speed — the cached HTML is identical for every visitor and no cache page needs to be bypassed for the test.
+- A lightweight standalone beacon endpoint records the events: it accepts only same-site requests, validates that the reported variant belongs to the reported slot, rate-limits per visitor, and stores only a salted daily hash — never the raw IP address.
+
+---
+
 ## [2.67.1] - 2026-08-27  ·  _Patch_
 **Link health checker: SSRF hardening**
 
