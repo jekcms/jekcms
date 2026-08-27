@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.70.0] - 2026-08-28  ·  _Minor_
+**Critical CSS: inline above-the-fold styles with async theme stylesheets**
+
+### Added
+- Pages now render faster: the CSS needed for the visible part of the page is inlined into the document head, and the theme's full stylesheets load asynchronously in the background (with a no-JavaScript fallback). This removes render-blocking CSS from the critical path and improves LCP and FCP.
+- The critical subset is generated automatically per theme from your site's real pages — no configuration, no theme edits, and it refreshes itself whenever the theme's CSS changes. Works on every theme.
+- Built-in safety rails: if the generated subset looks too small or too large, the page is served exactly as before; original stylesheet links are kept in a noscript fallback; and the feature can be switched off from the Performance panel (the RUM p75 numbers there will show you the effect).
+
+---
+
 ## [2.69.0] - 2026-08-27  ·  _Minor_
 **Performance (RUM): real-visitor Core Web Vitals panel**
 
