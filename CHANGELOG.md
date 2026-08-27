@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.67.0] - 2026-08-27  ·  _Patch_
+**Affiliate + Search Console Insights: reliability hardening**
+
+### Fixed
+- Search Console Insights no longer shows misleading trends when Google's API partially fails: if any part of a scheduled fetch errors out, the previous snapshot is kept and a retry is scheduled, instead of rebuilding the panel from incomplete data (which could have made every page look like it was rising or falling).
+- Insights comparison windows are now exact 28-day / previous-28-day ranges (ending yesterday, since today's data is always incomplete), so the totals and the per-page changes always agree.
+- Scheduled Search Console fetches now backfill any gap since the last successful run and are protected against overlapping runs, so a slow day or a missed cron no longer leaves holes in the daily trend.
+- Affiliate links keep working when a link is paused: a paused link's existing in-content links and /go/ clicks still resolve (pausing only removes it from new auto-cloaking) — previously a paused link 404'd and its [aff] shortcode vanished from the post.
+- An [aff] shortcode with a slug that no longer exists now preserves your custom anchor text as plain words instead of deleting it from the sentence.
+- Affiliate targets are validated harder on save: over-length URLs (which MySQL would silently truncate) and links that point back at your own /go/ cloak (a redirect loop) are now rejected with a clear error.
+
+### Security
+- Hardened the affiliate link-health monitor against SSRF: a target pointing at an internal or cloud-metadata address (localhost, 169.254.169.254, private ranges) is no longer added to server-side health probing.
+
+---
+
 ## [2.66.99] - 2026-08-27  ·  _Patch_
 **Affiliate + Search Console Insights: polish and fixes**
 
