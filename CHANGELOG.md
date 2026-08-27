@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.67.1] - 2026-08-27  ·  _Patch_
+**Link health checker: SSRF hardening**
+
+### Security
+- The outbound link-health checker (used by SEO and affiliate link monitoring) now validates the FINAL connection address, not just the originally saved URL: if a link redirects or its DNS resolves to an internal or cloud-metadata address (localhost, 127.x, 169.254.169.254, private ranges, IPv6 loopback/ULA), the probe reports it as unverifiable instead of revealing the internal service's status. This closes a server-side request forgery (SSRF) avenue where a crafted redirect could have been used to probe internal infrastructure.
+- Literal IPv6 URLs (e.g. http://[::1]/) are now correctly recognized and blocked by the safety gate.
+
+---
+
 ## [2.67.0] - 2026-08-27  ·  _Patch_
 **Affiliate + Search Console Insights: reliability hardening**
 
