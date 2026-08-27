@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.66.98] - 2026-08-27  ·  _Minor_
+**Affiliate Links: a new revenue channel**
+
+### Added
+- New "Affiliate Links" plugin to manage affiliate and outbound links in one place — a new revenue channel alongside ads. Each link gets a clean cloaked URL (yoursite.com/go/slug) that records the click server-side (bot-filtered, privacy-safe: no raw IP stored) and redirects to the target, so you can rename, disable or repoint a link without touching any post.
+- Automatic SEO safety: a content filter adds rel="sponsored nofollow noopener" to affiliate links (Google requires "sponsored" for paid links, and the wrong markup can cost you rankings) and can auto-nofollow all other outbound links. It can also auto-cloak any raw link in your content whose destination you've registered — existing posts are covered without editing them.
+- Drop a tracked link anywhere with [aff slug] (uses the link's name as anchor) or [aff slug]custom text[/aff]. Code blocks are left untouched.
+- A dashboard shows clicks per link (human vs bot separated), a 30-day click trend, and link status. Dead affiliate targets surface in the existing SEO → Broken Links checker, so you catch expired offers before they cost you.
+
+---
+
 ## [2.66.97] - 2026-08-27  ·  _Minor_
 **Search Console Insights: data-driven SEO**
 
