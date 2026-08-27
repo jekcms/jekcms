@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.69.0] - 2026-08-27  ·  _Minor_
+**Performance (RUM): real-visitor Core Web Vitals panel**
+
+### Added
+- A new Performance panel shows how fast your site really is for visitors: LCP, CLS, INP, FCP and TTFB are collected from real page views and reported as 75th-percentile values — the same method Google uses for Core Web Vitals — overall, by device, by page type, and as a "slowest pages" list that tells you exactly where optimization pays off.
+- The collector is a tiny inline script (no external CDN, no cookies) that sends a single measurement as the visitor leaves the page. It respects Do Not Track, skips logged-in users and bots, and works on every theme.
+- Privacy-first by design: only the page path, the metric values and a coarse device class are stored — no IP address, no session, no fingerprint. Collection can be switched off in the panel, and the switch is enforced on the server, not just in the page.
+- Data is kept for 90 days and old rows are cleaned up automatically.
+
+---
+
 ## [2.68.0] - 2026-08-27  ·  _Minor_
 **Ad A/B testing: placement and size variants with impression/click measurement**
 
