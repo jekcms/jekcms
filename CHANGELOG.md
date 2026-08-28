@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.72.1] - 2026-08-29  ·  _Patch_
+**Audit hardening: recipe filters, reaction schema, webhook brakes**
+
+### Improved
+- Membership payment bridge (released earlier today) hardened after an adversarial pass: unverified webhook requests can no longer grow the database or log files (flood brake), the delivery log rotates itself, and Stripe checkouts completed with a free trial or a 100% discount now correctly open Premium.
+
+### Fixed
+- Recipes theme: the archive's time and difficulty filters (and the "quickest" sort) now actually work — they queried post columns that never existed, so every filtered visit logged a database error and returned nothing. Filters now read the Recipe plugin's real data.
+- Post reactions: installations carrying the old reaction table layout repair themselves on first use — previously every post view on such a site logged a database error and reaction counts stayed frozen. Existing reactions are preserved during the repair.
+- Recipes theme: posts without recipe data no longer show invented "15 min prep · 30 min cook · 4 servings · easy" badges — the badges now read the Recipe plugin's real values and simply stay hidden when there are none.
+
+---
+
 ## [2.72.0] - 2026-08-29  ·  _Minor_
 **Membership payment bridge: automatic Premium via Stripe / Lemon Squeezy webhooks**
 
