@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.71.0] - 2026-08-29  ·  _Minor_
+**Migrate from Medium and Blogger + new Security & Trust pages**
+
+### Added
+- Migrate from Medium: upload the ZIP from Medium's "Download your information" as-is and your stories arrive with their full body, subtitle (kept as the excerpt), publish date and URL slug — drafts stay drafts, and re-running the import safely skips what is already there. With image localization on, Medium-hosted images are pulled into your media library and converted to AVIF/WebP.
+- Migrate from Blogger: upload the XML backup from Blogger's "Back up content" (a Google Takeout ZIP works too) and posts, pages and drafts import with their labels mapped to tags, publish dates and URL slugs preserved. Settings and comment entries in the backup are recognized and left out instead of turning into broken posts.
+- jekcms.com now has a Security page listing the concrete protections in the product — two-factor sign-in, Argon2id password hashing, encrypted stored secrets, signed webhooks, update integrity checks — plus a responsible-disclosure channel, and a Trust Center explaining data ownership, the perpetual license model and our honesty principles. Both pages exist in English and Turkish.
+
+### Improved
+- The API reference now documents all five outgoing webhook events — new-comment and new-member notifications had shipped earlier but were missing from the docs, so integrations could not discover them.
+
+---
+
 ## [2.70.3] - 2026-08-28  ·  _Patch_
 **SEO core: multilingual sitemap discovery + consistency fixes**
 
