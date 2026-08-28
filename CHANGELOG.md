@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.72.2] - 2026-08-29  ·  _Patch_
+**Audit follow-up: quieter logs and a cache race fix**
+
+### Improved
+- Error logs got quieter and more trustworthy: the contact-form's schema self-repair no longer probes by triggering database errors (it now checks columns directly), and deleting an already-deleted cache entry no longer logs a warning when two requests race. Version stamps across managed copies are also kept in sync automatically.
+
+---
+
 ## [2.72.1] - 2026-08-29  ·  _Patch_
 **Audit hardening: recipe filters, reaction schema, webhook brakes**
 
