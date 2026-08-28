@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.72.0] - 2026-08-29  ·  _Minor_
+**Membership payment bridge: automatic Premium via Stripe / Lemon Squeezy webhooks**
+
+### Added
+- Paid memberships no longer need manual bookkeeping: connect your own Stripe or Lemon Squeezy account's webhook to your site and members are marked Premium the moment their payment completes — and downgraded automatically on full refunds and subscription expiry. Matching uses the member's registration e-mail, and the provider's customer reference is remembered so subscription-end events match even when they carry no e-mail.
+- Set-up lives in Settings under the membership section: paste the signing secret, copy the ready-made webhook address, and watch the "last webhook" line confirm deliveries. Secrets are stored encrypted, never echoed back into the form, and every notification is verified against its signature — unsigned or tampered requests are rejected. Money still flows entirely through your own provider account: jekcms never sees card data.
+
+---
+
 ## [2.71.0] - 2026-08-29  ·  _Minor_
 **Migrate from Medium and Blogger + new Security & Trust pages**
 
