@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.72.3] - 2026-08-29  ·  _Patch_
+**Documentation: migrating from Ghost, Substack, Medium and Blogger**
+
+### Added
+- New documentation page "Migrating from Ghost, Substack, Medium & Blogger" (in English and Turkish): which export file each platform gives you, exactly what each importer carries across — publish states, dates, tags, paid/member visibility, image localization — and, just as importantly, what does not come across (comments, authors, subscriber lists) plus how to handle redirects afterwards. The offline documentation bundled with the installation package includes it too.
+
+---
+
 ## [2.72.2] - 2026-08-29  ·  _Patch_
 **Audit follow-up: quieter logs and a cache race fix**
 
