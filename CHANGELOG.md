@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.73.0] - 2026-08-29  ·  _Minor_
+**Media folders: organize the library without touching URLs**
+
+### Added
+- Media library folders: create, rename and delete folders from a new folder bar above the grid, filter the library by folder (including an "Unfiled" view with live counts), move files in bulk via the bulk-actions menu or one by one from the file's detail page, and have new uploads land in whichever folder is open. Deleting a folder never deletes its files — they simply return to Unfiled — and moving files never changes their URLs, so nothing published breaks. Existing installations pick up the schema automatically; no migration step needed.
+
+---
+
 ## [2.72.3] - 2026-08-29  ·  _Patch_
 **Documentation: migrating from Ghost, Substack, Medium and Blogger**
 
