@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.0] - 2026-08-29  ·  _Minor_
+**Layout engine phase 4: live preview and per-device sections**
+
+### Added
+- Live layout preview: a new button next to every section group in the theme customizer opens your real site in a preview window and applies your unsaved changes to it as you work — reorder a section or flip a toggle and the preview refreshes by itself. Desktop, tablet and mobile width buttons are built in. Drafts live only in your admin session: visitors keep seeing the saved layout until you press Save, and the preview never enters the page cache.
+- Per-device section visibility: every layout section can now be shown on all devices, desktop only, or mobile only — a heavy hero for desktop, a compact strip for phones. Hiding is pure CSS media query, so nothing shifts on the devices where the section does show, and the section cards wear a small badge so you always see which ones are device-limited.
+
+---
+
 ## [2.74.1] - 2026-08-29  ·  _Patch_
 **Audit follow-up: social queue repairs its own schema**
 
