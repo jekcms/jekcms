@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.74.0] - 2026-08-29  ·  _Minor_
+**Editorial approval flow: pending → review → approve**
+
+### Added
+- Optional editorial approval for multi-author sites: turn on "Author posts require editor approval" in Settings and authors can no longer publish or schedule directly — their save honestly lands as "Pending review", and editors or admins approve it with one click ("Approve & Publish" / "Send back to draft") right from the Posts list. Every approval records who approved and when in the post's audit trail, editing an already-live post never unpublishes it, and automated pipelines keep their own quality gate. Off by default — single-author sites notice nothing.
+
+---
+
 ## [2.73.0] - 2026-08-29  ·  _Minor_
 **Media folders: organize the library without touching URLs**
 
