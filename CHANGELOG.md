@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.74.1] - 2026-08-29  ·  _Patch_
+**Audit follow-up: social queue repairs its own schema**
+
+### Fixed
+- Social auto-posting on installations carrying the old queue layout no longer loses the remote post ID and publish timestamps: when the queue table lacks the newer columns, the publisher now adds them on the spot and retries, instead of logging a database error on every publish. Posts were always delivered — what was lost was the permalink back to them; that record is now kept.
+
+---
+
 ## [2.74.0] - 2026-08-29  ·  _Minor_
 **Editorial approval flow: pending → review → approve**
 
