@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.1] - 2026-08-30  ·  _Patch_
+**Paid licenses can remove the footer credit**
+
+### Added
+- "Powered by jekcms" is now optional on paid licenses: a new switch under Settings → General → Branding removes the credit line from your site footer. The copyright line and legal links stay untouched. On the free edition the switch stays locked and the credit remains — removing it is a paid-license benefit.
+
+### Improved
+- Saving settings now also refreshes the full-page cache, so site-wide changes (branding, footer, reading options) appear immediately instead of waiting for the cache to expire.
+
+---
+
 ## [2.75.0] - 2026-08-29  ·  _Minor_
 **Layout engine phase 4: live preview and per-device sections**
 
