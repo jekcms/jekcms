@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.3] - 2026-08-31  ·  _Patch_
+**Self-healing after updates on shared hosting**
+
+### Fixed
+- On some shared hosting stacks (notably LiteSpeed with aggressive OPcache settings) a core update could leave the server serving stale compiled code, breaking the site with a 500 error until PHP was restarted. The updater now invalidates the compiled-code cache file by file right after copying — before migrations run — and a new early watchdog detects this exact failure on any later request, clears the cache itself and auto-refreshes the visitor's page within seconds. No manual PHP restart needed anymore.
+
+---
+
 ## [2.75.2] - 2026-08-31  ·  _Patch_
 **Customizer save reliability fixes**
 
