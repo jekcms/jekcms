@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.4] - 2026-08-31  ·  _Patch_
+**Media uploads with broken ICC profiles, footer social selection**
+
+### Fixed
+- PNG images exported from Photoshop or Canva with a broken ICC color profile (the classic "iCCP: known incorrect sRGB profile" warning) failed to upload to the Media Library. These images are perfectly loadable — harmless decoder warnings are now tolerated during image processing and the upload completes normally.
+- In the Footer Builder, toggling social networks on or off did not stick: a script error silently swallowed checkbox changes, so the previous selection came back after saving. Selections now save exactly as chosen.
+
+---
+
 ## [2.75.3] - 2026-08-31  ·  _Patch_
 **Self-healing after updates on shared hosting**
 
