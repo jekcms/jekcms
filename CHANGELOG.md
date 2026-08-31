@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.8] - 2026-08-31  ·  _Patch_
+**Homepage, card and sidebar fixes across all themes**
+
+### Fixed
+- Post cards lost their title, date and meta as soon as the post had a featured image — the image escaped its frame and pushed the text out of the card. Cards now keep a fixed 16:10 image frame whether or not there is an image.
+- The homepage headline grid always had one empty slot: it reserves five cards but only four were fetched. It now fills all five, falling back to the newest posts when there aren't enough popular ones — so the grid is never patchy on a new site.
+- Homepage category blocks only ever showed the alphabetically first categories, so sites with many categories saw the same two blocks no matter how much they published. Blocks (and the fallback menu on some themes) now pick categories that actually have posts, most recently updated first.
+- Turning every sidebar widget off did nothing: an internal fallback switched them all back on. Your selection is now final — an empty sidebar stays empty. Fixed on six themes.
+- The "How this content was made" box looked like a grey block pasted onto the page: it borrowed the theme's serif heading font and letter-spaced capitals. It now follows the theme palette with an accent bar, an icon and a readable label — on every theme.
+- Share buttons under posts were washed out and hard to read; they now sit on a neutral surface with full-contrast icons and fill with the network's colour on hover.
+- Very tall featured images no longer stretch the post page out of shape, and the editor now suggests the right size (1200 × 675).
+- The old Twitter bird was replaced with the X logo everywhere it still appeared, including the footer builder's icon set.
+
+---
+
 ## [2.75.7] - 2026-08-31  ·  _Patch_
 **Layout saves no longer overwrite each other**
 
