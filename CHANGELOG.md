@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.7] - 2026-08-31  ·  _Patch_
+**Layout saves no longer overwrite each other**
+
+### Fixed
+- Saving the customizer stores the layout of every page (homepage, post page, sidebar…) in one go — and those writes were silently overwriting each other, so homepage section changes (turning the hero or category band off) were lost and the switches snapped back on. Each save now builds on the previous one within the same request; section toggles finally stick everywhere.
+
+---
+
 ## [2.75.6] - 2026-08-31  ·  _Patch_
 **Two new layout section types**
 
