@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.9] - 2026-08-31  ·  _Patch_
+**Theme switches no longer turn themselves off; reaction cards and headline badges fixed**
+
+### Fixed
+- Post-page switches (reaction cards, star rating, share bar) could silently turn themselves off after saving the customizer: a switch that wasn't part of the submitted form was treated as "off". Saving now only changes the switches that were actually on screen, so features can no longer disappear on their own. If your emoji reaction cards vanished, they come back with this update.
+- Some sites rendered two reaction bars on a post — a leftover theme bar plus the built-in one. Themes now declare their own bar so the built-in one steps aside.
+- Headline cards showed generic labels ("HOT NOW", "VIRAL", "EXCLUSIVE") instead of the post's category. They now show the real category name in its own colour and link to that category.
+
+---
+
 ## [2.75.8] - 2026-08-31  ·  _Patch_
 **Homepage, card and sidebar fixes across all themes**
 
