@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.6] - 2026-08-31  ·  _Patch_
+**Two new layout section types**
+
+### Added
+- The layout engine's section dictionary gained two generic types that any theme (including customized forks) can adopt: "Dual Spotlight" — two wide image cards side by side — and "All Posts" — a paginated full-archive grid with a posts-per-page setting.
+
+---
+
 ## [2.75.5] - 2026-08-31  ·  _Patch_
 **Section toggles that always work, missing customizer tabs, footer icon outlines**
 
