@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.2] - 2026-08-31  ·  _Patch_
+**Customizer save reliability fixes**
+
+### Improved
+- Tracking ID fields (GA4, Google Tag Manager, AdSense, Facebook Pixel) now accept a pasted full snippet: the ID is extracted automatically on save, so analytics starts working even if you paste the whole code block.
+
+### Fixed
+- Saving from Appearance → Customize no longer erases your Footer Builder configuration. The two screens stored data under the same key, so every customizer save silently reset the footer to the theme default.
+- Homepage section toggles (hero, category band, etc.) now survive strict hosting firewalls: the layout payload is sent in an envelope some shared-hosting WAFs used to strip, which made the toggle snap back to "on" after saving.
+- Saving the customizer or the Footer Builder now also refreshes the full-page cache, so visual changes appear on the site immediately.
+- Media Library uploads now show the actual reason when a file fails, instead of a bare error mark — including server-side blocks and configuration limits.
+
+---
+
 ## [2.75.1] - 2026-08-30  ·  _Patch_
 **Paid licenses can remove the footer credit**
 
