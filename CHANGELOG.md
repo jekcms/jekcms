@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.75.5] - 2026-08-31  ·  _Patch_
+**Section toggles that always work, missing customizer tabs, footer icon outlines**
+
+### Fixed
+- Homepage and post-page section toggles (hero, category band, widgets…) are now real form controls: they save correctly even if a browser extension, an old browser or a script error breaks the page's JavaScript. Previously the layout travelled only through a script-filled hidden field, so a broken script made the save silently skip and toggles snapped back on.
+- Themes that support layout sections but don't declare a matching customizer tab now get that tab automatically — for example the Sidebar tab appears on themes that were missing it, so widget stacks can be reordered and toggled everywhere.
+- Footer Builder social icons rendered as solid blobs: a stylesheet rule filled the outline-style icon set. Icons now keep their stroke outlines in both light and dark mode.
+
+---
+
 ## [2.75.4] - 2026-08-31  ·  _Patch_
 **Media uploads with broken ICC profiles, footer social selection**
 
