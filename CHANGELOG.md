@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.80.0] - 2026-09-01  ·  _Minor_
+**See every change live before saving, pick a card template visually, and a guarantee that saves actually show up**
+
+### Added
+- The customizer preview now shows everything, not just colors: flip a switch, hide the excerpt, reorder sections, change the category selection — the preview pane re-renders your real site with the unsaved draft within a second or two. The draft lives only in your admin session; visitors never see it and nothing is stored until you hit Save.
+- The Cards section opens with visual templates — Detailed, Balanced, Clean, Minimal — shown as miniature card mockups, the same picker language as the footer and menu designers. One click sets the switches, the preview updates instantly, and you can still fine-tune every field below.
+
+### Fixed
+- Some card settings saved correctly but never showed on the site: certain homepage surfaces (featured cards, hero lists, magazine grids) drew their own markup and ignored the switches. Every card-rendering surface across all 14 themes is now wired, and a new release-gate test drives a real browser flow on each theme — toggle off, save, and verify the element actually leaves the page — so this class of bug cannot ship again.
+- The category picker on some themes saved your selection but kept showing the default categories; those sections now honor the selection, in the order you picked.
+
+---
+
 ## [2.79.1] - 2026-09-01  ·  _Patch_
 **Customized themes get the full customizer too**
 
