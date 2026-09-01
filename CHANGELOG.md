@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.80.1] - 2026-09-01  ·  _Patch_
+**The active card template is now marked, and the preview jumps to what you are editing**
+
+### Improved
+- The Card Templates row now shows which template is active — derived from your current settings on page load, kept in sync as you tweak, and still marked after you save and return. Previously nothing was highlighted, which made a successful save look like it hadn't stuck.
+- The live preview now follows your attention: change a card setting and it scrolls to the post cards; toggle the author box or another post-page block and it opens the article and scrolls to that block, briefly highlighting it.
+
+---
+
 ## [2.80.0] - 2026-09-01  ·  _Minor_
 **See every change live before saving, pick a card template visually, and a guarantee that saves actually show up**
 
