@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.82.0] - 2026-09-01  ·  _Minor_
+**Post header controls on every theme, card excerpts that always work, and complete social icons**
+
+### Added
+- The post page header is now yours to shape, on all 14 themes: Customize → Post gains switches for the category badge, featured image, excerpt below the title, author row and date/reading-time line. Each theme only shows the switches its design actually has — and every one is verified on screen by the release-gate test.
+
+### Fixed
+- Turning card excerpts on now always shows them. Two silent failure modes were closed across themes: posts without a hand-written summary now derive one from the content (WordPress parity), and designs that restricted excerpts to only the large card now apply your explicit choice to every card.
+- Pinterest, TikTok, X, Telegram and e-mail icons in the footer social row rendered as a question-mark glyph on some sites; the icon set now covers every supported platform.
+
+---
+
 ## [2.81.1] - 2026-09-01  ·  _Patch_
 **Header and footer styling restored on article pages, and a new Showcase author box with the author's latest posts**
 
