@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.79.1] - 2026-09-01  ·  _Patch_
+**Customized themes get the full customizer too**
+
+### Improved
+- A theme that has been customized at the file level (a child or forked theme) no longer loses the customizer's newer sections. With one line in theme.json (customizer.extend_default), such a theme keeps the universal Colors, Typography and Layout controls and adds its own tabs on top — Cards, share styles, presets and search all included. Sites running heavily customized themes previously saw only a minimal set of options.
+
+---
+
 ## [2.79.0] - 2026-09-01  ·  _Minor_
 **Search your settings, one-click color presets, per-field reset, and typography & width controls**
 
