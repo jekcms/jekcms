@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.84.0] - 2026-09-02  ·  _Minor_
+**Post page freedom: share buttons where you want them, four comment designs, and three more author boxes**
+
+### Added
+- Customize → Post now controls where share buttons appear on all 14 themes: above the content, below it, both, or as a floating side bar that becomes a bottom bar on phones. Themes that had no share buttons at all gain them with one selection.
+- A comments design selector with four looks — classic avatar list, cards, chat bubbles and minimal rows — plus switches for avatars, newest-or-oldest order, form above or below the list, and the count in the heading. The shared block posts to the same moderation pipeline as before.
+- Three more author box designs: a cover-strip card with social icons, a boxless byline row, and a dark spotlight panel.
+
+### Improved
+- A new release gate loads a real post on every theme and verifies that the chosen share position, comment design and author box actually reach the page, then confirms the theme default returns when the choice is cleared.
+
+---
+
 ## [2.83.0] - 2026-09-02  ·  _Minor_
 **A rotating homepage slider on every theme, card hover effects, and more editable section headings**
 
