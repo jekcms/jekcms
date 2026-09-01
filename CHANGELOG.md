@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.81.1] - 2026-09-01  ·  _Patch_
+**Header and footer styling restored on article pages, and a new Showcase author box with the author's latest posts**
+
+### Improved
+- The author box design lineup was reworked: the horizontal style is replaced by Showcase — a two-column box with the author's avatar, bio and a "View All Articles" button on the left, and their three latest posts with thumbnails on the right. Existing selections switch over automatically.
+
+### Fixed
+- On two themes, a performance optimization from late August loaded part of the stylesheet only on the homepage — but that file also carried the header and footer design, leaving article and archive pages with an unstyled header. The shared header/footer styles now live in their own always-loaded file, keeping the homepage speed gain without the breakage. A release-gate test now verifies the header is styled on every page type.
+
+---
+
 ## [2.81.0] - 2026-09-01  ·  _Minor_
 **Author box designs you can pick visually, and full sidebar control: position and per-widget page visibility**
 
