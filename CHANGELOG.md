@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.85.0] - 2026-09-02  ·  _Minor_
+**Four post header designs on every theme: title over the image, centered, two-column, or minimal**
+
+### Added
+- Customize → Post opens with a header design selector on all 14 themes. Pick the theme's own header, a full-width cover with the title over the image, a centered title with the image below, a two-column layout with the image beside the title, or a minimal header with no image. The category, excerpt, author and date switches from v2.82 apply to every design.
+
+### Fixed
+- On the tech theme, turning off the category badge also hid the ad slot at the top of the article; the two are now independent. The theme's own share box also steps aside when a shared share style or position is chosen.
+
+---
+
 ## [2.84.0] - 2026-09-02  ·  _Minor_
 **Post page freedom: share buttons where you want them, four comment designs, and three more author boxes**
 
