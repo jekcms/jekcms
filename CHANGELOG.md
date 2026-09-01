@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.87.0] - 2026-09-02  ·  _Minor_
+**Reading experience controls, card layout variants, badge shapes, archive columns, a reading progress bar and a back-to-top button**
+
+### Added
+- Customize → Post gains reading controls on every theme: a drop cap on the first paragraph, left or justified text, three in-content link styles (underlined, brand color, highlight) and compact or relaxed paragraph spacing.
+- A reading progress bar at the top of article pages and a back-to-top button (left or right corner), both in the brand color and both off by default.
+- Customize → Cards gains a layout variant — title over the image, or horizontal with the image on the left — and a category badge shape (pill, rounded, square or text-only). Hero and featured cards keep the theme design.
+- Customize → Layout gains the number of columns on category, tag, author and search lists (1–4), narrowing automatically on small screens, and Customize → Appearance gains a global button corner style (pill, rounded, square).
+
+### Fixed
+- The health and travel themes did not run the shared footer script hook, so custom footer scripts from Settings never reached those sites; the hook is now in place.
+
+---
+
 ## [2.86.0] - 2026-09-02  ·  _Minor_
 **Sidebar widget and title styles, and section heading styles across the homepage**
 
