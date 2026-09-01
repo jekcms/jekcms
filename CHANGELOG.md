@@ -8,6 +8,35 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.76.0] - 2026-09-01  ·  _Minor_
+**The theme customizer, rebuilt: one clear layout, a new Cards section, and renamable section titles**
+
+### Added
+- A new Cards section controls the anatomy of your post cards: show or hide the category badge (and pick its position), turn the excerpt on or off and set its length, choose which meta appears — author, date, reading time, view count — switch between relative ("3 hours ago") and full dates, and set the image ratio and corner radius with live preview. It ships on four themes first (news, minimalist, tech, lifestyle); defaults match each theme's current look, so nothing changes until you change it.
+- Homepage section headings are now yours to name. Open a section's gear menu in the layout card and type your own title — "Latest Stories" can become whatever fits your site; leave it empty to keep the theme's wording.
+
+### Improved
+- The customizer now looks and works like General Settings: a vertical navigation on the left, your options in the middle, and the save/preview rail on the right. Every one of the 14 themes now presents the same order — Homepage, Post, Sidebar, Cards, Colors, Fonts, Layout, Advanced — with theme-specific extras at the end. Colors and fonts each have their own section instead of hiding inside "Branding", a dot marks sections with unsaved changes, and old deep links to the previous tabs still land in the right place.
+
+### Fixed
+- Switches that rendered inside another tab (for example a theme's disclosure or trip-details options merged into the Post tab) could not actually be changed — flipping them did nothing after save, because the form marked them under the wrong tab name. They now save correctly.
+
+---
+
+## [2.75.10] - 2026-08-31  ·  _Patch_
+**A real author page, cleaner post cards, and a calmer "how this was made" box**
+
+### Fixed
+- The refund policy page laid its "term: explanation" points out as boxed rows, and the term column landed at a different width in every row — one wrapped over three lines, the next fitted on one. It now reads as a normal list with the term in bold, so every point lines up. The partner terms page shared those same class names but shipped no styling at all, and the styling that did exist was written for dark mode only, so on the site's default light theme the bullets and panels were invisible. All of it now lives in the site stylesheet and follows the light and dark palettes.
+- The author page finally shows the author: their photo, name, bio, links and a real article count, in one card at the top of the page. Two themes (entertainment, tech) previously showed only a generic person icon, and on one of them the count was the whole site's post total rather than that author's. The header now comes from a single shared component, so every theme gets the same correct page.
+- Category, tag, author and search listings no longer blow one card up to double size in the narrow column beside the sidebar — every card in a listing is the same size.
+- Post cards on the entertainment theme were uneven and cluttered: cards in the same row ended at different heights, the author block sat at the bottom as a large square avatar, and the category badge could drift below the image. Cards now share one anatomy — image with the badge on its top-left corner, title, and a single meta line pinned to the bottom with a small round author avatar, the date and the counters.
+- The featured card stretched its neighbour into a tall, mostly empty card. It now spans two rows as well, so two normal cards stack beside it and no card is left with a hole in it.
+- The "How this content was made" box no longer draws a coloured bar down its left edge; it is now a single even outline in the theme's accent colour with the information icon carrying the emphasis.
+- Posts could be unreadable in dark mode: text pasted from another page brings its own colour with it, so a paragraph saved as black stayed black on the dark background. Pasted black (and pasted white) text now follows the theme's own colour, while colours you chose on purpose are kept.
+
+---
+
 ## [2.75.9] - 2026-08-31  ·  _Patch_
 **Theme switches no longer turn themselves off; reaction cards and headline badges fixed**
 
