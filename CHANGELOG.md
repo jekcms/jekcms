@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.81.0] - 2026-09-01  ·  _Minor_
+**Author box designs you can pick visually, and full sidebar control: position and per-widget page visibility**
+
+### Added
+- The author box under posts is now a design choice, on every theme. Customize → Post shows visual templates — Compass (horizontal card with socials), Card (centered), Banner (paneled with post count), Minimal (slim row) — as miniature mockups, the same picker language as the footer and menu designers. "Theme default" keeps each theme's own box untouched; picking a style previews instantly and applies on save. Verified on screen across all 14 themes by a new release-gate test.
+- Each sidebar widget can now say where it appears: all pages, home/archive only, or the post page only — set from the widget card's gear in Customize → Sidebar. Turn the trending list into a homepage-only widget and keep the table of contents just for articles.
+- Sidebar position (left or right) is now available on more themes — crypto, entertainment, lifestyle and pets join the ones that already had it.
+
+### Fixed
+- A thin empty bar could appear under the settings search box in the customizer navigation; it no longer does.
+
+---
+
 ## [2.80.1] - 2026-09-01  ·  _Patch_
 **The active card template is now marked, and the preview jumps to what you are editing**
 
