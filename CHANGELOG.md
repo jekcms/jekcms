@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.77.0] - 2026-09-01  ·  _Minor_
+**Card controls on all 14 themes, and a real category picker for the homepage**
+
+### Added
+- The Cards section introduced in the previous release now covers every theme. Each theme exposes exactly the options its card design supports — from the full set (badge, excerpt and its length, author, date, reading time, view count, date style, image ratio, corner radius) down to the focused set of image-led themes like travel — so every switch you see genuinely does something. Defaults still match each theme's current look.
+- Choosing which categories appear on the homepage no longer means typing slugs into a text box. The category blocks section now lists your real categories as tappable chips — tick the ones you want, in the customizer, and they are saved in the same format as before, so existing setups keep working.
+
+---
+
 ## [2.76.0] - 2026-09-01  ·  _Minor_
 **The theme customizer, rebuilt: one clear layout, a new Cards section, and renamable section titles**
 
