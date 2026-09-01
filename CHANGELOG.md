@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.83.0] - 2026-09-02  ·  _Minor_
+**A rotating homepage slider on every theme, card hover effects, and more editable section headings**
+
+### Added
+- Customize → Homepage → Hero now offers a rotating slider on all 14 themes: choose the theme's own hero or the slider, then set the slide count (2–8), autoplay, slide duration in seconds, arrow buttons and dot indicators. Themes that already ship their own slider expose the same duration/autoplay/arrow switches on their native design.
+- Customize → Cards gains a hover effect selector: lift with shadow, image zoom, both, or no motion — applied to every standard card across lists.
+- Section headings on the health theme's Latest, Most Popular and Recommended blocks are now editable from the customizer, matching the other themes.
+
+### Fixed
+- The hero section's variant choice was locked on 13 themes, so the slider settings the layout engine already carried never reached the customizer. The lock is lifted and a new release gate drives the slider on every theme and measures slide count, arrows, dots and duration in the rendered page.
+
+---
+
 ## [2.82.0] - 2026-09-01  ·  _Minor_
 **Post header controls on every theme, card excerpts that always work, and complete social icons**
 
