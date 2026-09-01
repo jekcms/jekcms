@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.79.0] - 2026-09-01  ·  _Minor_
+**Search your settings, one-click color presets, per-field reset, and typography & width controls**
+
+### Added
+- The customizer now has a search box. Type "badge", "font" or "sidebar" and jump straight to the setting — including layout section cards — with the matching field highlighted when you land on it.
+- Color presets: the Colors section offers ready-made palettes generated from your theme's own brand colors — Ocean, Forest, Violet, Ember — with the hue relationships between fields preserved, so every preset stays as coherent as the original design. One click fills the fields; nothing is saved until you hit Save.
+- Typography controls on every theme: body font size and line height, with a content-width slider for the site's main column. These emit nothing until you actually change them, so existing sites keep their exact look.
+- Every color, slider and switch now carries a small reset arrow that returns just that field to the theme default — no more resetting the whole theme to fix one value.
+- Ctrl+S (Cmd+S) saves from anywhere in the customizer, and leaving the page with unsaved changes now asks first.
+
+---
+
 ## [2.78.0] - 2026-09-01  ·  _Minor_
 **A fresh install now looks like the demo, share buttons get styles, and every section heading is yours to name**
 
