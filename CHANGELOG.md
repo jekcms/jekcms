@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.78.0] - 2026-09-01  ·  _Minor_
+**A fresh install now looks like the demo, share buttons get styles, and every section heading is yours to name**
+
+### Added
+- Share buttons on the post page now come in styles: keep the theme's own design, or switch to round chips, brand-colored circles, or minimal icons — one dropdown in Customize → Post. Available on six themes (news, minimalist, lifestyle, entertainment, trends, travel); the default stays exactly what the theme ships today.
+- Renaming homepage section headings now works across every theme that prints one — "Latest Articles", "Editor's Picks", "Most Read" and friends can all carry your own wording, set from the section's gear menu.
+
+### Improved
+- What you see on a theme's demo site is now what a fresh install gives you. We compared every live demo's saved settings against the theme's factory defaults and folded the differences in: the crypto theme ships with its demo's heading font, the personal theme with its demo's palette and calmer sidebar, and the pets and finance themes with the accent colors their demos actually wear. A release-gate test now keeps demo and defaults from drifting apart again.
+
+---
+
 ## [2.77.0] - 2026-09-01  ·  _Minor_
 **Card controls on all 14 themes, and a real category picker for the homepage**
 
