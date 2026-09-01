@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.86.0] - 2026-09-02  ·  _Minor_
+**Sidebar widget and title styles, and section heading styles across the homepage**
+
+### Added
+- Customize → Sidebar gains a widget box style (boxed, outlined or flat with dividers) and a widget title style (brand underline, uppercase rule, filled pill or centered rule) on the ten themes with a sidebar. One choice restyles every widget consistently.
+- Customize → Homepage gains a section heading style — bold underline, centered with a short rule, spaced uppercase, or a filled label — applied to every section heading on the homepage and related-posts blocks of the twelve themes that print them.
+
+### Improved
+- These styles are pure CSS emitted only when chosen, so the theme default stays pixel-identical; a new release gate confirms the rule reaches the page and disappears when the choice is cleared, on every theme.
+
+---
+
 ## [2.85.0] - 2026-09-02  ·  _Minor_
 **Four post header designs on every theme: title over the image, centered, two-column, or minimal**
 
