@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.102.0] - 2026-09-02  ·  _Minor_
+**Error and empty-state pages: smarter 404, no-results and empty-category designs, maintenance / coming-soon page and members-only box designs**
+
+### Added
+- 404 page gained an image / illustration, background colour, extra HTML, "Did you mean?" suggestions (the closest posts matching the broken address) and an optional countdown redirect to the homepage with a "stay here" button.
+- Empty-state designs for no-search-results and empty category / tag pages: friendly card, explore (search + categories + recent posts) or minimal, with custom heading and text; works on every theme's own empty block.
+- Maintenance / coming-soon page designed from the customizer: dark, light or brand-colour style, heading, text, countdown, "notify me" email form (Newsletter plugin), social icons, logo and background. Maintenance answers 503 so search engines wait; coming-soon answers 200 with noindex. Signed-in admins keep seeing the site.
+- Members-only content box designs (soft card, blurred preview + card, brand-colour banner) with custom heading and text; theme default keeps the current inline box.
+
+---
+
 ## [2.101.0] - 2026-09-02  ·  _Minor_
 **In-article "read this next" and newsletter / button boxes, byline separators and auto-loading the next post**
 
