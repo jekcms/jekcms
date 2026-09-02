@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.99.1] - 2026-09-02  ·  _Patch_
+**Reading indicator placement is one clear choice; theme and universal table-of-contents switches merged**
+
+### Fixed
+- The reading progress indicator showed only an on/off switch and hid its placement options until toggled. It is now a single choice: theme default, off, the theme's own bar (where the theme ships one), top or bottom bar, left or right rail, percent bubble or minutes-left bubble. Thickness, colour, gradient and corner appear as soon as a universal placement is chosen.
+- Themes with their own progress bar or table of contents no longer show a second switch next to the universal one; the single choice drives both, so a bar or contents box never prints twice.
+
+---
+
 ## [2.99.0] - 2026-09-02  ·  _Minor_
 **Customizer settings grouped into titled section cards**
 
