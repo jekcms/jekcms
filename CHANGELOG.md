@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.88.0] - 2026-09-02  ·  _Minor_
+**Sidebar Studio: sixteen widgets on every theme, page-by-page visibility, and six sidebar designs**
+
+### Added
+- Customize → Sidebar now offers the full widget set on all 14 themes: search, about, author card, table of contents, recent posts, most read, trending, categories, tags, newsletter, social links, share, info box, image banner, call-to-action box and custom HTML. Each widget carries its own settings (headings, counts, thumbnails, look-back window, button label and link, sponsored banner, and more) and can be reordered, switched on or off and previewed live.
+- Sidebar visibility per page family — homepage, post pages, category/tag/author/search pages and static pages — plus a per-widget rule that can also say 'everywhere except home'. Themes that never had a sidebar (starter, tech, entertainment post pages, travel's rail, recipes) gain one the moment you switch it on.
+- Six sidebar designs — theme default, clean, boxed, cards, dark panel and centered rules — with width (narrow/normal/wide), left or right position, widget spacing and a whole-sidebar sticky mode. Everything is pure CSS applied only when chosen, so the theme default stays untouched.
+
+### Improved
+- A new release gate switches every theme to the studio's widgets, checks that they reach the post page and the homepage, that visibility rules hide them, that design rules land in the stylesheet, and that a reset restores the theme default.
+
+---
+
 ## [2.87.0] - 2026-09-02  ·  _Minor_
 **Reading experience controls, card layout variants, badge shapes, archive columns, a reading progress bar and a back-to-top button**
 
