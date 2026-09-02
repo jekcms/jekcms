@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.95.0] - 2026-09-02  ·  _Minor_
+**Archive Studio, hero content control and universal related posts on every theme**
+
+### Added
+- Archive Studio (Customize → Archive): switch category, tag and author pages to a universal layout while keeping the theme's header and footer — four header bands (minimal, colour band, cover using the category image, centered), card look (grid, list, masonry, title-over-image, horizontal), columns, posts per page, sort order, description and post count, and an optional sidebar fed by Sidebar Studio. Author pages get an avatar, bio and social links header.
+- Hero content: choose what the homepage hero shows — featured posts, latest posts, chosen categories, or manual slides you write yourself (title, text, image, button, link) — plus image darkening, hero height and text alignment. Any choice other than Theme decides renders the universal rotating hero with the existing slide, speed and arrow controls.
+- Related posts: a universal related section with post count, source (shared tags, same category, or mixed) and a card look, available under the post layout on every theme; themes with their own related block switch to it when a card look is chosen.
+- Customizer fields that depend on a parent choice now stay hidden until that choice is made.
+
+---
+
 ## [2.94.0] - 2026-09-02  ·  _Minor_
 **Header Studio: announcement bar, header button and social icons, transparent and smart-sticky header on every theme**
 
