@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.98.0] - 2026-09-02  ·  _Minor_
+**Post page pro: reading indicator placements, table of contents, universal related posts, new navigation designs and an up-next bubble**
+
+### Added
+- Reading progress indicator now has six placements: thin bar at the top or bottom, vertical rail on the left or right, a percent bubble, or a minutes-left bubble; plus thickness, colour, gradient fill and bubble corner.
+- Table of contents generated from the post's H2/H3 subheadings: box, numbered, collapsible or floating on wide screens, with a custom heading, depth choice and active-section highlight while scrolling.
+- Universal related posts block on every theme: grid, list, title-over-image, horizontal cards or numbered titles only; heading, count, source (tags/category), columns, excerpt and placement before or after the navigation. Hides the theme's own block and the studio section so nothing prints twice.
+- Previous/next navigation gained two designs (arrow circles, split halves), a block heading and editable labels.
+- Up-next bubble: once the reader passes 70% of the post a dismissible card for the next post appears in the corner; corner is selectable and it stacks cleanly with the back-to-top button and the progress bubble.
+
+---
+
 ## [2.97.0] - 2026-09-02  ·  _Minor_
 **Category badge styling on cards: seven looks, custom colours, size and letter case**
 
