@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.92.1] - 2026-09-02  ·  _Patch_
+**Cleaner section settings panel with a live card-look preview**
+
+### Improved
+- The gear panel under each homepage section was re-laid out: every label now sits above its control at full width (no more clipped 'Card lo…' labels), the card-look picker shows a live miniature of the chosen look — grid, list, masonry, title-over-image, wide horizontal or the theme's own design — that updates the moment you change the selection, and settings the theme design does not read stay hidden until a universal look is chosen.
+- The layout editor no longer squeezes into a 300-pixel column on laptop screens: the mini page preview now appears only on very wide displays, and section rows wrap their controls onto a second line when space is tight.
+
+---
+
 ## [2.92.0] - 2026-09-02  ·  _Minor_
 **Homepage section details: card look, title and count on every section, plus category picker with uploadable icons**
 
