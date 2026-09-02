@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.88.2] - 2026-09-02  ·  _Patch_
+**Sticky widgets that actually stick, one sidebar engine for every theme, and a sticky mode selector**
+
+### Improved
+- Customize → Sidebar gains a sticky mode: theme default plus sticky group, sticky group only, whole sidebar sticky, or nothing sticky. The per-widget default is now sticky only for the table of contents, so enabling widgets no longer turns the entire sidebar into a pinned block by surprise.
+
+### Fixed
+- Marking a widget (for example the table of contents) as sticky had no visible effect on most themes, and when it did, several sticky widgets overlapped each other while scrolling. All 14 themes now share one sidebar renderer: from the first sticky widget on, the remaining widgets stay on screen together while the ones above scroll away; a group taller than the screen scrolls inside itself.
+- Themes whose sidebar was designed as a screen-high box with inner scrolling clipped the studio widgets; that rule now steps aside whenever a sticky group is present.
+- The customer sites running forked themes ignored the studio's widget rows and kept showing only their built-in table of contents; their sidebars now render the rows you enable.
+
+---
+
 ## [2.88.0] - 2026-09-02  ·  _Minor_
 **Sidebar Studio: sixteen widgets on every theme, page-by-page visibility, and six sidebar designs**
 
