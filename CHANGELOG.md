@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.99.0] - 2026-09-02  ·  _Minor_
+**Customizer settings grouped into titled section cards**
+
+### Improved
+- Every customizer tab now lays its settings out in titled section cards instead of one flat grid: Post (header, reading experience, sharing, author box, comments, navigation, related posts), Sidebar (where it appears, position, widget design), Cards (design, category badge, content), Layout (announcement bar, call-to-action, header, footer, buttons, elements, colour mode) and Advanced (custom code, back-to-top, 404 page). Each card shows a short description and its setting count.
+- Cards whose settings are all hidden by a parent switch hide themselves, and fixed multi-column rows collapse to two or one column when the panel is narrow (for example while the live preview is open).
+
+---
+
 ## [2.98.0] - 2026-09-02  ·  _Minor_
 **Post page pro: reading indicator placements, table of contents, universal related posts, new navigation designs and an up-next bubble**
 
