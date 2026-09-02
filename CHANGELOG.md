@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.91.1] - 2026-09-02  ·  _Patch_
+**Customizer saves now reach the CDN edge immediately**
+
+### Fixed
+- Saving, resetting, restoring or importing in the customizer cleared the local page cache but never told the CDN edge, so on sites behind Cloudflare the previous design kept being served for up to five minutes — a card template switched from Detailed to Clean still showed the author name and excerpt. Every customizer write now purges the edge as well (and sends a LiteSpeed purge header), so the new look is live on the very next visit.
+
+---
+
 ## [2.91.0] - 2026-09-02  ·  _Minor_
 **Post and archive extras: previous/next navigation, universal breadcrumbs, pagination styles and designed 404 pages on every theme**
 
