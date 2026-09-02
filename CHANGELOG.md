@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.103.1] - 2026-09-02  ·  _Patch_
+**Customizer colours no longer override a theme's dark mode**
+
+### Fixed
+- On themes with a dark-mode toggle, the customizer wrote its light text, background, surface and border colours unconditionally, so switching to dark mode kept white cards and dark text in the new blocks, the quiz card and several theme areas. Those colours now apply to light mode only; the theme's own dark values take over in dark mode. Brand colours, fonts and sizes are unchanged in both modes.
+
+---
+
 ## [2.103.0] - 2026-09-02  ·  _Minor_
 **Dark-mode safe blocks, a cleaner sidebar table of contents, author card only on posts, quiz dark mode**
 
