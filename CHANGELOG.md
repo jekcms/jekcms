@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.91.0] - 2026-09-02  ·  _Minor_
+**Post and archive extras: previous/next navigation, universal breadcrumbs, pagination styles and designed 404 pages on every theme**
+
+### Added
+- Previous / next post navigation on all 14 themes: cards with thumbnails, a minimal line, or covers with the title over the image. Choose whether it follows the date order or stays inside the same category, and whether images show. It prints after sharing and before comments; a theme's own navigation is hidden once a universal design is chosen, and a Hide option removes it entirely.
+- Universal breadcrumbs (Home › category › post) in four styles: chevron, slash, pill badges and small caps. Choosing a style hides the theme's own breadcrumb; with a post header design the trail prints inside the header, otherwise just above the theme's title.
+- Pagination style for category, tag, author and search lists: pill buttons, outlined, bold square, or previous / next only — applied on top of the theme's pagination markup.
+- 404 page designs under Customize → Advanced: Minimal, With search box, and Explore (search, most-read posts and category chips), each with an editable heading and description. The theme header and footer are kept; only the page body changes, and the theme's own 404 stays the default.
+
+---
+
 ## [2.90.0] - 2026-09-02  ·  _Minor_
 **Customizer Pro: version history with one-click restore, design packs, undo/redo and a seventy-font library**
 
