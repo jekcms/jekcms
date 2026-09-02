@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.89.0] - 2026-09-02  ·  _Minor_
+**Homepage Studio: twelve universal sections on every theme, a layout-engine fix that had silently dropped sections, and a dead-setting sweep**
+
+### Added
+- Customize → Homepage now offers the full section set on all 14 themes: latest posts (grid, list or masonry, with columns, category filter and paging), most read, category band (chips or tiles), category blocks, showcase (one lead + three), dual spotlight, newsletter band, call-to-action band, custom HTML block, headline strip, gallery strip and video row. Each section has its own heading, counts, columns, band style and category filter; sections are reordered, toggled and previewed live. Themes that ship their own design for a section keep it.
+
+### Fixed
+- The layout engine ran every section template in its own loop scope, so a template that assigned a variable named theme overwrote the engine's own — every section after it was dropped without an error. Sections now run in an isolated scope and one faulty section can no longer take the rest down. On the lifestyle theme this had disabled the homepage layout entirely.
+- A new dead-setting audit changed every customizer field on every theme and compared the rendered pages: four travel options that no template read were removed, a date format switch on recipe cards that show no date is hidden, the excerpt-below-title switch is hidden on five themes whose header never printed it, and reading time now reaches all news cards when you turn it on.
+
+---
+
 ## [2.88.2] - 2026-09-02  ·  _Patch_
 **Sticky widgets that actually stick, one sidebar engine for every theme, and a sticky mode selector**
 
