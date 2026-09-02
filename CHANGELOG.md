@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.92.0] - 2026-09-02  ·  _Minor_
+**Homepage section details: card look, title and count on every section, plus category picker with uploadable icons**
+
+### Added
+- Every post-list section on the homepage (latest, popular, recommended, opinion, videos) now offers a Card look setting on all 14 themes: keep the theme design, or switch to grid, list, masonry, title-over-image or wide horizontal cards. The universal looks honour the Cards tab switches and add column count and a category filter; section title and post count are editable on every theme.
+- Category band: pick exactly which categories to show and in what order, show a category icon or image in three sizes, and show post counts. Upload a square image per category under Admin → Categories (512×512 recommended); it is fitted into a fixed box whatever its source size, with the initial letter as fallback. On the travel theme, picking categories replaces the fixed continent map with category tiles.
+- Section settings the theme's own design does not read (columns, category filter) stay hidden until a universal card look is chosen, so nothing looks like a dead switch.
+
+### Fixed
+- Several homepage sections ignored their title or count setting even though the customizer showed it: recommended blocks on travel, health and minimalist, and latest posts on pets and recipes now read them.
+
+---
+
 ## [2.91.1] - 2026-09-02  ·  _Patch_
 **Customizer saves now reach the CDN edge immediately**
 
