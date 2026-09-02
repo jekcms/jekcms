@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.101.0] - 2026-09-02  ·  _Minor_
+**In-article "read this next" and newsletter / button boxes, byline separators and auto-loading the next post**
+
+### Added
+- In-article "read this next" box placed after a chosen paragraph: card with image, single-line strip or a small list of one to three posts; label and source are configurable. Works on all 14 themes through the common content hook.
+- In-article newsletter signup or text + button box after a chosen paragraph, in card, lined band or minimal designs. The signup posts to the Newsletter plugin with the same protection fields as the popup and tags subscribers with the "inline" source.
+- Byline separators (dot, pipe, slash or stacked) and byline style (small caps, small and muted) for the post header design and the themes' common byline rows.
+- Auto-load the next post (experimental): when the reader reaches the end, the next post opens below on the same page and the address updates; up to three posts, without ad or comment blocks.
+
+---
+
 ## [2.100.0] - 2026-09-02  ·  _Minor_
 **Reading Mode 2.0, share-selected-text bubble, last-updated badge, tag block designs and a follow-us strip**
 
