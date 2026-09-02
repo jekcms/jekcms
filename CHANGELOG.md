@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.97.0] - 2026-09-02  ·  _Minor_
+**Category badge styling on cards: seven looks, custom colours, size and letter case**
+
+### Added
+- Customize → Cards now styles the category label on every card: brand fill, soft tint, outline, dark, light, frosted glass over images, or custom background and text colours; plus four sizes and letter-case control. Works on all 14 themes and on the universal card looks; theme default keeps the theme's own badge.
+
+---
+
 ## [2.96.2] - 2026-09-02  ·  _Patch_
 **Distinct icons for every customizer section and an end-to-end form check**
 
