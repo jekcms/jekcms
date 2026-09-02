@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.103.0] - 2026-09-02  ·  _Minor_
+**Dark-mode safe blocks, a cleaner sidebar table of contents, author card only on posts, quiz dark mode**
+
+### Improved
+- Sidebar table of contents redesigned: numbered entries with thin dividers, the active section in the brand colour, no side bar.
+- A new release check activates the quiz plugin, builds a sample quiz, opens its standalone page and the shortcode embed, scores answers on the server and checks the instant-feedback guard and the dark-mode stylesheet.
+
+### Fixed
+- On dark themes whose colour variables use different names, the new post-page blocks (read this next, related, navigation, boxes, 404) could fall back to light-grey text that was unreadable. Every fallback now derives from the surrounding text colour, so the blocks read correctly in light and dark alike; the reading toolbar also follows the theme's own dark toggle.
+- The sidebar author card printed on category, tag, author and search pages, where it repeated the page it was on and took space for nothing. It now appears on single posts only, whatever its visibility setting says.
+- The quiz card stayed white on dark themes that switch mode with a toggle; it now follows the theme's surface, text and border colours in both modes.
+
+---
+
 ## [2.102.1] - 2026-09-02  ·  _Patch_
 **Cleaner, editorial look for the new post-page blocks: no coloured side stripes, gradients or emoji icons**
 
