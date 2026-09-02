@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.100.0] - 2026-09-02  ·  _Minor_
+**Reading Mode 2.0, share-selected-text bubble, last-updated badge, tag block designs and a follow-us strip**
+
+### Added
+- Customize → Post → Reading experience now controls the reading toolbar: on/off, corner, tool set (text tools, sepia, focus, listen, print), reading time and the resume reminder. The Settings → Advanced switch remains the site-wide default.
+- Share-selected-text bubble: selecting a sentence shows X / WhatsApp / copy; the quote travels with the post link.
+- "Last updated" badge at the start of the content, only when the content changed or always, with a custom label; the date matches the structured data.
+- Tag block designs (filled pills, outlined, #hashtag, minimal, hide) and an end-of-post follow-us strip (named chips, icons only, thin line) fed by Settings → Social.
+
+### Fixed
+- Reading Mode loaded on every page and could appear over the first card on the homepage; on post pages its text size applied to the whole page and the reading time counted header and footer text. It now loads on single posts only, scales only the article content and counts only its words.
+- Reading Mode labels were Turkish on every site and the voice was fixed to Turkish; labels now follow the site language and the voice matches it. The toolbar no longer overlaps the back-to-top button, the progress bubble or the up-next card in the same corner.
+
+---
+
 ## [2.99.1] - 2026-09-02  ·  _Patch_
 **Reading indicator placement is one clear choice; theme and universal table-of-contents switches merged**
 
