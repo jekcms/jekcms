@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.92.4] - 2026-09-02  ·  _Patch_
+**Universal homepage cards: boxed surface, breathing room and a saner horizontal layout**
+
+### Improved
+- The universal card looks (grid, list, masonry, title-over-image, horizontal) now sit in a proper card: a surface background with a hairline border and soft shadow, the image seated flush into the card's corners, and a generous body padding so titles and meta no longer hug the image or the page background.
+- The wide horizontal look uses at most two columns (one on narrow screens) instead of squeezing three thin cards side by side; list and showcase side cards got matching padding.
+
+---
+
 ## [2.92.3] - 2026-09-02  ·  _Patch_
 **Edge HTML caching is now opt-in, so saves are visible at once on every host**
 
