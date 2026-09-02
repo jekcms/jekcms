@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.94.0] - 2026-09-02  ·  _Minor_
+**Header Studio: announcement bar, header button and social icons, transparent and smart-sticky header on every theme**
+
+### Added
+- Announcement bar above the header: text plus an optional link, four styles (brand, dark, soft, outlined), shown on all pages or the homepage only, dismissible with the visitor's browser remembering the choice.
+- Header button (subscribe, contact, shop…) in solid, outline or pill style, optionally opening in a new tab, and a social icon cluster fed by Settings → Social links — both placed inside the theme's own header on all 14 themes.
+- Header behaviour: transparent over the homepage hero (returns to normal on scroll), sticky mode (theme default, always pinned, smart hide-on-scroll-down, or not sticky) and a shadow choice.
+- All of it is off by default; nothing changes until you turn it on under Customize → Header.
+
+---
+
 ## [2.93.0] - 2026-09-02  ·  _Minor_
 **One colour system and one typography panel on every theme, portable settings, and full export**
 
