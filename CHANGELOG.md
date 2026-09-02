@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.92.3] - 2026-09-02  ·  _Patch_
+**Edge HTML caching is now opt-in, so saves are visible at once on every host**
+
+### Fixed
+- Hostinger's CDN (and similar edge caches) treated the s-maxage hint on HTML pages as a five-minute store that none of jekcms's purges could reach, so a saved customizer change, a new post or a menu edit kept showing the old page for up to five minutes. HTML responses no longer advertise an edge lifetime by default — jekcms's own page cache still keeps pages fast — and hosts with a working purge integration can turn edge caching back on with a single constant (JEK_EDGE_HTML_TTL).
+
+---
+
 ## [2.92.2] - 2026-09-02  ·  _Patch_
 **Changes show up immediately on LiteSpeed hosting**
 
