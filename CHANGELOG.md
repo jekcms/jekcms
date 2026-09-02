@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.93.0] - 2026-09-02  ·  _Minor_
+**One colour system and one typography panel on every theme, portable settings, and full export**
+
+### Added
+- Colours: every theme now exposes the same eight roles — primary, secondary, text, muted text, page background, card surface, border and link — each with a light and a dark value. Where a theme did not offer a role, an optional field appears: leave it off and the theme's own colour stays exactly as designed; tick Customize and your colour is written to every variable name the theme uses.
+- Typography: heading and body font pickers on all themes (blank keeps the theme font), plus heading weight, letter case, letter spacing and an article text width preset. Everything is off until you choose it.
+- Settings now travel between themes: fields that mean the same thing under different names (breadcrumb, share buttons, author box, colours, fonts) resolve to each other, so design packs and imported settings land correctly on every theme.
+- Export includes homepage, post and sidebar layouts and the version history; import restores them.
+
+### Fixed
+- The personal theme's custom CSS and HTML fields used a plain text box; they now use the code editor like every other theme.
+
+---
+
 ## [2.92.4] - 2026-09-02  ·  _Patch_
 **Universal homepage cards: boxed surface, breathing room and a saner horizontal layout**
 
