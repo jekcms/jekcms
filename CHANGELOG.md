@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.96.2] - 2026-09-02  ·  _Patch_
+**Distinct icons for every customizer section and an end-to-end form check**
+
+### Improved
+- The customizer navigation showed the same bookmark icon for Header, Archive, Media and Mobile; each section now has its own icon.
+- A new release check logs in, saves the real customizer form across seven sections, confirms each change on the homepage, a post and a category page, then resets and confirms nothing is left behind.
+
+---
+
 ## [2.96.1] - 2026-09-02  ·  _Patch_
 **Customizer audit close-out: forked themes get every universal panel, dead-setting sweep clean**
 
