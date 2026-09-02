@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.90.0] - 2026-09-02  ·  _Minor_
+**Customizer Pro: version history with one-click restore, design packs, undo/redo and a seventy-font library**
+
+### Added
+- Version history: before every save the customizer captures the current state — all field settings plus the homepage, post and sidebar layouts — into a per-theme history of the last twenty-five saves. You can label a save, see who made it and when, and restore any earlier version in one click; the state you are leaving is captured first, so a restore can itself be undone.
+- Design packs: Editorial, Magazine, Minimal and Bold apply a matching set in one click — heading and body fonts, card layout and hover, badge shape, section title style, sidebar design, button shape, post header style, share position, author box and reading extras — together with a fitting colour palette. Only fields your theme has are filled; nothing is stored until you save.
+- Undo and redo inside the customizer: every change to a control is kept in an in-page history, reachable from the sidebar buttons or with Ctrl+Z and Ctrl+Shift+Z (Cmd on Mac). Text fields keep the browser's own undo.
+- The font pickers now offer seventy Google Fonts across sans, serif, display, handwriting and monospace families, loaded on the site only when chosen.
+
+### Fixed
+- The dead-setting audit now skips fields that layout cards manage and seeds the fixture with every social link, which surfaced three real defects: the finance theme never printed the featured image on posts because it read the wrong array key; the lifestyle theme's header and footer social icons read an always-empty theme file instead of Settings → Social links; and the copyright suffix field on the recipes and travel themes was saved but never printed because the shared footer bar ignored it. All three are fixed.
+
+---
+
 ## [2.89.0] - 2026-09-02  ·  _Minor_
 **Homepage Studio: twelve universal sections on every theme, a layout-engine fix that had silently dropped sections, and a dead-setting sweep**
 
