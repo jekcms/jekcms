@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.96.1] - 2026-09-02  ·  _Patch_
+**Customizer audit close-out: forked themes get every universal panel, dead-setting sweep clean**
+
+### Fixed
+- Sites running a forked theme now see the same universal customizer panels as every stock theme (colours, typography, header, archive, elements, media, mobile); one fork was missing the post featured-image switch its template already read.
+- A final dead-setting audit across all 14 themes found no setting without a visible effect.
+
+---
+
 ## [2.96.0] - 2026-09-02  ·  _Minor_
 **Elements, media and mobile controls plus a default colour mode on every theme**
 
