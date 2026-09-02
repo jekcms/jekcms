@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.96.0] - 2026-09-02  ·  _Minor_
+**Elements, media and mobile controls plus a default colour mode on every theme**
+
+### Added
+- Appearance: button size, weight and uppercase text; form field style (rounded, pill, underline, square); blockquote style (colour bar, large quote mark, card, centered); table style (striped, bordered, minimal); link hover effect. Each applies across the theme's own buttons, forms and article content.
+- Media: corner radius and shadow for images inside posts, slight zoom on hover, caption style, and click-to-enlarge (a self-hosted lightbox with Esc and click-outside to close).
+- Mobile: text scale for small screens, hide the sidebar on mobile, and a fixed bottom bar with Home, Search, Share (native share sheet where available) and Back to top in light, dark or brand style.
+- Default colour mode — light, dark or follow the device — on every theme with a dark palette; a visitor's own toggle choice always wins.
+
+---
+
 ## [2.95.0] - 2026-09-02  ·  _Minor_
 **Archive Studio, hero content control and universal related posts on every theme**
 
