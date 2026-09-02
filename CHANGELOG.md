@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.104.0] - 2026-09-02  ·  _Minor_
+**Search Studio: a theme-independent search experience opened by the header button**
+
+### Added
+- Customize → Layout → Search: choose what the search button opens — full-screen overlay, top panel, dropdown under the button, or the search page. Placeholder text, results as you type (first 8 hits inside the box), suggestions before typing (categories, most read, or both), keyboard shortcut (Ctrl+K and /), and an optional header button for themes that ship none.
+- The theme's own search button is captured, so the experience works even when a theme's script is out of step with its template. Keyboard navigation in results, Esc to close, focus returned to the button, scroll lock; dark-mode safe colours and line icons.
+
+### Fixed
+- On two customer sites the header search button did nothing because the theme script looked for different element ids than the template printed; the script now falls back to the template's ids, and Search Studio bypasses the problem entirely.
+
+---
+
 ## [2.103.1] - 2026-09-02  ·  _Patch_
 **Customizer colours no longer override a theme's dark mode**
 
