@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.92.2] - 2026-09-02  ·  _Patch_
+**Changes show up immediately on LiteSpeed hosting**
+
+### Fixed
+- On LiteSpeed servers (most shared hosting, Hostinger included) the built-in server cache kept every HTML page for five minutes after any change, so a customizer save, a new post or a menu edit stayed invisible until the timer ran out — a switched card look on the homepage kept showing the old design. jekcms now tells LiteSpeed not to store its HTML (jekcms keeps its own page cache and clears it on every change), and admin saves also send a purge so anything already stored is dropped at once.
+
+---
+
 ## [2.92.1] - 2026-09-02  ·  _Patch_
 **Cleaner section settings panel with a live card-look preview**
 
