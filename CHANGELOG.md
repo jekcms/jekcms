@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.102.1] - 2026-09-02  ·  _Patch_
+**Cleaner, editorial look for the new post-page blocks: no coloured side stripes, gradients or emoji icons**
+
+### Improved
+- The in-article "read this next" box is now an editorial block with thin top and bottom rules, an uppercase label row, thumbnail, title and a circular arrow; the single-line strip keeps label and title on one line.
+- Blockquote designs: "left colour bar" became "thin rules (top and bottom)" and the card design lost its side stripe. The members-only banner uses a solid brand colour, the author box cover band is solid, and the reading toolbar uses line icons instead of emoji.
+
+---
+
 ## [2.102.0] - 2026-09-02  ·  _Minor_
 **Error and empty-state pages: smarter 404, no-results and empty-category designs, maintenance / coming-soon page and members-only box designs**
 
