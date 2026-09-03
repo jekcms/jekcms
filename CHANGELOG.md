@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.105.0] - 2026-09-03  ·  _Minor_
+**Home Studio Pro: section heading pack, bands and spacing, per-section card options, and Palettes 2.0**
+
+### Added
+- Every post-list section on the homepage (latest, most read, recommended, opinion, videos, related, gallery) now has a subtitle, a "view all" label and target (empty = the chosen category or the next page), heading alignment, a section background band (soft, brand or dark) and vertical spacing.
+- Per-section card options that override the Cards tab only for that section: image ratio (16:9, 4:3, 1:1, 3:4, 21:9), excerpt, meta row, category badge and title size. Category selection stays a one-click chip picker.
+- Palettes 2.0: eight curated palettes (Ink, Ocean, Forest, Ember, Rose, Sand, Slate, Coral) that set all eight colour roles for light and dark mode at once, with AA text contrast. Clicking a palette also switches on optional colour roles, so it applies fully; the Default palette restores the theme colours.
+
+---
+
 ## [2.104.0] - 2026-09-02  ·  _Minor_
 **Search Studio: a theme-independent search experience opened by the header button**
 
