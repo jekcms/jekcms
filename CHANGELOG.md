@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.106.0] - 2026-09-03  ·  _Minor_
+**Main Menu Studio with live preview and Top Bar 2.0 with a menu location**
+
+### Added
+- Customize → Layout → Main menu design: link style (plain, underline, pill, boxed), text size, weight, letter case, item spacing, active-page highlight (underline, pill, bold, dot), alignment and dropdown design (soft, sharp, dark), with a live mock preview inside the customizer. Works on every theme's header menu.
+- Top Bar 2.0: the announcement strip now has left and right slots you fill with announcement text, a top-bar menu, social icons, today's date or a contact line, plus optional custom background and text colours. A new "Top bar" menu location in Admin → Menus feeds the strip; the customizer explains how to create it.
+
+### Improved
+- A theme's own header-tab switches (such as the scrolling trending strip) no longer sit next to the universal announcement bar; they moved under Advanced with the theme's heading, so the two are not mistaken for the same thing.
+
+---
+
 ## [2.105.0] - 2026-09-03  ·  _Minor_
 **Home Studio Pro: section heading pack, bands and spacing, per-section card options, and Palettes 2.0**
 
