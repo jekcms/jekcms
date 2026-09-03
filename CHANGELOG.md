@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.107.0] - 2026-09-03  ·  _Minor_
+**Reaction Studio: the emoji reaction bar is now designable on every theme**
+
+### Added
+- Customize → Post → Emoji reactions: five designs (boxed, pills, card with title, minimal, labelled), emoji sets built from the shared reaction system (classic, news, fun, trio or a custom list of up to eight), full-colour or monochrome emojis, three sizes, placement (end of content, before comments, start of content), alignment, bar title, count display, hover effect and an accent colour for the chosen reaction. Works on all 14 themes; a theme's own reaction area is replaced when a design is chosen.
+
+### Improved
+- The standard reaction bar's harsh full-strength divider and button borders were softened; buttons expose their state to screen readers.
+
+---
+
 ## [2.106.0] - 2026-09-03  ·  _Minor_
 **Main Menu Studio with live preview and Top Bar 2.0 with a menu location**
 
