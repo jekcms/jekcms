@@ -8,6 +8,159 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.114.0] - 2026-09-05  ·  _Minor_
+**Premium customizer: button studio, top bar pro, header and footer colours, one control per concept**
+
+### Added
+- Button studio (Layout → Buttons): style (solid, outline, soft tint, ghost), hover effect (darken, lift, glow, fade), shadow, plus background and text colour with light/dark pairs under Colors → Links and buttons. A live preview in the customizer mirrors every choice, including the theme's primary colour.
+- Top bar pro: bar height (slim / normal / tall), content alignment for a single slot, announcement link shape (underlined text, pill button, text + arrow), scrolling announcement text that respects reduced-motion, and two new visibility options: post pages only, every page except the homepage. A live top-bar preview sits above the settings.
+- Header and footer colours (Colors → Header and footer): background and text colour for the header and the footer, each with a dark-mode pair; empty fields keep the theme colour, and a dark-only value is scoped to dark mode so the light theme is untouched.
+- Dead-setting detector (tools/testbed/tt-dead-settings.php): every customizer field is changed one by one and seven page types are compared; a field that leaves no trace fails the release gate. The full run covers 14 themes and about 270 fields per theme. A companion selector-coverage audit loads each theme in a headless browser and checks that the CSS a setting emits actually matches elements in that theme; it found the menu, button, sidebar, byline and tag gaps fixed in this release.
+
+### Improved
+- One control per concept: the theme's own "sticky header" switch and the universal "sticky behaviour" selector asked the same question twice. The selector is now the single control and drives the theme's header class as well ("Not sticky" makes the theme header static, "Always pinned" pins it).
+- Themes that ship their own header social-icon row (Health, Personal) no longer also offer the universal "social icons in the header" switch, and the alias that could print two icon rows was removed.
+- Customizer navigation: heading weight, letter case, letter spacing and article text width moved from Layout to Fonts → Size and shape; the Archive, Media and Mobile tabs now use named sections (Archive layout, List, Archive heading, In-content images, Text scale, Mobile layout) instead of a single "General" pile.
+
+### Fixed
+- Main menu design (link style, size, weight, letter case, spacing, active highlight, alignment) produced CSS that matched nothing in eight themes because their menus use different markup (crypto, tech, travel, personal, trends, health, entertainment and starter); the selector set now follows every built-in theme's real header navigation. The dropdown design option is only offered on themes that render submenus.
+- Button size, weight and uppercase options targeted only .btn/.button classes and did nothing on six themes; they now reach the themes' real button classes (form submit, load-more, newsletter and header buttons) while leaving icon, share, reply and pagination buttons alone.
+- "Hide the sidebar on mobile" missed several themes' sidebar wrappers; the rule now uses the same sidebar selector list as the Sidebar Studio. Byline separator / letter case and tag block design now cover the byline and tag markup of every theme.
+- Starter and Finance themes never printed post tags (the template read a field the page loader does not fill), so the tag block design had no effect there. Lifestyle, Pets and Minimalist query tags but have no tag block; choosing a tag block design now prints one after the post on those themes.
+
+---
+
+## [2.113.2] - 2026-09-04  ·  _Patch_
+**Footer flush with the page bottom, FAQ accordions survive editing**
+
+### Fixed
+- Health theme: article pages showed a white band below the footer. An older body padding rule was still applied on posts; the footer now sits flush with the bottom of the page on every template. A new release gate opens every theme's home, post, category and page in a real browser and fails if anything is left below the footer.
+- Health theme: when imported content carried two FAQ sections under different headings (e.g. "FAQ" and "Sıkça sorulan sorular"), both were printed. The duplicate-FAQ collapse now recognizes Turkish headings as well and keeps only the last section.
+- Editor: FAQ accordions and generic collapsible blocks that came from imports or older themes (details/summary markup) were dropped when a post was opened and saved, leaving plain paragraphs. They are now recognized and kept as FAQ and accordion blocks.
+- Customizer defaults can now carry a Turkish text; the footer brand blurbs of the Health, Crypto and Recipes themes no longer fall back to English on Turkish sites.
+
+---
+
+## [2.113.1] - 2026-09-04  ·  _Patch_
+**Personal theme footer shows every saved social account**
+
+### Fixed
+- In the Personal theme, social accounts saved in Settings (X, GitHub and the newer networks such as Threads or Bluesky) were missing from the footer kit even though they were ticked in the footer's network list; the theme kept its own short list of seven networks. The footer now reads the same social registry as Settings, every network gets its brand icon and label, and older "twitter" entries map to X.
+
+---
+
+## [2.113.0] - 2026-09-04  ·  _Minor_
+**18 social networks, entered once, shown everywhere**
+
+### Added
+- Settings → Social Media now covers 18 networks: X, Instagram, Facebook, YouTube, TikTok, Threads, LinkedIn, Pinterest, WhatsApp (channel or number), Telegram, Bluesky, Mastodon, Discord, Reddit, Twitch, Spotify, Medium and GitHub. You may type a handle (@name) and the address is completed. Every network has a real brand icon.
+- One registry feeds every surface: the footer kit's network list, the header action group, the "Follow us" strip, the sidebar social widget and the link-in-bio page all read the same accounts. The footer list now shows exactly the networks in Settings, in the same order, with old saved "twitter" entries mapped to X.
+
+---
+
+## [2.112.3] - 2026-09-04  ·  _Patch_
+**Missing social icons, real share icons and archive card spacing**
+
+### Fixed
+- The "Follow us" strip showed an empty circle for GitHub because the icon set had no GitHub drawing. GitHub, Mastodon, Bluesky, Discord, Reddit, Twitch, Spotify and Medium icons were added; a network without an icon now shows its initial instead of an empty circle. A release gate checks that every network in Settings → Social has a real icon.
+- The personal theme's own share card used the letters X / in / f in boxes; it now uses the real brand icons (X, LinkedIn, Facebook, WhatsApp) in round buttons.
+- Archive list cards on the personal theme stacked the category chip, title and date with no breathing room; they now have proper spacing, a smaller chip, and a single-column layout with a wide image on phones.
+
+---
+
+## [2.112.2] - 2026-09-04  ·  _Patch_
+**Sidebar widget spacing and the dark-mode reading progress circle**
+
+### Fixed
+- Sidebar widgets sat almost touching each other when the Sidebar Studio grouped sticky widgets, because the theme's spacing rule did not reach inside the sticky group. Spacing is now applied between every widget wrapper, inside and outside the group, and follows the Sidebar Studio gap setting (tight / normal / roomy).
+- The circular reading-progress indicator drew its background and its percentage text from different colour tokens, so in dark mode on some themes the number was dark on a dark disc and unreadable. Both now come from the same token set; the percentage always contrasts with the disc.
+
+---
+
+## [2.112.1] - 2026-09-04  ·  _Patch_
+**Sidebar widgets now match the theme's card look**
+
+### Fixed
+- Universal sidebar widgets (most read, recent posts, categories, tags, newsletter and the rest of the Sidebar Studio set) rendered without a box or padding next to the theme's own card widgets on entertainment, finance, lifestyle, minimalist, news, personal, pets, starter and travel, so lists looked glued to the edges on phones. They now take the theme's own widget card (background, border, corner, padding). Call-to-action and banner widgets keep their own designs.
+
+---
+
+## [2.112.0] - 2026-09-04  ·  _Minor_
+**Spam protection 2.0 for comments — catches what slipped through, learns from your decisions**
+
+### Added
+- Language and script check: comments in Cyrillic, CJK or Arabic script on a Turkish/English site, and English-only text with a link on a Turkish site, now score as spam. Gambling, adult, pharma, loan/crypto and SEO phrase and brand lists in Turkish, English and Russian (1win, 1xbet, "deneme bonusu", "рабочее зеркало" and hundreds more).
+- Links are now detected even without http: bare domains such as psee.io/xxxx count, and the URL-shortener list grew (psee.io, t.ly, cutt.us, clck.ru, vk.cc and more). Arrow-style calls to action before a link are a signal too.
+- Classic flattery templates ("impressed with your writing skills", "do you offer guest writers", "paid theme or did you modify it") and homoglyph tricks (Latin words with Cyrillic or full-width letters) are recognised.
+- Random-looking author names (Zenas6r, 1win_kbSi), disposable email domains, suspicious website fields, missing hidden timestamp, missing Referer or Accept-Language headers, and the same text posted again from another IP all add to the score.
+- A learning model: every time you approve a comment or mark one as spam, the filter learns your site's own spam and genuine wording and joins the scoring after 10+10 examples.
+- Optional external reputation: StopForumSpam (no key, cached, fails silently) is on by default; an Akismet API key can be added and is verified on save.
+- Retroactive cleanup: pending comments are rescanned with the current filter every night, and Spam Protection has a "Rescan pending comments now" button (optionally including approved ones). Spam found this way moves to the spam folder, never deleted without you.
+
+---
+
+## [2.111.1] - 2026-09-03  ·  _Patch_
+**Performance report moved under Settings → Server**
+
+### Improved
+- The Performance (real-user Core Web Vitals) report no longer sits in the Appearance menu; it lives under Settings → Server next to the SEO status, with a back link on the report page. The address is unchanged.
+
+---
+
+## [2.111.0] - 2026-09-03  ·  _Minor_
+**Social Publishing 2.1: the Social Traffic Pack — link in bio, audio articles and podcast feed**
+
+### Added
+- Platform-specific copy written by AI: instead of one template for every network, each share gets its own text — a one-line hook on X, three to five lines and a question on LinkedIn, a conversational tone on Threads and Bluesky, caption plus hashtags and "link in bio" on Instagram, a keyword-rich description on Pinterest. Uses your existing AI key; without a key or a reply, the template is used as before. Generated once per post and stored.
+- Smart timing: when enabled, each share is moved into the hours when that network's readers are most active (site time zone, weekdays for LinkedIn and Reddit); your gap and spread settings still apply.
+- UTM tagging: every shared link now carries utm_source=network, utm_medium=social and a campaign name you choose, so ZeroTrack and GA4 show which network brings visits. Canonical links on Dev.to, Hashnode, WriteFreely and Micro.blog are left untouched. On by default; can be switched off.
+- Link-in-bio page at /bio (alias /links): a fast, mobile-first page with your logo, tagline, custom buttons, the latest posts with thumbnails and social icons — one link for Instagram, TikTok and YouTube profiles. Its links are UTM-tagged as "bio".
+- Audio articles: voice the whole post with the Video Studio speech engine (Gemini or OpenAI) from Studio → Audio article, or let new posts be voiced automatically. A "Listen to this article" player appears at the top of the post on every theme.
+- Podcast feed at /podcast.xml: voiced posts become episodes in an Apple Podcasts and Spotify compatible RSS feed with title, author, email, cover image and category settings. MP3 when ffmpeg is available on the server, WAV otherwise (Apple requires MP3/M4A; Spotify accepts WAV).
+- Evergreen re-sharing can now prefer the most-read posts instead of a random pick.
+- ZeroTrack: a Social Media Traffic card shows visits per platform (from utm_source and referrer, including X's t.co, Instagram, Threads, Bluesky, Telegram, TikTok and more) and the share of all visits.
+- TikTok appears in the connections list as "planned" with an honest note: TikTok's Content Posting API only allows public posts from audited apps; download the Video Studio MP4 and upload manually until then.
+
+### Improved
+- Google preferred source block redesigned: kicker, title and subtitle in one column next to the button, hairline top and bottom instead of a box, stacks on phones.
+
+---
+
+## [2.110.0] - 2026-09-03  ·  _Minor_
+**Google preferred source button**
+
+### Added
+- Google preferred source button: readers can make your site a preferred source in Google Search with one tap, so your posts carry the "preferred" badge in Top Stories and AI Mode for them. Customize → Post → Google preferred source: Google's official button or a script-free link that opens Google's source preferences, placement at the start or end of the post (or both) and in the header action group, light or dark button, custom texts. Works on all 14 themes.
+- Privacy and performance: Google's script loads only on pages that show the button, once and asynchronously; when the cookie consent bar is enabled it loads only after consent, and the link is shown until then. Without JavaScript the link is always available.
+- Measurement: Google does not report this feature, so button clicks are counted on your site. Admin → News Platforms shows whether the button is on, whether the install is at domain level (a Google requirement), the click total, a link to search for your site in Google's source tool and a link to the Google documentation.
+
+---
+
+## [2.109.0] - 2026-09-03  ·  _Minor_
+**Share Studio and site width presets**
+
+### Added
+- Share Studio: the post share buttons are now fully designable on all 14 themes — six styles (brand fill, soft brand tint, outlined, single colour, minimal, brand colour with the network name), four shapes (circle, rounded, square, pill), three sizes, real brand icons for X, Facebook, WhatsApp, Telegram, LinkedIn, Pinterest, Reddit and Bluesky plus email, copy link, print and the device share sheet, a network list you can order, a small label or a heading line, placement above the content, below it, both, or as a floating bar on the left or right edge, and a mobile behaviour of your choice (inline, sticky bottom bar, a single share button that opens the device share sheet, or hidden).
+- Share counts: shares are measured from clicks on your own buttons (the networks no longer expose public counters) and shown as a total or per button, with a display threshold so a fresh post never shows zero. Counts load after the page, so full-page caching stays intact.
+- Site width: Customize → Layout → Site width offers narrow (1000), standard (1200), wide (1400), extra wide (1600), full width and a custom value. The header, content, hero and footer wrappers follow the chosen width on every theme; health, travel, lifestyle, recipes and starter carried hard-coded wrappers that used to ignore it. The minimalist theme keeps its reading column and applies the preset to the site frame.
+- A real-browser release gate loads every theme at two widths on the home, post and category pages and fails on any wrapper that renders wider than the chosen size or causes horizontal overflow.
+
+---
+
+## [2.108.0] - 2026-09-03  ·  _Minor_
+**Reaction Studio 2.0: jekcms artwork set, meter cards and 16 reactions**
+
+### Added
+- A jekcms-drawn reaction artwork set replaces system emojis in the reaction bar: 16 flat vector faces and symbols (like, dislike, love, in love, fire, clap, haha, wow, cool, cute, thinking, mind blown, confused, sad, cry, angry) that look identical on every device and scale with the text. The standard bar, every studio design and the entertainment theme's own bar use it; Customize → Post → Emoji artwork switches back to system emojis.
+- Meter cards design: each reaction is a card with the emoji floating above it, the count, a share bar that fills against the other reactions and an uppercase label pill that takes the accent colour when chosen. Labelled tiles were redrawn as soft, borderless tiles.
+- Two new emoji sets (Social with 7, Magazine with 9 reactions) and seven new reaction types accepted by the reaction API; custom lists now take up to ten keys.
+
+### Fixed
+- Top bar / announcement strip: switched on with no announcement text and no link, the strip rendered nothing, so the toggle looked broken. It now shows the site tagline from Settings → General, or today's date, until you add text.
+- Standard reaction bar: the chosen reaction no longer inverts the emoji colours; it is marked with a soft tint and a bold count.
+
+---
+
 ## [2.107.0] - 2026-09-03  ·  _Minor_
 **Reaction Studio: the emoji reaction bar is now designable on every theme**
 
