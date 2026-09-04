@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.115.0] - 2026-09-05  ·  _Minor_
+**A fresh install that looks finished: sample content, cover images and 14 themes checked on an empty site**
+
+### Added
+- Setup wizard: "Start with sample content" is on by default. It seeds three categories, nine short guide posts with generated cover images, tags and a main menu, so the theme you pick looks complete from the first minute. Everything is removed with one click under Posts; the option is hidden for WordPress migrations.
+- The welcome post created by the wizard now ships with a cover image, and the site description is seeded in the site language (the schema's English text no longer leaks into footers and brand cards).
+- Sample content is seeded through one implementation shared by the wizard and the admin button; covers are editorial two-tone compositions instead of flat gradients, and removal also clears the menu items, tags and cover files it created.
+- Release gate: a fresh-install tour (tools/testbed/tt-fresh-tour.php) walks all 14 themes in the wizard-only state and with sample content, checking eight page types for PHP errors, broken local images, empty grids, template leftovers and English strings on a Turkish site.
+
+### Fixed
+- Starter theme: the featured hero grid squeezed images into a 140px strip (a list-card width rule leaked into the hero); the header no longer appends a second "Home" link next to the menu and shows a fallback navigation when no menu is defined.
+- Finance theme: the post page printed the cover path relative to the page (a 404 for uploaded covers); Travel theme: the post hero referenced a non-existent AVIF sibling and rendered black, and related cards stacked full-width because the grid rules only loaded on the homepage.
+- News theme on Turkish sites: relative times ("3h ago"), dates, LIVE/NEW badges, comment and contact form labels, the search page and the 404 page were English; the default avatar pointed to a missing file. Trends theme: the "Videos" section presented ordinary posts as videos when no post contained a video.
+- Turkish defaults for theme texts that shipped in English (Finance disclaimers, Health/Recipes/Travel footer and newsletter copy, Recipes home sections, Lifestyle newsletter note, Recipes e-mail placeholders); Crypto's trending box and Health's author list are hidden when they would be empty.
+
+---
+
 ## [2.114.0] - 2026-09-05  ·  _Minor_
 **Premium customizer: button studio, top bar pro, header and footer colours, one control per concept**
 
