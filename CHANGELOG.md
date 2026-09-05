@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.115.1] - 2026-09-05  ·  _Patch_
+**English installs without Turkish leftovers, and one newsletter band instead of two**
+
+### Fixed
+- English sites and dashboards: the remaining Turkish strings are gone. Posts list "Date" column header, the membership price hint in Settings, the sidebar position options in the customizer (they showed both languages at once), the font preview sample, the support ticket error and delete confirmation, the image import confirmation, the Crypto theme's code-copy button and the Lifestyle theme's empty search results text now follow the site language.
+- Lifestyle theme on a fresh install showed two full-width newsletter bands stacked above the footer, and two newsletter widgets in the post sidebar. The footer band now steps aside when the homepage layout already has a newsletter band, and the theme's own sidebar widget yields to the universal one.
+- Customizer: select options declared with separate Turkish and English labels crashed the page ("Array to string"); they now render in the panel language. is_home() also recognises the homepage of a site installed in a subdirectory.
+- Release gate: a new English-install check (tools/testbed/tt-en-leak.php) switches the test install to English, tours 14 themes across 11 page types plus every dashboard page, and fails on any Turkish word or a doubled newsletter band.
+
+---
+
 ## [2.115.0] - 2026-09-05  ·  _Minor_
 **A fresh install that looks finished: sample content, cover images and 14 themes checked on an empty site**
 
