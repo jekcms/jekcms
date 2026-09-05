@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.115.3] - 2026-09-05  ·  _Patch_
+**Imported "&" names shown correctly, tidier excerpts, and a hero that fills its column in the News theme**
+
+### Fixed
+- WordPress import: category and tag names, titles and excerpts that WordPress stores as HTML entities ("Kültür & Sanat") were saved verbatim and escaped again on screen, so visitors saw "&amp;". Both import paths now decode them before saving; migration 10 repairs sites imported earlier (category and tag names, post titles and excerpts only, post bodies untouched).
+- WordPress import: an excerpt generated from the body was cut at the 160th character in the middle of a word. It now ends at a word boundary with an ellipsis.
+- News theme: when the two secondary hero cards were taller than the main card, a large blank area opened under the main story's excerpt. The main image now stretches to fill the column and the byline sits directly under the text.
+
+---
+
 ## [2.115.2] - 2026-09-05  ·  _Patch_
 **News theme: header buttons back in the navigation bar, no empty box next to a single headline**
 
