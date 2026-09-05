@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.115.2] - 2026-09-05  ·  _Patch_
+**News theme: header buttons back in the navigation bar, no empty box next to a single headline**
+
+### Fixed
+- News theme: the search, dark-mode and mobile-menu buttons rendered as a lone row under the navigation bar on every install (the stylesheet expected them inside the bar). They now sit at the right end of the bar, white on the dark background, and follow the text colour in the inline header layout.
+- News theme: a site with a single published post showed the headline card next to an empty grey box. The hero grid collapses to one column until a second story exists.
+
+---
+
 ## [2.115.1] - 2026-09-05  ·  _Patch_
 **English installs without Turkish leftovers, and one newsletter band instead of two**
 
