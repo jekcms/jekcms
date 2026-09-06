@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.3] - 2026-09-06  ·  _Patch_
+**Footer legal links now point to your real pages in every theme, Newspaper info-strip and sidebar fixes, and a job title field in Users**
+
+### Fixed
+- Footer corporate and legal links (About, Contact, Privacy, Terms, Cookies, Disclaimer, KVKK, Masthead, Advertise) in all 14 themes now resolve to the pages that actually exist on your site, with the page's own title and address. Turkish sites no longer link to English paths such as /privacy-policy or /terms that only worked through redirects, and a concept without a page (for example Advertise) is no longer shown as a dead link. A release check now fetches every footer link in every theme and fails on a 404 or a redirect chain.
+- Newspaper info strip: when many rates are shown the city, prayer-time and weather boxes were pushed off the strip; the rates area now scrolls inside its own space.
+- Newspaper with Sidebar Studio's "Pill" title style: the widget title was invisible (dark text on the dark pill) and the header wrapper was styled a second time; titles now take the pill's colour and nested wrappers stay plain. The same nested-wrapper fix applies to the underline, uppercase and centered styles.
+- Newspaper with Cards Studio's "Overlay" layout: card titles and excerpts kept the dark text colour on the dark panel; they now inherit the layout's white text.
+- Users: the dashboard "Author job titles" warning sent you to Users, but the job title could only be edited on your own Profile. The user editor now has a Job title field (author box, byline and Person schema jobTitle).
+- Newspaper: the top-strip and footer "Video News" links are shown only when a video tag with posts exists; the Contact link goes to your real contact page.
+
+---
+
 ## [2.116.2] - 2026-09-06  ·  _Patch_
 **Newspaper theme: a stacked header with a full-width menu bar, currency and weather chips in the top strip, a "More" menu for long category lists, and a footer pages column that no longer depends on the main menu**
 
