@@ -8,8 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.2] - 2026-09-06  ·  _Patch_
+**Newspaper theme: a stacked header with a full-width menu bar, currency and weather chips in the top strip, a "More" menu for long category lists, and a footer pages column that no longer depends on the main menu**
+
+### Added
+- Header layout choice (Customize → Homepage): "Logo row + separate full-width menu bar" (new default, built for news sites with many categories) or "Logo and menu on one row". The menu bar gets the whole page width, so category names are no longer cut off next to the logo and chips.
+- Currency and weather chips now sit in the top strip next to the date and service links (Customize → Homepage → chip position); the menu row keeps only the logo, search and dark-mode buttons.
+- "More" menu: when categories still do not fit, the trailing items move into a "More" dropdown instead of being clipped; it re-measures on resize and after fonts load.
+
+### Fixed
+- Newspaper footer: the pages column (privacy policy, KVKK notice, about, contact, masthead, disclaimer) is built from the published pages themselves, legal pages first, so removing a page from the main menu no longer removes it from the footer.
+- Newspaper footer: the copyright text entered in Customize → Footer now wins over the footer kit's default line.
+
+---
+
 ## [2.116.1] - 2026-09-06  ·  _Patch_
-**Safe updates: post-update self-check with automatic rollback, an error log page in the panel, and a fix for the Themes page on non-default database ports**
+**Safe updates: post-update self-check with automatic rollback, an error log page in the panel, and Plesk/cPanel fixes (Themes page under open_basedir, Argon2 password hashing)**
 
 ### Added
 - Post-update self-check: right after the files are copied, the site checks itself over HTTP (admin login page and homepage). If a server error persists, the backup taken before the update is restored automatically, the site keeps running on the previous version, the version is put on hold so the nightly auto-update does not retry it, and the real reason (the last line of the error log) is reported to the update server and shown in the panel.
@@ -18,6 +32,11 @@ _`php tools/gen-changelog-md.php` and commit._
 - The licence heartbeat now carries the last logged exception, the number of errors in the last 24 hours, the OPcache configuration and any held update, so support can see what went wrong on a site without asking for screenshots.
 
 ### Fixed
+- Themes page returned "Server Error" on Plesk and cPanel hosts with an open_basedir restriction: it looked for a shared theme folder two levels above the installation, the restricted host raised a warning and the page died. The lookup now only runs in the jekcms.com multi-site layout; customer installations never look above their own folder. A new release check runs the admin panel under an open_basedir restriction exactly like Plesk.
+- Password hashing failed with "A thread value other than 1 is not supported" on PHP builds that use libsodium for Argon2 (Plesk PHP 8.4): changing a password or creating a user returned a server error. Hashing now uses a single thread (security comes from memory and time cost) and falls back to bcrypt where Argon2 is unavailable.
+- Legal page generator could fail with a duplicate-slug database error when a page with the same address was in the trash; the trashed row is now restored and reused.
+- Social callback routes (/social/callback, /pinterest-callback, /social/uninstall, /social/delete-data) returned a fatal error on installations without the Social plugin; they now answer 404.
+- Updates → History could fail with "Call to undefined function format_bytes" on some installations; the helper is now always available.
 - Themes page could return "Server Error" on hosts whose database does not listen on port 3306 or uses a socket: the page opened its own raw database connection without the configured port. It now uses the core connection (port, socket and options included).
 - Stale-code guard after an update: the self-heal page is now shown on every fatal within the update window (previously the 60-second throttle let a raw "Server Error" through on the second hit), the pattern also covers type and argument errors, uncaught errors in the first 15 minutes after an update use the same auto-refresh page, and the refresh stops after three attempts so a real bug never loops.
 - After a successful update the panel shows a short "preparing the site" page before returning to Updates, instead of loading new admin code in the same process that still had the old code cached.
