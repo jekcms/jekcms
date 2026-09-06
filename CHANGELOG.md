@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.4] - 2026-09-07  ·  _Patch_
+**Newspaper polish: sidebar and card styles from design packs render cleanly, the info strip never shows a cut-off rate, and the footer customizer can restore the theme default**
+
+### Fixed
+- Footer customizer: on a theme that ships its own footer (Newspaper) the picker showed "Classic 4 columns" as selected even though nothing was saved, and saving once replaced the theme footer with no way back. The theme default is now preselected and labelled, and a "Restore theme default" button removes the footer kit record so the theme footer returns.
+- Newspaper info strip: rates that do not fit are hidden from the end instead of being cut in half under the city box; the strip re-measures when the window is resized.
+- Newspaper with Sidebar Studio's "Pill" title (part of the Magazine design pack): the title was invisible or floated over the widget corner. In Newspaper the filled title now renders as a full-width header bar; the dark Trending widget keeps its own header; boxed widgets no longer get a double frame.
+- Homepage newsletter band: the heading disappeared when the "Boxed" section title style was active; band headings are now immune to section title styles.
+
+---
+
 ## [2.116.3] - 2026-09-06  ·  _Patch_
 **Footer legal links now point to your real pages in every theme, Newspaper info-strip and sidebar fixes, and a job title field in Users**
 
