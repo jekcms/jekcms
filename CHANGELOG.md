@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.0] - 2026-09-06  ·  _Minor_
+**New Newspaper theme for news sites, a story-type box in the editor, and the Astrology plugin**
+
+### Added
+- Newspaper theme (14th theme): an editorial news portal layout — top strip with date and service links, red breaking bar with timestamps, market strip (currencies, gold, Bitcoin, Ethereum) with city, weather and next-prayer countdown that follow the visitor's location, numbered hero slider, social video strip, category blocks, most-read list, two-column category boxes, Photo Focus panel, infographic strip, columnists row and daily horoscope. Grey page with boxed white cards, Rubik headlines, full dark mode. Every color, font, strip and section is editable in the customizer; the Newspaper footer template (Hürriyet-style five columns + social circles) is enabled by default.
+- Story type box in the post editor: when the active theme declares content kinds, a "Story type" select (Standard / Video / Photo gallery / Infographic / Breaking) adds the matching tag on save and explains where the story will appear — no need to remember tag names.
+- Astrology plugin: daily horoscopes for all twelve signs (free API, translated with the site AI key on Turkish sites, editable per day in the panel) with /burc and /burc/{sign} pages and a homepage strip.
+- Recommended plugins card on Themes and Dashboard: a theme can list the plugins it works best with (one-click activate) and a "Where does this theme pull content from?" guide.
+- Newspaper footer template for the footer kit: logo + copyright row, five bold link columns, corporate links row and legal text.
+
+### Improved
+- Layout engine: new homepage sections (info strip, video strip, category block, most-read, dual category, photo focus, infographic, columnists, astrology) with source settings (tag or category) shown on each card.
+
+---
+
 ## [2.115.3] - 2026-09-05  ·  _Patch_
 **Imported "&" names shown correctly, tidier excerpts, and a hero that fills its column in the News theme**
 
