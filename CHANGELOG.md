@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.5] - 2026-09-07  ·  _Patch_
+**Newspaper footer without repeated links and editable from Menus, overlay cards with author avatars, and a sidebar newsletter fix**
+
+### Fixed
+- Newspaper footer: the same page (for example the KVKK notice) could appear three times — in the services column, the pages column and the corporate row. Each address is now printed once. If a menu is assigned to Menus → Footer, that menu becomes the Pages column, so the footer is editable from Menus; the corporate row only shows legal pages not already listed. The footer customizer explains where each column comes from.
+- Cards Studio "Overlay" layout: when a card body contains an author avatar image, the body was not recognised as the text block and titles stayed dark on the dark panel (Newspaper related stories). Only a direct child image now counts as the card image.
+- Newspaper sidebar: the newsletter widget lost its accent background under the boxed widget style, leaving white text on white; backgrounds are kept.
+- Newspaper top strip: the video link no longer fails on a server that still runs the previous helper file for a few seconds after an update.
+
+---
+
 ## [2.116.4] - 2026-09-07  ·  _Patch_
 **Newspaper polish: sidebar and card styles from design packs render cleanly, the info strip never shows a cut-off rate, and the footer customizer can restore the theme default**
 
