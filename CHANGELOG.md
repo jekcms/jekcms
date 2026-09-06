@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.1] - 2026-09-06  ·  _Patch_
+**Safe updates: post-update self-check with automatic rollback, an error log page in the panel, and a fix for the Themes page on non-default database ports**
+
+### Added
+- Post-update self-check: right after the files are copied, the site checks itself over HTTP (admin login page and homepage). If a server error persists, the backup taken before the update is restored automatically, the site keeps running on the previous version, the version is put on hold so the nightly auto-update does not retry it, and the real reason (the last line of the error log) is reported to the update server and shown in the panel.
+- Update lock: while files are being copied and the self-check runs, visitors see a short "update in progress" page that refreshes itself instead of a half-copied site; the admin who started the update is not affected.
+- Error log page (Updates → Error log): the last lines of the application, PHP and update logs with a one-click copy button, so a "Server Error" can be diagnosed without hosting file access.
+- The licence heartbeat now carries the last logged exception, the number of errors in the last 24 hours, the OPcache configuration and any held update, so support can see what went wrong on a site without asking for screenshots.
+
+### Fixed
+- Themes page could return "Server Error" on hosts whose database does not listen on port 3306 or uses a socket: the page opened its own raw database connection without the configured port. It now uses the core connection (port, socket and options included).
+- Stale-code guard after an update: the self-heal page is now shown on every fatal within the update window (previously the 60-second throttle let a raw "Server Error" through on the second hit), the pattern also covers type and argument errors, uncaught errors in the first 15 minutes after an update use the same auto-refresh page, and the refresh stops after three attempts so a real bug never loops.
+- After a successful update the panel shows a short "preparing the site" page before returning to Updates, instead of loading new admin code in the same process that still had the old code cached.
+- The update request no longer inherits the host's execution-time and memory limits and completes even if the browser tab is closed.
+
+---
+
 ## [2.116.0] - 2026-09-06  ·  _Minor_
 **New Newspaper theme for news sites, a story-type box in the editor, and the Astrology plugin**
 
