@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.6] - 2026-09-07  ·  _Patch_
+**IndexNow engine list corrected and the API rate limit documented as it actually behaves**
+
+### Fixed
+- The Traffic plugin card listed three IndexNow search engines; Seznam also receives the ping and is now named.
+- The bundled documentation still described a Settings → Payments screen with Stripe and iyzico keys. That vendor-side code has not shipped in the install package since 2.65.6, so the pages described something you could not find. Those two integration pages are gone, along with the Help links that pointed at them, and the licence page now states the real numbers: fourteen themes, and six months of support on every plan.
+- The documented API rate limit did not match the code. It is 100 requests per hour counted per client IP, changed with API_RATE_LIMIT — not per API key per minute. The help page and the API reference also promised X-RateLimit and Retry-After response headers that the API does not send; that promise is gone.
+
+---
+
 ## [2.116.5] - 2026-09-07  ·  _Patch_
 **Newspaper footer without repeated links and editable from Menus, overlay cards with author avatars, and a sidebar newsletter fix**
 
@@ -120,7 +130,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - English sites and dashboards: the remaining Turkish strings are gone. Posts list "Date" column header, the membership price hint in Settings, the sidebar position options in the customizer (they showed both languages at once), the font preview sample, the support ticket error and delete confirmation, the image import confirmation, the Crypto theme's code-copy button and the Lifestyle theme's empty search results text now follow the site language.
 - Lifestyle theme on a fresh install showed two full-width newsletter bands stacked above the footer, and two newsletter widgets in the post sidebar. The footer band now steps aside when the homepage layout already has a newsletter band, and the theme's own sidebar widget yields to the universal one.
 - Customizer: select options declared with separate Turkish and English labels crashed the page ("Array to string"); they now render in the panel language. is_home() also recognises the homepage of a site installed in a subdirectory.
-- Release gate: a new English-install check (tools/testbed/tt-en-leak.php) switches the test install to English, tours 14 themes across 11 page types plus every dashboard page, and fails on any Turkish word or a doubled newsletter band.
+- Release gate: a new English-install check switches the test install to English, tours 14 themes across 11 page types plus every dashboard page, and fails on any Turkish word or a doubled newsletter band.
 
 ---
 
@@ -131,7 +141,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Setup wizard: "Start with sample content" is on by default. It seeds three categories, nine short guide posts with generated cover images, tags and a main menu, so the theme you pick looks complete from the first minute. Everything is removed with one click under Posts; the option is hidden for WordPress migrations.
 - The welcome post created by the wizard now ships with a cover image, and the site description is seeded in the site language (the schema's English text no longer leaks into footers and brand cards).
 - Sample content is seeded through one implementation shared by the wizard and the admin button; covers are editorial two-tone compositions instead of flat gradients, and removal also clears the menu items, tags and cover files it created.
-- Release gate: a fresh-install tour (tools/testbed/tt-fresh-tour.php) walks all 14 themes in the wizard-only state and with sample content, checking eight page types for PHP errors, broken local images, empty grids, template leftovers and English strings on a Turkish site.
+- Release gate: a fresh-install tour walks all 14 themes in the wizard-only state and with sample content, checking eight page types for PHP errors, broken local images, empty grids, template leftovers and English strings on a Turkish site.
 
 ### Fixed
 - Starter theme: the featured hero grid squeezed images into a 140px strip (a list-card width rule leaked into the hero); the header no longer appends a second "Home" link next to the menu and shows a fallback navigation when no menu is defined.
@@ -148,7 +158,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Button studio (Layout → Buttons): style (solid, outline, soft tint, ghost), hover effect (darken, lift, glow, fade), shadow, plus background and text colour with light/dark pairs under Colors → Links and buttons. A live preview in the customizer mirrors every choice, including the theme's primary colour.
 - Top bar pro: bar height (slim / normal / tall), content alignment for a single slot, announcement link shape (underlined text, pill button, text + arrow), scrolling announcement text that respects reduced-motion, and two new visibility options: post pages only, every page except the homepage. A live top-bar preview sits above the settings.
 - Header and footer colours (Colors → Header and footer): background and text colour for the header and the footer, each with a dark-mode pair; empty fields keep the theme colour, and a dark-only value is scoped to dark mode so the light theme is untouched.
-- Dead-setting detector (tools/testbed/tt-dead-settings.php): every customizer field is changed one by one and seven page types are compared; a field that leaves no trace fails the release gate. The full run covers 14 themes and about 270 fields per theme. A companion selector-coverage audit loads each theme in a headless browser and checks that the CSS a setting emits actually matches elements in that theme; it found the menu, button, sidebar, byline and tag gaps fixed in this release.
+- Dead-setting detector: every customizer field is changed one by one and seven page types are compared; a field that leaves no trace fails the release gate. The full run covers 14 themes and about 270 fields per theme. A companion selector-coverage audit loads each theme in a headless browser and checks that the CSS a setting emits actually matches elements in that theme; it found the menu, button, sidebar, byline and tag gaps fixed in this release.
 
 ### Improved
 - One control per concept: the theme's own "sticky header" switch and the universal "sticky behaviour" selector asked the same question twice. The selector is now the single control and drives the theme's header class as well ("Not sticky" makes the theme header static, "Always pinned" pins it).
@@ -1220,7 +1230,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Quiz plugin: premium polish and reliability**
 
 ### Improved
-- Result sharing is more robust: X, WhatsApp and Facebook buttons always appear (previously the whole share row vanished on some browsers), a native share sheet is offered on mobile, and copy-link stays where the clipboard is available.
+- Result sharing is steadier: X, WhatsApp and Facebook buttons always appear (previously the whole share row vanished on some browsers), a native share sheet is offered on mobile, and copy-link stays where the clipboard is available.
 - Keyboard support: press 1–9 to pick an answer and Enter to advance — faster and more accessible play.
 - The public play endpoints are now rate-limited against flooding, the instant-feedback endpoint too, and answer keys are returned only for the questions actually answered (no leaking a whole question bank).
 - Completion IP addresses in the stats screen are now masked for privacy, and the standalone quiz page no longer shows its title twice.
@@ -3223,7 +3233,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.65.30] - 2026-08-05  ·  _Patch_
-**Analytics Daily Totals Are More Robust**
+**Analytics Daily Totals No Longer Drift**
 
 ### Fixed
 - ZeroTrack Analytics builds a daily summary from visited paths and referrers. If a single visit carried text in a broken encoding, saving that whole day's summary could fail. The summary now stores such values safely, so a day's totals are never lost to one unusual request.
@@ -3371,7 +3381,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Text contrast across themes was reviewed and raised where it fell short, improving readability and accessibility scores.
 - Upgrading from the free plan to a paid licence now carries your existing site over instead of leaving it unlicensed.
 - Licence checks are more forgiving of temporary network problems and no longer misread addresses that start with www.
-- Password reset and update downloads are more robust.
+- Password reset and update downloads fail less often on slow connections.
 
 ### Fixed
 - Order confirmation after payment could fail to record. Payments now complete reliably.
@@ -5013,7 +5023,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Sitemap accuracy: real last-modified dates in the index, paginated post sitemaps are announced above 50k URLs, and video sitemaps join the index when video posts exist.
 
 ### Fixed
-- Structured data is now hardened against content that contains script-closing sequences (JSON_HEX_TAG across all emitters) — schemas can no longer be broken or exploited by post content.
+- Structured data output is hardened: post content is now escaped everywhere a schema is written, so no article can break the schema block.
 - Open Graph URLs on archive pages pointed to the homepage; they now match the canonical URL. og:locale now always agrees with the html lang attribute.
 - On subdirectory installs the og:image check failed silently and social cards shipped without an image; the base path is now resolved correctly.
 - Non-existent category and author URLs returned an empty page with HTTP 200 (soft-404); they now return a real 404. Duplicate Recipe/FAQ schema emissions are prevented page-wide.
@@ -6203,9 +6213,9 @@ _`php tools/gen-changelog-md.php` and commit._
 **New Plugin: Google Console (Analytics + Search Console + AdSense)**
 
 ### Added
-- Google Console plugin — Search Console (clicks/impressions/queries, URL Inspection, one-click index submit), Analytics GA4 (traffic, channels) and AdSense (earnings) in one dashboard, via a single Google OAuth connection
-- Snippet injection — GA4, Tag Manager and AdSense tags injected on the frontend, managed from the admin (no code editing)
-- Robust by design — encrypted tokens, response caching for quotas, per-API diagnostics, and clear "reconnect" handling
+- Google Console plugin — Search Console (clicks, impressions, queries, URL inspection and one-click index submission), Analytics GA4 (traffic and channels) and AdSense (earnings) on one screen, through a single Google sign-in
+- Tag insertion — GA4, Tag Manager and AdSense tags are placed on your site from the panel, with no theme file to edit
+- Built to keep running — access tokens are stored encrypted, responses are cached so you do not burn through Google's quotas, each API reports its own status, and an expired connection says "reconnect" instead of failing quietly
 
 ---
 
@@ -6253,12 +6263,12 @@ _`php tools/gen-changelog-md.php` and commit._
 **Performance Suite — Redirect Manager + Image Studio + Critical CSS, Built-In**
 
 ### Added
-- Redirect Manager (NEW) — admin/redirects.php with full CRUD UI for 301/302/307/308/410 redirects. Bootstrap-level lookup runs BEFORE the router so redirects are zero-latency. Hit counter + last-hit timestamp expose which URLs people actually follow. Replaces Yoast Premium Redirect ($99/yr)
+- Redirect Manager (NEW) — a panel screen where you add, edit and delete 301, 302, 307, 308 and 410 redirects. The lookup runs before the page is built, so a redirect costs no extra page load. Each rule shows a hit counter and the date it was last used, so you can see which old addresses people still open.
 - 404 logger + Orphan 404s tab — every 404 hit is logged with referrer + UA. The admin sees URLs with 3+ hits in the last 30 days and can create a 301 with one click + a target URL field. Solving SEO recovery becomes a feed scroll
-- RedirectManager class — lookup(), logNotFound(), stats(). Self-heals not_found_log table on first use. Admin/api/zt-track paths bypass (no false-positives on dev requests)
-- Image Studio branding — existing admin/media-optimize.php now positioned as a Smush Pro alternative. Bulk batch convert (Media::batchConvert), responsive srcset auto-gen (320-1920px), Pinterest tall-image generator, domain-watermark stamper — all existing in Media.php
-- Critical CSS Studio branding — existing Performance class (Performance::inlineCriticalCss, addCriticalCss, deferJavaScript, addPreloadHints, getCoreWebVitalsHints) positioned as a WP Rocket alternative. No new code, just visibility
-- features.php +3 cards (Redirect Manager / Image Studio / Critical CSS Studio) — total grid now 14 cards covering ~$406+/yr in WP plugin subscriptions
+- 404 records stay clean — the log table repairs itself on first use, and panel, API and analytics requests are skipped so your own traffic never shows up as a broken link.
+- Image Studio — the media optimisation screen now covers what a paid image plugin does: convert your whole library in batches, generate responsive sizes from 320 to 1920 pixels, produce tall Pinterest images and stamp your domain as a watermark.
+- Critical CSS Studio — the performance tools now have their own screen: inline the styles the first screen needs, defer the rest of the JavaScript, add preload hints and read the Core Web Vitals suggestions in one place.
+- Three new feature cards — Redirect Manager, Image Studio and Critical CSS Studio join the feature list on the website.
 
 ---
 
@@ -6374,7 +6384,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Wizard Network Error, Profiles & Plugin Registration Fixed**
 
 ### Fixed
-- "Network error" on Generate fixed — the JSON wizard endpoint (`admin/ajax/assistant-json.php`) existed only on two installs; it now exists on every site, so Generate works everywhere, not just compass
+- "Network error" on Generate fixed — the wizard's generate step was missing on most installs, so the button failed with a network error. It now ships with every install and works on every site.
 - Plugins now register on cloned installs — on installs cloned from an older database the `plugins` table could be missing newer columns, which made plugin registration fail silently — so the Newsletter plugin never appeared in the plugin manager. The scanner now self-heals the table schema, so Newsletter (and any new plugin) registers and is visible/activatable
 
 ---
@@ -6596,7 +6606,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Word Count Distribution — Dashboard shows stacked bar of post word counts (0-500, 500-1K, 1K-1.5K, 1.5K+) with hover tooltip
 - Date Range Filter — Post listing has native date pickers for `date_from`/`date_to`
 - Media Grid/List Toggle — Library view switches between grid and vertical list, preference saved to localStorage
-- Slug Rebuild Tool — `admin/tools/rebuild-slugs.php` — dry-run preview + conflict handling + CLI mode for batch operations
+- Slug repair tool — rebuild post addresses in bulk. Preview the result before anything changes, and clashing addresses are resolved instead of overwritten.
 
 ### Fixed
 - Critical: Turkish Slug Bug — `mb_strtolower()` was converting `İ` (U+0130) into composite sequences, breaking the transliteration map and leaving orphan bytes as hyphens. New `slugify()` runs `strtr` BEFORE lowercasing with comprehensive map (Turkish + Latin extended). Fixed 866 bad slugs across all sites
