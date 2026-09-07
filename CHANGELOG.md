@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.10] - 2026-09-07  ·  _Patch_
+**Horoscopes: the panel now says when no new reading can be written**
+
+### Fixed
+- A silent standstill is now visible. On a Turkish site the external service’s English text has to be translated before it can be published, and translation uses the AI key. With no key configured the module wrote nothing at all and the page simply stayed on the last day that was written — with no sign of it anywhere in the panel. Plugins → Horoscopes now states the problem, says which of the two fixes applies (configure a key, or switch the source to editor text), and shows how many of the twelve signs are filled for the day, the week and the month.
+
+---
+
 ## [2.116.9] - 2026-09-07  ·  _Minor_
 **Horoscopes: weekly and monthly readings, days prepared in advance, and text produced on your own site**
 
