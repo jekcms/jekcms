@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.8] - 2026-09-07  ·  _Patch_
+**The site manifest is served correctly again, and the Minimal post header divider can be turned off**
+
+### Improved
+- Newspaper theme: the rules under headings are now yours to choose. The theme drew a line under the post title block and under every H2 inside the article, and neither could be turned off. Customize → Post page now has two switches for them. Both start off, so the lines are gone; turn either back on if you want the newspaper look.
+- Newspaper footer: the legal texts moved to the bottom row. The KVKK notice and the disclaimer sat in the corporate column, away from the other legal pages. They now sit in the bottom legal row next to Privacy, Terms and Cookies, and no longer repeat higher up.
+- Minimal post header: the divider line is now a setting. The shared Minimal design also drew a thin line under the title with no way to remove it. Customize → Post page → Post header now has a "Divider line under the title" switch. It stays on by default there, so nothing changes unless you turn it off.
+
+### Fixed
+- /manifest.json returned the wrong file. A leftover file from an old release sat in the site root under that name and shadowed the real manifest, so browsers could not read your app name and the SEO health check reported "name unreadable". The stale file is no longer shipped and is removed from existing sites on update. The real manifest is generated for you and carries your site name, colours and icons. The same file also exposed the package checksum, file count and upload details publicly; that is gone too.
+- The health check now says what to do. When the manifest address returns something that is not a manifest, the check names the cause instead of only reporting that the name could not be read.
+
+---
+
 ## [2.116.7] - 2026-09-07  ·  _Patch_
 **License screen badges now match what your plan actually does**
 
