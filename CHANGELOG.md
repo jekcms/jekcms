@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.9] - 2026-09-07  ·  _Minor_
+**Horoscopes: weekly and monthly readings, days prepared in advance, and text produced on your own site**
+
+### Added
+- Weekly and monthly readings. The module only ever kept a reading for the current day. Each sign's page can now also show a weekly and a monthly reading underneath the daily one. If a period has no text yet, its block is simply not printed — no empty headings.
+- Days prepared in advance. Plugins → Horoscopes now has a "days ahead" setting (0–7, default 3). The module fills those days quietly in the background, but a prepared day stays invisible until its date arrives: a visitor always sees today's reading, never tomorrow's. This is what stops the site running dry if the source is unreachable for a few days.
+- A third source: produced on this site. Alongside "written by an editor" and "external service", readings can now be produced on your own site with your own AI key. Because the text is generated where it is published, it carries no third-party rights, it comes out in your site's language with no translation step, and — unlike the external service — it can fill future days at all.
+
+### Changed
+- The rights notice is now on the screen. Choosing the external service shows a short notice: the text is written by a third party, it arrives in English and is translated, and you are responsible for checking that its terms allow publication on your site. Each reading also carries a source label, so you can see at a glance which sign was written by an editor, produced on the site, or fetched.
+- One backup feed was removed. The module used to fall back to a second free feed whose text carried a known publication's editorial voice, which makes its copyright status unclear. It is gone. Sites using the external source now use the one documented free endpoint, and can fall back to producing text on the site.
+
+### Fixed
+- A weekly reading no longer overwrites the daily one. Readings were stored one row per day and sign, so any second reading for the same day replaced the first. Rows now also record which period they belong to, and existing readings are carried over as daily ones during the update.
+
+---
+
 ## [2.116.8] - 2026-09-07  ·  _Patch_
 **The site manifest is served correctly again, and the Minimal post header divider can be turned off**
 
