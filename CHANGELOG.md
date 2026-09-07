@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.7] - 2026-09-07  ·  _Patch_
+**License screen badges now match what your plan actually does**
+
+### Fixed
+- The feature badges on Settings → License described an older tiering. "White label" showed as off on the Personal and Standard plans even though those plans can already hide the footer credit from Settings → General → Branding. "Priority support" showed as on for Standard, which does not have it — the priority queue starts at Professional. Two badges promised things we do not sell at all, 24/7 support and a reseller right; both are gone.
+
+---
+
 ## [2.116.6] - 2026-09-07  ·  _Patch_
 **IndexNow engine list corrected and the API rate limit documented as it actually behaves**
 
@@ -130,18 +138,18 @@ _`php tools/gen-changelog-md.php` and commit._
 - English sites and dashboards: the remaining Turkish strings are gone. Posts list "Date" column header, the membership price hint in Settings, the sidebar position options in the customizer (they showed both languages at once), the font preview sample, the support ticket error and delete confirmation, the image import confirmation, the Crypto theme's code-copy button and the Lifestyle theme's empty search results text now follow the site language.
 - Lifestyle theme on a fresh install showed two full-width newsletter bands stacked above the footer, and two newsletter widgets in the post sidebar. The footer band now steps aside when the homepage layout already has a newsletter band, and the theme's own sidebar widget yields to the universal one.
 - Customizer: select options declared with separate Turkish and English labels crashed the page ("Array to string"); they now render in the panel language. is_home() also recognises the homepage of a site installed in a subdirectory.
-- Release gate: a new English-install check switches the test install to English, tours 14 themes across 11 page types plus every dashboard page, and fails on any Turkish word or a doubled newsletter band.
+- Release gate: a new English-install check switches the test install to English, tours every theme across 11 page types plus every dashboard page, and fails on any Turkish word or a doubled newsletter band.
 
 ---
 
 ## [2.115.0] - 2026-09-05  ·  _Minor_
-**A fresh install that looks finished: sample content, cover images and 14 themes checked on an empty site**
+**A fresh install that looks finished: sample content, cover images and the themes checked on an empty site**
 
 ### Added
 - Setup wizard: "Start with sample content" is on by default. It seeds three categories, nine short guide posts with generated cover images, tags and a main menu, so the theme you pick looks complete from the first minute. Everything is removed with one click under Posts; the option is hidden for WordPress migrations.
 - The welcome post created by the wizard now ships with a cover image, and the site description is seeded in the site language (the schema's English text no longer leaks into footers and brand cards).
 - Sample content is seeded through one implementation shared by the wizard and the admin button; covers are editorial two-tone compositions instead of flat gradients, and removal also clears the menu items, tags and cover files it created.
-- Release gate: a fresh-install tour walks all 14 themes in the wizard-only state and with sample content, checking eight page types for PHP errors, broken local images, empty grids, template leftovers and English strings on a Turkish site.
+- Release gate: a fresh-install tour walks every theme in the wizard-only state and with sample content, checking eight page types for PHP errors, broken local images, empty grids, template leftovers and English strings on a Turkish site.
 
 ### Fixed
 - Starter theme: the featured hero grid squeezed images into a 140px strip (a list-card width rule leaked into the hero); the header no longer appends a second "Home" link next to the menu and shows a fallback navigation when no menu is defined.
@@ -158,7 +166,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Button studio (Layout → Buttons): style (solid, outline, soft tint, ghost), hover effect (darken, lift, glow, fade), shadow, plus background and text colour with light/dark pairs under Colors → Links and buttons. A live preview in the customizer mirrors every choice, including the theme's primary colour.
 - Top bar pro: bar height (slim / normal / tall), content alignment for a single slot, announcement link shape (underlined text, pill button, text + arrow), scrolling announcement text that respects reduced-motion, and two new visibility options: post pages only, every page except the homepage. A live top-bar preview sits above the settings.
 - Header and footer colours (Colors → Header and footer): background and text colour for the header and the footer, each with a dark-mode pair; empty fields keep the theme colour, and a dark-only value is scoped to dark mode so the light theme is untouched.
-- Dead-setting detector: every customizer field is changed one by one and seven page types are compared; a field that leaves no trace fails the release gate. The full run covers 14 themes and about 270 fields per theme. A companion selector-coverage audit loads each theme in a headless browser and checks that the CSS a setting emits actually matches elements in that theme; it found the menu, button, sidebar, byline and tag gaps fixed in this release.
+- Dead-setting detector: every customizer field is changed one by one and seven page types are compared; a field that leaves no trace fails the release gate. The full run covers every theme and about 270 fields per theme. A companion selector-coverage audit loads each theme in a headless browser and checks that the CSS a setting emits actually matches elements in that theme; it found the menu, button, sidebar, byline and tag gaps fixed in this release.
 
 ### Improved
 - One control per concept: the theme's own "sticky header" switch and the universal "sticky behaviour" selector asked the same question twice. The selector is now the single control and drives the theme's header class as well ("Not sticky" makes the theme header static, "Always pinned" pins it).
@@ -273,7 +281,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Google preferred source button**
 
 ### Added
-- Google preferred source button: readers can make your site a preferred source in Google Search with one tap, so your posts carry the "preferred" badge in Top Stories and AI Mode for them. Customize → Post → Google preferred source: Google's official button or a script-free link that opens Google's source preferences, placement at the start or end of the post (or both) and in the header action group, light or dark button, custom texts. Works on all 14 themes.
+- Google preferred source button: readers can make your site a preferred source in Google Search with one tap, so your posts carry the "preferred" badge in Top Stories and AI Mode for them. Customize → Post → Google preferred source: Google's official button or a script-free link that opens Google's source preferences, placement at the start or end of the post (or both) and in the header action group, light or dark button, custom texts. Works on every theme.
 - Privacy and performance: Google's script loads only on pages that show the button, once and asynchronously; when the cookie consent bar is enabled it loads only after consent, and the link is shown until then. Without JavaScript the link is always available.
 - Measurement: Google does not report this feature, so button clicks are counted on your site. Admin → News Platforms shows whether the button is on, whether the install is at domain level (a Google requirement), the click total, a link to search for your site in Google's source tool and a link to the Google documentation.
 
@@ -283,7 +291,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Share Studio and site width presets**
 
 ### Added
-- Share Studio: the post share buttons are now fully designable on all 14 themes — six styles (brand fill, soft brand tint, outlined, single colour, minimal, brand colour with the network name), four shapes (circle, rounded, square, pill), three sizes, real brand icons for X, Facebook, WhatsApp, Telegram, LinkedIn, Pinterest, Reddit and Bluesky plus email, copy link, print and the device share sheet, a network list you can order, a small label or a heading line, placement above the content, below it, both, or as a floating bar on the left or right edge, and a mobile behaviour of your choice (inline, sticky bottom bar, a single share button that opens the device share sheet, or hidden).
+- Share Studio: the post share buttons are now fully designable on every theme — six styles (brand fill, soft brand tint, outlined, single colour, minimal, brand colour with the network name), four shapes (circle, rounded, square, pill), three sizes, real brand icons for X, Facebook, WhatsApp, Telegram, LinkedIn, Pinterest, Reddit and Bluesky plus email, copy link, print and the device share sheet, a network list you can order, a small label or a heading line, placement above the content, below it, both, or as a floating bar on the left or right edge, and a mobile behaviour of your choice (inline, sticky bottom bar, a single share button that opens the device share sheet, or hidden).
 - Share counts: shares are measured from clicks on your own buttons (the networks no longer expose public counters) and shown as a total or per button, with a display threshold so a fresh post never shows zero. Counts load after the page, so full-page caching stays intact.
 - Site width: Customize → Layout → Site width offers narrow (1000), standard (1200), wide (1400), extra wide (1600), full width and a custom value. The header, content, hero and footer wrappers follow the chosen width on every theme; health, travel, lifestyle, recipes and starter carried hard-coded wrappers that used to ignore it. The minimalist theme keeps its reading column and applies the preset to the site frame.
 - A real-browser release gate loads every theme at two widths on the home, post and category pages and fails on any wrapper that renders wider than the chosen size or causes horizontal overflow.
@@ -308,7 +316,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Reaction Studio: the emoji reaction bar is now designable on every theme**
 
 ### Added
-- Customize → Post → Emoji reactions: five designs (boxed, pills, card with title, minimal, labelled), emoji sets built from the shared reaction system (classic, news, fun, trio or a custom list of up to eight), full-colour or monochrome emojis, three sizes, placement (end of content, before comments, start of content), alignment, bar title, count display, hover effect and an accent colour for the chosen reaction. Works on all 14 themes; a theme's own reaction area is replaced when a design is chosen.
+- Customize → Post → Emoji reactions: five designs (boxed, pills, card with title, minimal, labelled), emoji sets built from the shared reaction system (classic, news, fun, trio or a custom list of up to eight), full-colour or monochrome emojis, three sizes, placement (end of content, before comments, start of content), alignment, bar title, count display, hover effect and an accent colour for the chosen reaction. Works on every theme; a theme's own reaction area is replaced when a design is chosen.
 
 ### Improved
 - The standard reaction bar's harsh full-strength divider and button borders were softened; buttons expose their state to screen readers.
@@ -395,7 +403,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **In-article "read this next" and newsletter / button boxes, byline separators and auto-loading the next post**
 
 ### Added
-- In-article "read this next" box placed after a chosen paragraph: card with image, single-line strip or a small list of one to three posts; label and source are configurable. Works on all 14 themes through the common content hook.
+- In-article "read this next" box placed after a chosen paragraph: card with image, single-line strip or a small list of one to three posts; label and source are configurable. Works on every theme through the common content hook.
 - In-article newsletter signup or text + button box after a chosen paragraph, in card, lined band or minimal designs. The signup posts to the Newsletter plugin with the same protection fields as the popup and tags subscribers with the "inline" source.
 - Byline separators (dot, pipe, slash or stacked) and byline style (small caps, small and muted) for the post header design and the themes' common byline rows.
 - Auto-load the next post (experimental): when the reader reaches the end, the next post opens below on the same page and the address updates; up to three posts, without ad or comment blocks.
@@ -451,7 +459,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Category badge styling on cards: seven looks, custom colours, size and letter case**
 
 ### Added
-- Customize → Cards now styles the category label on every card: brand fill, soft tint, outline, dark, light, frosted glass over images, or custom background and text colours; plus four sizes and letter-case control. Works on all 14 themes and on the universal card looks; theme default keeps the theme's own badge.
+- Customize → Cards now styles the category label on every card: brand fill, soft tint, outline, dark, light, frosted glass over images, or custom background and text colours; plus four sizes and letter-case control. Works on every theme and on the universal card looks; theme default keeps the theme's own badge.
 
 ---
 
@@ -469,7 +477,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Sites running a forked theme now see the same universal customizer panels as every stock theme (colours, typography, header, archive, elements, media, mobile); one fork was missing the post featured-image switch its template already read.
-- A final dead-setting audit across all 14 themes found no setting without a visible effect.
+- A final dead-setting audit across every theme found no setting without a visible effect.
 
 ---
 
@@ -500,7 +508,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Added
 - Announcement bar above the header: text plus an optional link, four styles (brand, dark, soft, outlined), shown on all pages or the homepage only, dismissible with the visitor's browser remembering the choice.
-- Header button (subscribe, contact, shop…) in solid, outline or pill style, optionally opening in a new tab, and a social icon cluster fed by Settings → Social links — both placed inside the theme's own header on all 14 themes.
+- Header button (subscribe, contact, shop…) in solid, outline or pill style, optionally opening in a new tab, and a social icon cluster fed by Settings → Social links — both placed inside the theme's own header on every theme.
 - Header behaviour: transparent over the homepage hero (returns to normal on scroll), sticky mode (theme default, always pinned, smart hide-on-scroll-down, or not sticky) and a shadow choice.
 - All of it is off by default; nothing changes until you turn it on under Customize → Header.
 
@@ -558,7 +566,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Homepage section details: card look, title and count on every section, plus category picker with uploadable icons**
 
 ### Added
-- Every post-list section on the homepage (latest, popular, recommended, opinion, videos) now offers a Card look setting on all 14 themes: keep the theme design, or switch to grid, list, masonry, title-over-image or wide horizontal cards. The universal looks honour the Cards tab switches and add column count and a category filter; section title and post count are editable on every theme.
+- Every post-list section on the homepage (latest, popular, recommended, opinion, videos) now offers a Card look setting on every theme: keep the theme design, or switch to grid, list, masonry, title-over-image or wide horizontal cards. The universal looks honour the Cards tab switches and add column count and a category filter; section title and post count are editable on every theme.
 - Category band: pick exactly which categories to show and in what order, show a category icon or image in three sizes, and show post counts. Upload a square image per category under Admin → Categories (512×512 recommended); it is fitted into a fixed box whatever its source size, with the initial letter as fallback. On the travel theme, picking categories replaces the fixed continent map with category tiles.
 - Section settings the theme's own design does not read (columns, category filter) stay hidden until a universal card look is chosen, so nothing looks like a dead switch.
 
@@ -579,7 +587,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Post and archive extras: previous/next navigation, universal breadcrumbs, pagination styles and designed 404 pages on every theme**
 
 ### Added
-- Previous / next post navigation on all 14 themes: cards with thumbnails, a minimal line, or covers with the title over the image. Choose whether it follows the date order or stays inside the same category, and whether images show. It prints after sharing and before comments; a theme's own navigation is hidden once a universal design is chosen, and a Hide option removes it entirely.
+- Previous / next post navigation on every theme: cards with thumbnails, a minimal line, or covers with the title over the image. Choose whether it follows the date order or stays inside the same category, and whether images show. It prints after sharing and before comments; a theme's own navigation is hidden once a universal design is chosen, and a Hide option removes it entirely.
 - Universal breadcrumbs (Home › category › post) in four styles: chevron, slash, pill badges and small caps. Choosing a style hides the theme's own breadcrumb; with a post header design the trail prints inside the header, otherwise just above the theme's title.
 - Pagination style for category, tag, author and search lists: pill buttons, outlined, bold square, or previous / next only — applied on top of the theme's pagination markup.
 - 404 page designs under Customize → Advanced: Minimal, With search box, and Explore (search, most-read posts and category chips), each with an editable heading and description. The theme header and footer are kept; only the page body changes, and the theme's own 404 stays the default.
@@ -604,7 +612,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Homepage Studio: twelve universal sections on every theme, a layout-engine fix that had silently dropped sections, and a dead-setting sweep**
 
 ### Added
-- Customize → Homepage now offers the full section set on all 14 themes: latest posts (grid, list or masonry, with columns, category filter and paging), most read, category band (chips or tiles), category blocks, showcase (one lead + three), dual spotlight, newsletter band, call-to-action band, custom HTML block, headline strip, gallery strip and video row. Each section has its own heading, counts, columns, band style and category filter; sections are reordered, toggled and previewed live. Themes that ship their own design for a section keep it.
+- Customize → Homepage now offers the full section set on every theme: latest posts (grid, list or masonry, with columns, category filter and paging), most read, category band (chips or tiles), category blocks, showcase (one lead + three), dual spotlight, newsletter band, call-to-action band, custom HTML block, headline strip, gallery strip and video row. Each section has its own heading, counts, columns, band style and category filter; sections are reordered, toggled and previewed live. Themes that ship their own design for a section keep it.
 
 ### Fixed
 - The layout engine ran every section template in its own loop scope, so a template that assigned a variable named theme overwrote the engine's own — every section after it was dropped without an error. Sections now run in an isolated scope and one faulty section can no longer take the rest down. On the lifestyle theme this had disabled the homepage layout entirely.
@@ -619,7 +627,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Customize → Sidebar gains a sticky mode: theme default plus sticky group, sticky group only, whole sidebar sticky, or nothing sticky. The per-widget default is now sticky only for the table of contents, so enabling widgets no longer turns the entire sidebar into a pinned block by surprise.
 
 ### Fixed
-- Marking a widget (for example the table of contents) as sticky had no visible effect on most themes, and when it did, several sticky widgets overlapped each other while scrolling. All 14 themes now share one sidebar renderer: from the first sticky widget on, the remaining widgets stay on screen together while the ones above scroll away; a group taller than the screen scrolls inside itself.
+- Marking a widget (for example the table of contents) as sticky had no visible effect on most themes, and when it did, several sticky widgets overlapped each other while scrolling. every theme now share one sidebar renderer: from the first sticky widget on, the remaining widgets stay on screen together while the ones above scroll away; a group taller than the screen scrolls inside itself.
 - Themes whose sidebar was designed as a screen-high box with inner scrolling clipped the studio widgets; that rule now steps aside whenever a sticky group is present.
 - The customer sites running forked themes ignored the studio's widget rows and kept showing only their built-in table of contents; their sidebars now render the rows you enable.
 
@@ -629,7 +637,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Sidebar Studio: sixteen widgets on every theme, page-by-page visibility, and six sidebar designs**
 
 ### Added
-- Customize → Sidebar now offers the full widget set on all 14 themes: search, about, author card, table of contents, recent posts, most read, trending, categories, tags, newsletter, social links, share, info box, image banner, call-to-action box and custom HTML. Each widget carries its own settings (headings, counts, thumbnails, look-back window, button label and link, sponsored banner, and more) and can be reordered, switched on or off and previewed live.
+- Customize → Sidebar now offers the full widget set on every theme: search, about, author card, table of contents, recent posts, most read, trending, categories, tags, newsletter, social links, share, info box, image banner, call-to-action box and custom HTML. Each widget carries its own settings (headings, counts, thumbnails, look-back window, button label and link, sponsored banner, and more) and can be reordered, switched on or off and previewed live.
 - Sidebar visibility per page family — homepage, post pages, category/tag/author/search pages and static pages — plus a per-widget rule that can also say 'everywhere except home'. Themes that never had a sidebar (starter, tech, entertainment post pages, travel's rail, recipes) gain one the moment you switch it on.
 - Six sidebar designs — theme default, clean, boxed, cards, dark panel and centered rules — with width (narrow/normal/wide), left or right position, widget spacing and a whole-sidebar sticky mode. Everything is pure CSS applied only when chosen, so the theme default stays untouched.
 
@@ -668,7 +676,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Four post header designs on every theme: title over the image, centered, two-column, or minimal**
 
 ### Added
-- Customize → Post opens with a header design selector on all 14 themes. Pick the theme's own header, a full-width cover with the title over the image, a centered title with the image below, a two-column layout with the image beside the title, or a minimal header with no image. The category, excerpt, author and date switches from v2.82 apply to every design.
+- Customize → Post opens with a header design selector on every theme. Pick the theme's own header, a full-width cover with the title over the image, a centered title with the image below, a two-column layout with the image beside the title, or a minimal header with no image. The category, excerpt, author and date switches from v2.82 apply to every design.
 
 ### Fixed
 - On the tech theme, turning off the category badge also hid the ad slot at the top of the article; the two are now independent. The theme's own share box also steps aside when a shared share style or position is chosen.
@@ -679,7 +687,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Post page freedom: share buttons where you want them, four comment designs, and three more author boxes**
 
 ### Added
-- Customize → Post now controls where share buttons appear on all 14 themes: above the content, below it, both, or as a floating side bar that becomes a bottom bar on phones. Themes that had no share buttons at all gain them with one selection.
+- Customize → Post now controls where share buttons appear on every theme: above the content, below it, both, or as a floating side bar that becomes a bottom bar on phones. Themes that had no share buttons at all gain them with one selection.
 - A comments design selector with four looks — classic avatar list, cards, chat bubbles and minimal rows — plus switches for avatars, newest-or-oldest order, form above or below the list, and the count in the heading. The shared block posts to the same moderation pipeline as before.
 - Three more author box designs: a cover-strip card with social icons, a boxless byline row, and a dark spotlight panel.
 
@@ -692,7 +700,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **A rotating homepage slider on every theme, card hover effects, and more editable section headings**
 
 ### Added
-- Customize → Homepage → Hero now offers a rotating slider on all 14 themes: choose the theme's own hero or the slider, then set the slide count (2–8), autoplay, slide duration in seconds, arrow buttons and dot indicators. Themes that already ship their own slider expose the same duration/autoplay/arrow switches on their native design.
+- Customize → Homepage → Hero now offers a rotating slider on every theme: choose the theme's own hero or the slider, then set the slide count (2–8), autoplay, slide duration in seconds, arrow buttons and dot indicators. Themes that already ship their own slider expose the same duration/autoplay/arrow switches on their native design.
 - Customize → Cards gains a hover effect selector: lift with shadow, image zoom, both, or no motion — applied to every standard card across lists.
 - Section headings on the health theme's Latest, Most Popular and Recommended blocks are now editable from the customizer, matching the other themes.
 
@@ -705,7 +713,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Post header controls on every theme, card excerpts that always work, and complete social icons**
 
 ### Added
-- The post page header is now yours to shape, on all 14 themes: Customize → Post gains switches for the category badge, featured image, excerpt below the title, author row and date/reading-time line. Each theme only shows the switches its design actually has — and every one is verified on screen by the release-gate test.
+- The post page header is now yours to shape, on every theme: Customize → Post gains switches for the category badge, featured image, excerpt below the title, author row and date/reading-time line. Each theme only shows the switches its design actually has — and every one is verified on screen by the release-gate test.
 
 ### Fixed
 - Turning card excerpts on now always shows them. Two silent failure modes were closed across themes: posts without a hand-written summary now derive one from the content (WordPress parity), and designs that restricted excerpts to only the large card now apply your explicit choice to every card.
@@ -728,7 +736,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Author box designs you can pick visually, and full sidebar control: position and per-widget page visibility**
 
 ### Added
-- The author box under posts is now a design choice, on every theme. Customize → Post shows visual templates — Compass (horizontal card with socials), Card (centered), Banner (paneled with post count), Minimal (slim row) — as miniature mockups, the same picker language as the footer and menu designers. "Theme default" keeps each theme's own box untouched; picking a style previews instantly and applies on save. Verified on screen across all 14 themes by a new release-gate test.
+- The author box under posts is now a design choice, on every theme. Customize → Post shows visual templates — Compass (horizontal card with socials), Card (centered), Banner (paneled with post count), Minimal (slim row) — as miniature mockups, the same picker language as the footer and menu designers. "Theme default" keeps each theme's own box untouched; picking a style previews instantly and applies on save. Verified on screen across every theme by a new release-gate test.
 - Each sidebar widget can now say where it appears: all pages, home/archive only, or the post page only — set from the widget card's gear in Customize → Sidebar. Turn the trending list into a homepage-only widget and keep the table of contents just for articles.
 - Sidebar position (left or right) is now available on more themes — crypto, entertainment, lifestyle and pets join the ones that already had it.
 
@@ -754,7 +762,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - The Cards section opens with visual templates — Detailed, Balanced, Clean, Minimal — shown as miniature card mockups, the same picker language as the footer and menu designers. One click sets the switches, the preview updates instantly, and you can still fine-tune every field below.
 
 ### Fixed
-- Some card settings saved correctly but never showed on the site: certain homepage surfaces (featured cards, hero lists, magazine grids) drew their own markup and ignored the switches. Every card-rendering surface across all 14 themes is now wired, and a new release-gate test drives a real browser flow on each theme — toggle off, save, and verify the element actually leaves the page — so this class of bug cannot ship again.
+- Some card settings saved correctly but never showed on the site: certain homepage surfaces (featured cards, hero lists, magazine grids) drew their own markup and ignored the switches. Every card-rendering surface across every theme is now wired, and a new release-gate test drives a real browser flow on each theme — toggle off, save, and verify the element actually leaves the page — so this class of bug cannot ship again.
 - The category picker on some themes saved your selection but kept showing the default categories; those sections now honor the selection, in the order you picked.
 
 ---
@@ -792,7 +800,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.77.0] - 2026-09-01  ·  _Minor_
-**Card controls on all 14 themes, and a real category picker for the homepage**
+**Card controls on every theme, and a real category picker for the homepage**
 
 ### Added
 - The Cards section introduced in the previous release now covers every theme. Each theme exposes exactly the options its card design supports — from the full set (badge, excerpt and its length, author, date, reading time, view count, date style, image ratio, corner radius) down to the focused set of image-led themes like travel — so every switch you see genuinely does something. Defaults still match each theme's current look.
@@ -808,7 +816,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Homepage section headings are now yours to name. Open a section's gear menu in the layout card and type your own title — "Latest Stories" can become whatever fits your site; leave it empty to keep the theme's wording.
 
 ### Improved
-- The customizer now looks and works like General Settings: a vertical navigation on the left, your options in the middle, and the save/preview rail on the right. Every one of the 14 themes now presents the same order — Homepage, Post, Sidebar, Cards, Colors, Fonts, Layout, Advanced — with theme-specific extras at the end. Colors and fonts each have their own section instead of hiding inside "Branding", a dot marks sections with unsaved changes, and old deep links to the previous tabs still land in the right place.
+- The customizer now looks and works like General Settings: a vertical navigation on the left, your options in the middle, and the save/preview rail on the right. Every one of the every theme now presents the same order — Homepage, Post, Sidebar, Cards, Colors, Fonts, Layout, Advanced — with theme-specific extras at the end. Colors and fonts each have their own section instead of hiding inside "Branding", a dot marks sections with unsaved changes, and old deep links to the previous tabs still land in the right place.
 
 ### Fixed
 - Switches that rendered inside another tab (for example a theme's disclosure or trip-details options merged into the Post tab) could not actually be changed — flipping them did nothing after save, because the form marked them under the wrong tab name. They now save correctly.
@@ -1248,7 +1256,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Theme customizer: numeric dropdowns now save correctly**
 
 ### Fixed
-- In the theme customizer, dropdown fields whose choices are numbers (for example the Recipes and Travel themes' "Grid columns" 2/3/4 selector) silently reverted to the default whenever you picked a different value — the saved value now sticks. All 14 themes' customizer fields were verified end to end (513 fields across colors, fonts, ranges, toggles, selects, code and image inputs) and theme switching, preview and one-click rollback were confirmed to keep a single clean settings row.
+- In the theme customizer, dropdown fields whose choices are numbers (for example the Recipes and Travel themes' "Grid columns" 2/3/4 selector) silently reverted to the default whenever you picked a different value — the saved value now sticks. every theme' customizer fields were verified end to end (513 fields across colors, fonts, ranges, toggles, selects, code and image inputs) and theme switching, preview and one-click rollback were confirmed to keep a single clean settings row.
 
 ---
 
@@ -2238,7 +2246,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ### Fixed
 - Legal pages served from the theme template — the default state of a fresh site — answered on both their Turkish and English addresses with identical content, and each address declared itself canonical. Measured: /privacy and /gizlilik returned the same page byte for byte as two indexable URLs. Every alias now collapses onto one address per document, chosen by the site language, exactly as it already did once a page existed in the CMS.
 - Those same pages were missing from the sitemap: live, indexable, but never submitted, because the sitemap only listed pages stored in the database. Privacy, terms, cookie policy, disclaimer, about and contact are now listed whenever they are served, and a page stored in the CMS replaces the built-in entry instead of being listed twice.
-- Legal, about and contact pages served from a theme template carried the site-wide meta description — the same sentence as the homepage — because the route never handed the page's identity to the theme. Each now carries its own description; verified across all 14 themes.
+- Legal, about and contact pages served from a theme template carried the site-wide meta description — the same sentence as the homepage — because the route never handed the page's identity to the theme. Each now carries its own description; verified across every theme.
 - The legal page editor screen answered with a server error on every install: it queried a table that belongs to the jekcms.com marketing site and does not exist in the CMS. The address now redirects to the page it was meant to open.
 - Generated legal pages calculated reading time with a counter that splits Turkish words, inflating the estimate by roughly 40%.
 
@@ -2289,7 +2297,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Page 2+ of the home/blog feed now carries the page number in its title instead of duplicating page 1's title.
 
 ### Fixed
-- Out-of-range pagination URLs (?page=N beyond the last page) returned an empty archive with HTTP 200 and a self-referencing canonical — an infinite, indexable space of thin duplicate pages. Every paginated list (home feeds, category/tag archives, author pages, all 14 themes) now returns a real 404.
+- Out-of-range pagination URLs (?page=N beyond the last page) returned an empty archive with HTTP 200 and a self-referencing canonical — an infinite, indexable space of thin duplicate pages. Every paginated list (home feeds, category/tag archives, author pages, every theme) now returns a real 404.
 - The personal theme stamped paginated archive pages with an extra "noindex, follow" robots tag next to the core's "index, follow" — conflicting directives, and search engines pick the restrictive one, silently dropping page 2+ from the index. Paginated archive pages are all indexable again with a single robots tag.
 - A per-post robots value saved as plain "index, follow" wiped the core defaults' max-image-preview:large directive, costing those posts large-thumbnail eligibility in Google Discover. Indexable robots values without max-* directives now get the default set appended.
 - URLs of non-paginated pages (a single post, a fixed homepage) with a stray ?page=999 served identical content that declared itself canonical — the canonical now keeps ?page only on genuinely paginated templates and consolidates everything else onto the clean URL.
@@ -2406,7 +2414,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Added
 - New “End of Article” slot — the ideal spot for an AdSense Multiplex unit, monetizing readers who finish a post. Works in every theme automatically.
-- Four previously dead slots now work in ALL 14 themes with zero theme edits: mobile bottom anchor (with a dismiss button), mobile top banner, sidebar top and sticky sidebar — the core injects them universally.
+- Four previously dead slots now work in every theme with zero theme edits: mobile bottom anchor (with a dismiss button), mobile top banner, sidebar top and sticky sidebar — the core injects them universally.
 - Revenue Settings panel: in-content ad interval (every N paragraphs, following the 300–500 word rule) with a per-page cap, lazy loading for below-fold ads (protects Core Web Vitals), a GDPR consent gate that holds custom ad codes until the visitor accepts cookies, and an editor for extra ads.txt lines (non-Google networks/resellers).
 - The Banner Manager's [banner id=N] shortcode finally renders on the site — it previously appeared as plain text because no frontend handler existed.
 - Slots in the admin are now ordered and badged by earning power (in-article and above-the-fold first), and slots the active theme can't print are labeled clearly.
@@ -3449,7 +3457,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Right after installation the admin greeted you with "License validation has not succeeded for 999 days" — alarming, and not what was happening. When no license key has been entered yet, the panel now simply asks you to enter it; the day counter only ever appears after a real validation has aged.
-- The free edition's Updates screen claimed all 14 themes and 13 plugins were installed. "Installed Components" now reports what is actually on your server — and when you upgrade to a paid license, the missing premium components are offered for install exactly as before.
+- The free edition's Updates screen claimed every theme and 13 plugins were installed. "Installed Components" now reports what is actually on your server — and when you upgrade to a paid license, the missing premium components are offered for install exactly as before.
 - On installs without the distribution plugins, the dashboard showed a "Traffic Control" panel with a made-up setup score and links to screens that don't exist. Plugin panels now appear only when the plugin is actually installed, and the score is computed only from the channels you have.
 
 ---
@@ -3881,10 +3889,10 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.59.0] - 2026-07-24  ·  _Minor_
-**Every Theme Is Now Modular: Drag-and-Drop Sections, Menu Designs and Real Color Controls Across All 14 Themes**
+**Every Theme Is Now Modular: Drag-and-Drop Sections, Menu Designs and Real Color Controls Across every theme**
 
 ### Added
-- The modular layout engine now covers all 14 themes. Every homepage is built from reorderable cards in Customize → Homepage: drag to reorder, toggle sections on or off, and tune each one (post counts, titles, category lists) from its gear panel.
+- The modular layout engine now covers every theme. Every homepage is built from reorderable cards in Customize → Homepage: drag to reorder, toggle sections on or off, and tune each one (post counts, titles, category lists) from its gear panel.
 - New universal sections in the engine: category spotlights, opinion row, edition strip, video row, CTA band, photo gallery strip, plus sidebar widgets for popular posts, trending, search, social links, an about box and a free info box.
 - A Menu tab in the customizer for every converted theme: pick between menu designs (classic, centered, slim and theme-specific variants), toggle sticky behavior, search and the light/dark switch.
 - Sidebar control where the theme has one: choose whether it shows on the homepage and post pages, pick left/right placement, and manage the widget stack with the same cards.
@@ -5178,7 +5186,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ---
 
 ## [2.18.32] - 2026-07-07  ·  _Patch_
-**Site Name Signal Completed Across All 14 Themes**
+**Site Name Signal Completed Across every theme**
 
 ### Fixed
 - Every theme's homepage now marks the site name as an H1 heading — completing all four signals Google documents for choosing the site name shown in search results, so Google stops falling back to the bare domain. The heading renders with zero visual change; inner pages keep their content H1. (Personal shipped in the previous release; the remaining 13 themes are covered now.)
@@ -6287,10 +6295,10 @@ _`php tools/gen-changelog-md.php` and commit._
 **Security Center — WAF Dashboard + File Integrity Monitor, Built-In**
 
 ### Added
-- Security Center admin page — a single tabbed dashboard for WAF/login attempts, security events, and file integrity. Surfaces what was already running silently (Security::detectAttacks, login_attempts log, IntegrityGuard::maybeVerify) so you can actually see attacks happen. Replaces Wordfence Premium ($119/yr)
+- Security Center admin page — a single tabbed dashboard for WAF/login attempts, security events, and file integrity. It surfaces protections that were already running silently — attack detection, the login-attempt log and the file integrity check — so you can watch attempts as they happen. Replaces Wordfence Premium ($119/yr)
 - WAF tab — recent login attempts (last 30), top attackers by failed-login count (last 7d), blocked IPs table with manual block/unblock, one-click "Block this attacker" from the top-attackers list. KPIs at the top: failed logins (24h), unique IPs (7d), blocked count, FIM status
-- Security Events tab — parses `logs/security.log` (where Security::detectAttacks writes SQLi / XSS / path-traversal hits), displays timeline with IP, message and context. Up to 30 most recent events
-- File Integrity tab — install fingerprint display, VERIFIED/DRIFT status pill, last tamper report (formatted JSON), one-click "Scan Now" button that triggers IntegrityGuard::verifyManifest(). Includes a response-playbook card for what to do if drift is detected
+- Security Events tab — parses `logs/security.log` — where blocked injection, cross-site scripting and path-traversal attempts are recorded — and shows a timeline with the address, the message and the context. The 30 most recent events are listed.
+- File Integrity tab — shows the install fingerprint, a verified-or-changed status pill, the last tamper report and a "Scan now" button that re-checks every core file. A short card tells you what to do if something has changed.
 - Self-healing blocked_ips table — created automatically on first visit to the page. Idempotent: ON DUPLICATE KEY UPDATE preserves existing blocks. CSRF-protected admin operations throughout
 - Sidebar link — new "Security Center" entry directly below Backups in the admin nav. Shield icon. Standard active-state highlighting
 
