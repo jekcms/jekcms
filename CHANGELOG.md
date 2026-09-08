@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.13] - 2026-09-08  ·  _Patch_
+**Sidebar widgets are visible again, and the AdSense contact check reads the right setting**
+
+### Fixed
+- Part of the sidebar was hidden behind a scrollbar inside it. Both themes capped the sidebar at the height of the screen and gave it its own scrollbar. Anything past that point — usually the widgets you added yourself in Customize — was only reachable by noticing a thin scrollbar and scrolling inside the column. Measured on a live post page: 580 pixels hidden in Pets, 521 in Travel. The column now flows with the page and everything in it is visible. Stickiness is still available where it belongs, in Customize → Sidebar → Sticky mode.
+- The AdSense readiness check said your contact e-mail was missing when it was not. The check only looked at a setting that had no field anywhere in the panel, so a site whose owner had filled in the only e-mail field available still failed it. The check now reads the address you actually set, and Settings → General has a proper “Contact Email” field for the address you want published — separate from the admin e-mail used for logging in and notifications.
+
+---
+
 ## [2.116.12] - 2026-09-08  ·  _Patch_
 **Pets theme: sidebar widgets no longer overlap each other**
 
