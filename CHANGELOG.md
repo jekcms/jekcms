@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.119.0] - 2026-09-08  ·  _Minor_
+**One voice for every AI tool, a queue that tells you which posts to refresh, and an MCP server for your agents**
+
+### Added
+- Brand voice. Under Settings → API & Automation, describe your audience, tone, how you address the reader, banned words, house rules and a sample paragraph — once. Every place the AI writes now follows it: Content Studio and the wizard, the single-post generator, social captions, video scripts, the SEO analysis and the new short answers. Your banned words join the built-in AI-cliché list, so the generation self-check catches them too. Leave a field empty and it is simply not sent; switch the whole thing off and prompts are exactly as before.
+- Content Refresh, a new queue under Growth. It gathers signals that used to live in five places into one list of posts that need attention: clicks fell 30% or more in Google Console, a broken outbound link, published over 18 months ago and untouched for 12, an old year in the title, or a popular post without a short answer. Each row shows why, with a priority score, and offers Edit, Snooze for 30 days or Done. The queue rescans itself weekly; when a signal disappears the row closes on its own, and a “done” post that is edited later while the signal persists comes back. The problem a blog dies of in year two now has a to-do list.
+- MCP server. Claude Code, Claude Desktop, Cursor and any Model Context Protocol client can now connect straight to your site at `/api/mcp/` with an ordinary API key. Eleven tools: site info, list/get/create/update/publish/trash posts, categories and tags, the refresh queue and the AI visibility summary. New posts are drafts until `publish_post`, which runs the same quality gate as the panel and returns the reasons when it refuses; authors are limited to their own posts exactly as in the REST API. The API Keys page shows the connection snippet; the docs have a full page.
+- Trust page: “How is this sustainable?” A one-time license with lifetime updates raises a fair question, so the answer is now written down: where the revenue comes from, the measurable release rhythm, no lock-in even if jekcms disappeared (WXR/Ghost/JSON export, REST and MCP access), and what we deliberately do not promise.
+
+---
+
 ## [2.118.0] - 2026-09-08  ·  _Minor_
 **See the AI engines reading your site: AI Visibility report, per-post short answers and an llms.txt switch**
 
