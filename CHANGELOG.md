@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.117.0] - 2026-09-08  ·  _Minor_
+**A calmer admin: grouped menu, a drawer that closes on mobile, a collapsible sidebar and a search that actually searches**
+
+### Added
+- The admin menu is now grouped: Content, Growth, Appearance, Revenue, System. Forty-plus items used to sit in one flat list, so capable features read as if they did not exist. Every plugin now lives in the group it belongs to — SEO, Google Console, Traffic, Social, Newsletter, Web Push, Audience, A/B tests and ZeroTrack under Growth; AdSense Readiness, Affiliate Links and the Ad Manager under Revenue; Forms, Quizzes, Recipe Cards, Stories, Downloads, AI Images and the Editorial Calendar under Content. Groups collapse with a click and remember their state; the group holding the page you are on always opens.
+- Pin what you use. Hover any menu item and click the star — it appears in a “Pinned” group at the top of the menu, on every page, in this browser. Unpin the same way.
+- Collapse the sidebar to icons. The button next to the version number shrinks the menu to a 68-pixel icon rail and gives the content the room. The choice persists, and the page paints in the chosen state without a flash.
+- Ctrl+K opens a real command palette. Type a few letters to jump to any admin page or Settings tab; after two characters it also searches posts, pages, media, users and comments. Arrow keys move, Enter opens, Esc closes. The search box in the header used to be an input that did nothing on focus.
+- A new release gate opens every plugin admin page with a real admin session and fails on a PHP error or a missing shell, so a page cannot break silently again. A second gate drives the new shell in a real browser at phone and desktop widths.
+
+### Fixed
+- On phones and tablets the admin menu could not be closed. Below 1024 pixels the content moved to the left edge but the 256-pixel menu stayed fixed on top of it, with no way to dismiss it. The menu is now a drawer: hidden until you tap the menu button, closed by tapping outside, by Esc, by the close button, or by choosing a page. Content is never covered.
+- Admin pages scrolled sideways on small screens. The update banner drew a single 1000-pixel line and the filter toolbar did not wrap, so every page was wider than the phone. The banner wraps, toolbars wrap, wide tables scroll inside their own box, and the page body stays put. Measured on the dashboard, posts, media, settings and plugins pages: zero horizontal overflow.
+- Plugin admin pages look like one product. Web Push had a full-width header over a 760-pixel column of cards, fifteen inline styles and thirteen emoji icons; it is now a two-column layout that matches the rest of the panel. Emoji used as icons were removed from thirty-nine places across fourteen plugin pages, the post editor and the media library (they render differently on every device and look like a chat window). A gate now keeps inline styles and emoji from creeping back.
+- Quick search no longer leaks other authors’ drafts. Authors see only their own posts and pages in results, in line with the posts list. Result labels are translated instead of raw status codes.
+
+---
+
 ## [2.116.13] - 2026-09-08  ·  _Patch_
 **Sidebar widgets are visible again, and the AdSense contact check reads the right setting**
 
