@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.11] - 2026-09-08  ·  _Patch_
+**Post layouts: the article gets the wide column again, and the recipe jump links actually go somewhere**
+
+### Fixed
+- Pets theme: the table of contents was taking the article’s column. When a post has a table of contents the theme lays out three columns — contents, article, sidebar. A sidebar rule was forcing a two-column grid on top of that, so the contents box took the wide column, the article was squeezed into roughly 320 pixels, and the sidebar dropped to its own row underneath. This happened on a clean install with nothing changed, because the theme’s own default sidebar position triggered the rule. Sidebar settings no longer override a three-column layout; they adjust the last column instead of collapsing the design.
+- Trends theme: turning share buttons off shrank the article to a sliver. The layout declared a fixed three columns (share rail, article, sidebar) while two of them are optional. With sharing switched off the article fell into the 64-pixel share rail. The column set is now derived from what is actually on the page, so any combination of share and sidebar reads correctly.
+- Recipes theme: six of the seven “In this recipe” links went nowhere. The list was hard-coded to a fixed set of section anchors that most posts never contain — and on a Turkish site none of them matched. The list is now built from the headings the post actually has, and it is not shown at all when there are none.
+
+---
+
 ## [2.116.10] - 2026-09-07  ·  _Patch_
 **Horoscopes: the panel now says when no new reading can be written**
 
@@ -2364,7 +2374,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Settings audit: SVG hardening in the branding preview**
 
 ### Security
-- The generated-logo and favicon SVG fields are now sanitized before they are stored and before they are rendered in the branding preview. These are hidden form fields, so a tampered value could previously carry an event handler (e.g. onload) or script into the admin branding screen; the old check only rejected literal tags and the preview printed the markup raw. Legitimate generated logos are unaffected.
+- The generated-logo and favicon SVG fields are now sanitized before they are stored and before they are rendered in the branding preview. These are hidden form fields, so a tampered value could previously carry an event handler (e.g. onload) or script into the admin branding screen; the old check only rejected literal <script> tags and the preview printed the markup raw. Legitimate generated logos are unaffected.
 
 ---
 
@@ -4360,7 +4370,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Reworked the setup wizard into the same calm two-column layout as the connected panel: the step-by-step guide on the left, the critical warnings in a refined right-hand sidebar. Removed the remaining red boxes in the wizard (red read as an error); warnings are now amber "attention" / blue "info" with a clean left-rail accent instead of the previous generic colored icon tiles.
 
 ### Fixed
-- Fixed a bug where the setup wizard's "Connect" button never actually connected. The test-mode toggle was accidentally nested as a inside the connect ; browsers flatten nested forms, so pressing Connect submitted the toggle action instead -- the token was never saved or verified and the panel stayed stuck in test (mock) mode no matter what. The two forms are now separate, and connecting with a real token always runs a real verification (and clears any leftover test mode).
+- Fixed a bug where the setup wizard's "Connect" button never actually connected. The test-mode toggle was accidentally nested as a <form> inside the connect <form>; browsers flatten nested forms, so pressing Connect submitted the toggle action instead -- the token was never saved or verified and the panel stayed stuck in test (mock) mode no matter what. The two forms are now separate, and connecting with a real token always runs a real verification (and clears any leftover test mode).
 
 ---
 
