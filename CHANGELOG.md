@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.118.0] - 2026-09-08  ·  _Minor_
+**See the AI engines reading your site: AI Visibility report, per-post short answers and an llms.txt switch**
+
+### Added
+- AI Visibility, a new report under Growth. Which AI bots crawl your site (OpenAI Search, ChatGPT-User, GPTBot, Claude Search, ClaudeBot, Perplexity, Google-Extended, Common Crawl, ByteDance, Amazon, Meta, Apple and more), how often, which pages they read, when they were last seen, and whether each one is allowed or blocked by your access policy. A daily crawl chart, a 7/30/90-day window and a top-pages table come with it. Analytics scripts never saw this traffic: bots do not run JavaScript. The log is written at the server, on cached and uncached pages alike, and kept for 90 days.
+- Visits that arrive from AI assistants. With ZeroTrack Analytics active, the report counts visitors who came from ChatGPT, Perplexity, Gemini, Copilot, Claude, Grok, Meta AI and others, shows their share of all visits and the pages they landed on. When an AI answer cites you, you now see the click-through.
+- A short answer block for every post. In the post editor’s SEO box, write a 40–70 word direct answer to the question your title asks, or press “Write with AI” to draft one from the body. It is published as a “Short answer” box at the top of the post in all 14 themes, as the schema.org abstract in your JSON-LD, and as the post’s line in llms.txt. This is the single strongest signal for answer engines to quote you rather than paraphrase you. Off switch in Settings → SEO.
+- GEO readiness list. The report tells you at a glance whether llms.txt is live, how many published posts carry a short answer and an FAQ block, and what your bot policy allows. Each row links to where you fix it.
+- llms.txt can be switched off from Settings → SEO → AI Bot Access, with live links to both files right there. Seven more AI bots (Perplexity-User, Meta fetcher, DuckDuckGo AI, You.com, Mistral, Cohere, Diffbot) joined the access policy list so what you see in the report can also be governed.
+- Honest by design. The report says plainly what cannot be measured: AI engines do not publish which source they showed for which query. jekcms does not invent a “visibility score”; it shows two things that are certain — crawl activity and real visits from AI assistants.
+
+### Fixed
+- The Pets theme never showed the FAQ block. Its table-of-contents generator pre-rendered the post to collect headings and threw the result away, which consumed the one-per-post guard, so the real body came out without the FAQ. The pre-render now skips the boxes; FAQ and the new short answer render once, where they belong.
+
+---
+
 ## [2.117.0] - 2026-09-08  ·  _Minor_
 **A calmer admin: grouped menu, a drawer that closes on mobile, a collapsible sidebar and a search that actually searches**
 
