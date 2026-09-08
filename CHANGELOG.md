@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.116.12] - 2026-09-08  ·  _Patch_
+**Pets theme: sidebar widgets no longer overlap each other**
+
+### Fixed
+- The sticky widget group was sitting on top of the widgets below it. The sidebar is already a sticky, scrollable column, and the group inside it was made sticky a second time — so it rode over whatever followed. On a post page the “Categories” heading was printed inside the list above it, overlapping by 62 pixels. The inner group now scrolls with the column it lives in.
+
+---
+
 ## [2.116.11] - 2026-09-08  ·  _Patch_
 **Post layouts: the article gets the wide column again, and the recipe jump links actually go somewhere**
 
