@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.120.2] - 2026-09-09  ·  _Patch_
+**Fresh installs on Apache no longer fail with a 500 from .htaccess; support policy applied on every channel**
+
+### Improved
+- Ticket support is granted by the license on every channel, not only in the customer portal. The free edition includes documentation, not tickets; a paid license includes six months of ticket support. The contact form's "Technical Support" subject and the client API now apply the same rule: a message from a sender without an active support entitlement is kept and read, but it does not open a ticket, and the sender receives an automatic reply explaining what is included and where the documentation and licenses are. Customers whose support period has ended are told how to renew.
+- The customer portal home now shows your support status. Free license: support is not included, with links to the documentation and licenses. Paid license with 30 days or fewer left: the end date and a renewal link. Ended: a renewal link and a reminder that your license, site and updates keep working.
+
+### Fixed
+- A fresh installation on an Apache host (Plesk, cPanel) could answer every page with a 500 error. The shipped .htaccess began with an invisible byte-order mark; Apache read it as an unknown directive on the first line and refused the whole file, while LiteSpeed hosts silently tolerated it, so the problem had gone unnoticed since May. The .htaccess in the package and on every managed site is clean now, the installer strips the mark if an editor or FTP client adds it back, and the release check refuses any package text file that starts with one. Existing sites that already load fine are unaffected. If your fresh install shows this error, open .htaccess in your host's file manager and save it as UTF-8 without BOM, or replace it with the copy from the new package.
+
+---
+
 ## [2.120.1] - 2026-09-09  ·  _Patch_
 **Retired plugin no longer lingers in the menu after an update**
 
