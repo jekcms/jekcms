@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.120.1] - 2026-09-09  ·  _Patch_
+**Retired plugin no longer lingers in the menu after an update**
+
+### Fixed
+- On sites updated to 2.120.0 the retired Editorial Calendar could still appear in the sidebar, under a generic "Plugins" heading with its raw database name. The update package had left out the small replacement file that marks the plugin as retired, and an update only adds or overwrites files, so the old plugin stayed in place and its menu entry survived. The package now carries the replacement file, and the sidebar, the plugin list and the plugin loader each check the retired flag themselves, so a leftover database row can never surface a menu entry again. Fresh installations were never affected.
+
+---
+
 ## [2.120.0] - 2026-09-09  ·  _Minor_
 **One calendar instead of two: the Editorial Calendar plugin retires into Content Studio**
 
