@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.120.0] - 2026-09-09  ·  _Minor_
+**One calendar instead of two: the Editorial Calendar plugin retires into Content Studio**
+
+### Improved
+- The Editorial Calendar plugin has been retired. Its board only turned existing drafts into cards — it could not create anything, so on a site without drafts it was an empty screen with no obvious next step — and its month view was a weaker copy of the Content Studio calendar that also missed scheduled posts stored without a schedule timestamp. Content Studio is now the single calendar; editor approval stays where it always was, as a core setting. The plugin disappears from the menu and the plugin list on existing installs; its old address redirects to Content Studio. New installations never receive it.
+- The Content Studio calendar now places scheduled posts by whatever date they carry (schedule time, then publish time, then creation time), so posts scheduled by an import or the API no longer vanish from the month.
+- Page headers no longer wrap their description in a half-width column. Six plugin pages had pinned the intro text to 660 pixels; on pages without stat cards on the right, the text broke at the middle of the strip. The header text column now flexes across the strip on every admin page.
+
+---
+
 ## [2.119.0] - 2026-09-08  ·  _Minor_
 **One voice for every AI tool, a queue that tells you which posts to refresh, and an MCP server for your agents**
 
