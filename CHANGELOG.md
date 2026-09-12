@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.136.0] - 2026-09-13  ·  _Minor_
+**Your SEO screens now check every way a site can be hidden from Google - including the two they could not see before**
+
+### Improved
+- The release gate now checks this from the outside too. The signal smoke test that runs against every managed site after a deploy reads the response headers, fetches `robots.txt` and fails if a site is closed to search engines by any of the three routes. Two new release gates lock the behaviour in: one keeps all three diagnostic surfaces reading headers, the other proves a cached copy returns exactly the headers the freshly built page did.
+
+### Fixed
+- The SEO screens could tell you a site was indexable while it was invisible to Google. Both the SEO Status and SERP Identity screens fetch your live homepage, but neither of them read the response headers — they only looked at the robots meta tag inside the HTML. A site can be closed to search engines in three separate ways, and two of them live outside the page body: an `X-Robots-Tag` HTTP header and a `robots.txt` that disallows everything. We found a real site serving all three signals at once — two saying "do not index", the third saying "index" — and the panel reported it as healthy. Both screens now read the headers, fetch `robots.txt`, and compare all three. When they disagree you get a new critical finding that shows the three values side by side and explains that Google applies the most restrictive one.
+- The new finding also tells you where the problem is coming from. jekcms only sends an `X-Robots-Tag` header in maintenance mode and on a few internal endpoints, so if you see one on a normal page while maintenance is off, that header is being added by your hosting layer — not by your site. Searching your own files for it would never find it. The panel now says this in plain words and points you at the Search Engine Visibility setting in your hosting panel, instead of leaving you to hunt for a line of code that does not exist.
+- Cached pages lost the response headers your site had just produced. The full-page cache stored only the HTML body, so a page served from cache came back without the headers PHP had set while building it. The same URL could therefore answer with two opposite indexing signals depending on whether it was a cache hit — and the pages that get cached are, by definition, your most visited ones. Cached copies now carry those headers alongside the body and replay them on every hit. The stored format changed, so existing cached copies are ignored and rebuilt; nothing is served incorrectly during the transition. Only headers the application owns are kept — timing and cache-control headers are still produced fresh for every response.
+
+---
+
 ## [2.135.1] - 2026-09-12  ·  _Patch_
 **Scheduled jobs ran again on fresh installs: the command-line boot crashed before it reached your site**
 
