@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.135.1] - 2026-09-12  ·  _Patch_
+**Scheduled jobs ran again on fresh installs: the command-line boot crashed before it reached your site**
+
+### Fixed
+- Cron never ran on a freshly installed site. The environment file defined its host-detection helpers inside a branch that only runs for web requests. PHP only pre-loads a function when it is declared at the top level of a file, so on the command line — where a cron job has no host name — those helpers were never defined and the boot stopped with a fatal error a hundred lines later. Everything that runs from the command line was affected: scheduled posts stayed unpublished, the newsletter queue never drained, backups were not taken and the integrity manifest could not be refreshed after an update. The site itself worked perfectly in a browser, which is why this could go unnoticed. The helpers are now declared before the branch; behaviour is otherwise identical, including the strict host checks that reject spoofed "local-looking" host names. A new release gate boots the software with no host name on every release, so this class of failure cannot come back silently.
+
+---
+
 ## [2.135.0] - 2026-09-12  ·  _Minor_
 **Stories can build themselves from your latest posts, and the audience screen now answers who you can actually e-mail**
 
