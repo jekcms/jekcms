@@ -8,6 +8,366 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.135.0] - 2026-09-12  ·  _Minor_
+**Stories can build themselves from your latest posts, and the audience screen now answers who you can actually e-mail**
+
+### Added
+- A story now has a type. When you create one you choose between building the slides yourself — image, video, text card, poll, as before — or letting the story fill itself from what you publish. Pick a window (last 3, 7, 15 or 30 days, or type your own), optionally a category and an order (newest, or most read), and the story plays those posts.
+- The window rolls on its own. An automatic story keeps no stored slides: the window is recalculated every time the page is drawn. In a 30-day story a post that turns 31 days old drops off by itself and a newly published one enters at the front — no queue, no refresh job, no stale slide left behind. If nothing falls inside the window the bubble is simply not shown.
+- More than one automatic story. Because the setting now lives on the story, you can run several side by side — "This week" over the last 7 days and "Sport, last month" over a category — each with its own window and cover. The editor shows the posts currently flowing through the story, in the order your visitors see them.
+- The audience screen tells you what you can act on. Instead of a list of source counters, the top of the page now answers the questions that decide a campaign: how many people you may e-mail, how many have bought something, how much they have paid in total and how many joined in the last 30 days. A banner points out the people who bought but never subscribed — the single most valuable list on the page — and takes you straight to it.
+- Tag hundreds of contacts at once. Segments filter by tag, but tags could only be typed one contact at a time, which made them unusable on a real list. A bar under the filters now applies a tag to every contact the current filter matches — or removes it — and running it twice does not duplicate anything.
+- A segment can be limited to people who gave e-mail consent. Tick the new rule and the segment size equals the number of people a broadcast actually reaches, so the "500-contact segment, 12 e-mails sent" surprise is gone. Each segment row also has a Create campaign button that opens the newsletter composer with that segment already selected.
+
+### Improved
+- The audience keeps itself up to date. Until now the contact list only changed when someone pressed Refresh, so the numbers on screen — and the size of a segment you were about to broadcast to — could be weeks old. It is now rebuilt once a day in the background, the screen says when that last happened, and it warns you if the list has gone more than a day without a refresh.
+- Every contact carries its consent and its value. The list shows whether a person is a subscriber, pending, unsubscribed or unreachable, together with how many orders they placed and how much they paid; you can sort by highest spend and filter down to buyers, subscribers, or people who are not subscribed. The same columns are in the CSV export, and refunded orders count as orders but never as revenue.
+- The contact list is paged instead of quietly cut. It used to stop at the first 300 people with a note; it now pages through the whole audience with the sort order you chose, and what you see on screen is exactly what the export and the bulk tagging apply to.
+
+---
+
+## [2.134.0] - 2026-09-12  ·  _Minor_
+**A post now shows its own category everywhere, and autosave no longer takes your unsaved fields with it**
+
+### Added
+- Pick the category that names the post. The category box in the editor now has a "main" marker next to each choice. What you mark is what the reader sees on the badge and in the breadcrumb, and what Google is told the article belongs to. Existing posts keep the category their article page has been showing, so nothing moves on its own.
+
+### Fixed
+- The article page showed the wrong category. On the news themes the badge and the breadcrumb named the site's first category instead of the post's own: a health story opened under Education. The cause was a single line in the theme header that reused the same variable name the article template keeps the post's categories in, wiping it halfway through the page. The header now keeps to its own name, and a new gate fails the build if any included template fragment reuses a shared name again.
+- One post, one category, everywhere. A post can sit in several categories, but nothing recorded which one names it, so every surface picked its own: the badge took the alphabetically first, the card took the lowest id, the structured data took whatever the database returned first. Cards, badges, breadcrumbs, Open Graph and the data sent to Google now all read the same category, and the editor lets you mark which one that is.
+- Autosave stopped erasing unsaved fields. Writing a new post, the first autosave opened a draft on the server and then reloaded the page to switch into the edit view — within twenty seconds, even mid-sentence. Autosave only carries the title and the body, so the SEO title and description, the excerpt, categories and tags were gone. The page no longer reloads: the draft is adopted in place, Save updates that same draft instead of creating a second post, and a line at the bottom of the screen says what happened.
+- Author photos were broken on cards. The author box and the structured data added the uploads path to the avatar; the post cards printed the stored value as it is, so the same page showed a working photo next to the article and a broken one on every card. All surfaces now resolve the path the same way.
+- Feed and API images pointed nowhere. The RSS enclosure, the JSON feed image and the featured image returned by the API were built without the uploads path, so news aggregators, Pinterest and any automation reading the API got a 404 while the post page showed the picture. They now use the same resolver as the sitemap.
+- Two different descriptions in one page head. The meta description used what you wrote in the SEO panel, while the structured data quietly generated its own from the excerpt. Google was told one thing and shown another; both now use your text when there is one.
+- Old articles flashed a red LIVE badge. The badge read the row\'s last-touched timestamp, which a bulk SEO or auto-linking pass also refreshes, so months-old posts looked like breaking news while the byline under them still showed the original date. The badge now reads the content date, the same one the update line uses.
+- Reading time disagreed with itself. Where the value was missing, some screens printed a flat five minutes and others recalculated from the text, so one post could say 5 minutes in the archive and 11 in the latest strip; the structured data rounded where the page rounded up. One rule now answers everywhere.
+- Author links that went nowhere. Some theme bylines linked to a column that does not exist or to a made-up "staff" author, landing the reader on a 404; others quietly pointed at the homepage. A byline now links to the real author page or stays plain text.
+- Static pages claimed to be updated every day. The "Last updated" line on pages read the system touch date, so any maintenance pass made an About or Terms page look edited that morning. It now shows when the content actually changed.
+- Category pages counted differently than they listed. The page count ignored child categories, future-dated posts and the language filter while the list did not, so a parent category lost its last pages and a category with scheduled posts opened empty ones. Both now use the same rule, and posts filed under a child category appear in the parent everywhere: the archive, the sitemap and the API.
+
+---
+
+## [2.133.1] - 2026-09-11  ·  _Patch_
+**The AI meta texts come back reliably, and the bulk run takes one post per round**
+
+### Fixed
+- An empty answer instead of the meta text. The current generation of fast models spends part of its budget on internal reasoning, and the meta request was capped low enough that some posts came back with a fragment rather than the title and description. The budget is raised and a failed read is retried once, which cleared it on every post we measured live.
+- The bulk run is paced for slow servers. A single provider call can take up to a minute when the first model is busy and the request walks to the next one. Each round now writes one post and hands control back to the browser, so the run cannot sit long enough in one request to hit a hosting time limit. Stopping and pressing the button again continues from what is left.
+
+---
+
+## [2.133.0] - 2026-09-11  ·  _Minor_
+**SEO analysis is back at the top of the tool panel, and the meta texts can be written with AI one row at a time or for the whole site**
+
+### Added
+- Meta texts for the whole site, written in rounds. Gelişmiş SEO's content tab can now hand the meta title and description of every published post to the AI. The work runs in short rounds instead of one long request, so a site with hundreds of posts finishes without hitting the server's time limit, and a progress bar names each post as it is written. You choose between filling only the empty fields and rewriting everything, and you can stop mid-run — what is written stays written.
+- One row, one button. Every row in the same table has an AI button that writes that post's meta title and description into the input boxes without saving, so you read the text and press Save yourself.
+- The SEO title question is answered where it is asked. Under the SEO title field, and in the bulk panel, jekcms now explains what the field is for: the post title speaks to the reader on the page, the SEO title to the Google result line. Left empty, the post title is used — which is the right choice when it stays under 60 characters with the site-name suffix and opens with the search phrase. The AI follows the same rule and keeps a title that already works instead of inventing a different one.
+
+### Fixed
+- The SEO analysis panel is visible again. Once the tool column started scrolling inside its own box, the analysis panel sat two thousand pixels below its fold: scrolling the page no longer brought it into view, so it looked like it had been removed. Save and preview are now pinned to the top of the column, the analysis panel sits directly underneath, and the check list scrolls inside the panel instead of pushing categories, tags and the featured image out of reach.
+- The AI button sits where it can be read. The button next to the meta title and description was floated to the end of the label line, where it collided with the character counter and slipped out of view in a narrow column. Each field now has a proper header row: the field name on the left, the counter and the button on the right, with the button saying what it does.
+- An old installation no longer keeps AI silently switched off. Sites whose AI table was created by an earlier release were missing the consent column, and without it every AI feature reported itself as disabled with nothing on screen to explain why. The nightly maintenance run now adds the column, as it already does for the multi-key columns.
+
+---
+
+## [2.132.0] - 2026-09-11  ·  _Minor_
+**The editor's side panel scrolls on its own, a flagged sentence is selected where it lives, and AI writes the meta texts and image alt text**
+
+### Added
+- AI for the meta title and description. A small AI button next to each field writes both from the post itself in one request: the title inside 60 characters including the suffix your theme appends, the description between 130 and 155, in the site language and your brand voice, with the focus keyphrase worked in. The text lands in the field and the SEO score updates at once; you still read it before publishing.
+- Image alt text written by AI. The image fixes used to restate the file name or the post title. With an AI key connected they now describe what the image shows, using the file name, the post title, the focus keyphrase and the sentence around the image — one request per 20 images, so a bulk run stays inside the quota. Without a key, or for anything the model skips, the old file-name text is still produced.
+
+### Changed
+- The side panel follows you. Categories, the SEO panel, the brief and Publish used to sit at the top of a long post, so reaching them meant scrolling the whole page up and back. The column now sticks under the header and scrolls inside itself, keeping the tools where you left them. On narrow screens the layout is one column as before.
+- A flagged sentence is selected, not just scrolled to. Clicking a long sentence or paragraph in the SEO analysis now selects that exact text in the editor with the caret already in it, so the fix can be typed straight away; the paragraph still glows for a moment as a second cue. When the text cannot be matched exactly, the old scroll-and-glow behaviour remains.
+
+---
+
+## [2.131.0] - 2026-09-11  ·  _Minor_
+**Content Refresh moves into the Advanced SEO panel, under Content**
+
+### Changed
+- Content Refresh sits with the other content SEO tools. The refresh queue is about posts going stale or losing rank, so it now opens inside the Advanced SEO panel's Content group, next to Content SEO, Heading Fixer and the Year Updater, with the number of waiting posts shown on the menu entry. Administrators no longer have a second entry for it in the sidebar; opening the old address lands on the panel. Editors, who do not have the Advanced SEO panel, keep their sidebar entry and reach the queue exactly as before.
+- A public demo can now try niche research and the competitor analysis without draining the operator's AI credit: Trend Content runs in stages, so it counts against its own hourly allowance (24 calls) instead of the single-shot AI budget, and the writer's brief endpoint joins that budget. Demo mode is off on normal installs, where nothing is limited.
+
+---
+
+## [2.130.0] - 2026-09-11  ·  _Minor_
+**Competitor analysis in your language and honest about what it counts; Prepare shows each step live; the draft opens at once**
+
+### Changed
+- Prepare shows what it is doing. A live step list (collecting variants → the AI writes the subheadings → searching competitors → measuring pages → preparing the report) with an elapsed-time counter replaces the static wait note. Results arrive as cards: stat tiles, a target-length callout, the get-ahead checklist, competitor headings as add-in chips and a measured-pages table that also lists skipped pages and why. The model that wrote the subheadings is shown. The create button sits on its own row under the options.
+
+### Fixed
+- English headings in a Turkish report. Search results in another language were being measured and their headings fed the recommendations and the brief. Pages are now checked for language and skipped (shown as such), the search asks for pages in the site's language, and the brief is instructed to stay in it.
+- Image counts and headings from site chrome. A page's related-post grid, sidebar and promo blocks inflated the image count ("68 images") and pushed "You may also like" and "Categories" into competitor headings. Measurement now uses the article's real content container and drops boilerplate headings.
+- Creating a draft waited on the model. The AI brief ran before the redirect (10-20 s on slower hosts). The draft now opens immediately with the outline; the brief is generated in the editor's Brief tab in the background with a visible progress state.
+
+---
+
+## [2.129.1] - 2026-09-11  ·  _Patch_
+**The editor dial shows the server's SEO score — one number everywhere; the feature pages describe the new research, brief and AI provider tools**
+
+### Changed
+- One score, by construction. The editor still runs its instant checks for the list and the click-to-scroll examples, but the number on the dial now comes from the server engine (the same function the posts list, the SEO Optimizer and batch recalculation use), refreshed as you type and stored on save. The two screens cannot drift apart any more.
+- jekcms.com feature cards now cover Trend Content (niche research), Competitor Analysis & Writer's Brief and the five AI providers with current models; the editor, SEO settings and calendar cards describe the 30+ checks, the SEO pack additions and role scoping.
+
+---
+
+## [2.129.0] - 2026-09-11  ·  _Minor_
+**Competitors are found and measured automatically, with a plain report on how to get ahead; the posts list and the editor now agree on the SEO score**
+
+### Added
+- Automatic competitor analysis. "Prepare" no longer waits for you to paste URLs: with a Gemini key the model searches Google for the phrase, the ranking pages are fetched and measured (words, subheadings, images, FAQ, tables, video, last update) and a report says what it takes to get ahead: the target length against their average and longest, headings they cover that your plan lacks, how many images to add, whether an FAQ block or a table sets you apart, stale years in their titles, and the snippet answer to place. The brief reads the same report, so the intro and the sections tell the writer how to beat them.
+- Prepare shows its progress. The step runs in two requests: subheadings arrive within seconds with a "1/2" line, the competitor search and measurements follow with "2/2" and their expected duration, and the button is disabled until both are done.
+
+### Fixed
+- Posts list said 70, the editor said 77. Batch recalculation and the SEO Optimizer handed the engine partial rows (no slug, status, dates or schema fields), so the gaps were graded as missing. The engine now completes the row from the database whenever it has the post id; a gate compares the partial and the full row.
+
+---
+
+## [2.128.0] - 2026-09-11  ·  _Minor_
+**Natural subheadings, a real writer's brief in the editor, and one SEO scoring engine for the whole product**
+
+### Added
+- Subheadings written for readers. Google's completions ("how to update browser pc", "… phone", "… ps3") are keyword variants, not headings. With an AI key, "Prepare" now turns them into a natural outline: 5-8 H2s that keep the long-tail search inside without repeating one pattern, fold device variants into one section and follow the reader's path; the raw variants stay collapsed underneath for reference.
+- Writer's brief, section by section. The brief now says for every subheading what to write, what to mention and which screenshot or visual to add, plus FAQ questions, phrases to work in, the closing and the one thing to avoid. It lives in the editor's SEO panel as a "Brief" tab next to Analysis/SERP/Social (opened by default on research drafts) with a tick per section; any post can generate or refresh its brief from there.
+- New SEO checks in both the editor and the server: readability on the site language's scale (Ateşman for Turkish, Flesch for English), keyphrase length and its spread across the text, consecutive sentences opening with the same word, duplicate headings, published content not updated for a year, and the competitor target length from the research brief.
+
+### Fixed
+- Two SEO scores for one post. The posts list, the SEO Optimizer page, batch recalculation and API saves used an older 100-point list (OG title and description cost 20 points even though the theme fills them, an undefined canonical earned 5) while the editor dial ran 26 checks with category budgets. One engine now scores everywhere; a real-browser gate keeps the editor dial within 5 points of the server.
+
+---
+
+## [2.127.1] - 2026-09-11  ·  _Patch_
+**Settings → API tab renders again; the Gemini chain never ends in a 503**
+
+### Fixed
+- Settings → API stopped halfway. The per-provider model selects added in 2.127.0 ran before the AI client was loaded, so the tab ended in the generic error page on every site. The client now loads at the top of the tab, and a new gate test renders the tab end to end, checks the registry defaults and saves a model choice.
+- Gemini under load. Measured tonight: 3.8, 3.6 and the "latest flash" alias all answered 503 "high demand" on a free key while 2.5 Flash answered in a second. The fallback chain now ends in 2.5 Flash as a last resort, so a request gets the newest model whenever Google serves it and never fails on capacity.
+
+---
+
+## [2.127.0] - 2026-09-11  ·  _Minor_
+**Trend Content 4: the AI researches your niche and hands you long-tail topics with titles; every AI provider moves to its current generation**
+
+### Added
+- Research the niche. One button collects raw candidates (what Google completes for your niche words and categories, Wikipedia's most-read, the daily trends, Search Console), drops excluded and single-word terms and topics you already cover, then sends the rest to the connected AI with your site summary. The model keeps only what your reader would search, writes each as a long-tail search phrase plus a concrete post title, names the intent (how-to, definition, comparison, list…) and the angle, and adds a few topics of its own. Only these curated rows reach the board; the draft opens with the AI title and the phrase as focus keyword. 2-4 AI requests per run, staged so slow hosts never time out; runs by itself weekly when a key exists.
+- AI model registry. One file names the model every provider uses; Settings → API lists them from there and lets you pick a model for OpenAI, Claude, Groq and Cohere too. Defaults are the current generation's best price/performance: Gemini 3.8 Flash, GPT-5.6 Terra, Claude Sonnet 5, GPT-OSS 120B on Groq, Command A. Under load the Gemini request falls down a chain (3.8 → 3.6 → latest alias) with the same key instead of failing. A gate keeps frozen legacy model names out of the core and forces re-verification every 120 days.
+
+### Changed
+- Raw search completions and Wikipedia titles are no longer stored as board rows (the previous board listed one-word and generic items such as "Google" or "Linux"); they are research input only. Without an AI key the page says so plainly and disables the research button.
+- The trend scan keeps the daily Google Trends list and Search Console; rows that fit the niche appear in a secondary "Trending and in your niche" list under the researched topics.
+
+---
+
+## [2.126.2] - 2026-09-11  ·  _Patch_
+**New niche suggestions are judged by the AI during the scan; misfits never reach the board**
+
+### Changed
+- Automatic AI verdict on niche suggestions. A Google completion can contain a niche word and still be off topic (the seed "SEO" brought a Korean actor). With an AI key, every scan now sends the new suggestion and Wikipedia rows (up to 25) to the model in a single request; rows it rejects are hidden, rows it confirms carry the "AI confirmed" pill. Google Trends and Search Console rows stay on the word model and cost nothing.
+- The AI client is loaded for the hourly cron scan too, so niche derivation and verdicts no longer happen only when someone presses "Scan now".
+
+---
+
+## [2.126.1] - 2026-09-11  ·  _Patch_
+**AI niche derivation reads the model's answer in full; Wikipedia signals must name a niche word**
+
+### Fixed
+- AI answers shaped as a JSON list were collapsing to their first object. The niche derivation reported "bad_json" on a live site and the AI verify button only ever judged one row. Both prompts now ask for a wrapper object and the reader accepts lists, wrapper objects and lists embedded in prose.
+- Fresh installs asked Google about their sample categories. "Getting Started", "Writing", "Site Tips" and the catch-all "General" are now neither scan seeds nor niche phrases; a fresh site's board stays empty until it has real categories, keywords or an AI key.
+- Wikipedia signal too loose. A TV series ("Daha 17") reached the board because the digits and the word "series" each occur somewhere in the site's titles. An encyclopedia title now has to name a niche word, a category or an existing post to count.
+
+---
+
+## [2.126.0] - 2026-09-11  ·  _Minor_
+**Trend Content 3: your niche gets its own sources, and the AI derives the niche from your site**
+
+### Added
+- Niche search sources. The daily Google Trends list is mostly sports and politics, so a tech or health site saw an empty board no matter what it wrote into the niche settings. Every scan now asks Google what is being searched right now for up to 12 of your niche words and categories (rotating through all of them) and adds Wikipedia's most-read articles of the day that fit your niche. Both are keyless and free; rows carry a "Searched in your niche" or "Wikipedia" pill.
+- AI-derived niche. With an AI key, the model reads your categories, description and latest titles once a day and names the 12 topics your readers type into Google; those become scan seeds and niche phrases. One request a day, cached; the niche settings box shows the list and when it was refreshed.
+- Topics scanned line on the board: the exact seeds the radar asks about, so an empty board is never a mystery.
+
+### Changed
+- Installer catch-all categories (General, Uncategorized and the like) are never used as seeds; a completion of a niche word that still does not fit the niche ("life" → "Lifetown taxi") is dropped instead of stored.
+- The scan summary now says how many signals came from Search Console, niche suggestions and Wikipedia.
+
+---
+
+## [2.125.1] - 2026-09-11  ·  _Patch_
+**The retired Trend Radar address redirects to Trend Content on updated installs**
+
+### Fixed
+- Old page could linger after the update. The updater never deletes files, so an updated site would have kept serving the retired Trend Radar screen at its old address. The package now ships a small redirect in its place; bookmarks and old links land on Content Studio → Trend Content.
+
+---
+
+## [2.125.0] - 2026-09-11  ·  _Minor_
+**Trend Content 2: one board, one row per topic, covered topics folded away, a real writer's brief**
+
+### Added
+- A writer's brief. Every draft carries a brief read from the search intent (definition, how-to, comparison, price, application, informational): who the reader is, what the intro must do, target length. With a connected AI key, a small call adds the intent, the intro's two sentences, 3-5 points to cover, the angle and one thing to avoid; the option is on by default and says it uses quota.
+
+### Changed
+- The Trend Radar page is gone. Content Studio → Trend Content is the single place for rising searches; the scan, region and the hourly cron are unchanged and the dashboard card keeps its numbers.
+- Subheadings and titles are in Title Case (Every Word Capitalised, acronyms kept), with correct Turkish İ/ı.
+
+### Fixed
+- Duplicates and covered topics. Near-identical queries ("nginx nedir", "ngnix nedir", "nginx nedir ne için kullanılır") fold into one row; topics your site already answers are no longer on the writing board but in a collapsed "Already written" list with a refresh action. A one-letter typo in your own Search Console queries still finds the post; long Turkish stems are folded so "dns değiştirme" finds "DNS Nasıl Değiştirilir".
+- No boilerplate in the draft. The post body is the outline only (one H2 per subheading); the instructions that used to be pasted as the intro now live in the editor's Trend brief box.
+
+---
+
+## [2.124.1] - 2026-09-11  ·  _Patch_
+**Trend Radar re-scores open signals on every scan**
+
+### Fixed
+- Stale verdicts stayed on the board. A signal that did not trend again kept the relevance it was given by an older model, so a term rejected by the new niche rules could still show as "fits the niche". Every scan now re-scores all open signals with the current model, which also picks up new posts and changed niche keywords.
+
+---
+
+## [2.124.0] - 2026-09-11  ·  _Minor_
+**Trend Content: rising searches filtered by your niche, real long-tail subheadings, a competitor read-out and a one-click draft**
+
+### Added
+- Trend Content (Content Studio → Trend Content). The rising searches of the day and week, in your site's language and region, reduced to the ones that belong to your niche. Each entry shows the traffic band, the news behind it and whether you already cover it (then it offers a refresh instead of a duplicate). Prepare pulls the long-tail questions people actually type into Google as subheadings, sentence-cased, with a checkbox each; you can add your own. Create trend content opens a draft with the title, one H2 per chosen subheading, the focus keyword and a brief in the editor's right column (sources, competitor numbers, headings competitors cover that you do not). No API key or quota is needed for any of this.
+- Competitor read-out. The trend's own news sources, plus any URL you paste, are fetched and measured: word count, headings, images, FAQ blocks. The card states the average and the longest, suggests a target length and lists the subheadings competitors cover so you can add them with one click.
+- Optional AI. With a connected key you can have the body written from the outline and the sources (the page says so and that it uses your quota), and you can run an AI niche check on the list. Without a key the module works in full; only these two extras are absent.
+- Niche settings on the same page (admin): extra niche words and excluded words; saving re-scores the open signals.
+- Content Studio overview shows the top three trends in your niche with a link to the module.
+
+### Fixed
+- The niche match was too loose. A trend touching a single word of a category ("sosyal konut" against "Sosyal Medya") counted as in the niche. The model now requires coverage: every content word of the term, or at least two of three, must belong to the site's vocabulary (categories, description, owner keywords, titles, tags used twice), or the term must match a post title strongly. A partial touch never pins a category. Lone generic words ("oyun", "denetim") no longer match a post that merely contains them; a one-word Search Console query still does, because the site already ranks for it. Turkish suffixes are folded so "konutları" and "konut" meet, and dotted/dotless İ/ı are handled correctly in sentence case.
+
+---
+
+## [2.123.2] - 2026-09-11  ·  _Patch_
+**Audit round 2: an author's bell and post list match their dashboard, New post for every role, queue AI disclosure setting, honest bulk save**
+
+### Added
+- Queue AI disclosure default. Settings → General → Reading gets the field that the content queue already read but nobody could set: the default AI disclosure for posts published from the queue (not specified, no AI, AI assisted, AI wrote and a person edited, AI generated).
+- New post and Posts quick buttons on the dashboard for every role, not only editors and authors.
+
+### Fixed
+- Author view is consistent. The notification bell no longer shows an author the site-wide scheduled count, the Posts list opens on the author's own posts by default, and site-wide chart series are no longer written into an author's page source.
+- Bulk meta save reports failures. "Save changed rows" now saves rows one after another, marks a rejected row with ✗ and says how many succeeded; before, the counter cleared as if every row had saved.
+- Image file report says when it could not read. A failed media query used to render the green "nothing to do" message; each query now fails on its own and the card says the report could not be read. Camera-dump names such as 20260910_1200 count as generic.
+- Turkish words inside the dashboard's social card and activity tooltip (Pending, Failed, Comments) are translated on English panels.
+
+---
+
+## [2.123.1] - 2026-09-11  ·  _Patch_
+**Audit round: comment replies actually send, one setting lives in one place, SEO plugin fixes, real English strings**
+
+### Improved
+- Settings say where each text goes. Tagline, site description and footer text each list the places they appear; the default meta description states its fallback order. Posts per page and excerpt length explain that the Archive Studio and card settings take their defaults from here and override them when set.
+- Archive Studio and cards follow Settings → Reading by default. Posts per page in the Archive Studio starts from the Settings value; the card excerpt length follows the Settings value once it is 60 characters or more.
+- IndexNow key is owned by the core. The Traffic plugin shows and uses the key from Settings → SEO and re-syncs its key file if the core rotated it.
+
+### Fixed
+- Replying to a comment did nothing. The reply box sat inside the comment list's bulk-action form, and browsers drop a form nested in a form, so the Reply button submitted the wrong form and the reply never left the page. The box is now its own block: the reply is sent in the background, a confirmation appears, and the list reopens on the new reply. A plain form post to the reply endpoint also returns to the list instead of showing raw JSON.
+- Google tracking ids were kept in two places. The Google plugin's settings form showed its own stale copy of the GA4, Tag Manager and AdSense ids and, on save, cleared the ids entered under Settings → Analytics when its checkbox was off. The form now mirrors the ids from Settings, so there is one source.
+- Maintenance mode could not be switched off. A coming-soon or maintenance page chosen in the customizer stayed active after the Settings → Advanced switch was turned off. Switching it off now also resets the customizer mode, and the switch shows which page is currently active.
+- Trend Radar and ZeroTrack shared one on/off row. Both stored their switch under the bare key `enabled` (setting keys are unique site-wide), so turning one off turned the other off. Trend Radar now uses its own keys.
+- Favicon PNGs ignored the chosen style and colour. The generator's style and colour were never posted, so the 48px and 180px files were always the blue gradient. They now follow your choice.
+- Footer logo from the footer designer never rendered on the Lifestyle theme (the resolver looked for a different key).
+- SEO plugin. The English interface of the SEO optimizer, content optimizer and scheduler showed generated placeholder labels ("Seo Fix All"); 184 strings are now real English. A per-post robots value set in the editor now beats the URL-shape rules. Custom robots.txt rules without a User-agent line get `User-agent: *` so crawlers apply them; a pasted Sitemap line is no longer printed twice; the help lists every accepted directive. Sitemap exclusions accept `/path/*` for whole subtrees. The SERP identity check no longer compares the site name against the value the admin header overwrote. The site tab's button opens the SEO tab. The CSV export link carries the session token; the CSV import checks the upload. IndexNow pings accept only this site's URLs. Clearing a meta description also clears the Open Graph text that was copied from it. The content fixer previews only what it will apply to; the slug rebuilder keeps its filters when applying. The Personal theme printed verification tags twice. A dead "image migration" link on Featured Images now opens Import.
+- Weekly 404 report. The table is created when needed, a failed e-mail no longer costs a week, and the text now says what the threshold is: addresses seen again in the last seven days with three or more misses in total.
+- Tag slug rename. A stale redirect from the old slug is corrected instead of skipped, and an unrelated rule that happened to start at the new address is no longer deleted.
+- Trend Radar. The first visit no longer waits on a network scan (up to 18 seconds on a host that cannot reach Google); Search Console signals are shown under every region; the "Open queue" button works for editors because the content queue is now an editor screen.
+- Demo mode. Content-queue actions sent as JSON were invisible to the demo guard; the exempt operator no longer sees the demo banner; the password form gets the account message.
+- Stories. The cover-only story's virtual slide used a negative id that skipped the ownership check; it now uses a verifiable id.
+- Screen options. Saving from an editor or author panel no longer wipes the dashboard choices an admin made for sections that role cannot see, and a failed save is reported instead of showing "Saved".
+
+---
+
+## [2.123.0] - 2026-09-10  ·  _Minor_
+**Roles: editors and authors get a content-only admin; site operations stay with the owner**
+
+### Added
+- A dashboard per role. An author's dashboard shows their own numbers: published posts with drafts, scheduled and in-review counts, views on their posts, files they uploaded, and lists of their own drafts, scheduled and recent posts. An editor sees the content picture of the whole site (posts, pending comments, media, content health, calendar, publishing activity, category split, winning content, recent comments) but none of the operations widgets: traffic, system status, site health, SEO and storage charts, the setup checklist, update and license banners.
+- A sidebar that only lists what the role can open. Authors get Posts and Media. Editors add Categories, Tags, Pages, Comments, Content Studio, Content Refresh and Trend Radar. Settings, Themes, Plugins, Ads, Users, Updates, License, Import and Backups are the owner's. The quick-access buttons, the customize-this-screen panel and the notification bell follow the same rule, so nobody meets a dead link or a 403 by clicking around.
+
+### Improved
+- Server-side guards match the menu. Categories and Tags require the manage-categories capability (editor and up), Reports requires analytics access (owner), Content Studio and the content wizard require editor, and the bulk AI, queue, import, duplicate-finder, logo, image-repair, upload-scan and SEO batch endpoints refuse lower roles with a clean 403. An author can now change only the media files they uploaded. Hiding a menu entry was never the enforcement; the page is.
+- Customize-this-screen hides the whole card. Switching a dashboard card off used to hide only its header; the card body stayed. The switch now covers the card.
+
+---
+
+## [2.122.0] - 2026-09-10  ·  _Minor_
+**SEO pack: custom robots rules, sitemap exclusions, tag slug redirects, a weekly 404 digest, an image file report and one-click bulk meta save**
+
+### Added
+- Custom robots.txt rules. Settings > SEO now has a text box whose lines are appended to the generated robots.txt. Only real directives are kept (User-agent, Allow, Disallow, Crawl-delay, Sitemap, Host, Clean-param and comments); anything else is dropped, so a typo cannot break the file.
+- Sitemap exclusions. A second box takes one path per line (/landing-page, /category/internal, /tag/test). Those entries are left out of the sitemap while the pages themselves keep working.
+- Tag slug changes redirect. Renaming a tag's slug now records a 301 from the old tag address to the new one, the same way posts and categories already did. Chains are retargeted so a tag renamed twice still lands on the current address.
+- Weekly 404 digest. Turn it on in Settings > SEO and once a week the admin e-mail receives the addresses that returned 404 at least three times in the last seven days, with hit counts and a link to the redirect screen.
+- Image file report. The SEO optimizer's Images tab lists image files over 300 KB and files whose names carry no meaning (IMG_1234, screenshot, untitled, camera dumps), so you can rename or compress them before they hurt page speed and image search.
+- Save all edited rows. The Posts tab of the SEO optimizer tracks which meta title and description fields you changed and saves all of them with one button instead of one row at a time.
+
+---
+
+## [2.121.3] - 2026-09-10  ·  _Minor_
+**Screen options: choose what your dashboard and sidebar show; demo mode exempts the operator account**
+
+### Added
+- Customize this screen. A new button in the top bar of the dashboard (next to the search box) opens a panel where you switch each dashboard section on or off: the onboarding checklist, alert badges, every summary card, the traffic, calendar, trend and activity cards, the charts, and the side-column lists. The same panel lists the sidebar entries, so a user who never touches, say, the media library or the newsletter can hide those entries too. Everything starts visible after installation; the choice is remembered per user and can be reset with one click. Dashboard, Settings, Updates and License can never be hidden, so nobody locks themselves out.
+
+### Improved
+- Demo mode: the operator stays in charge. JEK_DEMO_EXEMPT names the account ids or e-mails that the demo guard leaves alone, so the site owner can still manage users, settings and updates on a public demo while visitors cannot. "Check for updates" is allowed for everyone in demo mode; it only reads.
+
+---
+
+## [2.121.2] - 2026-09-10  ·  _Patch_
+**Stories: a cover-only story now shows; dashboard cards softened and a fifth card added; plugin x theme matrix gate**
+
+### Improved
+- Dashboard summary cards. Five compact cards instead of four large ones, in soft tints that follow the light and dark panel theme rather than saturated solid colours. The new fifth card, Content Health, shows how many posts are waiting in the refresh queue, how many trend signals fit your niche and how many posts carry a broken outbound link.
+- Plugin x theme matrix in the release gate. With every packaged plugin active, all fourteen themes must serve the home page, a post, a page and a category without a PHP error, show the story strip for a cover-only story and carry the analytics tracker. Theme-dependent extras such as the share bar are reported, not enforced.
+
+### Fixed
+- A story saved with a cover image but no slides never appeared on the site. The feed skipped it silently, so "Home" could be selected and nothing showed. A cover-only story now plays its cover as a single slide, on every theme, and the story list marks it as "cover as single slide" so you know why it looks that way.
+
+---
+
+## [2.121.1] - 2026-09-10  ·  _Patch_
+**Demo mode: a public demo panel refuses deletions, account, settings and install actions**
+
+### Added
+- Demo mode for showcase installations. With the JEK_DEMO_MODE constant set in the configuration, the admin panel stays fully browsable and editable, but the server refuses, for every panel user, anything a stranger could use to spoil the demo for the next visitor: deleting or trashing posts, pages, media, comments, categories, tags and menus; creating or changing users, passwords and profiles; saving settings; license, plugin, theme (except session previews), update, backup and import/export actions; bulk content tools such as encoding repair and auto-linking; and outbound tools such as link-health scans. Single-shot AI helpers keep working with a small hourly allowance per visitor. Refused page requests come back with a message; refused background requests answer 403. A banner at the top of the panel says what is off and that content resets nightly. On the public jekcms demo, combined with the nightly snapshot restore, this closes the gap a visitor used today to deactivate the demo's license.
+
+---
+
+## [2.121.0] - 2026-09-10  ·  _Minor_
+**Trend Radar: rising searches next to the posts your site already answers with**
+
+### Added
+- Trend Radar (Growth menu). Every hour the site reads the day's rising searches for its country from Google Trends (no API key, no quota) and, when the Google Console plugin is connected, the queries whose impressions grew at least 50% in the last 28 days. Each search is compared word by word with your post titles, category and tag names, so the list shows what people are looking for today and whether you already have the answer: a found post, a topic that fits your niche, or noise. Related headlines from the trend are listed under each term.
+- Three exits, nothing automatic. "Refresh the post" sends the matching post to the Content Refresh queue with a "Trending" reason; "Queue a draft" drops a brief with the source headlines into the content queue for tomorrow morning so an editor writes it; "Mute" hides the term for 30 days. The radar never publishes on its own. Region follows the site language and can be overridden; the hourly scan can be switched off.
+- Content queue honours an external refresh signal. Other tools can now open a Content Refresh row for a post with their own reason (used by the radar for "Trending").
+
+---
+
+## [2.120.4] - 2026-09-10  ·  _Patch_
+**Operator license lock: a showcase or demo installation can no longer be deactivated from the panel**
+
+### Improved
+- A site operator can lock the license against deactivation. Setting the JEK_LICENSE_LOCK constant in the configuration (or JEK_LICENSE_LOCK=1 in the environment file) hides the Deactivate button on the License page and refuses the action if it is posted anyway; activation, verification and refresh keep working. This is meant for demo and showcase installations where visitors have panel access. On the public jekcms demo a visitor had deactivated the license, which put the demo into lockdown until it was restored; the lock closes that path.
+
+---
+
+## [2.120.3] - 2026-09-10  ·  _Patch_
+**Posts published from the content queue carry an AI-use disclosure; the Pets theme no longer links to empty categories**
+
+### Improved
+- A post published from the content queue can now carry its "AI usage" disclosure automatically. Until now the disclosure field in the editor's Editorial box stayed empty for every queued post, so sites that publish on a schedule had to open each post afterwards to set it. A queue item may state its own value, and a site can set a default for everything the queue publishes (no AI, AI-assisted and human-edited, AI-generated and human-reviewed, or editorially reviewed). Posts you write by hand in the editor are not affected.
+
+### Fixed
+- Pets theme: the mobile menu, the footer and the 404 page listed every category, including ones with no published post yet. A visitor who tapped one landed on an empty archive. Those three places now list only categories that have at least one published post, as the desktop menu already did. Empty categories stay in the admin and fill in as posts are published.
+
+---
+
 ## [2.120.2] - 2026-09-09  ·  _Patch_
 **Fresh installs on Apache no longer fail with a 500 from .htaccess; support policy applied on every channel**
 
