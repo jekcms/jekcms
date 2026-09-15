@@ -30,7 +30,7 @@ Installs on any PHP + MySQL hosting, one-time license.
   automatic internal linking, AVIF/WebP media pipeline
 - **Automation-ready** — full REST API + n8n webhook workflows for
   AI-assisted publishing (Gemini / GPT), plus JSON bulk import
-- **13 professional themes** — travel, recipes, health, finance, news, tech…
+- **14 professional themes** — travel, recipes, health, finance, news, tech…
   customizable from the admin panel
 - **Portable & yours** — installs on any PHP + MySQL hosting; your code and
   data live in a standard exportable database; existing WordPress content can
@@ -43,7 +43,7 @@ Everything below ships as an official, first-party module — no third-party
 plugins to buy, install or keep compatible:
 
 - **Content & SEO** — per-post SEO (Schema.org/JSON-LD), automatic internal
-  linking, Schema Studio (13 types), Redirect Manager, Instant Indexer
+  linking, Schema Studio (11 types), Redirect Manager, Instant Indexer
   (IndexNow + WebSub), **Advanced Search** (FULLTEXT relevance ranking),
   **Editorial Calendar** (kanban board + month view), modern editor with live
   SEO scoring
@@ -53,7 +53,7 @@ plugins to buy, install or keep compatible:
   notifications** (self-hosted VAPID, no third-party service), **Form Builder**,
   **Digital Downloads** (sell files or lead magnets), **Audience / CRM** (unify
   subscribers, form leads, buyers & commenters), **A/B Tests** (headline & CTA
-  experiments), Social Publisher (21 networks), ZeroTrack privacy analytics
+  experiments), Social Publisher (22 networks), ZeroTrack privacy analytics
 - **Security & ops** — security center/WAF, TOTP 2FA, daily Smart Backup with
   one-click restore, signature-verified auto-updates, Cloudflare setup wizard
 
