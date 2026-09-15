@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.141.2] - 2026-09-16  ·  _Patch_
+**Theme previews show the current image, at the right proportions**
+
+### Fixed
+- Theme previews in your panel could stay months out of date. The preview image is cached for a year and its address never changed, so once your browser had a copy it kept showing it — a theme could be redesigned and your Themes page would still show the old screenshot. The address now carries a stamp that moves, so a new preview reaches you within the hour.
+- The theme card was scrolling the wrong part of the preview. Each card reveals a tall screenshot by sliding it, and that slide was calculated from one fixed size assumed for every theme. A taller screenshot never showed its lower half; a shorter one slid past empty space. The proportions are now read from the image itself.
+- The setup wizard had the same stale previews. Its theme cards carried no stamp at all, so a first-time installer could be choosing from screenshots that no longer matched the themes.
+
+---
+
 ## [2.141.1] - 2026-09-15  ·  _Patch_
 **The contact page names its departments in your language**
 
