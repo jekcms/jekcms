@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.141.1] - 2026-09-15  ·  _Patch_
+**The contact page names its departments in your language**
+
+### Fixed
+- On the trends theme, the contact page listed its departments in English whatever language the site was in. Those three names are yours to write, but until you do the page falls back to its own list — and that list was fixed English text, so a Turkish site greeted visitors with “Editorial desk”, “Partnerships” and “Support”. The fallback now follows the site language.
+
+---
+
 ## [2.141.0] - 2026-09-15  ·  _Minor_
 **Forms accept file uploads, and newsletter sign-ups actually reach you**
 
