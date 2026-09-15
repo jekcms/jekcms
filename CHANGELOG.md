@@ -8,6 +8,37 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.141.0] - 2026-09-15  ·  _Minor_
+**Forms accept file uploads, and newsletter sign-ups actually reach you**
+
+### Added
+- Form fields can now be file uploads. A CV, a scanned invoice, a screenshot — you set which extensions you accept and the size limit, per field. The file is checked three ways before it is kept: the extension must be on your list, the content must actually match that extension, and executable or script types are refused outright no matter what you allow.
+- Uploaded files are private, not public. They go into a folder that is closed to direct access, under a random name, so the address gives nothing away about who sent it. You download them from the submission screen in the panel, and the notification email carries that link rather than the file itself.
+
+### Fixed
+- On one theme a newsletter sign-up never reached the site at all. The travel theme's form waited a second and a half and then said “Subscribed!” without contacting the server once, so every address typed into it was lost.
+- Newsletter forms had no bot trap. The server has looked for one for a long time, but no theme — and not the plugin's own embedded form — ever printed the field, so that check simply never ran on this channel. It is now in place everywhere. Deliberately without the timing check that goes with it: that one measures how fast the form was filled in, and someone who types their address quickly would have been dropped without being told.
+- A successful sign-up could report failure. Two themes asked the server for a page and then tried to read it as data; the read failed, so visitors who had in fact just subscribed were shown an error and typed their address again.
+- The instruction that matters most was being thrown away. A sign-up is only finished when the visitor confirms it by email. One theme replaced that sentence with a two-second “Success!” on the button, so nobody learned there was a second step — and those sign-ups stayed pending forever.
+- Sign-up replies came back in Turkish on English sites. Every message in that flow was fixed Turkish text, whichever language the site was set to.
+- The contact form on two themes submitted to an address that did not exist. Filling it in and pressing send produced a 404 page and the message was gone — no copy stored, no email sent, and nothing to tell the site owner it had happened.
+- Opening a form submission showed the form editor instead. The button on the submissions list left out one parameter, and that button is the only way into a submission, so messages could be listed but not read.
+
+---
+
+## [2.140.1] - 2026-09-15  ·  _Patch_
+**A site with no posts yet now looks finished instead of broken**
+
+### Fixed
+- An empty homepage used to show nothing at all. On some themes the header ended and the footer began with not one line in between, because every homepage section quietly renders nothing when there are no posts. A visitor landing there had no way to tell the site apart from a broken one. Every theme now says so plainly, and the themes that already had their own wording keep it.
+- The footer could float in mid-page. On nine of the fourteen themes, a page shorter than the screen left blank space below the footer — measured at 365px on one theme. It only ever showed on short pages: an empty site, a 404, a search with no results, a single short post.
+- Empty boxes are no longer drawn. A sidebar widget with nothing to show still drew its container, and a footer column with an empty list still printed its heading. Both now stay out of the way until they have something to say.
+- Every fresh install used to publish an English placeholder as its description. Regardless of the language you chose, every page carried `<meta name="description" content="Welcome to our blog">` until you changed it — the line Google is most likely to print under your title in search results. New installs now use the description you typed during setup.
+- One theme's colours contradicted its own design. The Tech theme's colour settings shipped with a light background, dark text and an indigo accent, while the theme itself is dark with a green accent. Since the settings win, the wrong accent was what you actually saw.
+- The news theme's info bar overflowed on phones. Its narrow-screen rule was written for a grid layout that was never there, so it never applied.
+
+---
+
 ## [2.140.0] - 2026-09-15  ·  _Minor_
 **The panel now tells you whether your site can appear in Google's AI answers**
 
