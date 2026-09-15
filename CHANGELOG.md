@@ -8,6 +8,121 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.140.0] - 2026-09-15  ·  _Minor_
+**The panel now tells you whether your site can appear in Google's AI answers**
+
+### Added
+- Three new rows on the SEO health screen answer a question the panel used to get wrong. Google's AI answers — AI Overviews and AI Mode — are fed by ordinary Googlebot and by whether your pages allow snippets. There is no separate AI crawler behind them. That eligibility now has its own line, read from your live pages and your live robots.txt rather than from the setting you saved.
+- Gemini access is shown separately, because it is a different thing. The Google-Extended token governs the Gemini app and nothing else; blocking it does not remove you from Google Search or from AI answers. The two used to sit under one heading, which made it easy to switch off the wrong one.
+- Rules written outside the CMS are now visible too. Your CDN or firewall can add its own robots.txt rules — Cloudflare's "block AI crawlers" option does exactly that. The same crawler then ends up with two entries, one allowing your site and one blocking it, and which one wins depends on the crawler. Instead of reporting your saved setting as if it were the live result, the panel names the crawlers this applies to.
+
+---
+
+## [2.139.1] - 2026-09-15  ·  _Patch_
+**The renewal price now appears everywhere you look, and the panel tells you where you stand**
+
+### Changed
+- The first year is now priced separately from renewals. Personal $39, Standard $99 and Professional $249 are first-year prices; renewals are $49, $129 and $299. The point of publishing both is that you can see the second year before you pay for the first — the figure sits on the pricing card, in the FAQ, on your licence in your account and in the order summary at checkout. Renewal is still never automatic.
+
+### Fixed
+- Your panel now says where your licence stands. A licence coming up for renewal, or one that has lapsed, gets a strip at the top of the dashboard and on the licence card — with what is still working, what is switched off and a renew button. Before this, the dashboard only tracked the support period: it said "your support ends" while staying silent about the licence, and a lapsed licence produced no message at all.
+- The panel no longer offers a plan that is not for sale. The customer panel still listed the Unlimited tier and an "upgrade to Unlimited" button, while the pricing page had already moved that tier to a conversation. Those buttons led to a checkout that no longer exists.
+- An expired licence no longer sent you to the activation screen. Opening the licence page on an installation whose term had ended showed the first-run "enter your key" screen instead of your licence details.
+
+---
+
+## [2.139.0] - 2026-09-14  ·  _Minor_
+**The licence is now annual — and if you stop renewing, your site keeps running**
+
+### Added
+- Renewal reminders and a renew button where you would look for one. Thirty days before the licence ends, seven days before, and on the day it lapses, one e-mail goes out — and each one says plainly that the site keeps running. The same notice appears on the licence card in your account, with a renew link. Lifetime licences never receive any of it.
+- Renewing extends the licence you already have. A renewal adds a year to your existing key and to your support period; it does not issue a second key that you would have to activate on your site all over again. If your licence is one of the lifetime ones, a renewal only extends support and leaves the licence untouched.
+
+### Changed
+- Paid plans are now sold for a year instead of once. Personal $39, Standard $99 and Professional $249 are first-year prices, and support is included in them — the separate 12-month support add-on is gone. Renewals are $49, $129 and $299, and that number is printed on the pricing card, in the FAQ and in your account: we are not interested in the domain-registrar habit of showing a cheap first year and springing the real figure on you later. Renewal is never automatic; your card is not charged without you. The site limits are unchanged: one, three and ten sites. Unlimited is no longer on the shelf; more than ten sites is now a conversation, not a checkout button.
+- What happens when a licence lapses is the part worth reading. Your site does not shut down, and your admin panel does not lock. jekcms falls back to the free edition: you keep writing, publishing and receiving updates — security patches included, because an unpatched install helps nobody. The theme you are already running keeps rendering exactly as it did. What switches off is the premium side: plugins, the Content Wizard, the AI features, switching to another premium theme, and adding new sites to the licence. Renew and all of it comes back where you left it.
+- Everyone who already bought a lifetime licence keeps it. Licences sold before this release do not get an expiry date, are not re-priced, and are not asked to renew. That is a right that was paid for; the new model applies to new licences only.
+- Updates are never paywalled on the free edition. This is the deliberate part of the design rather than an oversight: a CMS that stops patching the installs that stopped paying is a CMS that leaves vulnerable sites on the internet with our name on them.
+
+---
+
+## [2.138.0] - 2026-09-14  ·  _Minor_
+**Your site starts out looking like the demo, not like an empty folder**
+
+### Added
+- Every theme now ships its own demo content. Until now a fresh installation seeded nine general "how to use jekcms" posts, whatever theme you picked — so somebody installing the Recipes theme opened their new site and found an article about how tags work. Each of the fourteen themes now carries its own set: three categories and nine real posts written for that subject, with tags, a menu and cover images. Pick Recipes and you get recipes with ingredients and steps; pick Travel and you get packing and border-crossing guides. The installer asks whether you want it, and one click under Posts removes all of it whenever you are ready to publish your own work.
+- Covers are generated in your theme's colours. The demo images are not stock photos and they are not shipped inside the package — they are drawn during installation from the palette the theme declares, so the front page looks composed rather than assembled from placeholders, and the download does not get any bigger.
+- Changing your theme can now bring its content with it. If the demo content on your site belongs to a theme you no longer use, the Themes screen offers to replace it with the new theme's own. Your own posts are never touched — only the demo set is swapped.
+
+### Fixed
+- Turkish words came out half-capitalised. Themes used PHP's plain uppercase function, which only knows the English alphabet: Günlük became GüNLüK, Fırın became FıRıN. Category chips and section labels read as broken text rather than design. Turkish also needs i to become İ, which the multibyte function gets wrong on its own. Uppercasing is now language-aware everywhere, and the single-letter avatar badges — which were cutting the first byte of a name, so Şule became a broken character — take the first letter properly.
+- Some theme menus and buttons led to pages that were never there. A few themes linked to addresses that are not routes in jekcms at all — the Travel menu offered Destinations and Travel Tips, its homepage map linked five continents, the Pets footer and search offered six pet categories in English, its sidebar had an adoption button, the Newspaper photo section linked a tag, and the Recipes newsletter checkbox pointed at a terms page under the wrong path. On a site that does not happen to use those exact names — which is every fresh install — all of them answered 404. Each one now points at something real, or is not shown at all.
+- Every card on a brand-new site read “0 views”. The view counter was printed whenever the field existed, and on a fresh install it exists and it is zero — so the first thing anyone saw was a grid of zeros, which says nothing and makes the site look abandoned. The counter now appears once a post actually has views. Nothing is invented and no number is rounded up; a post with no views simply does not carry the label.
+- Sections left a hole when a category only had a few posts. On the Newspaper theme the category blocks and the latest-news row were built as a fixed four-column grid. A category with three posts filled one column and left three empty, which is exactly what a new site looks like — every category starts with three. The rows now take as many columns as they have cards, and a lone card becomes a full-width horizontal one.
+- Tag links on the Pets theme ignored the theme's own colours. They were drawn in a purple-to-indigo gradient that cycled through five more unrelated colours, which had nothing to do with the theme. They are quiet now and pick up your accent colour on hover. The author initial badge on the Starter theme had the same problem: it mixed your theme colour with a fixed purple, so it drifted violet whichever theme you chose.
+- The welcome post showed up as the lead story on your new site. Installing a theme demo set also seeded the post that greets the site owner — “your site is ready, edit or delete this to begin” — and on most themes it took the top card. So the first thing a visitor read was a note addressed to you, sitting above nine real articles, next to a leftover “General” category the theme never asked for. The welcome post now appears only when there is nothing else: a theme with no demo set, or demo content switched off.
+- Categories with no posts were listed in menus and footers. The navigation lists were built from every category on the site, so an empty one — the default bucket, or one you made and have not written in yet — was offered as a link and led to an empty archive. Some themes had tried to hide it by matching names (“uncategorized”, “general”), which misses a category you renamed and misses your own empty ones entirely. Every theme now lists the categories that actually have posts.
+- Skipping the theme step left you with the blank scaffold. If you did not pick a theme in the installer, the site was set up with starter — the empty base theme meant for building on, which is deliberately left out of the demo gallery. So the people least sure of what they wanted got the barest possible result. The installer now falls back to a real showcase theme; starter stays on the list for anyone who wants it.
+- Authors imported from WordPress had a broken avatar. The importer asked Gravatar to return an error when an address had no picture, and then stored that address anyway — so every imported author without a Gravatar account showed a broken image on every page. They now get the standard placeholder.
+- Choosing which categories to feature emptied their images. On themes with a category circle row, the images disappeared as soon as you picked the categories by hand instead of leaving the automatic selection. The row worked until you customised it — which is when most people look at it.
+- The nine demo covers were nearly identical to each other. They now vary in brightness and warmth while staying in the theme's colour family.
+- The Turkish installer showed a raw escape sequence instead of an apostrophe on the WordPress import card.
+
+---
+
+## [2.137.0] - 2026-09-13  ·  _Minor_
+**Your site now tells you the moment it falls out of search**
+
+### Added
+- A watch that notices when your SEO signals break — at the moment they break. A site can drop out of Google quietly. A theme change, a plugin you switched on, a customiser save: any of them can flip a page to `noindex` or close the whole site in `robots.txt`, and nothing tells you. jekcms now takes a fingerprint of your home page, your newest post and your busiest category — the title, the canonical address, both robots signals, the structured data, the language links and the sitemap size — and compares it against the last one. It runs right after a theme switch, a plugin change, a core update and a customiser save, and once a day besides. When something changes, the panel says what changed, on which page, and what it means in plain words: this page has dropped out of search, not robots_meta differs. No external tool can do this, because no external tool is inside your installation watching the change happen.
+- One switch decides whether search engines may index your site. Three separate signals tell a crawler whether it is welcome: an HTTP header, the `robots.txt` file and a tag in the page itself. Google obeys the most restrictive of the three, and two of them are invisible when you look at the page. They used to be set independently, which meant they could disagree — and a site could be closed to Google while its page source said it was open. They now all come from a single setting, so disagreement is no longer possible.
+
+### Improved
+- Panel screens get to the point. Some screens opened with several paragraphs explaining themselves before showing a single row of your own data. On the worst of them you scrolled past about twelve hundred characters of explanation to reach the first result. The explanations have not been deleted — they moved. Each screen now opens with one sentence, and the full account sits behind the ? next to the heading, or a fold you can open. On the Trending Content screen the distance from the title to your first result dropped by more than a third.
+- The Audience screen only warns you when there is something to do. It used to carry a permanent notice explaining how the audience is gathered, whether or not anything needed attention. That explanation is now in the help bubble, and the notice appears only when the list has never been built or has gone stale — the case where you actually have to press something.
+- A documentation page for the News Publishers screen. Getting into Google News, Apple News or Microsoft Start is twenty-two separate applications, each with its own review queue. The new page explains the readiness checklist, what the three tiers mean, and which publisher details reviewers look for — including the corrections policy most publishers forget.
+
+### Fixed
+- Choosing Recipe or Local Business as a post's structured data broke the page. The post returned a server error instead of rendering — the setting was selectable in the panel, and selecting it took the page down. Both types now render, and every type the panel offers is checked against the live page before each release.
+- The How do I use this button was missing from four screens, and on another it led to a page that does not exist. It is now present on the Licence, SEO Status and News Publishers screens, and the link that went nowhere has been removed. On the Advanced SEO panel it had never appeared at all, because the tool is shown inside a frame there.
+- The update badge in the sidebar was drawn in a colour that does not belong to jekcms.
+
+---
+
+## [2.136.4] - 2026-09-13  ·  _Patch_
+**The Turkish documentation now reads as Turkish, not as a translation**
+
+### Improved
+- The Turkish pages were rewritten as Turkish. They had been produced by translating the English pages sentence by sentence, and it showed: English puts the verb near the front of a sentence and Turkish puts it at the end, so a sentence that reads well in English arrives in Turkish with its verb fortieth in line and a dash-parenthesis wedged in before it. Every page was measured, the worst sentences were rewritten, and a few outright errors of idiom and agreement were corrected along the way. A check now runs before each release so the problem cannot creep back.
+
+### Fixed
+- The n8n setup page still advised creating a separate editor account and issuing the API key from it. The API Keys screen is admin-only and always issues the key to the administrator who is signed in, so that was not possible from the panel. Both language versions now say what the screen actually does.
+
+---
+
+## [2.136.3] - 2026-09-13  ·  _Patch_
+**The REST API is part of the free edition, and the licence screen now says so**
+
+### Fixed
+- The licence screen said your API access was switched off when it was not. On a free installation the REST API has always worked — nothing in the code ever refused a call because of the licence — but the *API Access* row on Admin → License showed it as unavailable. The row now reflects what actually happens, and the free edition officially includes the API, so the n8n and Zapier workflows shipped with jekcms run on a free site exactly as they do on a paid one.
+
+---
+
+## [2.136.2] - 2026-09-13  ·  _Patch_
+**The documentation now shows you the screen you are reading about**
+
+### Improved
+- Every documentation page now carries a real screenshot, in your language. All 38 pages were reworked: the English pages show the English panel and the Turkish pages show the Turkish one, and every image comes from a working install rather than a mock-up. Twenty pages — the API reference, theme guides, integrations and automation — were rewritten from the code itself, which turned up a number of places where the documentation described behaviour the product does not have. Those claims are gone and what is written now matches what the software does.
+- The offline copy in your installation package carries its images too. Until now the bundled documentation pointed at pictures that only existed on our website, so every screenshot in it was an empty box. The images now travel inside the package and the pages work with no internet connection at all.
+- Four controls that led nowhere have been fixed. The Automation Centre button on the bulk-planning screen pointed at a retired page; it now opens the Content Queue. The Content Queue's settings link pointed at a tab that does not exist; it now tells you which settings are needed. The "do not track logged-in users" option in the Google Console plugin was saved but never applied, so administrators were counting their own visits; it now works. And the MCP examples on the API Keys screen printed a Turkish placeholder on English panels.
+
+### Fixed
+- The breadcrumb trail started with an English "Dashboard" even when the rest of the panel was in Turkish. It now uses the same wording as the menu.
+- The licence activation screen switched itself to Turkish as it loaded, regardless of the panel language. It now opens in the language you set.
+- The setup wizard showed one step number on the card and a different one on the progress bar for a fresh install. Both now come from the same place.
+
+---
+
 ## [2.136.1] - 2026-09-13  ·  _Patch_
 **The indexability check now names the plugin that is hiding your site**
 
