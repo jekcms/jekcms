@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.142.3] - 2026-09-16  ·  _Patch_
+**Clearer “after payment” steps, and your checkout note travels with the order**
+
+### Improved
+- “What happens after payment” now reads as a timeline. Three numbered steps with a timing label each — right away, in 30 minutes, within one business day — so you know what to expect before you pay.
+- The note you leave at checkout reaches the team with the sale. Whatever you write in “Anything we should know?” is now in the sale notification e-mail as well as on the order page, so the person doing your installation sees it first.
+
+---
+
 ## [2.142.2] - 2026-09-16  ·  _Patch_
 **The checkout page keeps your language and reads more clearly**
 
