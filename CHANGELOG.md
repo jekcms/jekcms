@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.2] - 2026-09-17  ·  _Patch_
+**Affiliate theme rebuilt on the original ReviewPanel design**
+
+### Improved
+- The Affiliate theme now carries the full ReviewPanel design. Home page with product slider, headline block, category strip, latest-review cards, best-of lists, blog grid, newsletter box and the "How we review" process; product pages with the framed image header, store buttons, score, quick verdict box, key features table, pros and cons, specs, FAQ, final verdict and a sticky buy box; category pages with subcategory cards, sort bar and review cards; matching blog, author, search, legal and error pages. Light and dark mode, per-category accent colours and the full-screen mobile menu are all included.
+
+---
+
 ## [2.145.1] - 2026-09-16  ·  _Patch_
 **Footer columns pick any menu; newspaper footer shows the legal pages**
 
