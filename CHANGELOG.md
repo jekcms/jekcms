@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.143.0] - 2026-09-16  ·  _Minor_
+**Partner Program 2.0: share-link attribution, channel stats, commissions on renewals, in-panel agreement**
+
+### Added
+- Your share link now earns commission on its own. Anyone who arrives through jekcms.com/p/YOURCODE and pays within 30 days is credited to you, even if they never type the coupon.
+- Channel-tagged links and a 30-day click chart. Create a separate link for YouTube, Instagram, X, your blog or any custom tag; the panel shows clicks, sales and conversion per channel, plus a daily chart.
+- Renewals and upgrades earn commission too. A customer you referred stays yours: their licence renewals and plan upgrades are credited to you at the same rate. Installation, migration, hosting and care services stay fixed-price and outside the commission base.
+- Accept the Partner Program agreement in your panel. The full text is shown in the panel; one click records the version, date and IP, and a copy of the text is e-mailed to you. When the text changes, the panel asks again.
+
+### Improved
+- Partner commissions are calculated on the licence only. Services are left out of the commission base, in line with the promo-code rule.
+- Services are sold as their own products on the payment side. A service bought on its own is charged at its own list price under its own name on the invoice.
+- Partner Program Terms updated. Link attribution, coverage of renewals and upgrades, and the fixed-price rule for services are now spelled out in the terms.
+
+---
+
 ## [2.142.4] - 2026-09-16  ·  _Patch_
 **Promo codes at checkout — for licences only, never for services**
 
