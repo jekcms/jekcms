@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.142.0] - 2026-09-16  ·  _Minor_
+**Installation, migration, hosting and monthly care — added at checkout**
+
+### Added
+- Four services you can order with your licence. Installation on your own hosting ($49), installation with WordPress migration ($99), jekcms Hosting ($99 a year) and Monthly care ($49 a month). Each is done by the jekcms team; the pricing page explains what is included and how long it takes.
+- A checkout page that shows your order before payment. Buying a plan now opens a summary of your account and plan with the services listed beside it. Tick what you need, the total updates as you go, then continue to secure payment as before. Nothing is charged until you complete the payment.
+- Services you bought appear in your customer portal. A new Services page shows each one with its status — waiting, in progress, completed — and the next step. Your order confirmation e-mail lists them too, along with what happens next.
+- Existing customers can order a service on its own. No new licence is needed; the Services page in the portal takes you straight to payment.
+
+### Improved
+- Buying now asks you to sign in first. The Buy button opens the sign-in or sign-up window and brings you straight back to your order afterwards, so every order is tied to your account from the first step.
+
+---
+
 ## [2.141.4] - 2026-09-16  ·  _Patch_
 **The SEO watcher no longer raises an alarm every time you publish**
 
