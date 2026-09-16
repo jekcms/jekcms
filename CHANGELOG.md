@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.143.1] - 2026-09-16  ·  _Patch_
+**Lapsed licences keep full updates; free-key link on activation; settings history shows only your changes**
+
+### Improved
+- A lapsed licence keeps receiving full updates, theme updates included. Your premium theme keeps running after your licence lapses, so it now keeps getting its updates too instead of drifting away from the core. Plugins, AI and the customizer stay off until you renew; the licence page now shows where to renew and how quickly your rights return.
+- Free edition: the activation screen now says where to get your free key. Updates need a licence key; a free one comes from your jekcms.com account, and the link is right on the screen.
+- Settings history now shows only the changes you made. The system's own timestamps and version records used to fill the list with dozens of entries and carried an undo button that could roll back internal state. They are no longer recorded, listed or undoable; what remains is your own changes with a real undo.
+
+---
+
 ## [2.143.0] - 2026-09-16  ·  _Minor_
 **Partner Program 2.0: share-link attribution, channel stats, commissions on renewals, in-panel agreement**
 
