@@ -30,7 +30,7 @@ Installs on any PHP + MySQL hosting, one-time license.
   automatic internal linking, AVIF/WebP media pipeline
 - **Automation-ready** — full REST API + n8n webhook workflows for
   AI-assisted publishing (Gemini / GPT), plus JSON bulk import
-- **14 professional themes** — travel, recipes, health, finance, news, tech…
+- **15 professional themes** — travel, recipes, health, finance, news, tech…
   customizable from the admin panel
 - **Portable & yours** — installs on any PHP + MySQL hosting; your code and
   data live in a standard exportable database; existing WordPress content can
