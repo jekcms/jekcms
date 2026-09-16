@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.142.4] - 2026-09-16  ·  _Patch_
+**Promo codes at checkout — for licences only, never for services**
+
+### Added
+- Enter your promo code on the checkout page. The discount shows in the order summary before you pay, so the total you see is the total you are charged. Codes apply to the licence only; installation, migration, hosting and care services are always at list price.
+
+### Improved
+- Each service can have its own product on the payment side. A service bought on its own is charged as that product at its own price; a service bought together with a licence is added to the licence payment.
+
+---
+
 ## [2.142.3] - 2026-09-16  ·  _Patch_
 **Clearer “after payment” steps, and your checkout note travels with the order**
 
