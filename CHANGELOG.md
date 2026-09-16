@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.1] - 2026-09-16  ·  _Patch_
+**Footer columns pick any menu; newspaper footer shows the legal pages**
+
+### Improved
+- Footer columns can now show any menu you created. In Appearance → Footer, a menu column offers every menu from the Menus page, not only the ones assigned to a location, so a four-column footer can carry a different menu in each column.
+- The newspaper footer no longer hides the legal links. Privacy Policy, Terms of Service, Cookie Policy and similar pages were missing from the newspaper footer entirely; they now appear in the bottom legal row, and a link already shown in a column is not repeated there.
+
+---
+
 ## [2.145.0] - 2026-09-16  ·  _Minor_
 **Affiliate theme: product hero, scored cards, best-of lists, jump-to strip and sticky buy box**
 
