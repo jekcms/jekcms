@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.141.3] - 2026-09-16  ·  _Patch_
+**Online purchases now issue the one-year licence the pricing page describes**
+
+### Improved
+- Form attachments reject a few more script-type extensions on every setting, and pruned spam submissions take their attachments with them.
+
+### Fixed
+- A licence bought online was issued without an end date and with six months of support. The annual model applied only to licences created by hand; the checkout path still wrote the old open-ended licence. A licence bought online now carries its one-year term, and support runs for that same year, exactly as the pricing page says. Licences already issued are left as they are.
+- Renewal reminders could arrive twice in the same minute. The 30-day and 7-day reminders both matched a licence that had received neither, so a recently sold licence got both e-mails at once. The two windows no longer overlap, and a licence that lapsed long ago is no longer told today that it has just lapsed.
+- The pricing page footnote still described the old model. Under the plan cards it said the licence was permanent and updates free forever; the contact form's automatic reply spoke of six months of support. Both now describe the annual licence with support included.
+- Legal page section numbers were doubled. The generated privacy and terms texts already number their headings; the table of contents added its own number in front, producing “1. 1. Scope”. One number now.
+- A lapsed licence screen called your plan “Free”. When the term ends the server lowers the rights to the free tier, and the panel showed that tier name instead of the plan you bought. It now names your plan, so you know what you are renewing.
+
+---
+
 ## [2.141.2] - 2026-09-16  ·  _Patch_
 **Theme previews show the current image, at the right proportions**
 
