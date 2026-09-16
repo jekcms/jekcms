@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.143.2] - 2026-09-16  ·  _Patch_
+**No more "setting changed" banner after updates; page editor shows only fields in use**
+
+### Improved
+- The dashboard no longer shows a "1 setting changed in the last 15 minutes, undo?" banner after updates. The system's own flags were tripping it, so a site you never touched greeted you with a warning after every update. The banner is gone; settings history and undo live on their own page.
+- The page editor now lists only the fields your site actually uses. It used to offer 180 fields across the marketing pages, and 143 of them were read by nothing, so an edit there changed nothing on the site. Those fields are gone; what remains is exactly what the pages render.
+- Reports and the dashboard no longer break on installs without the social plugin or with an older newsletter table. The Reports page adapts to whichever subscriber timestamp column exists, and the social pipeline widget only links to the plugin when it is installed.
+
+---
+
 ## [2.143.1] - 2026-09-16  ·  _Patch_
 **Lapsed licences keep full updates; free-key link on activation; settings history shows only your changes**
 
