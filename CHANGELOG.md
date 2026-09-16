@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.141.4] - 2026-09-16  ·  _Patch_
+**The SEO watcher no longer raises an alarm every time you publish**
+
+### Fixed
+- Publishing a post could trigger a critical SEO alert. The watcher sampled your newest post, so each new post moved that sample to a different page and the two pages were compared as if one had changed into the other — a “canonical moved” alarm with nothing actually wrong. It now watches your most-read post and only ever compares a page with itself.
+- A growing sitemap was reported as a change. Every new post raised “sitemap 34 → 35”, and the same site-wide notice was repeated once per sampled page. The sitemap count now only counts when it drops by a meaningful amount, and site-wide checks are reported once.
+- The alert was hard to read and easy to lose. The panel strip printed the raw log line, and the “Review” link cleared the alert without ever showing its contents. The strip now says what changed in plain language, and the SEO Status page lists the full finding before dismissing it.
+- Older sites still described every page as “Welcome to our blog”. The fresh-install fix in 2.140.1 did not reach sites that were already running; that placeholder is now cleared on existing installs too, so pages fall back to the description you wrote.
+- The editor showed “Index, follow” for posts that were actually hidden from search. Sample posts are seeded as no-index so that identical text across thousands of sites is not treated as duplicate content, but the stored value did not match the editor’s options and the wrong choice appeared selected. The editor now reads the value correctly and says plainly when a post is hidden from search engines.
+
+---
+
 ## [2.141.3] - 2026-09-16  ·  _Patch_
 **Online purchases now issue the one-year licence the pricing page describes**
 
