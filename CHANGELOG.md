@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.144.0] - 2026-09-16  ·  _Minor_
+**Product Reviews plugin: scores, pros and cons, best-of lists, comparisons and tracked store buttons**
+
+### Added
+- Product Reviews plugin. Turn any post into a product review: score with breakdown, one-line verdict, who it is for, pros and cons, key features, spec table, FAQ and badges such as Editor's Choice. Store buttons carry your Amazon tag automatically, go through click-counted links when the Affiliate Links plugin is on, and every box prints the affiliate disclosure Amazon requires.
+- Best-of lists and comparison tables. Rank products into a "Best of 2026" list with badges and notes, or put two or three products side by side with their shared specs, scores, prices and buttons. Both are shortcodes you can drop into any post or page.
+- Reader star ratings and rich results. Readers rate a product in one click; the average feeds Product and Review structured data together with your editorial score, so reviews can show stars and prices in search results.
+
+---
+
 ## [2.143.2] - 2026-09-16  ·  _Patch_
 **No more "setting changed" banner after updates; page editor shows only fields in use**
 
