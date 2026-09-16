@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.3] - 2026-09-17  ·  _Patch_
+**Affiliate theme: modern home page with most-read and score board**
+
+### Improved
+- Affiliate theme home page redesigned. Latest reviews now sit in a bento grid with one large lead card and scored cards (rating badge, one-word verdict, stars, price and a "Check price" button); a new "Most read" section ranks the six most-viewed reviews with a numbered lead card and list; a "Highest scores" board shows the top-rated products with their badges; category cards, best-of lists and blog articles use the same modern card language, and every section has a consistent header with subtitle and "View all" link. All sections are toggled and ordered from the Layout Studio.
+
+### Fixed
+- Affiliate theme: blog articles rendered with a wide share column and a narrow text column; the article layout now keeps its 60px share rail and full-width text, and the author box shows the large avatar next to the bio.
+
+---
+
 ## [2.145.2] - 2026-09-17  ·  _Patch_
 **Affiliate theme rebuilt on the original ReviewPanel design**
 
