@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.0] - 2026-09-16  ·  _Minor_
+**Affiliate theme: product hero, scored cards, best-of lists, jump-to strip and sticky buy box**
+
+### Added
+- Affiliate theme — the 15th theme. Built for product review and affiliate sites: a product hero with score, quick verdict and store button, a top-rated grid with rank and score badges, best-of list cards, a sticky "Jump to" strip that follows the post's headings and product sections, and a sticky buy box in the sidebar. Warm pink and navy, DM Sans, sharp corners; every colour follows the customizer.
+- Accent colour per category. Post and category pages can take a fixed accent colour per category, automatically or from a slug-to-colour map in Appearance → Colours. Turn it off and every page uses the primary colour.
+- Product Reviews plugin works out of the box with the theme. Post cards show the score, the plugin's boxes take the theme's palette and corners, and the footer carries the affiliate disclosure from Product Reviews → Settings. Without the plugin the theme runs as a regular blog theme.
+
+---
+
 ## [2.144.0] - 2026-09-16  ·  _Minor_
 **Product Reviews plugin: scores, pros and cons, best-of lists, comparisons and tracked store buttons**
 
