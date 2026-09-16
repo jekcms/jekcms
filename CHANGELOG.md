@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.142.1] - 2026-09-16  ·  _Patch_
+**The Buy button works when you are signed in, and the service cards match the plan cards**
+
+### Improved
+- The service cards under the plans now use the same layout, type and price style as the plan cards, with a shorter, scannable list. Each card also offers a Telegram button when a group link is set in Settings.
+- The Add-on Services screen in the admin panel lists the catalog and the job queue in the standard table layout.
+
+### Fixed
+- Signed-in visitors could click Buy and nothing happened. The pricing page is served the same to everyone, so the button always tried to open the sign-up window — and for a signed-in visitor that window is not on the page. The button now goes straight to checkout when you are signed in and opens the sign-up window only when you are not.
+- Writing to us about a service now starts with the right subject. The contact form opens with Sales selected and a short message naming the service you clicked, so you do not choose it twice. The Enterprise card does the same.
+
+---
+
 ## [2.142.0] - 2026-09-16  ·  _Minor_
 **Installation, migration, hosting and monthly care — added at checkout**
 
