@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.142.2] - 2026-09-16  ·  _Patch_
+**The checkout page keeps your language and reads more clearly**
+
+### Improved
+- A clearer checkout. A step strip shows where you are (account, order, secure payment, licence), the plan card lists what is included, and the agreement box, the pay button with the live total, and the security notes now sit together in the order summary. A short “what happens after payment” list closes the summary.
+
+### Fixed
+- Coming from the Turkish pricing page, the checkout opened in English, and the TR button led to a missing page. The site header worked out the language from the address, and checkout addresses carry no language part. Checkout now follows your portal language, and the EN/TR buttons switch it in place.
+
+---
+
 ## [2.142.1] - 2026-09-16  ·  _Patch_
 **The Buy button works when you are signed in, and the service cards match the plan cards**
 
