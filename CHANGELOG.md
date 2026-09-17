@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.6] - 2026-09-17  ·  _Patch_
+**Affiliate theme: 3:4 product images, rebuilt related block and styled sidebar widgets**
+
+### Improved
+- Affiliate theme: product images are now 3:4 everywhere. Review cards, the product header and its gallery, the score board, the most-read list, related reviews, blog cards and the article cover image all use the same portrait ratio, so a grid no longer mixes square and landscape crops.
+- Related reviews rebuilt. The "You might also love" block now uses the same card design as the home page, with a score badge, verdict, rating and price, and falls back to article cards when there are no other products in the category.
+- Sidebar widgets are styled. The author card, table of contents, share card, recent posts, categories, tags and newsletter widgets all render as proper cards in this theme instead of unstyled text.
+- Author box and reaction bar redesigned. The author box sits flush in the article column with a solid accent avatar, and the reaction bar now renders inside the content column as a centred card instead of spanning the page.
+
+### Fixed
+- Affiliate theme: the product cards carried a comparison button that led nowhere, and the theme script printed debug output to the browser console. Both are gone.
+
+---
+
 ## [2.145.5] - 2026-09-17  ·  _Patch_
 **Affiliate theme: redesigned product review page**
 
