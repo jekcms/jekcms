@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.9] - 2026-09-17  ·  _Patch_
+**Product reviews pass the Rich Results Test**
+
+### Fixed
+- Product reviews were failing Google’s Rich Results Test. Every review page carried an offer block with no price, and Google rejects that: an offer has to state a price. The page was being judged as a merchant listing, which is the wrong category for a site that reviews products rather than selling them. Reviews now publish as product snippets, which is the category they belong in, and the star rating still shows. When you do enter a price, the offer is published in full with currency, validity date, condition and seller, so that path passes too.
+- The review score was being published twice, once as a self-awarded average. A page with no reader votes still claimed an average rating of one vote, which was the site rating itself. Search engines treat that as self-serving. The editorial score now travels as what it is, a signed review, and the average rating appears only once real readers have voted.
+- Product images were published as site-relative paths instead of full addresses, and only the main image was sent. Gallery images now go out too, as full addresses.
+- A review is now signed by its author. The writer’s name, the publication date, the last update and the verdict text are all published with the review, instead of an unnamed company byline.
+
+---
+
 ## [2.145.8] - 2026-09-17  ·  _Patch_
 **Affiliate theme: build the review page block by block**
 
