@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.11] - 2026-09-18  ·  _Patch_
+**Product sections were built twice, and an image-less product broke its page**
+
+### Improved
+- The Affiliate theme now tells you which plugins it needs. Activating it brings up the recommended plugins card with one-click activation and a line on what each one is for: without Product Reviews the posts are ordinary blog posts, and without Affiliate Links the store buttons are not counted and every visitor goes to the same store. The theme also lists where each homepage section pulls its content from.
+
+### Fixed
+- A product with no image took its own review page down. The save-for-later box asked for the product photo without checking that one exists, and the page answered with a server error instead of the review. Any product you had not uploaded an image for was affected. The box is now skipped when there is no image, and the page renders.
+- Every product section was being built twice. The Affiliate theme draws the product header, features, pros and cons, specifications and FAQ itself, and the Product Reviews plugin was adding its own copy of all of them underneath. The theme was hiding the copies with a styling rule, which had two costs: the duplicate text stayed in the page for search engines to read, and a shortcode you placed on purpose was hidden along with it. A theme can now declare that it draws these sections, and the plugin stops building them. Shortcodes you write yourself keep working.
+- The reader rating box appeared twice on product reviews, for the same reason.
+
+---
+
 ## [2.145.10] - 2026-09-18  ·  _Minor_
 **Each visitor to their own Amazon store, plus price history**
 
