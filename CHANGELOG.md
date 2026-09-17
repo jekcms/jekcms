@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.5] - 2026-09-17  ·  _Patch_
+**Affiliate theme: redesigned product review page**
+
+### Improved
+- Affiliate theme product review page redesigned. The header now pairs a square product shot with a gallery, a score badge and a card that holds the price and store buttons, next to the title, brand and model, the score with stars, the one-line verdict, the review meta and sharing. Below it an at-a-glance strip shows rating, who it is for, the key highlight and price, and the jump bar carries a buy button. Key features are numbered cards, pros and cons are colour-coded panels, specifications are a two-column grid, the FAQ is an accordion, and the final verdict is a dark panel with the score, per-criterion bars and the call to action. Product videos from YouTube or Vimeo now get their own section, and the sidebar card shows the product thumbnail, score, price, buy button and other stores.
+
+---
+
 ## [2.145.4] - 2026-09-17  ·  _Patch_
 **Affiliate theme: redesigned footer**
 
