@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.4] - 2026-09-17  ·  _Patch_
+**Affiliate theme: redesigned footer**
+
+### Improved
+- Affiliate theme footer redesigned. A navy footer with the brand block and social buttons on the left, four link columns with accent headings (categories show their review counts), a trust strip with review count, category count, average score and an "independent testing" note, the affiliate disclosure in its own labelled row, and a bottom bar with copyright, platform credit, light/dark switch and a back-to-top button. Fully responsive and styled for both light and dark mode.
+
+---
+
 ## [2.145.3] - 2026-09-17  ·  _Patch_
 **Affiliate theme: modern home page with most-read and score board**
 
