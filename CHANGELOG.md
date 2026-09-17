@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.10] - 2026-09-18  ·  _Minor_
+**Each visitor to their own Amazon store, plus price history**
+
+### Added
+- Every visitor now lands in their own country’s Amazon store. Someone reading your review from the UK goes to amazon.co.uk, someone from Turkey to amazon.com.tr, and each click is counted with that country’s own tag. Before this, all of that traffic went to one store and earned nothing outside it. The decision is made at the moment of the click, so it works even though the page itself is cached. It only ever sends a visitor to a store you entered a tag for, because a click sent to an untagged store earns nothing.
+- Tags for all twenty-one Amazon marketplaces. The settings screen offered five; the rest could not be filled in even though the product supported them. Poland, Brazil, Singapore, Saudi Arabia, Belgium and Egypt were added as well.
+- Price history, with the lowest price you recorded. Every time you update a product’s price it is recorded, and the review can now show that history as a chart with the lowest and highest figures. When the current price is the lowest one yet, the card says so. The chart is drawn on the page itself, with no external library and no script.
+- Fill a product in from its Amazon address. Paste the address or the ASIN and the product identifier, the store link and the cover image arrive on their own. The name, brand and price stay with you: Amazon does not allow reading its page content, so nothing is invented.
+
+### Fixed
+- The price history table had been filled in on every save since the feature shipped, and nothing ever read it. The recorded prices are now shown.
+
+---
+
 ## [2.145.9] - 2026-09-17  ·  _Patch_
 **Product reviews pass the Rich Results Test**
 
