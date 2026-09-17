@@ -8,6 +8,27 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.8] - 2026-09-17  ·  _Patch_
+**Affiliate theme: build the review page block by block**
+
+### Added
+- The product review page can be built block by block. Customize → Post page now carries a switch and a design picker for every part of a review: the quick verdict box, the thumbnail strip, key features, pros and cons, specifications, the FAQ, the video, the final verdict panel with its score bars, the reader rating and the save-for-later box. Each design picker shows a small preview of what you are choosing, so nothing has to be saved to find out what it looks like.
+- Quick verdict box. A review can open with a summary card that lists the score, who the product suits, the standout feature and the price range, so a reader who only wants the answer gets it in the first screen. It can also run as a full-width strip, or be switched off.
+- Save-for-later box. An invitation under the article to pin the review to a Pinterest board, in a wide or a narrow design. It appears on blog posts as well as reviews.
+- Buy card contents are now optional. Customize → Sidebar can switch the score, the price, the share buttons and the newsletter form in the sticky buy card on and off separately.
+- The headline no longer has an empty half. On the home page the category cards now sit beside the headline as a two-column tile set, each in its category colour, instead of running as a separate strip underneath. A switch in Customize → Homepage puts them back in the strip.
+- Homepage spacing and motion. The space between homepage sections is now a slider, the review counts on category cards can be hidden, and the lift that cards make on hover can be switched off for a calmer page.
+
+### Improved
+- Author box rebuilt. It now shows the writer's job title, the subjects they actually cover on the site and their social profiles as icon buttons, next to a full-size portrait. The job title was being read from the database but never printed, so every author box was missing it.
+
+### Fixed
+- Affiliate theme: the site icon, the web app manifest and the structured data block were missing from this theme's pages. The tab showed no icon and search engines received no JSON-LD. The other fourteen themes already printed all three.
+- Affiliate theme: hovering a key-feature card cut off its top edge, because the grid around the cards was clipping anything that moved outside it.
+- Affiliate theme: an opened FAQ answer sat flush against its question with no space between them.
+
+---
+
 ## [2.145.7] - 2026-09-17  ·  _Patch_
 **New positioning: a next-generation, smart CMS**
 
