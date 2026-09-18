@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.16] - 2026-09-18  ·  _Patch_
+**Confirmed price alerts, faster first paint and titles that fit**
+
+### Improved
+- Round-up pages no longer claim to be someone else’s review. Putting a best-of list or a comparison inside an article printed full review markup for every product listed, each pointing at a different address — the page was telling search engines it was the review page for products it only mentioned. Those pages now publish a proper list instead, with each entry linking to its own review.
+- Fonts no longer hold up the page. The font stylesheet was loaded in a way that blocks drawing, so when Google’s font service was slow or unreachable the page waited for it: we measured a page taking 15 seconds to show while the server itself answered in half a second. Text now appears immediately and the font swaps in when it arrives.
+- Long titles keep their words instead of the site name. Search results cut the title at about sixty characters, and “| Site name” was always appended — on a long headline the suffix was never visible anyway but it ate the space. The site name is now added only when it fits; search engines still read it from the page’s structured data.
+
+### Security
+- Price alerts now require confirmation. The form accepted any address, so someone could have put another person’s email on a product without their knowledge. A confirmation link is sent first and alerts go only to addresses that clicked it; requests nobody confirms are deleted after seven days.
+
+---
+
 ## [2.145.15] - 2026-09-18  ·  _Patch_
 **A fresher update date for reviews, and a readable robots.txt notice**
 
