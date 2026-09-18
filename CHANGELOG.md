@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.14] - 2026-09-18  ·  _Patch_
+**Clickable cards, a sectioned product form and a warning for posts hidden from search**
+
+### Improved
+- The product editing screen is a workspace now. Sixty-five fields ran down one long column and the width was capped, which left the screen half empty and the fields cramped. The form now uses the full width and is split into named sections, each with a line explaining what belongs there; a sticky list on the right jumps to any section, marks the one you are reading, shows how many fields each one holds, and keeps Save within reach. Ctrl+S saves.
+- Questions and answers are readable by answer engines. The FAQ on a review page is now published as structured data when it is visible on the page. Google has limited FAQ rich results to official and health sites since 2023, so this is not about a search result box: question and answer pairs are the form AI answers quote most readily.
+- The author archive report says what you are missing. It only said that author archives are noindex by default. It now also says how many of your authors pass the threshold, and why the page matters on a review site: a reader and a search engine both want to see who tested the product.
+
+### Fixed
+- Card bodies still did not open the article. The overlay that was supposed to make the whole card clickable sat on the heading rather than on the heading’s link, so it covered the card without being a link: it swallowed the click and disabled the cover photo’s own link underneath. Blog cards, review cards, score cards and best-of cards now open from anywhere on the card.
+- The home page carried two H1 headings. The site name in the header became an H1 on the home page while the headline section printed one as well, so the page’s main heading announced the brand instead of the subject. The site name is now an H1 only when the headline section is absent, so the page always has exactly one.
+- Nine published guides were hidden from Google. Sample content ships marked “noindex” on purpose; when those posts are turned into real articles the mark stays behind and nothing says so. The SEO report now lists every published post that carries it, with a link to each.
+- Affiliate redirects were open to crawlers. Every store button goes through a counted redirect; those addresses are now closed in robots.txt, so crawl budget is spent on your pages rather than on redirects.
+- The affiliate disclosure was only in the footer. On a review page the first store button appears long before it, so a reader could click without ever being told the link earns a commission. A single line now sits under the buy buttons, and it can be switched off in the customiser if you disclose elsewhere.
+- Footer links to your legal pages went through a redirect. Two parts of the system disagreed about the canonical address of a privacy or terms page when you have not written your own: the router served one address and the footer linked to another, so every one of those links took a 301. Both now read the same list.
+
+---
+
 ## [2.145.13] - 2026-09-18  ·  _Patch_
 **Calmer blocks, clickable cards, a visible comment button and a rebuilt product form**
 
