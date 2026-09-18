@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.13] - 2026-09-18  ·  _Patch_
+**Calmer blocks, clickable cards, a visible comment button and a rebuilt product form**
+
+### Improved
+- The review page blocks are calmer. The reaction bar, the author card, the price history and the price alert each had a coloured stripe on top and a frame on all four sides. That stacking of outlined boxes is the look of a generated page, so the stripes are gone and the blocks are separated by space and a single hairline instead.
+- The product editing form was rebuilt. Sixty-five fields sat in one ragged column with section headings stuck to the hint above them. Fields are now in even columns, each section has room and a rule above it, repeated rows read as numbered cards, and the Save button follows you down the page.
+- The Model field says what it wants. It was being filled with variant details such as a size, so it now asks for the manufacturer’s model number and points variant details to the Specifications section.
+- Store buttons name the store. “Check best price” read like a link to a comparison site; the button now says “Buy on Amazon”, or whichever store the link actually goes to.
+- How we review products, rewritten. The section claimed hands-on testing over extended periods and counted “products tested”. That is not what this kind of site does, so the four steps now describe the real process and the numbers say what they actually count.
+
+### Fixed
+- Cards in the highest-scores block only responded on the title. A reader clicking the product photo got nothing. The photo and the whole card now open the review, and the same was done for the best-of list cards.
+- The Post Comment button was invisible. It had no styling, so it rendered as plain black text on the page background and did not look like a button at all.
+- The share label sat above its buttons instead of beside them, because a bottom margin left over from another layout pushed it up.
+- The slider timer bar moved in visible steps. It animated its width across 34 pixels, which reads as stuttering; it now animates smoothly and respects the reduced-motion setting.
+- Blog cards on the home page had no real cover photos, only generated purple gradients. Every guide now carries a photograph of the products it is about.
+
+---
+
 ## [2.145.12] - 2026-09-18  ·  _Minor_
 **Tell me when the price drops**
 
