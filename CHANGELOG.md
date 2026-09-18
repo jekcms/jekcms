@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.17] - 2026-09-18  ·  _Patch_
+**Internal links now use anchor text that means something**
+
+### Fixed
+- Automatic internal links sometimes used meaningless anchor text. Phrases were taken from the whole title, including the sentence after the colon, so a link could read “people buy” or “stop thinking” and point at a product review. The title before the colon names the subject; the part after it is a sentence about it, and sentences make poor links. Phrases now come from the subject, so anchors read like “Apple Watch” or “air fryer”. Measured on a 39-post site: four of seventeen links were of the bad kind.
+
+---
+
 ## [2.145.16] - 2026-09-18  ·  _Patch_
 **Confirmed price alerts, faster first paint and titles that fit**
 
