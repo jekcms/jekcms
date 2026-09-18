@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.12] - 2026-09-18  ·  _Minor_
+**Tell me when the price drops**
+
+### Added
+- Readers can ask to be told when a price drops. A short form sits on the product page next to the price history: the reader leaves an email address, and when you next save that product at a lower price a single email goes out with the old price, the new one and a link back to your review. Every email carries a one-click unsubscribe link, and clicking it a second time says the alerts are already off rather than warning about a broken link.
+- It only ever writes when the price really falls. Raising a price notifies nobody, and a reader who signed up at a lower figure is not emailed about a price above it. Nobody receives the same drop twice.
+- Sending does not hold up your save. A drop marks everyone waiting in one step; the emails then go out in the background, twenty-five at a time, without you setting up a scheduled task. Where the newsletter plugin is installed its own delivery settings are used.
+- The form never appears on a product without a price, because there would be nothing to promise. It can also be switched off for the whole site under Product Reviews, or per theme under Customize.
+
+---
+
 ## [2.145.11] - 2026-09-18  ·  _Patch_
 **Product sections were built twice, and an image-less product broke its page**
 
