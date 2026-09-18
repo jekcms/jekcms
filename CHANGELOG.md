@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.15] - 2026-09-18  ·  _Patch_
+**A fresher update date for reviews, and a readable robots.txt notice**
+
+### Fixed
+- Editing a product did not refresh the review’s update date. Product details live apart from the article, so changing a price, a specification or a question changed what the page shows while search engines were still told the page had not been touched since the article itself was last saved. The date now follows whichever was edited last.
+- The SEO watch could not show what changed in robots.txt. It printed the before and after values, but robots.txt repeats the same rules for every crawler it names, so the part that fitted on screen read “allow: / | allow: / | allow: /” on both sides — identical, and no help at all. The notice now names the rules that were added or removed.
+
+---
+
 ## [2.145.14] - 2026-09-18  ·  _Patch_
 **Clickable cards, a sectioned product form and a warning for posts hidden from search**
 
