@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.18] - 2026-09-18  ·  _Patch_
+**List pages do far less work to draw the same screen**
+
+### Improved
+- List pages now run close to half the database queries. A list of posts asked the database about each card separately — this card’s author, this card’s categories, this card’s reaction counts — so a twenty-two card home page could run seventy-nine queries, most of them fetching the same few authors over and over. Lists now ask once for everything the page needs. Measured on identical content: the Personal theme’s home page went from 79 queries to 40, Entertainment from 82 to 50. Nothing on the page changes; it simply takes less work to draw.
+- The author’s title now appears on the Personal and Trends themes. Both themes carried their own copy of the author lookup and neither copy returned the job title, so what you typed into the profile page never reached the author card. There is now a single lookup for the whole product, and it returns every field.
+
+### Fixed
+- A setting saved while a page is being built is now seen by the rest of that page. Settings are read from the database once per page load and kept in memory for speed. Saving one wrote to the database but left that in-memory copy untouched, so any step that saved a value and then read it back in the same page still saw the old one — no error, no warning, the value simply appeared not to have been saved. Activating a theme had the same shape: the remainder of that request kept using the previous theme’s layout. Both the settings and the active theme now refresh the moment they change.
+- Best-of lists no longer link to posts you kept private. The affiliate theme’s list section looked up a product’s review page by id and checked only that it was published, missing the visibility filter every other list query applies — so a review set to private or written in another site language could surface as a card on the home page.
+- Two image frames in the affiliate theme could collapse. The card image is a link, and a link is inline by default, which makes the fixed aspect ratio have no effect: the frame did not reserve its space, so the layout could jump while images loaded. The score table and article cards now declare the frame properly.
+
+---
+
 ## [2.145.17] - 2026-09-18  ·  _Patch_
 **Internal links now use anchor text that means something**
 
