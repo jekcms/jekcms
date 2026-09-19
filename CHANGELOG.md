@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.22] - 2026-09-19  ·  _Patch_
+**Pin hashtags are terms again, not squashed headlines**
+
+### Fixed
+- Pinterest pins no longer carry a hashtag made out of the whole headline. When a post had no tags of its own, the pin description fell back to the post’s focus keyword and title — both of which are sentences. Spaces are not allowed in a hashtag, so they were pressed into one word and the pin went out with something like `#furminatordesheddingtoolreview`: thirty characters nobody has ever typed into a search box. The fallback now proposes short terms only — the product’s brand and the post’s categories — and anything longer than three words is dropped rather than mashed. Pins also carry at most three hashtags instead of eight, because a wall of tags reads as spam on Pinterest.
+
+---
+
 ## [2.145.21] - 2026-09-19  ·  _Patch_
 **The end-of-article pin block fits the page**
 
