@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.20] - 2026-09-19  ·  _Patch_
+**Images carry their own alt text, and the pin button saves the right picture**
+
+### Added
+- Affiliate theme: a “Pin this” block at the end of an article. A vertical 2:3 image with the article’s own sentence already written into the pin description, so a reader who saves it does not land on an empty description field. The product photographs on the page are marked as not pinnable, so the save button can no longer pick the wrong one.
+
+### Improved
+- Every image can now carry its own alt text, and the site uses it. The media library has had an alt text field for a long time, but the themes ignored it: a featured image, a product photo and a related-article thumbnail on the same page all printed the article title. For a reader using a screen reader that is three images described identically, and for Google Images it is three pictures with nothing to tell them apart. Alt text is now read from the library entry, and the title is only the fallback when the entry has none. Nothing to switch on — fill in the alt text on an image and every place that image appears starts using it.
+- Social preview images describe the picture, not the headline. The `og:image:alt` tag repeated the post title, which told a reader who could not see the image nothing they were not already reading next to it. It now uses the image’s own alt text. `twitter:image:alt` was never sent at all and now is.
+
+### Fixed
+- “Save to Pinterest” now saves the image you designed for it. On a product review the save button picked up the plain product photograph on its white background, because that was the image sitting next to the button. Pinned to a board it became an unreadable square. The button now saves the article’s featured image, and the box that previews it is shaped 2:3 — the proportion Pinterest actually shows — instead of 3:4.
+
+---
+
 ## [2.145.19] - 2026-09-19  ·  _Patch_
 **Your affiliate tag is read from settings, not baked into old links**
 
