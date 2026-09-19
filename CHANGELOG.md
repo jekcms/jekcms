@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.19] - 2026-09-19  ·  _Patch_
+**Your affiliate tag is read from settings, not baked into old links**
+
+### Fixed
+- Changing your affiliate tag now applies to links that already exist. The tag was written into each store link at the moment the product was saved, and only a save on the plugin’s settings screen refreshed those links. So if the tag changed any other way — a new Amazon account, a restored backup, an import, a change made outside the settings form — every link kept pointing at the old tag. Nothing looked broken: the page worked, the redirect worked, and the sale was simply credited to an account that no longer existed. The tag is now read from your settings at the moment a visitor clicks, so the current tag always wins. A marketplace you have no tag for is left untouched, because sending a visitor there with someone else’s tag earns nothing.
+
+---
+
 ## [2.145.18] - 2026-09-18  ·  _Patch_
 **List pages do far less work to draw the same screen**
 
