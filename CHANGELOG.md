@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.24] - 2026-09-19  ·  _Patch_
+**Hashnode connects for real**
+
+### Fixed
+- Hashnode can now actually be connected. It was listed as a channel in the previous release but never reached the code that publishes: a platform has to be declared in three places, and one of them was missed, so the connection simply returned nothing. All three now agree, and the release gate checks that they keep agreeing — a channel that is advertised but silently does nothing is worse than one that is not offered at all.
+
+---
+
 ## [2.145.23] - 2026-09-19  ·  _Minor_
 **Hashtags on every channel, and Hashnode joins the list**
 
