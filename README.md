@@ -53,7 +53,7 @@ plugins to buy, install or keep compatible:
   notifications** (self-hosted VAPID, no third-party service), **Form Builder**,
   **Digital Downloads** (sell files or lead magnets), **Audience / CRM** (unify
   subscribers, form leads, buyers & commenters), **A/B Tests** (headline & CTA
-  experiments), Social Publisher (22 networks), ZeroTrack privacy analytics
+  experiments), Social Publisher (23 networks), ZeroTrack privacy analytics
 - **Security & ops** — security center/WAF, TOTP 2FA, daily Smart Backup with
   one-click restore, signature-verified auto-updates, Cloudflare setup wizard
 
