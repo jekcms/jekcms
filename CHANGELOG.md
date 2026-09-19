@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.25] - 2026-09-19  ·  _Patch_
+**The English admin speaks English**
+
+### Improved
+- Social connection fields no longer spill out of their card. In the narrow channel cards the App ID and secret boxes could not shrink below their default width, so they ran past the card edge.
+
+### Fixed
+- Turkish no longer shows up in the English admin. A number of screens still printed Turkish whatever language you had chosen: the billing details page in full, ticket status labels, the legal page generator link, a couple of buttons and one screen-reader label. They now follow the panel language. Our own leak detector had missed them because it only looked for letters unique to Turkish, and a word like “kaydet” has none — it now also checks words visible on screen that are Turkish without those letters.
+- The error and maintenance pages pick one language instead of printing two. When the database is unreachable the site cannot read its own language setting, so these pages used to print an English paragraph followed by a Turkish one. They now choose: the site language when it can be read, otherwise the visitor’s browser language, otherwise English — and the page’s `lang` attribute finally matches what is written on it.
+
+---
+
 ## [2.145.24] - 2026-09-19  ·  _Patch_
 **Hashnode connects for real**
 
