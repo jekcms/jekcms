@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.23] - 2026-09-19  ·  _Minor_
+**Hashtags on every channel, and Hashnode joins the list**
+
+### Added
+- Hashnode is now available as a publishing channel. The full article is syndicated with a canonical link pointing back to your own site, so search engines still treat you as the original source. Connect it with a personal access token and your publication address under Social → Connections.
+
+### Improved
+- Every social post now goes out with hashtags, not just Pinterest ones. A post with no tags of its own used to reach Pinterest with a made-up hashtag and reach every other network with none at all. There is now one rule for all of them: the post’s own tags come first, then the product’s brand, then its category, aiming for three to five tags. Nothing is invented — if those sources run out, the post simply goes out with fewer. A new Default hashtags box under Social settings lets you supply a short list that tops up what the post cannot fill.
+- Each network gets the number of hashtags it actually wants. Five was applied everywhere. Reddit, Discord, Tumblr and Dev.to now get none in the body, because a hashtag there either does nothing or means something else entirely (in Discord it is a channel link, and Tumblr and Dev.to have their own tag field we were already filling). Pinterest, X and Bluesky get three, where the character budget is tight or a wall of tags reads as spam. Mastodon, LinkedIn, Instagram, Threads and the rest get up to five.
+
+---
+
 ## [2.145.22] - 2026-09-19  ·  _Patch_
 **Pin hashtags are terms again, not squashed headlines**
 
