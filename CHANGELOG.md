@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.21] - 2026-09-19  ·  _Patch_
+**The end-of-article pin block fits the page**
+
+### Fixed
+- Affiliate theme: the “Pin this” block at the end of an article now sits inside the page, not across it. The block was printed without the wrapper every other full-width section uses, so it ran to the edge of the browser window while its text stayed pinned to the left, leaving a wide empty gap on the right. It also borrowed the styling of the small in-article save box, which was drawn for the narrow article column. It now has its own layout — image, text and button across three columns — and folds down sensibly on a laptop and a phone.
+
+---
+
 ## [2.145.20] - 2026-09-19  ·  _Patch_
 **Images carry their own alt text, and the pin button saves the right picture**
 
