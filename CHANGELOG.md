@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.26] - 2026-09-20  ·  _Patch_
+**The channel card's dropdown stays inside the card**
+
+### Improved
+- The Pinterest mode selector fits its card. The two options spelled out when to use each one — “Sandbox (test — before Standard approval)” — which ran past the edge of the narrow channel card and squeezed the dropdown arrow off the end. They now read Test (sandbox) and Live (production); the explanation already sits in the setup notes above, where there is room for it.
+
+---
+
 ## [2.145.25] - 2026-09-19  ·  _Patch_
 **The English admin speaks English**
 
