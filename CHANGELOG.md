@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.28] - 2026-09-20  ·  _Minor_
+**What owners report, and a tidier product header**
+
+### Added
+- A new “What owners report” section on product reviews. A review page tells people what a product does; it rarely tells them what living with it is like after a few months. This field holds three to five sentences on what long-term owners consistently say — the complaint that keeps coming back, the workaround everyone finds, the thing that surprises people. It appears after the verdict, and it is labelled as a summary of owner feedback, not as a test we ran. Write it in your own words: copying review text from a shop breaks that shop’s terms and copied text earns nothing in search.
+
+### Fixed
+- Affiliate theme: the score line is aligned again. The label under the stars carried a divider and an indent left over from an older layout, where it sat beside the score rather than below it. That left a stray vertical line and pushed the text out of line with the stars.
+- Affiliate theme: the product header no longer leaves a tall gap under the image. The byline and share row now sit under the product photo instead of at the bottom of the much longer right-hand column, so the two sides finish closer together.
+- Affiliate theme: the “Pin this” block moved up to just after the reader rating. It used to sit below the related reviews, by which point the reader had already moved on.
+
+---
+
 ## [2.145.27] - 2026-09-20  ·  _Patch_
 **Two admin banners that would not go away**
 
