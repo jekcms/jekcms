@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.145.27] - 2026-09-20  ·  _Patch_
+**Two admin banners that would not go away**
+
+### Improved
+- “Sample content is installed” no longer forces you to delete it. The only button on that strip removed the posts, so anyone who had rewritten the sample articles and made them their own was stuck choosing between deleting their work and seeing the notice on every page. There is now a second button that keeps everything and simply stops the reminder. The non-destructive choice comes first, and the wording no longer assumes you want the content gone.
+
+### Fixed
+- The SEO watch stops talking once the change has settled. Its notice sat at the top of every admin page until you dismissed it by hand — fixing the thing it reported, or putting it back, changed nothing, because a clean measurement never cleared the old notice. From now on, a measurement that finds nothing changed clears it. The history stays in the system log; only the banner goes quiet. A run that could not reach the site at all does not count as clean, so a network problem cannot silence a real warning.
+
+---
+
 ## [2.145.26] - 2026-09-20  ·  _Patch_
 **The channel card's dropdown stays inside the card**
 
