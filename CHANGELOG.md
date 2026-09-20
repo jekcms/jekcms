@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.146.0] - 2026-09-20  ·  _Minor_
+
+### Added
+- Affiliate programs: set your tag once, every link gets it. Until now the tag was an Amazon-only field buried in Product Reviews settings. If you worked with anything else — a local marketplace, a network, a shop’s own scheme — you pasted a tagged address by hand for every single product. Now you define the program on the Affiliate Links screen: the store domain, and either the tag it adds to the link or the redirect address your network gave you. From then on every link to that domain picks it up automatically, including the buy buttons on product reviews. Amazon is preconfigured with its 21 marketplaces, and a tag you already had is moved across on the first visit — nothing to re-enter.
+
+### Changed
+- Store buttons other than Amazon are tagged too. Previously only Amazon addresses were stamped; a link to any other shop went out exactly as you pasted it. Now any address that matches a program you defined is tagged on its way out.
+- The link list says where each link came from. Links created from product reviews sat in the same list as the ones you added by hand, which read as a second, separate product inventory. Each row now names its product and links straight to it.
+- Product Reviews no longer keeps a second tag field. With Affiliate Links switched on, the tag boxes in Product Reviews settings became a place you could type into without effect. They are replaced by the tags in force and a link to the program screen.
+
+---
+
 ## [2.145.28] - 2026-09-20  ·  _Minor_
 **What owners report, and a tidier product header**
 
