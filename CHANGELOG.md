@@ -8,6 +8,35 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.147.1] - 2026-09-23  ·  _Patch_
+
+### Fixed
+- A malformed search link no longer takes the search page down. A link such as `/search?q[]=x` sends the search term as a list instead of text. Every theme expected text, so the page answered with a server error. Bots probe addresses like this all the time, which filled the error log and showed search engines a broken page. Values that must be a single piece of text (search, page number, sort order and a few others) are now checked before any page code runs; a list in their place is simply ignored and the page opens normally. The admin panel is not affected.
+
+---
+
+## [2.147.0] - 2026-09-20  ·  _Minor_
+
+### Added
+- Forgot your password? Now there is a way back in. The sign-in screen carries a recovery link: enter the account email and a link arrives that is valid for one hour and works only once. Until now there was no way back at all — someone who forgot the admin password had to edit the database by hand, and with two-step verification switched on they were locked out for good. The reset link never switches off an authenticator, because recovery must not become the way around a second factor. Requesting a link shows the same confirmation whether or not the address belongs to an account, so the form cannot be used to find out who is registered on your site. Setting a new password also signs out the “remember me” sessions on other devices. If the site cannot send email yet, the screen says so up front instead of letting you wait for a message that will never arrive.
+
+### Fixed
+- Emails now speak your site’s language. Every message the CMS sends — password reset, account activation, welcome, order, invoice, support ticket — was written in Turkish no matter what language the site ran in, while the licence email was English-only in the other direction. Readers of an English site received Turkish instructions they could not follow. Subjects and bodies are now written in both languages and picked to match the recipient, and the diagnostics on the mail test screen follow the same rule.
+- The sign-in screen no longer prints the version number. Anyone who could load the page — no account needed — could read exactly which release a site was on. After a security release that turns the open internet into a list of which installs are still behind. The version stays where it is useful: on the dashboard and the Updates screen, once you are signed in.
+
+---
+
+## [2.146.1] - 2026-09-20  ·  _Patch_
+
+### Improved
+- Setting up a program shows you the result before you save. As you type the tag or the network address, a sample link appears underneath showing exactly how your links will go out. The link form tells you whether the address you pasted matches a program and where the visitor will actually be sent, and the link list marks every tagged link with its program. Pasting a full address with a path into the domain field now works too.
+
+### Fixed
+- Links you add by hand now pick up your program tag too. The programs feature promised that every link to a store domain gets the tag, but only the buy buttons on product reviews did. A link you added yourself, or a plain store address inside a post, went out untagged and the sale was never credited to you. The tag is now applied at the moment of redirect, and to plain store links inside your posts, so every link honours the program you defined.
+- Saving Product Reviews settings no longer wipes your Amazon tag. With Affiliate Links switched on, the settings form hides the old tag boxes. Saving that form still wrote the missing boxes back as empty, so a tag that had not been moved to a program yet was lost. The old tag is now left untouched, and the move to programs also runs on any admin visit rather than only when you open the Affiliate Links screen.
+
+---
+
 ## [2.146.0] - 2026-09-20  ·  _Minor_
 
 ### Added
