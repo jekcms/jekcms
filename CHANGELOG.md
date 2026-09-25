@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.148.1] - 2026-09-25  ·  _Patch_
+
+### Improved
+- Every plugin has its own menu item again. Plugin pages were folded into tabs at the top of a shared page, so an installed plugin such as AdSense Readiness was hard to find. Each plugin now sits in the menu under its own name. Only closely related core pages, such as Categories and Tags, still share a menu item with tabs.
+- A clearer Comments screen. Each comment shows who wrote it, when, on which post and, for replies, which comment it answers. Pending and spam comments carry a clear label, the spam score appears only when it matters, and the actions are proper buttons. Replying to a pending comment approves it, so your reply never sits under a hidden comment. Click a post title to see only that post's comments.
+- A tidier Media Library. Every file card now has the same shape, with the name, type, size and dimensions under the thumbnail, so the grid no longer leaves gaps. The list view, which was broken, now shows one clean row per file with its thumbnail, details, date and actions. The page header is a single summary line that points out images missing alt text.
+- AI images and voice-overs follow the newest model. The AI Images and Social Studio voice-over settings used to keep the model name they were installed with. They now follow the built-in model list, so an update that moves to a newer model reaches them too; a model you picked yourself stays as it is.
+- Money Pages counts cleaner. The same visitor clicking the same link again within 30 minutes counts once, and clicks on an A/B test goal button now appear in the report as well.
+
+### Fixed
+- Long post titles are shown in full. Posts created through the content API or an import could carry a copy of the title cut at 70 characters, so the browser tab and the search result ended mid-word. The full title is used again, and new posts no longer store the cut copy.
+- Every site has a share image. A site whose logo exists only as SVG and that has no default share image was shared on social networks as a bare link. It now gets a 1200x630 card with the site name and tagline, drawn once by the built-in card maker. Choosing your own share image replaces it.
+- Product ratings stay honest. A visitor could add a new star rating to a product every day; now each visitor has one rating and can only change it. Ratings and price alerts are accepted only from your own pages.
+- Post votes on the Crypto theme. Vote messages follow the site language, votes are accepted only for published posts and from your own pages, and the visitor's IP address is no longer stored.
+- Download e-mails in your site's language. The buyer's download e-mail and the new-order notice were half Turkish, half English. File names with accented letters now download with the right name.
+
+---
+
 ## [2.148.0] - 2026-09-24  ·  _Minor_
 
 ### Added
