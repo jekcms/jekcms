@@ -8,6 +8,27 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.148.0] - 2026-09-24  ·  _Minor_
+
+### Added
+- Money Pages: see which posts actually earn. A new tab under Analytics counts affiliate link clicks, newsletter and push signups, form submissions and downloads, and ties each one to the page it happened on and the page the visitor entered the site from, together with the source that sent them. No cookies are used. When Google Console is connected, each page also shows its average Google position, and the report points out the quickest win: a page that already converts but sits between positions 4 and 20. It also names the most-read post that brings nothing yet, so you know where a product link or a newsletter call belongs.
+
+### Improved
+- A calmer admin panel. Every page now opens with a one-line title and a one-line description. The explanations that sat under each field as two or three lines of text moved into a small ? next to the field name: hover or tap it when you need it, and the form stays readable when you do not.
+- A shorter menu. Pages that belong together now share one menu item with tabs at the top: Analytics holds ZeroTrack, Google Console and AI Visibility; Ads holds AdSense readiness; Categories holds Tags; Import holds Backups. Recipe cards, quizzes, stories and other content types sit in their own group that starts folded. Nothing was removed; every page is still one click away and in the Ctrl+K search.
+- A dashboard that starts simple. A new account sees the essentials first. Charts, status cards and repeat lists are one click away under Customize this screen, and your own choice always wins.
+- Warnings where they matter. The update, license and SEO signal notices no longer stack on top of every page; each shows on the page it concerns.
+- Tidier forms. The affiliate link form lines fields up in logical rows and uses the same on/off switch as the rest of the panel. Membership and payment settings moved out of Site Information into their own card. In the post editor, Structured Data and Editorial Details start folded until you use them.
+
+### Fixed
+- Dark mode no longer shows white boxes. The revenue settings and A/B test cards on the Ads page, and the notices on the Horoscope page, kept light colours in dark mode.
+- Pages no longer jump while loading. The Customize and Import pages rebuilt their layout a moment after opening, pushing the content down; they now appear in place.
+- The menu highlights the right page. On several plugin pages the menu marked Dashboard as the current page and the breadcrumb showed only Dashboard.
+- Ad slots show their status in your language. The badge read Disabled in English on Turkish sites.
+- The automatic stories bubble uses your site’s language. On some new Turkish sites it was created as Latest Posts; it now shows Son İçerikler unless you renamed it.
+
+---
+
 ## [2.147.1] - 2026-09-23  ·  _Patch_
 
 ### Fixed
