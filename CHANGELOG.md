@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.148.2] - 2026-09-25  ·  _Patch_
+
+### Improved
+- A maintenance page that looks like your site. The maintenance and coming-soon page now uses your logo, your theme's heading and body fonts and its colours, with a clear status label, the expected return time, and your social links and contact address in the footer. The dark, light and brand-colour styles are still available under Customize.
+
+### Fixed
+- Posts prepared on a local computer no longer point Google back to it. Content built on a local copy and moved to the live site could keep a canonical address such as http://localhost/..., which tells search engines the real page lives on a machine they cannot reach. Such addresses are now ignored and every page names itself; a canonical you set on purpose to another real site still works.
+- The Media Library grid fills every row. A full page of files used to leave empty squares on the last row on wide screens. The page now shows 48 files and the grid only uses 2, 3, 4, 6 or 8 columns, so full pages always end on a complete row.
+
+---
+
 ## [2.148.1] - 2026-09-25  ·  _Patch_
 
 ### Improved
