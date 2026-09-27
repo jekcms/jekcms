@@ -8,6 +8,13 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.149.0] - 2026-09-28  ·  _Minor_
+
+### Added
+- Choose where your pins lead: the post or the store. Social Auto-Publish has a new Pin link setting. With "Store", the pin for a product review goes straight to the product's store page with your affiliate tag, and posts without a product still link to the post. The link is sent exactly as your store address, with no campaign tag and no redirect, and the pin description starts with an affiliate disclosure (#CommissionsEarned), as Amazon asks for social posts. Works with the Product Reviews add-on.
+
+---
+
 ## [2.148.5] - 2026-09-27  ·  _Patch_
 
 ### Improved
