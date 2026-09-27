@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.148.5] - 2026-09-27  ·  _Patch_
+
+### Improved
+- The dashboard tells you when your site cannot send email. On a server without mail set up, every message fails quietly: newsletter confirmations never reach subscribers and contact form notifications never reach you. When the last messages have all failed, the dashboard now shows a warning with the server's reason and a link to the email settings.
+
+### Fixed
+- The dashboard shows the real time of your last IndexNow submission. The traffic card read an old value that is no longer updated, so it could show a date months in the past even though new posts were being submitted normally.
+- Fewer false entries in the database error log. Feeds, the admin menu and social hashtags looked up tables belonging to add-ons that were not installed. The page worked, but each lookup added a line to the error log. These checks now look before they ask.
+
+---
+
 ## [2.148.4] - 2026-09-27  ·  _Patch_
 
 ### Fixed
