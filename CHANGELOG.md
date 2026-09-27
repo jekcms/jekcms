@@ -8,6 +8,13 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.148.4] - 2026-09-27  ·  _Patch_
+
+### Fixed
+- Pinterest can now read the links your pins point to. The generated robots.txt closed every address with a query string to crawlers, including links carrying campaign tags (?utm_source=...). Pinterest's crawler follows robots.txt, so it could not open the page a pin pointed to. Tagged addresses are now open to crawlers; other query strings stay closed and the canonical tag still names the clean address.
+
+---
+
 ## [2.148.3] - 2026-09-27  ·  _Patch_
 
 ### Improved
