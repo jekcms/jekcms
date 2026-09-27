@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.148.3] - 2026-09-27  ·  _Patch_
+
+### Improved
+- Every shared link is checked before it is sent. Social Auto-Publish now follows the link to its final address and shares that address, so no network receives a redirect. A page that no longer exists (404 or 410) is not shared at all and the queue shows why.
+- A spam rejection pauses the channel instead of retrying. The queue used to resend a rejected link up to six times, which lowers the account's standing further. Now the item fails at once, the channel pauses for 72 hours and Queue & Logs explains what happened, with a button to resume early once the network lifts the block.
+
+### Fixed
+- Automatic Pinterest publishing no longer stops with "We blocked this link because it may lead to spam". Social Auto-Publish adds campaign tags (utm_source and friends) to every shared link, while the site redirected any address carrying those tags to the clean address. Every pin therefore pointed at a redirecting link, and Pinterest treats redirecting links as spam. Tagged addresses now open directly; search engines still see a single page because the canonical tag never includes the tags.
+- Social traffic reports finally see campaign tags. The same redirect removed the tags before the page loaded, so ZeroTrack could not tell which network or campaign a visitor came from. Visits from shared links are now attributed correctly.
+
+---
+
 ## [2.148.2] - 2026-09-25  ·  _Patch_
 
 ### Improved
