@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.149.1] - 2026-10-01  ·  _Patch_
+
+### Fixed
+- The dark logo now shows in dark mode in the News and Newspaper themes. Both themes ignored the Dark Theme Logo setting: in dark mode the header kept the light logo, and a dark wordmark disappeared against the dark background. The header and the newspaper footer now switch to your dark logo, and footer designs that use the site logo pick it up too.
+- Post titles fit the search result line in the News, Newspaper and Pets themes. These themes added "| Site name" to every title, so a 70-character headline became 90 characters and Google cut it before the site name ever showed. Like the other themes, they now leave the site name out when the title would not fit in 60 characters. The headline itself is never shortened.
+
+---
+
 ## [2.149.0] - 2026-09-28  ·  _Minor_
 
 ### Added
