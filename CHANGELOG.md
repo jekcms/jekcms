@@ -8,6 +8,42 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.150.4] - 2026-10-10  ·  _Patch_
+
+### Fixed
+- Every theme reads the site name from one place. Themes looked the name up in more than twenty different ways; several fell back to a fixed name such as Finance Pro or Recipes when the setting was empty, and one theme read it straight from the database, past the settings layer. All of them now use a single core function that returns exactly the name under Settings, General, so no page can carry a different name.
+
+---
+
+## [2.150.3] - 2026-10-10  ·  _Patch_
+
+### Fixed
+- The site name you set is now the only name Google sees. On the home page several themes printed the site name twice in the main heading (once for screen readers, once visibly), the app manifest cut long names after 12 characters, and an old manifest.json file left in the site folder could replace the generated one. Google reads all of these when it picks the name it shows above your results, so it received a different name from the one in Settings. The heading, page title, site name tag, structured data and manifest now all carry exactly the name under Settings, General, and a check before every release keeps it that way in all 16 themes.
+
+---
+
+## [2.150.2] - 2026-10-10  ·  _Patch_
+
+### Fixed
+- Posts with a wide table no longer cut text off on phones. A table with several columns could not shrink below its content, so it widened the whole article column beyond the screen and every paragraph lost its last words on the right. The table now stays inside the column and scrolls sideways on its own; on a wide screen it still fills the column.
+
+---
+
+## [2.150.1] - 2026-10-10  ·  _Patch_
+
+### Added
+- A new cookie consent card, on by default. It looks the same in all 16 themes: a compact card in the corner on desktop and at the bottom on phones, with a dark version for visitors who use dark mode. Reject and Accept are equal buttons, the choice is kept for 180 days, and the card links to your cookie or privacy page when you have one. The text follows the language of each page (Turkish, English, German, French, Spanish, Italian, Portuguese, Dutch, Russian and Arabic), so a bilingual site shows the right language on every page. You can still turn it off or write your own text under Settings, Analytics.
+
+### Improved
+- The up-next card and the percent bubble no longer cover the text on phones. The up-next card used to open over the middle of the article once 70 percent was read, and both it and the percent bubble sat well above the bottom edge of the screen, right over the lines being read. The card now appears when the reader reaches the end of the post and closes again when they scroll back up. On phones it is a full-width strip at the very bottom, the percent bubble sits low in the corner, and the bubble steps aside while the card is open.
+- Less server load on shared hosting. Ready page copies are now served for an hour instead of five minutes. On a site with few visitors, most search engine and bot visits used to find the copy expired and built the page from scratch; that work counts against the hosting plan's resource limit. Saving a post, page, menu or setting still refreshes the copies at once, so visitors never see an old version. The duration is under Settings, Advanced, Cache.
+- Fewer pages built for nothing. One in ten visits that had a ready copy was sent through the full page build so scheduled tasks could run on hosts without a cron job. That now happens only when a scheduled task is actually due, and never when the host runs the real cron.
+
+### Fixed
+- Google Analytics counts your visitors again. With the cookie banner on, every visitor started with analytics refused until they clicked a button. Most people never click, so Google received only anonymous signals that do not show in reports: the tracking code was on the site but Analytics showed almost no one. Refusal by default now applies only where Google requires prior consent (the European Economic Area, the United Kingdom and Switzerland). Everywhere else measuring starts at once, and a visitor who clicks Reject is still not tracked.
+
+---
+
 ## [2.150.0] - 2026-10-10  ·  _Minor_
 
 ### Added
