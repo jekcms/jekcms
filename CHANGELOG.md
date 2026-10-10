@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.150.0] - 2026-10-10  ·  _Minor_
+
+### Added
+- Showing up on Google: one list, one button per step. The dashboard now shows what a site needs to get into Google: whether it is open to search engines, connected to Search Console, whether its sitemap is registered and has been read, whether the homepage is in the index, how many old addresses still return "not found", which published posts are hidden from search, and when the last post went out. Each step is measured live and comes with exact instructions and a single action. With the Google plugin connected, the sitemap and homepage status come straight from Search Console. The card disappears once every step is done.
+
+### Improved
+- Old addresses from a previous system now redirect on their own. When a site moves to jekcms from WordPress or another script, Google keeps visiting the old addresses for weeks; each "not found" tells it that the content was deleted. jekcms now resolves these before showing a 404: Yoast, Rank Math and WordPress sitemap addresses lead to the new sitemap, WordPress feed addresses (/comments/feed, /category/.../feed) lead to the feed, and old post addresses with a date, a folder such as /review/ or /blog/, an /index.php/ prefix or a different year in the slug lead to the post with the same address. Each match is saved as a permanent 301 redirect you can see under Redirects.
+
+### Fixed
+- Post addresses with special characters open again. A slug sent through the API or an import could keep a percent-encoded dash or an emoji (for example step%e2%80%91by-step). Such a post appeared in the sitemap but returned "not found" at its own address. Slugs given from outside now pass through the same cleaning as slugs made from a title, and the old form redirects to the clean address.
+
+---
+
 ## [2.149.1] - 2026-10-01  ·  _Patch_
 
 ### Fixed
@@ -113,11 +126,11 @@ _`php tools/gen-changelog-md.php` and commit._
 ## [2.147.0] - 2026-09-20  ·  _Minor_
 
 ### Added
-- Forgot your password? Now there is a way back in. The sign-in screen carries a recovery link: enter the account email and a link arrives that is valid for one hour and works only once. Until now there was no way back at all — someone who forgot the admin password had to edit the database by hand, and with two-step verification switched on they were locked out for good. The reset link never switches off an authenticator, because recovery must not become the way around a second factor. Requesting a link shows the same confirmation whether or not the address belongs to an account, so the form cannot be used to find out who is registered on your site. Setting a new password also signs out the “remember me” sessions on other devices. If the site cannot send email yet, the screen says so up front instead of letting you wait for a message that will never arrive.
+- Forgot your password? Now there is a way back in. The sign-in screen carries a recovery link: enter the account email and a link arrives that is valid for one hour and works only once. Until now there was no way back at all - someone who forgot the admin password had to edit the database by hand, and with two-step verification switched on they were locked out for good. The reset link never switches off an authenticator, because recovery must not become the way around a second factor. Requesting a link shows the same confirmation whether or not the address belongs to an account, so the form cannot be used to find out who is registered on your site. Setting a new password also signs out the “remember me” sessions on other devices. If the site cannot send email yet, the screen says so up front instead of letting you wait for a message that will never arrive.
 
 ### Fixed
-- Emails now speak your site’s language. Every message the CMS sends — password reset, account activation, welcome, order, invoice, support ticket — was written in Turkish no matter what language the site ran in, while the licence email was English-only in the other direction. Readers of an English site received Turkish instructions they could not follow. Subjects and bodies are now written in both languages and picked to match the recipient, and the diagnostics on the mail test screen follow the same rule.
-- The sign-in screen no longer prints the version number. Anyone who could load the page — no account needed — could read exactly which release a site was on. After a security release that turns the open internet into a list of which installs are still behind. The version stays where it is useful: on the dashboard and the Updates screen, once you are signed in.
+- Emails now speak your site’s language. Every message the CMS sends - password reset, account activation, welcome, order, invoice, support ticket - was written in Turkish no matter what language the site ran in, while the licence email was English-only in the other direction. Readers of an English site received Turkish instructions they could not follow. Subjects and bodies are now written in both languages and picked to match the recipient, and the diagnostics on the mail test screen follow the same rule.
+- The sign-in screen no longer prints the version number. Anyone who could load the page - no account needed - could read exactly which release a site was on. After a security release that turns the open internet into a list of which installs are still behind. The version stays where it is useful: on the dashboard and the Updates screen, once you are signed in.
 
 ---
 
@@ -135,7 +148,7 @@ _`php tools/gen-changelog-md.php` and commit._
 ## [2.146.0] - 2026-09-20  ·  _Minor_
 
 ### Added
-- Affiliate programs: set your tag once, every link gets it. Until now the tag was an Amazon-only field buried in Product Reviews settings. If you worked with anything else — a local marketplace, a network, a shop’s own scheme — you pasted a tagged address by hand for every single product. Now you define the program on the Affiliate Links screen: the store domain, and either the tag it adds to the link or the redirect address your network gave you. From then on every link to that domain picks it up automatically, including the buy buttons on product reviews. Amazon is preconfigured with its 21 marketplaces, and a tag you already had is moved across on the first visit — nothing to re-enter.
+- Affiliate programs: set your tag once, every link gets it. Until now the tag was an Amazon-only field buried in Product Reviews settings. If you worked with anything else - a local marketplace, a network, a shop’s own scheme - you pasted a tagged address by hand for every single product. Now you define the program on the Affiliate Links screen: the store domain, and either the tag it adds to the link or the redirect address your network gave you. From then on every link to that domain picks it up automatically, including the buy buttons on product reviews. Amazon is preconfigured with its 21 marketplaces, and a tag you already had is moved across on the first visit - nothing to re-enter.
 
 ### Changed
 - Store buttons other than Amazon are tagged too. Previously only Amazon addresses were stamped; a link to any other shop went out exactly as you pasted it. Now any address that matches a program you defined is tagged on its way out.
@@ -148,7 +161,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **What owners report, and a tidier product header**
 
 ### Added
-- A new “What owners report” section on product reviews. A review page tells people what a product does; it rarely tells them what living with it is like after a few months. This field holds three to five sentences on what long-term owners consistently say — the complaint that keeps coming back, the workaround everyone finds, the thing that surprises people. It appears after the verdict, and it is labelled as a summary of owner feedback, not as a test we ran. Write it in your own words: copying review text from a shop breaks that shop’s terms and copied text earns nothing in search.
+- A new “What owners report” section on product reviews. A review page tells people what a product does; it rarely tells them what living with it is like after a few months. This field holds three to five sentences on what long-term owners consistently say - the complaint that keeps coming back, the workaround everyone finds, the thing that surprises people. It appears after the verdict, and it is labelled as a summary of owner feedback, not as a test we ran. Write it in your own words: copying review text from a shop breaks that shop’s terms and copied text earns nothing in search.
 
 ### Fixed
 - Affiliate theme: the score line is aligned again. The label under the stars carried a divider and an indent left over from an older layout, where it sat beside the score rather than below it. That left a stray vertical line and pushed the text out of line with the stars.
@@ -164,7 +177,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - “Sample content is installed” no longer forces you to delete it. The only button on that strip removed the posts, so anyone who had rewritten the sample articles and made them their own was stuck choosing between deleting their work and seeing the notice on every page. There is now a second button that keeps everything and simply stops the reminder. The non-destructive choice comes first, and the wording no longer assumes you want the content gone.
 
 ### Fixed
-- The SEO watch stops talking once the change has settled. Its notice sat at the top of every admin page until you dismissed it by hand — fixing the thing it reported, or putting it back, changed nothing, because a clean measurement never cleared the old notice. From now on, a measurement that finds nothing changed clears it. The history stays in the system log; only the banner goes quiet. A run that could not reach the site at all does not count as clean, so a network problem cannot silence a real warning.
+- The SEO watch stops talking once the change has settled. Its notice sat at the top of every admin page until you dismissed it by hand - fixing the thing it reported, or putting it back, changed nothing, because a clean measurement never cleared the old notice. From now on, a measurement that finds nothing changed clears it. The history stays in the system log; only the banner goes quiet. A run that could not reach the site at all does not count as clean, so a network problem cannot silence a real warning.
 
 ---
 
@@ -172,7 +185,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **The channel card's dropdown stays inside the card**
 
 ### Improved
-- The Pinterest mode selector fits its card. The two options spelled out when to use each one — “Sandbox (test — before Standard approval)” — which ran past the edge of the narrow channel card and squeezed the dropdown arrow off the end. They now read Test (sandbox) and Live (production); the explanation already sits in the setup notes above, where there is room for it.
+- The Pinterest mode selector fits its card. The two options spelled out when to use each one - “Sandbox (test - before Standard approval)” - which ran past the edge of the narrow channel card and squeezed the dropdown arrow off the end. They now read Test (sandbox) and Live (production); the explanation already sits in the setup notes above, where there is room for it.
 
 ---
 
@@ -183,8 +196,8 @@ _`php tools/gen-changelog-md.php` and commit._
 - Social connection fields no longer spill out of their card. In the narrow channel cards the App ID and secret boxes could not shrink below their default width, so they ran past the card edge.
 
 ### Fixed
-- Turkish no longer shows up in the English admin. A number of screens still printed Turkish whatever language you had chosen: the billing details page in full, ticket status labels, the legal page generator link, a couple of buttons and one screen-reader label. They now follow the panel language. Our own leak detector had missed them because it only looked for letters unique to Turkish, and a word like “kaydet” has none — it now also checks words visible on screen that are Turkish without those letters.
-- The error and maintenance pages pick one language instead of printing two. When the database is unreachable the site cannot read its own language setting, so these pages used to print an English paragraph followed by a Turkish one. They now choose: the site language when it can be read, otherwise the visitor’s browser language, otherwise English — and the page’s `lang` attribute finally matches what is written on it.
+- Turkish no longer shows up in the English admin. A number of screens still printed Turkish whatever language you had chosen: the billing details page in full, ticket status labels, the legal page generator link, a couple of buttons and one screen-reader label. They now follow the panel language. Our own leak detector had missed them because it only looked for letters unique to Turkish, and a word like “kaydet” has none - it now also checks words visible on screen that are Turkish without those letters.
+- The error and maintenance pages pick one language instead of printing two. When the database is unreachable the site cannot read its own language setting, so these pages used to print an English paragraph followed by a Turkish one. They now choose: the site language when it can be read, otherwise the visitor’s browser language, otherwise English - and the page’s `lang` attribute finally matches what is written on it.
 
 ---
 
@@ -192,7 +205,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Hashnode connects for real**
 
 ### Fixed
-- Hashnode can now actually be connected. It was listed as a channel in the previous release but never reached the code that publishes: a platform has to be declared in three places, and one of them was missed, so the connection simply returned nothing. All three now agree, and the release gate checks that they keep agreeing — a channel that is advertised but silently does nothing is worse than one that is not offered at all.
+- Hashnode can now actually be connected. It was listed as a channel in the previous release but never reached the code that publishes: a platform has to be declared in three places, and one of them was missed, so the connection simply returned nothing. All three now agree, and the release gate checks that they keep agreeing - a channel that is advertised but silently does nothing is worse than one that is not offered at all.
 
 ---
 
@@ -203,7 +216,7 @@ _`php tools/gen-changelog-md.php` and commit._
 - Hashnode is now available as a publishing channel. The full article is syndicated with a canonical link pointing back to your own site, so search engines still treat you as the original source. Connect it with a personal access token and your publication address under Social → Connections.
 
 ### Improved
-- Every social post now goes out with hashtags, not just Pinterest ones. A post with no tags of its own used to reach Pinterest with a made-up hashtag and reach every other network with none at all. There is now one rule for all of them: the post’s own tags come first, then the product’s brand, then its category, aiming for three to five tags. Nothing is invented — if those sources run out, the post simply goes out with fewer. A new Default hashtags box under Social settings lets you supply a short list that tops up what the post cannot fill.
+- Every social post now goes out with hashtags, not just Pinterest ones. A post with no tags of its own used to reach Pinterest with a made-up hashtag and reach every other network with none at all. There is now one rule for all of them: the post’s own tags come first, then the product’s brand, then its category, aiming for three to five tags. Nothing is invented - if those sources run out, the post simply goes out with fewer. A new Default hashtags box under Social settings lets you supply a short list that tops up what the post cannot fill.
 - Each network gets the number of hashtags it actually wants. Five was applied everywhere. Reddit, Discord, Tumblr and Dev.to now get none in the body, because a hashtag there either does nothing or means something else entirely (in Discord it is a channel link, and Tumblr and Dev.to have their own tag field we were already filling). Pinterest, X and Bluesky get three, where the character budget is tight or a wall of tags reads as spam. Mastodon, LinkedIn, Instagram, Threads and the rest get up to five.
 
 ---
@@ -212,7 +225,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Pin hashtags are terms again, not squashed headlines**
 
 ### Fixed
-- Pinterest pins no longer carry a hashtag made out of the whole headline. When a post had no tags of its own, the pin description fell back to the post’s focus keyword and title — both of which are sentences. Spaces are not allowed in a hashtag, so they were pressed into one word and the pin went out with something like `#furminatordesheddingtoolreview`: thirty characters nobody has ever typed into a search box. The fallback now proposes short terms only — the product’s brand and the post’s categories — and anything longer than three words is dropped rather than mashed. Pins also carry at most three hashtags instead of eight, because a wall of tags reads as spam on Pinterest.
+- Pinterest pins no longer carry a hashtag made out of the whole headline. When a post had no tags of its own, the pin description fell back to the post’s focus keyword and title - both of which are sentences. Spaces are not allowed in a hashtag, so they were pressed into one word and the pin went out with something like `#furminatordesheddingtoolreview`: thirty characters nobody has ever typed into a search box. The fallback now proposes short terms only - the product’s brand and the post’s categories - and anything longer than three words is dropped rather than mashed. Pins also carry at most three hashtags instead of eight, because a wall of tags reads as spam on Pinterest.
 
 ---
 
@@ -220,7 +233,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **The end-of-article pin block fits the page**
 
 ### Fixed
-- Affiliate theme: the “Pin this” block at the end of an article now sits inside the page, not across it. The block was printed without the wrapper every other full-width section uses, so it ran to the edge of the browser window while its text stayed pinned to the left, leaving a wide empty gap on the right. It also borrowed the styling of the small in-article save box, which was drawn for the narrow article column. It now has its own layout — image, text and button across three columns — and folds down sensibly on a laptop and a phone.
+- Affiliate theme: the “Pin this” block at the end of an article now sits inside the page, not across it. The block was printed without the wrapper every other full-width section uses, so it ran to the edge of the browser window while its text stayed pinned to the left, leaving a wide empty gap on the right. It also borrowed the styling of the small in-article save box, which was drawn for the narrow article column. It now has its own layout - image, text and button across three columns - and folds down sensibly on a laptop and a phone.
 
 ---
 
@@ -231,11 +244,11 @@ _`php tools/gen-changelog-md.php` and commit._
 - Affiliate theme: a “Pin this” block at the end of an article. A vertical 2:3 image with the article’s own sentence already written into the pin description, so a reader who saves it does not land on an empty description field. The product photographs on the page are marked as not pinnable, so the save button can no longer pick the wrong one.
 
 ### Improved
-- Every image can now carry its own alt text, and the site uses it. The media library has had an alt text field for a long time, but the themes ignored it: a featured image, a product photo and a related-article thumbnail on the same page all printed the article title. For a reader using a screen reader that is three images described identically, and for Google Images it is three pictures with nothing to tell them apart. Alt text is now read from the library entry, and the title is only the fallback when the entry has none. Nothing to switch on — fill in the alt text on an image and every place that image appears starts using it.
+- Every image can now carry its own alt text, and the site uses it. The media library has had an alt text field for a long time, but the themes ignored it: a featured image, a product photo and a related-article thumbnail on the same page all printed the article title. For a reader using a screen reader that is three images described identically, and for Google Images it is three pictures with nothing to tell them apart. Alt text is now read from the library entry, and the title is only the fallback when the entry has none. Nothing to switch on - fill in the alt text on an image and every place that image appears starts using it.
 - Social preview images describe the picture, not the headline. The `og:image:alt` tag repeated the post title, which told a reader who could not see the image nothing they were not already reading next to it. It now uses the image’s own alt text. `twitter:image:alt` was never sent at all and now is.
 
 ### Fixed
-- “Save to Pinterest” now saves the image you designed for it. On a product review the save button picked up the plain product photograph on its white background, because that was the image sitting next to the button. Pinned to a board it became an unreadable square. The button now saves the article’s featured image, and the box that previews it is shaped 2:3 — the proportion Pinterest actually shows — instead of 3:4.
+- “Save to Pinterest” now saves the image you designed for it. On a product review the save button picked up the plain product photograph on its white background, because that was the image sitting next to the button. Pinned to a board it became an unreadable square. The button now saves the article’s featured image, and the box that previews it is shaped 2:3 - the proportion Pinterest actually shows - instead of 3:4.
 
 ---
 
@@ -243,7 +256,7 @@ _`php tools/gen-changelog-md.php` and commit._
 **Your affiliate tag is read from settings, not baked into old links**
 
 ### Fixed
-- Changing your affiliate tag now applies to links that already exist. The tag was written into each store link at the moment the product was saved, and only a save on the plugin’s settings screen refreshed those links. So if the tag changed any other way — a new Amazon account, a restored backup, an import, a change made outside the settings form — every link kept pointing at the old tag. Nothing looked broken: the page worked, the redirect worked, and the sale was simply credited to an account that no longer existed. The tag is now read from your settings at the moment a visitor clicks, so the current tag always wins. A marketplace you have no tag for is left untouched, because sending a visitor there with someone else’s tag earns nothing.
+- Changing your affiliate tag now applies to links that already exist. The tag was written into each store link at the moment the product was saved, and only a save on the plugin’s settings screen refreshed those links. So if the tag changed any other way - a new Amazon account, a restored backup, an import, a change made outside the settings form - every link kept pointing at the old tag. Nothing looked broken: the page worked, the redirect worked, and the sale was simply credited to an account that no longer existed. The tag is now read from your settings at the moment a visitor clicks, so the current tag always wins. A marketplace you have no tag for is left untouched, because sending a visitor there with someone else’s tag earns nothing.
 
 ---
 
@@ -251,12 +264,12 @@ _`php tools/gen-changelog-md.php` and commit._
 **List pages do far less work to draw the same screen**
 
 ### Improved
-- List pages now run close to half the database queries. A list of posts asked the database about each card separately — this card’s author, this card’s categories, this card’s reaction counts — so a twenty-two card home page could run seventy-nine queries, most of them fetching the same few authors over and over. Lists now ask once for everything the page needs. Measured on identical content: the Personal theme’s home page went from 79 queries to 40, Entertainment from 82 to 50. Nothing on the page changes; it simply takes less work to draw.
+- List pages now run close to half the database queries. A list of posts asked the database about each card separately - this card’s author, this card’s categories, this card’s reaction counts - so a twenty-two card home page could run seventy-nine queries, most of them fetching the same few authors over and over. Lists now ask once for everything the page needs. Measured on identical content: the Personal theme’s home page went from 79 queries to 40, Entertainment from 82 to 50. Nothing on the page changes; it simply takes less work to draw.
 - The author’s title now appears on the Personal and Trends themes. Both themes carried their own copy of the author lookup and neither copy returned the job title, so what you typed into the profile page never reached the author card. There is now a single lookup for the whole product, and it returns every field.
 
 ### Fixed
-- A setting saved while a page is being built is now seen by the rest of that page. Settings are read from the database once per page load and kept in memory for speed. Saving one wrote to the database but left that in-memory copy untouched, so any step that saved a value and then read it back in the same page still saw the old one — no error, no warning, the value simply appeared not to have been saved. Activating a theme had the same shape: the remainder of that request kept using the previous theme’s layout. Both the settings and the active theme now refresh the moment they change.
-- Best-of lists no longer link to posts you kept private. The affiliate theme’s list section looked up a product’s review page by id and checked only that it was published, missing the visibility filter every other list query applies — so a review set to private or written in another site language could surface as a card on the home page.
+- A setting saved while a page is being built is now seen by the rest of that page. Settings are read from the database once per page load and kept in memory for speed. Saving one wrote to the database but left that in-memory copy untouched, so any step that saved a value and then read it back in the same page still saw the old one - no error, no warning, the value simply appeared not to have been saved. Activating a theme had the same shape: the remainder of that request kept using the previous theme’s layout. Both the settings and the active theme now refresh the moment they change.
+- Best-of lists no longer link to posts you kept private. The affiliate theme’s list section looked up a product’s review page by id and checked only that it was published, missing the visibility filter every other list query applies - so a review set to private or written in another site language could surface as a card on the home page.
 - Two image frames in the affiliate theme could collapse. The card image is a link, and a link is inline by default, which makes the fixed aspect ratio have no effect: the frame did not reserve its space, so the layout could jump while images loaded. The score table and article cards now declare the frame properly.
 
 ---
@@ -273,9 +286,9 @@ _`php tools/gen-changelog-md.php` and commit._
 **Confirmed price alerts, faster first paint and titles that fit**
 
 ### Improved
-- Round-up pages no longer claim to be someone else’s review. Putting a best-of list or a comparison inside an article printed full review markup for every product listed, each pointing at a different address — the page was telling search engines it was the review page for products it only mentioned. Those pages now publish a proper list instead, with each entry linking to its own review.
+- Round-up pages no longer claim to be someone else’s review. Putting a best-of list or a comparison inside an article printed full review markup for every product listed, each pointing at a different address - the page was telling search engines it was the review page for products it only mentioned. Those pages now publish a proper list instead, with each entry linking to its own review.
 - Fonts no longer hold up the page. The font stylesheet was loaded in a way that blocks drawing, so when Google’s font service was slow or unreachable the page waited for it: we measured a page taking 15 seconds to show while the server itself answered in half a second. Text now appears immediately and the font swaps in when it arrives.
-- Long titles keep their words instead of the site name. Search results cut the title at about sixty characters, and “| Site name” was always appended — on a long headline the suffix was never visible anyway but it ate the space. The site name is now added only when it fits; search engines still read it from the page’s structured data.
+- Long titles keep their words instead of the site name. Search results cut the title at about sixty characters, and “| Site name” was always appended - on a long headline the suffix was never visible anyway but it ate the space. The site name is now added only when it fits; search engines still read it from the page’s structured data.
 
 ### Security
 - Price alerts now require confirmation. The form accepted any address, so someone could have put another person’s email on a product without their knowledge. A confirmation link is sent first and alerts go only to addresses that clicked it; requests nobody confirms are deleted after seven days.
@@ -287,7 +300,7 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ### Fixed
 - Editing a product did not refresh the review’s update date. Product details live apart from the article, so changing a price, a specification or a question changed what the page shows while search engines were still told the page had not been touched since the article itself was last saved. The date now follows whichever was edited last.
-- The SEO watch could not show what changed in robots.txt. It printed the before and after values, but robots.txt repeats the same rules for every crawler it names, so the part that fitted on screen read “allow: / | allow: / | allow: /” on both sides — identical, and no help at all. The notice now names the rules that were added or removed.
+- The SEO watch could not show what changed in robots.txt. It printed the before and after values, but robots.txt repeats the same rules for every crawler it names, so the part that fitted on screen read “allow: / | allow: / | allow: /” on both sides - identical, and no help at all. The notice now names the rules that were added or removed.
 
 ---
 
