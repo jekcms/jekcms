@@ -8,6 +8,38 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.158.0] - 2026-10-11  ·  _Minor_
+**Install on Any Hosting Panel: A Setup That Checks Your Server**
+
+### Added
+- Server check at the end of setup. Your browser tries your site the way a visitor would: do page addresses work, are the log, backup and cache folders closed to the outside, would a script placed in the uploads folder run. If something is open, you get step-by-step instructions for your server and panel (cPanel, Plesk, DirectAdmin, aaPanel, CloudPanel, HestiaCP, CyberPanel, nginx, Caddy), with the rules filled in for your site ready to copy.
+- The same check under Settings → Security → Security Center → Server Check. Run it again whenever you move to another server or panel.
+- Settings → General → Redirect to HTTPS. After you install an SSL certificate, one switch moves your site to https. Before switching on, the https address is tested; without a working certificate it stays off and tells you why.
+- Smarter database step. The server field accepts every form hosting panels give (localhost, host:port, a socket path), the MySQL/MariaDB version is shown, and permissions are tested before anything is installed.
+
+### Improved
+- Setup now runs in short steps, so it completes on hosts that stop a request after 30 seconds. If the connection drops in the middle, the next attempt picks up where it left off.
+- A site without an SSL certificate yet (a new domain, a temporary panel address) installs and opens over http instead of being sent to an https address that does not work. Behind Cloudflare (including "Flexible") and other proxies, https is recognised and there are no redirect loops.
+- A site installed on www.yourdomain stays on www; it is no longer sent to the bare domain.
+- Database details and the licence key are now kept in PHP files that a web server never hands out, and log, cache and backup file names can no longer be guessed. This keeps them private on nginx, Caddy and Plesk servers even before the server rules are added.
+- Setup and the site work on hosts that switch off PHP functions such as set_time_limit, exec or mail, and on servers without the ctype or fileinfo extensions.
+- Clearer messages for the most common setup problems: the MySQL user was not added to the database, wrong password, unknown database server, MySQL/MariaDB too old, and a site folder PHP cannot write to (with the folder owner and the user PHP runs as).
+- The setup wizard no longer depends on the server's PHP session folder; on servers where that folder is not writable, setup no longer stops at the first step.
+- The system check now also covers encryption (openssl), file type detection, XML support, uploads, the temporary folder and the connection to jekcms.com for updates.
+
+### Fixed
+- Database passwords containing spaces, # or quotes now work.
+- Updates no longer reset your site's own .htaccess choices (the HTTPS redirect and the AI bot access block).
+- ads.txt, the favicon, visitor statistics and the API now work on nginx and Caddy, not only on Apache.
+- Visitor statistics and ad/performance events are recorded when the database runs on a port other than 3306 or through a socket.
+- Warnings PHP 8.5 wrote to the error log on some admin pages are gone.
+- The Affiliate theme now shows its preview image in the setup wizard.
+
+### Security
+- Setup no longer deletes tables that belong to another application in the same database (common names such as users, posts or settings); it stops and asks for an empty database. An earlier jekcms installation is only replaced after you confirm it.
+
+---
+
 ## [2.157.0] - 2026-10-11  ·  _Minor_
 **AI Drafts at the Length You Asked For, an Optional Humanizing Pass and Menus per Language**
 
