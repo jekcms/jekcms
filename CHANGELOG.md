@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.154.0] - 2026-10-11  ·  _Minor_
+**Settings, Backups and Maintenance Mode Checked End to End on Every Release**
+
+### Improved
+- Every release is now checked the way you use the panel. Each Settings tab is saved as your browser sends it: saving without changes alters nothing and adds nothing to the history, every field is stored as entered and recorded in Settings history, and Undo in the history brings the old value back.
+- Backups are restored, not just created, in every release check. A full backup is taken, downloaded, its database dump is verified, then restored; deleted content comes back, an automatic backup is kept from just before the restore, and broken or non-zip files are refused without touching your data.
+- Maintenance mode is verified from both sides: visitors and search engines get the maintenance page with a 503 status and a retry hint (so your pages are not dropped from search), while you keep seeing the site and the panel while signed in.
+- Security checks from an attacker's point of view: no admin page or panel action answers without a login, configuration, backups and logs cannot be read from the web, PHP files cannot run from the uploads folder, uploads of PHP, .htaccess, double-extension and script-carrying files are refused, and protective headers and secure session cookies are in place.
+- Moving from WordPress was rerun end to end with the current package: posts, pages, comments, images, categories and old addresses arrive, and importing the same package twice creates no duplicates.
+
+### Fixed
+- Post editor and banner editor: a file the server refused (for example a type that is not allowed) was treated as uploaded and no message appeared. The reason is now shown.
+
+---
+
 ## [2.153.0] - 2026-10-11  ·  _Minor_
 **Customizer You Can Trust: Every Setting Shows, Preview Matches the Live Site**
 
