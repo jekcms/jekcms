@@ -8,6 +8,32 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.153.0] - 2026-10-11  ·  _Minor_
+**Customizer You Can Trust: Every Setting Shows, Preview Matches the Live Site**
+
+### Improved
+- Every color and font setting was checked in a real browser in all themes. Each one now changes something you can see on the home page, an article, a category page or the 404 page. Settings that did nothing were connected or removed.
+- Link color now colors the links inside your articles. In most themes it only changed a few interface links before. It is applied only when you pick a color, so sites that never touched it look the same.
+- Body text size and line height now reach the article text. The theme's own proportion between interface and article text is kept: a theme that sets articles slightly larger than the menu still does after you change the size.
+- Site width now also applies to Crypto, Personal and Newspaper; in Crypto the article column stays at a comfortable reading width when you widen the site.
+- Corner radius now reaches the cards and card pictures in News, Finance, Health, Pets, Crypto and Affiliate.
+- Reset to defaults and Import keep a copy of your previous settings in Version history, so a wrong click can be undone with Restore.
+- Affiliate: the Typography settings (article text size, heading size, line height, paragraph spacing) now work. Content width uses the shared Text width setting.
+- Clearer setting names: themes with their own article text size show the general one as "Interface text size (not the article text)"; the share accent color says it applies to the single-colour style and the one-tap Share button on phones.
+- Removed settings that never changed anything: Personal "Serif font", Affiliate "Content column width" (the shared Text width setting does this) and the Starter secondary color.
+
+### Fixed
+- The preview now shows exactly what publishing will. Some color, font and layout changes appeared in the preview with your previously saved values and only took effect after saving.
+- Affiliate: the Primary color setting was overwritten by the Accent color when both were saved.
+- Tech: in light mode, links and accents stayed neon green on a white background. They now use a readable shade of your brand color, and the light palette is kept.
+- Tech and Travel: Text color and Background color had no effect.
+- Finance: a rule that squared every corner on the page also blocked the Corner radius setting.
+- Badge color now reaches the category labels on Trends and Affiliate cards.
+- Recipes: Background color and the handwriting font on the contact page now apply. Personal: the heading font is kept when you also choose a body font. Lifestyle: the accent color now colors highlighted and selected text.
+- Health: the customizer showed square corners while the home page pictures were rounded; both now start at the same value.
+
+---
+
 ## [2.152.0] - 2026-10-11  ·  _Minor_
 **Every Theme Refreshed: Shorter Pages on Phones, Calmer Colors, Real Front Pages**
 
