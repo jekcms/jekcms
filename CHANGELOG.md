@@ -8,6 +8,34 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.151.0] - 2026-10-11  ·  _Minor_
+**Every Plugin Reviewed: Safer Forms, No Lost Data, Lighter Pages**
+
+### Improved
+- Lighter pages. Seven plugins checked their database tables on every page view; they now do it once a day. Story settings load in one query instead of about ten, and the horoscope fetch waits 10 minutes after a failed attempt instead of retrying on every visit.
+- Google Search Console: a revoked connection stops retrying instead of filling the shared limit; the coverage screen loads in one query.
+- Purple accents, emoji and developer notes were removed from plugin screens, emails and messages, and those messages now follow the panel language.
+
+### Fixed
+- Nothing gets lost quietly. If the form builder is set not to store entries and the notification email fails, the entry is now kept. A newsletter signup whose confirmation email could not be sent is told so, instead of hearing "check your inbox". A short DNS outage no longer marks real subscribers as bounced.
+- Audience (CRM). A contact you delete stays deleted; it no longer comes back the next day. If one source can't be read, the daily update no longer removes that source's contacts along with their tags and notes.
+- Files are cleaned up. Deleting a form removes its uploaded files; a download product's old file is removed when you replace or delete it; a product with paid orders is taken off sale instead of deleted, so customers keep their links.
+- AI images. The bulk scan no longer loops forever (and keeps paying) when one post fails; images are added to the latest version of the post, so an edit you saved meanwhile is kept; a partly finished post is completed later instead of being marked done.
+- Horoscopes. Saving one sign in the panel no longer freezes the other eleven; each sign page has its own description and an unknown sign returns a real 404; coming days are prepared by the scheduled task instead of waiting for visitors.
+- Recipes. Amounts like "1,5" scale with the servings and Turkish pages show results with a comma; the card image no longer breaks when only a cover image exists.
+- Newsletter subject lines show "Q&A" as written, not as "Q&amp;A"; a sent campaign can't be queued again by accident; emails and footers follow the site language.
+- Push broadcasts that run in parts no longer cancel each other; the A/B test goal field accepts paths like /contact.
+- The home page slider shows as many slides as you choose: when there are fewer featured posts than slides, the rest are filled with your latest posts.
+
+### Security
+- Google connection relay. A specially written return address could hand a site's Google access to another address. Return addresses are now checked character by character and rebuilt from their parts.
+- A/B tests, contact form and form builder only send visitors back to your own domain; addresses like yoursite.com.example.net or ones hiding a backslash no longer pass.
+- Auto-replies cannot be used to mail strangers. The contact form and form builder now limit auto-replies per visitor per day, strip links from the name field, and the form builder's default reply no longer echoes the visitor's text back.
+- Visitor counters can't be inflated by scripts. Story polls and reactions, A/B test impressions, quiz completions and analytics read the real visitor address behind Cloudflare and add per-visitor limits.
+- Push notifications are accepted only from real browser push services.
+
+---
+
 ## [2.150.4] - 2026-10-10  ·  _Patch_
 
 ### Fixed
