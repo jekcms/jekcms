@@ -8,6 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.159.0] - 2026-10-11  ·  _Minor_
+**A Setup Wizard That Walks You Through: Language, Theme, Site and Admin in Clear Steps**
+
+### Added
+- Choose the language on the first screen. Pick Türkçe or English at the top of the wizard; every step, the site and the admin panel follow that choice.
+- "Where do I find these details?" on the database step. Short instructions for cPanel, Plesk, DirectAdmin, Hostinger, aaPanel, CloudPanel, HestiaCP and CyberPanel show where to create the database and its user.
+- A theme step of its own. All 15 themes appear with a preview, a one-line description and a link to the live demo. The recommended theme is marked, and you can change it later.
+- Password strength and a strong password generator. The admin password shows its strength as you type, can be shown or hidden, and one click creates a strong password.
+- A summary when setup finishes. Your site address, admin panel address and admin email are listed on the last screen, with copy buttons.
+
+### Improved
+- Site details and the admin account now have their own steps, so each screen asks only a few questions and points straight to the field that needs fixing.
+- The install screen lists each stage (unpacking files, creating tables, adding content, saving settings, importing, checking the server) and marks it as it completes.
+- When the server meets every requirement, the system check shows a single line; warnings and missing items stay in view, and the full list opens with "Show details".
+- The database server and port fields moved under "Advanced", since most hosts use localhost.
+- On phones, the wizard fits the screen at every step, including the theme gallery and the final screen.
+
+### Fixed
+- A full backup no longer fails with "Can't open file" when a temporary file in the uploads folder is removed while the backup is being written.
+
+---
+
 ## [2.158.0] - 2026-10-11  ·  _Minor_
 **Install on Any Hosting Panel: A Setup That Checks Your Server**
 
