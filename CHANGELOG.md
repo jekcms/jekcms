@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.156.0] - 2026-10-11  ·  _Minor_
+**Menus That Show Up Everywhere: Dropdowns, Phones, Footers and Easy Reordering**
+
+### Added
+- Dropdown menus in every theme. Sub-items you add on the Menus screen now appear under their parent in all 15 themes, up to three levels deep. On a computer the dropdown opens when you point at the item, on touch screens and with the keyboard through a small arrow button; in the phone menu sub-items are listed indented under their parent.
+- Move up and move down buttons on the Menus screen. Menu items could only be reordered by dragging with a mouse, which does not work on phones, tablets or with a keyboard. Each item now also has two buttons; dragging still works.
+
+### Fixed
+- Sub-items added on the Menus screen did not appear at all in 12 of the 15 themes (Affiliate, Crypto, Finance, Health, Lifestyle, Minimalist, News, Newspaper, Pets, Tech, Travel and the phone menu of Recipes).
+- The menu assigned to the Footer location was ignored by 7 themes when the Footer kit is not in use; it now appears in the footer, next to the legal links.
+- "Open in a new tab" was ignored by 8 themes. It is now honoured everywhere and always comes with the safe link setting that stops the new page from controlling yours.
+- Tech: there was no menu button on phones, so visitors on a phone could not reach the menu at all.
+- Recipes: the phone menu showed a fixed list (categories, About, Contact) instead of the menu you built on the Menus screen.
+
+### Security
+- AI Images plugin: if a request failed, the error message shown in the panel could contain the API key, because the pattern meant to mask it never matched. Keys in those messages are masked now.
+
+---
+
 ## [2.155.0] - 2026-10-11  ·  _Minor_
 **AI Writing That Reads Like a Person Wrote It**
 
