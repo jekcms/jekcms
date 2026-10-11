@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.162.0] - 2026-10-12  ·  _Patch_
+**Setup and Import Polish After a Full Test Round on Every Server Type**
+
+### Improved
+- The Import screen's tabs fit on one line and say what each one uses (package, XML, CSV, REST API), and the page description lists every way in.
+- The setup wizard's package step shows how many menus the package contains, and no longer tells you to leave images out of a large package; large packages upload in parts.
+
+### Fixed
+- After a package was uploaded on the Import screen, the file field and the import button stayed visible next to the found counts; they are now hidden until you start or cancel.
+- The setup wizard no longer deletes its own files if it is asked to finish before the installation is complete, which could leave a half-installed site behind.
+
+---
+
 ## [2.161.0] - 2026-10-12  ·  _Minor_
 **Import WordPress's Own Export File, and Packages of Any Size from the Admin Panel**
 
