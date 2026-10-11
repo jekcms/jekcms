@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.152.0] - 2026-10-11  ·  _Minor_
+**Every Theme Refreshed: Shorter Pages on Phones, Calmer Colors, Real Front Pages**
+
+### Improved
+- Tech, News, Finance and Crypto were rebuilt. Each home page now opens with a lead story and its picture, a short list of other headlines next to it, and a feed below that never repeats what the top already shows. Box stacks, shadows and gradient bands gave way to clean lines and a clear reading order. Tech keeps its code-green identity with IBM Plex type; News reads like a wire service with ink headlines and red only as an accent; Finance drops the gradient banner and the vanity counters; Crypto replaces purple with a single accent you can change.
+- Phones get shorter, denser pages in all themes. Lists and section cards turn into rows with a small square picture, while the first story keeps its large image. Typical home pages are now about half as long on a phone: Trends from 16,900 to 8,800 pixels, Recipes from 10,100 to 5,600, Health from 9,900 to 6,300, Travel from 6,700 to 3,100.
+- Purple and pastel gradients were removed from Entertainment, Lifestyle and Crypto; each theme now uses one accent color that the customizer controls. Colors you have already chosen are kept.
+- Long site names stay on one line on phones instead of wrapping under the buttons.
+- The home page slider fills the slide count you choose with your latest posts when there are fewer featured ones.
+
+### Fixed
+- Travel: a text logo was white on the white header and could not be seen; cards started invisible and stayed blank until the page script ran.
+- Finance: social links in the footer overflowed their 40-pixel boxes; the newsletter pop-up no longer opens after 30 seconds or on the home page, only after a reader has read most of an article, at most once every 14 days.
+- Phones: the menu button no longer jumps to the top-right corner over other content (it was measured before the web font loaded); a 42-pixel sideways scroll on News and a 13-pixel one on Recipes are gone.
+- News: the brand red set in the customizer was also turning every headline red; the Latest Stories list no longer repeats the three lead stories.
+- Crypto: the trending list showed a vote count of 0 next to almost every post; it now shows the rank. Voting stays on the article page.
+
+---
+
 ## [2.151.0] - 2026-10-11  ·  _Minor_
 **Every Plugin Reviewed: Safer Forms, No Lost Data, Lighter Pages**
 
