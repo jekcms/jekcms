@@ -8,6 +8,40 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.160.0] - 2026-10-11  ·  _Minor_
+**Move Your Whole WordPress Site: Galleries, Menus, SEO and Comment Threads Come Along**
+
+### Added
+- Menus come across. WordPress menus are imported with their sub-items, and each item stays linked to the page, post or category it points to. On a new install your header and footer menus become the site's header and footer menus.
+- Packages of any size in the setup wizard. The package is uploaded in parts sized to your host's upload limit, and if the connection drops it continues from the last part it received.
+- Media library after migration. Images and files from WordPress appear in the media library in a folder named WordPress, with their alt text, titles and captions.
+- Category and tag addresses are redirected to their new archive pages, in addition to posts and pages.
+- jekcms Migrator 1.1.0 for WordPress. The package now contains reusable blocks expanded into the content, the images used in cover, gallery and media-and-text blocks, linked files, your logo and site icon, and optionally the whole media library. It no longer copies media files before packing them, so the export needs half the disk space.
+
+### Improved
+- Connecting the setup wizard to your WordPress database now brings across everything the plugin package does: SEO fields, menus, comment threads, sticky posts, scheduled and private posts, the primary category and redirects. Both paths use the same import engine.
+- Content arrives the way it looked on your site: galleries become jekcms galleries you can edit, YouTube, Vimeo, Spotify and SoundCloud embeds become players, X and Instagram embeds become links, image captions stay captions, and paragraphs written in the classic editor are kept.
+- Plugin shortcodes such as contact forms are removed from the text, while ordinary text in square brackets stays.
+- Scheduled, private and pending posts keep their status, sticky posts become featured posts, and each post keeps its comment setting and its primary category from Yoast or Rank Math.
+- SEO fields now include the focus keyword, canonical address and "hide from search engines". Fields that only contain template variables are left empty so jekcms builds the title itself.
+- Importing the same package or database again does not create duplicates. On a new install, your own pages such as the privacy policy replace the default pages the setup created; a different post that happens to have the same address arrives with "-2" added to it.
+- When jekcms is uploaded into the WordPress folder, PDFs and other linked files are copied along with the images, so they keep working after the old WordPress files are removed.
+- Comment counts on posts are correct straight after the import.
+
+### Fixed
+- Package import: comments of a post whose address had to change went to another post with the old address; they now stay on their own post, and replies keep their thread.
+- Package import: scheduled, private and pending posts were imported as drafts.
+- Images that could not be fetched during a migration to a new domain were pointed at the new domain, where they do not exist. They now keep their old address and keep showing while the old site is online.
+- A redirect to the WordPress "Uncategorized" category, which is not imported, led to a missing page; it is no longer created.
+- Redirects for old addresses with Turkish or other non-English characters now match.
+- The export summary in the jekcms Migrator plugin always showed Turkish words; it now follows the WordPress language.
+- A full backup no longer stops when the server's virus scanner locks a file in the uploads folder; that file is left out and the rest of the backup is completed.
+
+### Security
+- During a migration, the uploaded package and the data read from WordPress are kept under names that cannot be guessed, and they are deleted when the import finishes.
+
+---
+
 ## [2.159.0] - 2026-10-11  ·  _Minor_
 **A Setup Wizard That Walks You Through: Language, Theme, Site and Admin in Clear Steps**
 
