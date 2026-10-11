@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.155.0] - 2026-10-11  ·  _Minor_
+**AI Writing That Reads Like a Person Wrote It**
+
+### Improved
+- AI Draft, the Content Wizard, Content Studio and Trend Content now avoid the patterns that give machine writing away. The instructions name them one by one: "not X, but Y" contrasts, em dashes, habitual lists of three, moral or summary closing lines, stock openers such as "In conclusion", inflated words, rhetorical questions and filler transitions. Turkish articles get their own list based on how Turkish AI text actually reads.
+- Articles no longer all share the same skeleton. Each one still uses at least two scanning aids, but picks the ones the content needs (a table only for a real comparison, numbered steps only for real steps, a tip box only when there is a real tip) instead of always adding a table, two lists, a quote box and a closing list.
+- A final clean-up pass runs on every generated article: dashes used as asides become commas, number ranges get a plain hyphen, and stock opening phrases are removed. Links, images and code are left untouched.
+- Measured on ten test articles generated before and after this change, the machine-writing score per 1,000 words fell from 16.4 to 8.1 in Turkish and from 8.7 to 1.1 in English. The same measure now runs on every release.
+
+### Fixed
+- Time-sensitive figures in AI articles were dated with a past year ("as of 2024"); the current year is now used, with a note to check the live value.
+- Backups: a file refused on restore (broken or not a backup) was left behind in the backups folder on the server; it is now removed whether the restore succeeds or not.
+
+### Security
+- The Gemini API key is now sent in a request header instead of the web address, for AI writing and the AI Images plugin. Web addresses can end up in proxy and server logs; headers do not.
+
+---
+
 ## [2.154.0] - 2026-10-11  ·  _Minor_
 **Settings, Backups and Maintenance Mode Checked End to End on Every Release**
 
