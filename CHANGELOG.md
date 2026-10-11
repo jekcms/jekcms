@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.161.0] - 2026-10-12  ·  _Minor_
+**Import WordPress's Own Export File, and Packages of Any Size from the Admin Panel**
+
+### Added
+- Admin panel → Import → WordPress XML. Upload the file WordPress makes under Tools → Export. Posts, pages, statuses, categories with the primary category, tags, authors, comment threads, menus, SEO fields and redirects come across with the same rules as the plugin package. Images are downloaded from your old site and converted to AVIF or WebP.
+- Import report. When an import finishes, the Import screen shows how many posts, pages, comments, media files, menus and redirects came across, what was already there and what could not be imported, with links to each list.
+
+### Improved
+- The WordPress package in the admin panel is uploaded in parts sized to your host's upload limit and imported in short steps, so a large site no longer hits the upload limit or a timeout. If you close the page, the import continues from where it stopped when you come back.
+- The menu option is now on the package screen as well. On a site that already has its own header or footer menu, imported menus wait in Menus instead of replacing it.
+- The SQL → CSV and REST API migration pages now use the same content converter as the other paths: galleries, embeds and captions come across instead of being removed, and image links point to the local copies.
+- Importing the same WordPress site twice no longer duplicates comments.
+
+### Fixed
+- The file field on the Import screen showed ".csv" for every file type; it now shows the size and type of the chosen file.
+
+---
+
 ## [2.160.0] - 2026-10-11  ·  _Minor_
 **Move Your Whole WordPress Site: Galleries, Menus, SEO and Comment Threads Come Along**
 
