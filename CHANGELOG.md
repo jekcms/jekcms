@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.157.0] - 2026-10-11  ·  _Minor_
+**AI Drafts at the Length You Asked For, an Optional Humanizing Pass and Menus per Language**
+
+### Added
+- Humanizing pass for AI drafts (Settings → AI). When it is on, a finished draft gets one more read that rewrites only the sentences that sound machine-made. Headings, links and images stay exactly as they were, and if the rewrite would not read more naturally the original draft is kept. It is off by default because it uses one more AI request per draft.
+- Menus per language. If you publish posts in more than one language, you can now set a language for a menu on the Menus screen. A post in that language shows the menu set to its language for the same location; every other page keeps the menu set to all languages. If a language has no menu of its own, its posts fall back to the all-languages menu.
+
+### Improved
+- AI drafts that come out noticeably shorter than the length you picked (short, medium, long) are now completed in the same style before they reach the editor, keeping their headings. Before, a "long" draft could arrive at half the length.
+- Gemini: when the daily limit of the selected model runs out, the draft is written with the next model in the list instead of stopping with a quota error.
+
+---
+
 ## [2.156.0] - 2026-10-11  ·  _Minor_
 **Menus That Show Up Everywhere: Dropdowns, Phones, Footers and Easy Reordering**
 
