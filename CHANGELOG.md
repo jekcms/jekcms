@@ -8,6 +8,155 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.168.1] - 2026-10-17  ·  _Patch_
+**News Sitemap Passes Search Console on Quiet Days**
+
+### Fixed
+- When no post had been published in the last 48 hours, sitemap-news.xml came back with no entries and Google Search Console reported "Missing XML tag". It now lists your latest posts instead, so a news sitemap you submitted by hand stays valid.
+- No sitemap (news, video, tags, authors, categories, or a posts page past the last one) is ever returned empty any more. If a sitemap has nothing to list, it lists your home page.
+- Post titles with broken characters no longer turn into an empty title tag in the news and video sitemaps, and a language setting such as "tr_TR" is now written as "tr", the format Google News expects.
+
+---
+
+## [2.168.0] - 2026-10-14  ·  _Minor_
+**Privacy by Default: Consent First, Accurate Legal Pages**
+
+### Improved
+- The legal page generator was rewritten. It reads the tools enabled on your site (cookie banner, Google Analytics, AdSense, reCAPTCHA, ZeroTrack, newsletter, Cloudflare and others) and writes tables of what is processed, why, on what legal basis, which cookies are used and who receives data. It refuses to generate when tracking code in Custom scripts runs without consent or the cookie banner is off. The texts are templates, not legal advice.
+- Google Fonts are now served from your own server, on the site and in the admin panel. Visitors' browsers no longer connect to Google for fonts.
+- View, reaction and rating records no longer store visitors' IP addresses or full browser details; a one-way hashed value and the device type are kept. Existing records are converted during the update.
+- Failed sign-in records are deleted after about 90 days. IP addresses in comments and contact messages are cleared when the log retention period ends.
+- The installation marker is now sent by your server at most once a day instead of from every visitor's browser.
+
+### Changed
+- Google Analytics, Tag Manager and Meta Pixel now load only after the visitor clicks Accept, for visitors from every country. Before, consent was asked only in the EU, UK and Switzerland. Settings > Cookie consent lets you go back to the old behaviour; the legal consequences of that choice are yours.
+- The Reject and Accept buttons on the cookie banner now look the same (same colour, size and text size).
+- When your site has no legal page yet, themes now show a text built from your site's actual setup instead of a fixed sample text.
+- The Newspaper theme's "weather and prayer times for the visitor's location" option is now off by default. When on, it works only after the visitor accepts cookies.
+- After this update, admins are asked to read and accept the updated licence agreement (EULA 3.0) once.
+
+### Security
+- An API key stopped working only when the key itself was revoked. If a user was banned or set to inactive, their existing keys for the REST API and the AI connection (MCP) kept working with that user's role. Keys now work only while their owner is active.
+
+---
+
+## [2.167.3] - 2026-10-13  ·  _Patch_
+**Bold One-Line Subheadings in Posts Now Stand Out**
+
+### Fixed
+- A paragraph made of a single bold line (for example "3. Apply the one-item-out rule.") was shown at body text size and did not read as a subheading. It now gets a little more size and space above it.
+
+---
+
+## [2.167.2] - 2026-10-13  ·  _Patch_
+**Term Lists in Posts Are Easier to Scan**
+
+### Fixed
+- Back-to-back lines like "Wool: durable and stain-resistant" or "48-inch round table: 8-foot rug" used to run as plain text. They now show as a list: the term in bold on its own line, the explanation below it.
+
+---
+
+## [2.167.1] - 2026-10-13  ·  _Patch_
+**Step Boxes in Posts Now Cover Every Step**
+
+### Fixed
+- In posts with numbered steps (Step 1, Day 2, Week 3-4), only some steps were shown in a box and the rest stayed as plain text. One-sentence steps, steps with a bold label and steps with a dash now get the same box.
+- Lifestyle theme: on post pages the sidebar starts at the top again instead of further down the page.
+
+---
+
+## [2.167.0] - 2026-10-12  ·  _Minor_
+**What You Set Is What Visitors See: Sidebar, Footer and Header Settings Now Match the Site Exactly**
+
+### Fixed
+- Some themes showed their own fixed widgets (search, categories, popular posts, topics) on post and category pages next to the ones you chose in Customize → Sidebar. Now only the widgets you turned on appear.
+- Turning off Table of Contents in the sidebar now removes it from post pages in every theme.
+- Sidebar visibility switches for pages where a theme has no sidebar (for example the home page in some themes) are no longer shown, since they had no effect.
+- Header: announcement bar options appear only while the bar is on, and header button options only once the button has a label and an address.
+- Footer: templates with fewer columns now mark the columns they will not show, instead of dropping them silently.
+- Footer: in the Newspaper template, turning off the bottom bar now also hides the copyright line.
+
+---
+
+## [2.166.1] - 2026-10-12  ·  _Patch_
+**Footer Editor Preview Stays on Screen and Shows the Real Desktop Layout**
+
+### Improved
+- Footer editor: the preview stays next to you while you edit columns, social links and the bottom bar further down the page.
+- Desktop preview draws the footer at a real desktop width (scaled to fit), so column layouts look the way they will on the site; the box fits the footer's height.
+
+---
+
+## [2.166.0] - 2026-10-12  ·  _Minor_
+**Customize Side by Side: a Large Live Preview With Device Sizes, and Visual Cards for Design Choices**
+
+### Added
+- Large preview: one click puts your settings on the left and the real site on the right, with a Save button above the preview.
+- Desktop, tablet and phone buttons show the preview at the real width of each device.
+- The preview follows the tab you are editing: the Post tab shows a post, the Archive tab shows a category page, the rest show the home page.
+- Button style, hover effect, shadow and size, form fields, quotes, tables, link hover, image corners and shadow, captions, header shadow and the announcement bar are now chosen from cards that show a real miniature of each option.
+- Category band: three new looks (cover cards, circles, numbered list) plus icon shape (round, soft square, square) and icon colour (light tint, brand fill, outline, dark).
+
+### Fixed
+- On home pages with the new slider, the slider's own styles could reach other home page sections.
+
+---
+
+## [2.165.0] - 2026-10-12  ·  _Minor_
+**Rotating Hero Sliders Designed for Each Theme, With a Live Preview in the Customizer**
+
+### Added
+- Eight slider layouts: Cinema, Split, Headline rail, Card strip, Magazine, Minimal, Thumbnails and Stack.
+- Six transitions (fade, slide, zoom, Ken Burns, wipe, rise) and five timer indicators (filling bar, story segments, bar on the list item, 01 / 05 counter, none).
+- Each theme comes with its own slider: Finance shows a headline list whose top line fills while a story is on screen, Travel uses thumbnails with a slow zoom, Crypto a dark split panel, Trends a card strip, Minimalist a type-first layout.
+- In Customize, Homepage, Hero, the choices appear as cards with small moving previews, and a live preview of your home page plays your choice before you save.
+
+### Improved
+- The hero rotates every 7 seconds by default, pauses on hover, when the tab is hidden or when it scrolls out of view, and can be swiped on phones or moved with the arrow keys.
+- Slider text follows the page colors, so it stays readable in dark and light mode; posts shown in the slider are not repeated in the latest posts list on the first page.
+
+---
+
+## [2.164.0] - 2026-10-12  ·  _Minor_
+**The Table of Contents Now Sits at the Bottom of the Sidebar and Stays on Screen, in Every Theme**
+
+### Improved
+- On post pages the table of contents is always the last box in the sidebar and stays on screen while you scroll, just below the sticky header.
+- Themes that had no table of contents (Affiliate articles, Entertainment, Starter, Tech) now show one in the sidebar when a post has subheadings.
+- News and Newspaper move the table of contents from the top of the article into the sidebar; with the sidebar turned off it stays at the top of the article.
+- Pets moves its table of contents from a separate left column into the sidebar, so the article text gets more width.
+- Other sticky boxes in the sidebar step aside so they no longer cover the table of contents.
+- Every theme is now checked for readable text in both dark and light mode before each release.
+
+### Fixed
+- Travel: the "On this page" box at the bottom of the sidebar did not stay on screen while scrolling.
+- In the sidebar table of contents of some themes the items showed two numbers side by side.
+- Finance dark mode: headlines, list titles and post text were dark blue on a dark background and could not be read.
+- Dark mode: the News breaking label, the Newspaper "All" link, the Recipes newsletter box, Travel buttons, the active Personal category button and the Health most-read numbers are readable again.
+- Light mode: the Finance post breadcrumb was white on white; Trends cards without an image showed a white title on a light background; faint labels in Affiliate, Starter, Travel and Entertainment are darker.
+- Starter: after changing the accent color, category chips kept the old light blue background behind the new color.
+
+---
+
+## [2.163.0] - 2026-10-12  ·  _Minor_
+**Sharper Crypto, Finance and Trends Themes, Readable Step Lists and a Sidebar That Never Scrolls on Its Own**
+
+### Improved
+- Crypto: the lead story and the post header sit on a dark band that matches crypto imagery, and the home page shows your categories with their post counts under the lead story.
+- Crypto and Finance posts get clearer headings, tables, quotes and code blocks, and long lines are capped to a comfortable reading width.
+- Finance: the masthead shows your tagline as the headline with the counters beside it, and the list next to the lead story is numbered.
+- Trends: sidebar boxes on posts are frosted cards, the table of contents is numbered and highlights the section you are reading, and the share buttons show icons instead of letters.
+- Paragraphs that start with "Step 1:" or "Day 2 -" are shown as marked steps with the step name in bold, in every theme.
+- Sticky sidebars follow the page and stop at their bottom edge instead of scrolling inside a box.
+
+### Fixed
+- With a square icon logo, the site name next to it was invisible on the home page of themes with a dark header.
+- Minimalist: related post cards had no space between image and title and showed the date too large.
+- Tags named "NULL" or "undefined" sent by publishing tools through the API are no longer created.
+- Finance: the subscribe pop-up and the after-post disclosure no longer promise daily market insights or say the author may hold positions.
+
+---
+
 ## [2.162.0] - 2026-10-12  ·  _Patch_
 **Setup and Import Polish After a Full Test Round on Every Server Type**
 
