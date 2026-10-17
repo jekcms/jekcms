@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [2.168.2] - 2026-10-17  ·  _Patch_
+**Sitemaps Are Checked Against Google's Rules Before They Go Out**
+
+### Improved
+- Every sitemap is now checked against Google's required tags before it is served. If a single entry is broken (no address, an empty news title, a video without a player link, an image without an address), that entry is left out and the rest of the file stays valid. Before, one bad entry could make Search Console reject the whole file.
+- The daily SEO check now also opens all your sitemaps, including the news and video sitemaps that are not listed in sitemap.xml but can be submitted by hand. If Search Console would report one of them as having errors, you see a warning at the top of the admin panel before Google does.
+- SEO Status has a new "Sitemap rules" line that shows, file by file, whether your sitemaps are valid.
+
+---
+
 ## [2.168.1] - 2026-10-17  ·  _Patch_
 **News Sitemap Passes Search Console on Quiet Days**
 
