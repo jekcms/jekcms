@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.3] - 2026-11-02  ·  _Patch_
+**AdSense Readiness Becomes a Step-by-Step Guide**
+
+### Added
+- AdSense Readiness now walks you through six steps: content, legal pages and contact, authors, technical setup, AdSense code and applying. A summary at the top shows your score, progress across the steps and the next task to do.
+- Every open item explains why it matters and lists what to do in plain steps, with a button that opens the exact screen that fixes it: the right settings tab, the author's own profile, the privacy page editor or the category being edited.
+- Items that concern several posts, categories or authors open a list where each row goes straight to its edit screen.
+- When the privacy policy is missing Google's required advertising disclosure, a ready-made paragraph in the site's language is shown with a copy button.
+- New measurements: legal and contact links in the menus, mobile layout, empty pages, page response time, broken links, the site icon and the last 30 days of traffic from ZeroTrack.
+- The apply step lists what cannot be measured, such as submitting the sitemap, opening the AdSense account and requesting review, and lets you tick each one off. The publisher ID step ticks itself when the code is found on the site.
+
+### Fixed
+- On older installs without the author job title field, the whole author check failed to run. It now measures what exists.
+- The policy scan showed internal group names and gave every hit the same security-content explanation, even for a place name in a travel post. Groups now have readable names and each hit is explained in context.
+- Some readiness texts used shouting capitals or internal setting names; they now speak plainly.
+
+---
+
 ## [3.0.2] - 2026-11-02  ·  _Patch_
 **Newsletter and Analytics Pages Join the New Look**
 
