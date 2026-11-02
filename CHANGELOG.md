@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.5] - 2026-11-03  ·  _Patch_
+**Google Console Gets a Setup Wizard**
+
+### Added
+- A five-step setup wizard asks which Google services you use (Search Console, Analytics, Tag Manager, AdSense) and only sets up those. Choosing "Not yet" shows how to open the service.
+- Before connecting, the wizard walks through each Google screen, including the "Google hasn't verified this app" warning and exactly where to click to continue.
+- After connecting, the Search Console property, Analytics property and AdSense account that match your site are selected automatically; the Analytics measurement ID and AdSense publisher ID are read from Google.
+
+### Improved
+- Google is asked only for the permissions of the services you chose, so the consent screen is shorter.
+- The panel shows only the tabs and summary cards of the services you use.
+
+### Fixed
+- The connection screen described the jekcms Google app as verified while Google's review was still in progress; it now says so plainly.
+
+---
+
 ## [3.0.4] - 2026-11-02  ·  _Patch_
 **Visitor Data Stays on Your Server, and a Tool for Privacy Requests**
 
