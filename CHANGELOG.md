@@ -8,6 +8,27 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.4] - 2026-11-02  ·  _Patch_
+**Visitor Data Stays on Your Server, and a Tool for Privacy Requests**
+
+### Added
+- Libraries a theme or your own code loads from cdnjs, jsDelivr or unpkg are now downloaded once by your server and served from your own domain, the same way Google Fonts already were. Visitors' browsers no longer contact those CDNs, so their IP addresses do not leave your server.
+- A Personal data requests page under System finds everything stored about an email address (comments, contact messages, newsletter, contact records, form submissions, orders), downloads a copy as JSON and erases what can be erased. Orders and consent records are kept and the reason is shown.
+- Comment, contact and newsletter forms in every theme now show the same short privacy notice with a link to your privacy notice page.
+- Newsletter sign-ups now keep a record of the notice shown, the page and the time, and the moment the confirmation link was clicked, so you can prove how consent was given.
+
+### Improved
+- Google reCAPTCHA loads only when a visitor starts filling in a form, not on every page view, and a line under the form says so.
+- Commenter avatars come from your own site by default; Gravatar can be turned on under Settings → General → Discussion, and the privacy notice then mentions it.
+- YouTube previews are served from your server; YouTube is contacted only when a visitor presses play, and the preview says so.
+- Newsletter consent boxes now ask for exactly one thing: receiving the newsletter. Contact forms no longer ask for consent they do not need.
+- New installs start with newsletter open and click tracking off. The privacy notice generator now covers Gravatar, YouTube and newsletter tracking as they are actually set up.
+
+### Fixed
+- On sites without the cookie banner, the Google preferred-source button loaded Google's script without asking; it now shows a plain link instead.
+
+---
+
 ## [3.0.3] - 2026-11-02  ·  _Patch_
 **AdSense Readiness Becomes a Step-by-Step Guide**
 
