@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.2] - 2026-11-02  ·  _Patch_
+**Newsletter and Analytics Pages Join the New Look**
+
+### Improved
+- Every newsletter page now follows the panel's new look: campaigns, subscribers, campaign results, templates, appearance and settings. Status shows as a small dot instead of a coloured badge, and filters sit in one compact row.
+- Newsletter settings use on/off switches and save from a bar that appears when something changes. Day of month and weekday only show for the digest frequency you picked.
+- Setting names in the newsletter speak plainly: Confirmed sign-up, Count opens, Count clicks and Emails per round, each with a one-line explanation.
+- Draft campaigns open in the editor from the list; sent ones open their results.
+- ZeroTrack has three tabs: Overview, Earning pages and Settings. Earning pages and Settings use the same cards and switches as the overview.
+
+### Fixed
+- On sites where the newsletter was installed before template protection existed, saving an email template or applying an email design failed. The missing field is now added on first open.
+- The "All" count on the campaigns and subscribers lists showed only the filtered number.
+- In Turkish, the error shown when an email design could not be applied left out the reason.
+
+---
+
 ## [3.0.1] - 2026-11-02  ·  _Major_
 **A Calmer Admin: One Design Across the Whole Panel**
 
