@@ -8,6 +8,114 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.1] - 2026-11-02  ·  _Major_
+**A Calmer Admin: One Design Across the Whole Panel**
+
+### Added
+- Social & Video has its own Audio summary & podcast tab. AI writes a short spoken summary of a post (about 1, 2 or 3 minutes) using only what the post says, and it is read aloud with Google Gemini, OpenAI or ElevenLabs. The player at the top of the post can play, skip 15 seconds and change speed, and the post's structured data tells search engines that it has audio.
+- Narration runs in the background: you can leave the page, and when you come back the post shows that it is still being narrated, so it is not started twice. On sites that use the jekcms video service, audio is saved as MP3.
+- You can add more than one Gemini key for narration. When one key's daily quota runs out, the next one is used. If a key is rejected, the page says so and lets you enter a new key right there.
+- Social & Video > Video: a finished video can be made again in another style or deleted. Posts that already have a video are marked in the post list. Title, description and hashtags each have their own Copy button, hashtags are written without # and separated by commas, and the post's category is shown under its title.
+- Generated videos and audio summaries do not mention the current year, so they do not look dated a year later. The post's own text is not changed.
+
+### Improved
+- The dashboard opens with a To do list: missing backup, comments waiting for approval, broken links, posts without a search description, images without alt text, drafts and posts not updated in a year. Each row has one button that takes you to the fix.
+- Buttons, cards, tabs, tables and notices share one look on every screen. Main actions are a solid ink button instead of blue, cards no longer sit inside other cards, and lists are more compact. Content Studio and its pages follow the same look.
+- Settings has a quiet section menu on the left and each group in its own card. Plugins can be filtered by on/off and searched.
+- Traffic & Distribution is split into three tabs: Automatic distribution, News platforms and Backlinks. Each news platform and backlink source is one row; its steps and form open in a side panel. The Google preferred source button can be turned on and off from its row.
+- The newsletter dashboard shows what to do next, 30-day subscriber growth, where subscribers come from and the latest campaigns.
+- Lists of referrers, platforms and sources show each site's own icon instead of a letter.
+- Social settings list only the channels you have connected, each with its logo, account and an on/off switch.
+- The sign-in, password reset and licence agreement screens use the same black and white look as the panel.
+- Over 70 help texts in the English admin showed placeholder words such as "Plugins Description"; they now explain what the setting does.
+
+### Fixed
+- Pinterest rejected pins whose image was AVIF or WebP with "This site doesn't allow you to save Pins". The image is now sent to Pinterest as a JPEG file.
+- Long narrations no longer stop halfway with a time-out message on shared hosting.
+- Fixing one image's alt text in SEO no longer keeps you waiting up to 90 seconds when the AI service is slow. After 30 seconds the alt text is written from the file name instead.
+- Saving a setting could end in a server error when two cache clean-ups ran at the same moment. The clean-up now carries on.
+
+---
+
+## [2.172.0] - 2026-10-31  ·  _Minor_
+**Money Pages Now Shows Ad Revenue per Page and Outbound Clicks**
+
+### Improved
+- With Google connected and an AdSense account selected, Money Pages lists your pages by AdSense earnings, with views, RPM and ad clicks. The amounts are AdSense's own estimates; jekcms does not calculate them. Sites that earn from ads used to see only "No conversions yet" here.
+- Clicks from your posts to other sites are now counted. Links marked rel="sponsored" or pointing to well-known affiliate sites count as affiliate clicks, so direct affiliate links work without /go/ addresses.
+- A new strip at the top shows which revenue sources are being measured and, for anything missing, what to do and where to do it.
+
+---
+
+## [2.171.0] - 2026-10-31  ·  _Minor_
+**Internal Links That Stay Put and Reach the Posts Nobody Links To**
+
+### Improved
+- Automatic internal linking no longer removes and rebuilds links on every run. Existing links stay where they are; running it again only fills the gaps, so Google does not see your links change each time.
+- Posts that no internal link points to are served first, then the posts with the fewest links. No post receives more than ten internal links, so links no longer pile up on the same few articles.
+- Adding links no longer changes a post's updated date, so search engines are not told that content changed when it did not.
+- Anchors read naturally: phrases keep their small words ("book a multi-country trip") and city guides are linked from phrases like "in Prague".
+- Automatic linking and the Orphan Content tool now use the same engine and the same count, taken from the real links in your posts. On large sites the work runs in rounds and the screen continues by itself until it is done.
+
+---
+
+## [2.170.1] - 2026-10-31  ·  _Patch_
+**Dark Mode Header Fixes and a Guided Setup for Audio Articles**
+
+### Improved
+- When no AI key is set, the Audio articles section explains in three steps how to get a free Gemini key, links to Google AI Studio and to the API settings, and keeps the Generate button off until a key exists. Its input fields now match the rest of the panel.
+- The Indexing page lists every step at the top, so the Bing and Yandex steps are one click away instead of below a long page list.
+- YouTube Shorts no longer appears in the connection list or the platform switches.
+
+### Fixed
+- The automatic light logo for dark mode was not created when the logo had been saved as a full address of your own site. It is now created in that case too.
+- In the Travel theme the header turned white in dark mode once you scrolled the homepage, so the light menu text disappeared. The dark header now applies on every page.
+
+---
+
+## [2.170.0] - 2026-10-31  ·  _Minor_
+**Video Studio Retired; Audio Articles Move to Social Settings**
+
+### Improved
+- Audio articles are generated per post from Social Publishing → Settings → Audio articles & Podcast. Generation runs in the background, so long posts no longer time out, and the player appears there when the audio is ready. Automatic voicing of new posts works as before.
+
+### Removed
+- Video Studio has been removed from Social Publishing. Videos could only be rendered in an open browser tab, so the jobs opened automatically for new posts were never finished: on the sites we checked, none of 48 jobs had produced a video. The old address now opens the Connections screen, and about 680 KB of rendering files are gone from the package.
+- YouTube Shorts is no longer offered as a connection, because it only published videos made in Video Studio.
+
+---
+
+## [2.169.1] - 2026-10-31  ·  _Patch_
+**Every Social Account Shows in the Footer, and Test Copies Never Post**
+
+### Fixed
+- Social accounts entered under Settings → Social media now appear in the footer of every theme. Themes used to show a fixed set of four to seven networks, so accounts such as LinkedIn, Bluesky, Mastodon or Threads were never shown, and in some themes none appeared at all.
+- A local or test copy of a site (localhost, an internal network address, .test or .local) no longer posts to social networks. When a live database was copied to a local machine, its connected accounts came along and the local copy could publish posts linking to localhost addresses.
+
+---
+
+## [2.169.0] - 2026-10-31  ·  _Minor_
+**Problems Now Come With the Fix, and Google Analytics Counts Each Visit Once**
+
+### Improved
+- SEO Status now tells you what to do for every problem and fixes the safe ones with one click (clearing stale caches, moving a file that hides your real web app manifest aside), with a direct link to the right setting for the rest.
+- When a CDN in front of your site blocks the site's own checks (for example Cloudflare and Hostinger CDN switched on together), SEO Status and the SERP identity check measure directly from your server and show a single card with the real cause and the steps to fix it, instead of a dozen misleading critical errors.
+- The Google integration settings open with a status overview of Search Console, Analytics, AdSense and PageSpeed, then walk through the steps in order; expert options are tucked away at the bottom.
+- ZeroTrack now shows visitor countries without any setup. The country comes from Cloudflare when available and otherwise from the visitor's browser time zone; no IP database or third-party service is used.
+- Indexing actions (notify Bing and Yandex, resubmit the sitemap) now show their result inside the step you clicked, and the button shows that it is working.
+- The homepage slider uses each theme's own colour instead of a generic blue, the split layout no longer grows to the photo's full height, and the minimal layout no longer squeezes into the reading column. The Travel theme slider has a new editorial look with a centred serif headline and a numbered story strip.
+- About and Contact pages in the Travel theme have proper spacing between headings and paragraphs, and the About page heading is the page title.
+
+### Fixed
+- If the same Google Analytics ID was entered in Settings and also pasted as Google's full snippet into Custom scripts, every visit was counted twice after cookie consent. The duplicate snippet is no longer printed, the tracking code never loads a second time after consent, and the Analytics tab offers a one-click cleanup. Other code in Custom scripts (AdSense, other IDs, your own events) is left untouched.
+- Category, tag, author and archive pages in the Travel theme showed one full-width card per row and stretched to about 10,000 pixels. The card grid is back.
+- In dark mode a dark logo disappeared on the dark header. If no dark logo is uploaded, jekcms now creates a readable light version automatically and keeps the coloured parts of the logo.
+- The PageSpeed tab no longer ties up the admin panel or ends in a gateway timeout: measurements run in the background and the result appears when Google finishes.
+- A hidden anti-spam field on contact forms showed up as "Leave this field empty" in themes that style the form themselves.
+- The site name fallback no longer announces the site as "jekcms" when the Site name setting is empty; the domain is used instead.
+
+---
+
 ## [2.168.2] - 2026-10-17  ·  _Patch_
 **Sitemaps Are Checked Against Google's Rules Before They Go Out**
 
