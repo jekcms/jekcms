@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.1.1] - 2026-11-03  ·  _Patch_
+**One Clean Screen for AI Settings**
+
+### Improved
+- Settings → API now shows every AI provider in one list, each with its own logo. Open a row to enter its key, pick a model and test it. The order of the list is the fallback order.
+- Choose a default separately for content writing, helper jobs (SEO titles, alt text, social captions) and images.
+- The separate key fields, the extra open-model block and the second Gemini model box are gone; quotas and usage statistics sit at the bottom under Usage and limits.
+- The OpenRouter key for image generation is now entered in the same list instead of the AI Images settings.
+
+---
+
 ## [3.1.0] - 2026-11-03  ·  _Minor_
 **AI Pool: Open Models and Automatic Fallback**
 
