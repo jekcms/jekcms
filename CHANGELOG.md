@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.7] - 2026-11-03  ·  _Patch_
+**Better Phone Layouts Across Themes**
+
+### Fixed
+- Recipe theme: on phones the author, share, newsletter and table of contents boxes no longer appear as a narrow column before the article.
+- Health and Travel themes: a text site name (no uploaded logo) no longer turns into a squashed line or disappears in the header on inner pages.
+- Pets theme: the menu button now sits at the right edge of the header.
+- Trends, News, Entertainment and Minimalist themes: the site name in the header is no longer cut off as early, and the Trends dark mode switch takes less space.
+- Trends theme: article and archive images are landscape on phones instead of tall strips; page headers no longer show a half background panel.
+- Minimalist theme: sidebar widgets on phones take the full width in one column.
+- Personal, Lifestyle and Finance themes: removed the scroll hint on phones, put the article details on one line, and the breadcrumb no longer breaks word by word.
+- Travel theme: the contact page no longer shows a broken image when no demo images are installed.
+- The "Replying to: Cancel" chip in comment forms no longer shows before you click Reply.
+
+---
+
 ## [3.0.6] - 2026-11-03  ·  _Patch_
 **Redesigned Featured Sliders and a Simpler Licence Screen**
 
