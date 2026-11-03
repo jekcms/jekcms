@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.1.0] - 2026-11-03  ·  _Minor_
+**AI Pool: Open Models and Automatic Fallback**
+
+### Added
+- Settings → API has a new AI pool. If the default provider runs out of quota, is overloaded or cannot be reached, the request moves to the next connected provider. You set the order by dragging or with the arrows.
+- A provider that fails is moved to the back of the order for 10 minutes, so requests do not keep waiting on it.
+- New providers for open-weight models: DeepSeek, Qwen (Alibaba Cloud), Kimi (Moonshot AI), GLM (Z.ai), MiniMax, Mistral, OpenRouter, Cerebras, NVIDIA NIM, Hugging Face and Together AI. Several have a free tier.
+- Own endpoint: connect any OpenAI-compatible address, such as Ollama, LM Studio, vLLM or your own gateway. A key is optional.
+- Fetch models: each provider card lists the models your key can use, straight from the provider.
+
+### Fixed
+- When the default provider has no key but another provider does, the writing screens no longer report that AI is not connected.
+- Provider error messages no longer show your API key in the AI usage log.
+
+---
+
 ## [3.0.7] - 2026-11-03  ·  _Patch_
 **Better Phone Layouts Across Themes**
 
