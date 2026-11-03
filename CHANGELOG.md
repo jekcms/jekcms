@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.0.6] - 2026-11-03  ·  _Patch_
+**Redesigned Featured Sliders and a Simpler Licence Screen**
+
+### Improved
+- Every slider layout was redrawn: the slider no longer touches the menu, side panels lost their heavy frame and shadow, and the overlapping card in the magazine layout is gone.
+- The scattered dots, bars, counter and arrows are replaced by one navigation strip (slide number, progress and arrows) that sits in the same place in every layout.
+- Portrait images, such as tall recipe cards, are no longer cropped in wide frames, so the text printed on them stays readable.
+- Each theme draws the slider in its own style: the recipe theme uses a tall photo frame, and the finance rail uses thin dividers instead of thick grey bars.
+- The licence agreement screen now has three plain steps (what to know, the full text and acceptance) on a light page with dark mode support.
+
+### Fixed
+- The "Decline and sign out" button on the licence screen now signs you out; before, it only reloaded the page.
+
+---
+
 ## [3.0.5] - 2026-11-03  ·  _Patch_
 **Google Console Gets a Setup Wizard**
 
