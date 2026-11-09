@@ -8,6 +8,27 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.8.0] - 2026-11-09  ·  _Minor_
+**Phones: Tidy Headers, No Zoom on Forms, Steady Archive Pages**
+
+### Improved
+- All themes, phones: tapping a search, newsletter or comment field no longer zooms the page on iPhone. Safari zooms in on fields with text smaller than 16 px and stays zoomed; form fields are now 16 px on screens up to 900 px wide.
+- All themes, phones: the cookie banner no longer covers the open menu. It steps aside while the menu is open, comes back when the menu closes, and takes less room on small screens.
+- Header on phones: the search, theme and menu buttons always sit at the right edge. When the logo was an image (seen on Lifestyle, News, Entertainment and Finance sites), the buttons stood right next to the logo and the right half of the header stayed empty.
+- Archive pages (category, tag, author, search) keep still while they load. The above-the-fold styles written into the page are now collected separately for the home page, archive pages and posts; archive pages used to miss theirs and jumped on desktop (layout shift measured at 0.87).
+- Older iPhones and Macs (iOS 15 and earlier) show post images again: when the browser cannot open an AVIF image, it switches to the WebP copy saved with the upload.
+- Affiliate theme on phones: a review page opens with the product name, brand and score, followed by the photo and the buy button. The name used to sit below the photo, thumbnails and share buttons, about one and a half screens down. Small labels are 12 px, slider dots have a larger tap area and the home search box shows its full placeholder on narrow phones.
+- Travel theme on phones: the header is shorter and the Popular Destinations row fits the screen; the third continent was cut off at 390 px.
+- Finance theme on phones: the three figures under the home page heading sit in one row instead of breaking into a misaligned second line.
+- Tech theme on phones: a long site name wraps onto two lines instead of ending in an ellipsis.
+
+### Fixed
+- Recipes theme: the About page showed broken images for its recipe section covers and requested a background image that does not exist, leaving two errors on every visit.
+- Pets theme: the post image viewer no longer leaves an empty image in the page, and its close button is labelled in the site language.
+- Image sizes: when a card shows the medium size of an image, the size list no longer repeats the same file with two different widths.
+
+---
+
 ## [3.7.0] - 2026-11-09  ·  _Minor_
 **Site Trust: Honest Pages, Clean Alt Text, No Ads on Empty Screens**
 
