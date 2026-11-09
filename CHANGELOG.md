@@ -8,6 +8,126 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.7.0] - 2026-11-09  ·  _Minor_
+**Site Trust: Honest Pages, Clean Alt Text, No Ads on Empty Screens**
+
+### Added
+- AdSense Readiness, three new checks: Template claims (theme sentences on About, Contact and FAQ that the site cannot back up), Image alt text (alt text that reads like an image-generation prompt) and Title template (titles ending in the same phrase or carrying a year). Each one lists the affected posts and links to the editor.
+- Content quality gate: before publishing, a post gets a warning when its title contains a year, when its title ending repeats the pattern of three or more published posts, or when an image alt text reads like a prompt. Publishing is not blocked.
+
+### Improved
+- Recipes and Travel themes: About, Contact and FAQ pages no longer print ready-made first-person claims ("every photo is shot in our kitchen", "thousands of subscribers", camera brands, a fixed number of authors). When the page has content in Pages, that content is the page; otherwise the page shows the site's own data: authors, sections and recent posts.
+- Recipes theme: newsletter boxes use a neutral line ("Get new recipes by email. Unsubscribe at any time.") instead of claiming thousands of subscribers.
+- Imported posts: the import template now asks for alt text that describes what the image shows, and alt text is cleaned on publish so lighting, camera and "no text, no logo" phrases from the image prompt do not reach the page.
+- AdSense Readiness: when the host blocks requests named Googlebot from its own server (a common fake-bot shield) while the AdSense crawler gets through, the check reports it as information with a Search Console test link instead of a failure. When a manually placed ads.txt file declares a different publisher ID than the page, the check says which file to fix.
+- Mobile first paint, all themes: the shared mobile header stylesheet is written into the page instead of being fetched as a separate file. On phones it was the only stylesheet that held back the first paint, costing one extra server round trip.
+- Home page sliders no longer jump while the page loads: the shared hero slider keeps slides on top of each other from the first paint, and the Affiliate product slider gets its layout rules with the page. Before, every slide showed stacked until the stylesheet arrived (layout shift up to 0.9 on desktop).
+- Accessibility: footer legal links have a 32 px tap height on phones and stronger contrast, the form privacy note is easier to read, share buttons in the Minimalist theme and search buttons in the Lifestyle theme have names for screen readers, the Finance reading progress bar is labelled, Lifestyle footer headings follow the page heading order, and the Trends newsletter band and Affiliate review shelf no longer use ARIA roles their elements cannot carry.
+
+### Fixed
+- Ads are no longer loaded on screens without publisher content: 404 and 410 pages, maintenance, site search, login and account screens. The AdSense code pasted into the header used to load there too, which AdSense policy does not allow.
+- Links inside posts that point to a post not yet published (draft, scheduled or waiting in the content queue) or removed with 410 are shown as plain text until the target goes live. Readers and search engines used to land on 404 pages.
+- Travel theme: the FAQ sidebar and the hero slider no longer link to demo destinations that do not exist on the site (404), and the hero slider no longer shows demo author names.
+- Personal and Affiliate themes: the e-mail icon in the social links opens the mail app. The address was written without mailto: and produced a broken link on every page.
+- Travel and Recipes themes: live search results are built so that the page source no longer contains half-written link addresses that crawlers reported as 404.
+
+---
+
+## [3.6.2] - 2026-11-07  ·  _Patch_
+**Affiliate Article Header and Sidebar**
+
+### Improved
+- Affiliate theme, articles: the cover image sits beside the title in a fixed frame instead of full width under it. Tall cover images used to push the first paragraph a whole screen down.
+
+### Fixed
+- Affiliate theme, article sidebar: the author card, share buttons, table of contents and other widgets are styled as on product reviews. Share icons used to render hundreds of pixels wide and the contents list as plain text.
+
+---
+
+## [3.6.1] - 2026-11-07  ·  _Patch_
+**Affiliate Home Page Fixes**
+
+### Fixed
+- Affiliate theme, newsletter strip: the privacy note sits on its own line under the form. It used to squeeze the heading into a narrow column, one word per line.
+- Affiliate theme, Latest reviews: the card count rounds to full rows of four, so no single card is left alone on a second row.
+
+---
+
+## [3.6.0] - 2026-11-07  ·  _Minor_
+**Topic Icons for Categories and a Tidier Affiliate Home Page**
+
+### Added
+- Categories get topic icons: a set of 107 line icons (kitchen, home, smart home, audio, fitness, pets, travel, money and more) ships with jekcms and loads from your own site. A category without a chosen icon gets one that fits its name, in English or Turkish, so no theme shows a bare letter any more.
+- Pick the icon in Categories → edit, or for all categories at once in Customize → Home page → Category icons. Both use a searchable picker and write to the same place, so a choice made in one shows in the other. An uploaded category image still takes priority.
+
+### Improved
+- Affiliate theme, Latest reviews: equal compact product cards, four in a row, instead of one oversized lead card that took half the screen. On phones the cards scroll sideways in a single strip.
+- Affiliate theme, Latest articles: two columns of horizontal rows with a small image beside the title and summary. Tall pin covers used to make each card half a screen high.
+- Affiliate theme, newsletter section on the home page: a single slim strip with the form beside the text instead of a large box.
+
+---
+
+## [3.5.0] - 2026-11-06  ·  _Minor_
+**Link-in-Bio Page With Blocks, Click Statistics and a QR Code**
+
+### Added
+- Social → Bio page: a tab of its own for the single link in your Instagram, TikTok, YouTube and X profiles. Build the page from blocks and put them in any order: website button, link, product list, latest posts, featured post, newsletter form, heading, text and social icons. A phone preview sits next to the editor.
+- Links can be highlighted, and they can open and close on set dates, so a seasonal page appears and disappears without anyone touching the panel. Each block can be shown in every language or in only one.
+- Four looks (band, minimal, cards, dark) in the site's colour, with the site logo. The page loads nothing from outside services.
+- Views and clicks for the last 30 days, broken down by channel and by link. Choose the profile a link is for and the page builds it with the channel code; clicks on products carry the code on to the affiliate tag.
+- QR code of the profile link, ready to download for posters, cards and packaging.
+
+### Improved
+- Affiliate theme, Highest scores cards line up: score, badge, image, title and category sit at the same height on every card. Short badges used to sit next to the score and long ones below it, which pushed images and titles out of line.
+- Affiliate theme on wide screens: newsletter headings no longer break with loose line spacing, the second newsletter and the repeated stats are hidden when the page already shows them, footer links stay on one line with their counts, home page categories use the category colour instead of a letter badge, and slider product photos no longer show a white box.
+
+---
+
+## [3.4.0] - 2026-11-06  ·  _Minor_
+**Affiliate Theme Rebuilt for Phones**
+
+### Added
+- Affiliate theme, product reviews on phones: a buy bar slides up from the bottom once the top buy button scrolls out of view, with the product name, score and the store button. It steps aside when the footer comes into view.
+
+### Improved
+- Affiliate theme on phones: a product review now opens straight into the review. The sidebar with the score, buy button and newsletter used to come first, so readers scrolled more than two screens before the first sentence.
+- Category, search, tag and author pages list reviews as compact rows with a small image beside the text. A category of eight reviews went from eight screens to about two.
+- Home page on phones: the stats strip sits on one line, categories show in two columns, featured cards put the title under the photo instead of over it, and the hero slider uses readable text sizes and a larger product image.
+- The comparison table keeps the first column in place while the products scroll sideways. Its buttons, and those of the best-of list, pros and cons, specs and FAQ boxes, now use the theme colour instead of the plugin's default blue.
+- Headings inside reviews have tighter line spacing, the duplicate newsletter and repeated stats are hidden, and the menu has a single close button.
+- Social → link-in-bio page redesigned: the site logo on a band in the brand colour, a search box that finds an item by its number or name (the number from a video), category filters and bigger item numbers with a Check price label on every row. A link like /bio?item=37 opens the page on that item. The logo used to show as a letter on sites whose logo is stored as an icon or a generated SVG.
+
+### Fixed
+- Site icon: /favicon.ico and /favicon.svg now serve the icon uploaded under Settings → Branding. The package's own favicon.svg (the jekcms mark) was served instead, so browsers, Google results and link previews showed the jekcms icon on sites that had uploaded their own.
+- Social → Connections → Facebook: when the account manages several Pages, the Page matching the site's name or domain is chosen. It used to take the first Page in the list, which could be another site's Page.
+- Affiliate theme default texts no longer say the products are tested hands-on.
+- Affiliate theme, About page: when the page has no content of its own, the fallback text now describes a review site (what it covers, how reviews are put together, how the site is funded). It used to show a personal-journal text about software and productivity.
+
+---
+
+## [3.3.0] - 2026-11-05  ·  _Minor_
+**Short Videos From Product Reviews**
+
+### Added
+- Product Reviews → edit a product: when the site is connected to the video server (Social → Video), a Product video box appears. It makes a vertical infographic video from the review's own features, pros and cons, spec table and score, with a matching cover. Prices are never shown in the video.
+- Three templates (Burst, Grid, Poster). Choose one, or all three: the script and narration are written once and used in three different designs, so each network can get its own version of the same product.
+- Finished product videos appear in Social → Video with the post videos, ready to preview, download and send.
+
+---
+
+## [3.2.0] - 2026-11-05  ·  _Minor_
+**Affiliate Channels, Cleaner Click Counts and Products in the Link-in-Bio Page**
+
+### Added
+- Affiliate Links → Programs: add a separate tag for each channel (for example yt=yoursite-yt-20). Share a /go/ link with ?c=yt and that channel's tag is used, so your Amazon report shows which channel brought the sale. The click log records the channel as well.
+- Social → Settings → Link-in-bio page can now list your latest product reviews with their numbers. When a short video says "item 12", viewers find it there. Give the profile link as /bio?c=ig and the buttons carry the Instagram tag.
+- REST API: new /api/v1/products endpoint to list, create, update and delete product reviews. Store links are mapped to Affiliate Links on save, exactly as in the panel.
+
+### Fixed
+- Affiliate click counts no longer include page scanners: a visitor opening more than three different links within ten seconds, link-preview HEAD requests and browser prefetches are counted as bots. The redirect still works for them.
+
+---
+
 ## [3.1.1] - 2026-11-03  ·  _Patch_
 **One Clean Screen for AI Settings**
 
