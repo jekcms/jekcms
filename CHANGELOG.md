@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.10.0] - 2026-11-10  ·  _Minor_
+**New News Theme: A Newspaper Front Page**
+
+### Added
+- News theme 3.0, rebuilt from scratch for news sites. The top bar shows the date and the latest headlines; below it sit a centered masthead and a menu row between thin rules. On phones a strip of sections scrolls sideways under the menu.
+- News theme, home page: a front package with the lead story's headline and summary beside a large photo, two stories next to it and a row of four below; then the latest stories, section blocks, a "Don't miss" pair, an "In brief" list of short headlines, a dark "Featured" band, a numbered most-read list and a newsletter band. Stories already shown higher up are not repeated while fresh ones are left.
+- News theme, footer: the masthead with today's date, a section index listing each section's latest headlines, a short description with About and Contact buttons, and the legal links.
+- News theme: an article page with a clear byline, update time and photo caption, an opinion row for sites with an opinion or column category, and an 18-story sample pack with its own cover illustrations.
+
+### Improved
+- News theme updates keep your saved settings: colors, fonts, menu layout, sidebar choices, breaking-news banner and footer texts carry over to the new design.
+
+---
+
 ## [3.9.0] - 2026-11-10  ·  _Minor_
 **New Tech Theme, Cleaner Legal Pages in Every Theme**
 
