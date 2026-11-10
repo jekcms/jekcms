@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.9.0] - 2026-11-10  ·  _Minor_
+**New Tech Theme, Cleaner Legal Pages in Every Theme**
+
+### Added
+- Tech theme 3.0, rebuilt from scratch for technology news sites. Home page: a cover mosaic with headlines set on the images, topic circles you can tap to open a category, a rotating bar of the latest headlines, a numbered most-read band and a newsletter band.
+- Tech theme, post page: the text runs as wide as the cover image; the contents box shows how far you have read; once you scroll, a slim bar keeps the site logo (links home), the post title (back to top), search, light/dark switch and the menu within reach.
+- Tech theme: designed sidebar boxes (most read, categories, tags, newsletter), a four-column footer and its own legal page with a contents rail that marks the section you are reading, numbered sections and a print button.
+
+### Improved
+- Legal pages in all themes follow the theme's colors in light and dark mode, show one contents list and one number per section, keep wide tables inside a scrolling box on phones and no longer repeat the page title at the top of the text.
+- Theme updates now remove files the new theme version no longer uses. Copying an update never deleted anything, so a leftover section file from the old version could take the place of the current one.
+- Sticky contents box: when a theme has a bar above a sticky header, the box now stops below the header instead of sliding under it.
+
+### Fixed
+- Personal theme legal pages showed two contents lists and numbered each heading three times ("01 1. Cookies"); on phones a table pushed the page sideways and the section numbers were hard to read in light mode.
+- Legal pages in the shared template left a white block in dark mode, and the Entertainment theme printed a white title on a white background.
+- Sample content: when a demo pack's cover images change, they get new file names, so visitors no longer see the old images from the browser or CDN cache.
+
+---
+
 ## [3.8.0] - 2026-11-09  ·  _Minor_
 **Phones: Tidy Headers, No Zoom on Forms, Steady Archive Pages**
 
