@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.13.0] - 2026-11-11  ·  _Minor_
+**AdSense Readiness Measures Search Demand, a Weekly Backlink Assistant, a Clearer Affiliate Theme**
+
+### Added
+- AdSense Readiness has a new first step, "How search engines see the site". From your own visit log it measures visits from Google per day, the share of posts that get at least one search visit, and whether Google shows the site less than other search engines. While Google sends less than one visit a day the verdict is never "ready", however complete the rest of the checklist is.
+- "Narrow the showcase" screen in AdSense Readiness: lists posts with no search visits and archives or restores them in bulk. An archived post keeps its address and internal links keep working; it leaves the home page, categories, search, related posts, the feed and the sitemap, and its page is marked noindex. Content and dates are not changed.
+- Posts have a new visibility, "Archived", in the editor.
+- Traffic plugin, Backlinks tab: a weekly assistant. It picks a few step-by-step tasks for your site's language and topic (Turkish communities and news platforms for Turkish sites; subreddits, journalist requests and directories for English sites), shows how long each takes, and tracks done and skipped tasks. Repeating tasks come back when due.
+- Backlink assistant drafts: with AI set up, each task can draft a profile text, a community answer or a pitch email from your site's own details. The assistant never posts anywhere for you.
+- Dashboard: a "This week's backlink tasks" card when the Traffic plugin is on.
+
+### Improved
+- Affiliate theme 1.10: the "Check price" button on product cards is a filled 44 px button, the lead slide shows its "Read full review" button as soon as the page opens, and on phones the buy bar is visible from the first screen of a review.
+- Affiliate theme: a neutral white background with pink kept for scores and buttons, darker secondary text, larger card titles, labels in regular sentence case and plain rank numbers.
+- Settings, Social Media is split into two inner tabs, Profiles and Bio page.
+
+---
+
 ## [3.12.0] - 2026-11-11  ·  _Minor_
 **Bio Page for Every Site, Managed From Settings**
 
