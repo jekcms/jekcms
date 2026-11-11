@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.12.0] - 2026-11-11  ·  _Minor_
+**Bio Page for Every Site, Managed From Settings**
+
+### Added
+- Settings, Social Media now has a Bio page section: turn the page on or off, pick one of five looks, choose the accent color and tick what the page shows (social icons, website button, your links, latest posts). The page lives at /bio and works with any theme.
+- Turning the bio page on from Settings also activates the Social plugin when it is off, so there is no separate step.
+- Bio page: a new "Solid color" look that fills the page with your accent color.
+
+### Improved
+- The Settings section and the Bio page editor under Social read and write the same settings; links, their order, click counts and the QR code stay in the editor.
+- Bio page: without a color of its own it now follows the primary color of the active theme, buttons pick a readable text color on light accent colors, and section titles are set in regular sentence case.
+
+---
+
 ## [3.11.0] - 2026-11-11  ·  _Minor_
 **Seven Themes Redesigned, Each With Its Own Typeface and Shape**
 
