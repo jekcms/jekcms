@@ -8,6 +8,29 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.11.0] - 2026-11-11  ·  _Minor_
+**Seven Themes Redesigned, Each With Its Own Typeface and Shape**
+
+### Added
+- Crypto theme 3.0: a price strip tinted by the day's move, a market map with a price table, real coin icons, step-by-step guides and a risk note on articles.
+- News theme 4.0, for a blog that covers the news of one sector: the lead headline sits on a color panel beside its cover, an "On the agenda" list runs next to the second row, and headlines use the serif of the reading text while menus and labels stay sans.
+- Finance theme 3.0: a mint lead band, topic boxes with a one-line description each, and a calculator block with three tools (savings growth, loan installment, 50/30/20 budget). Headings are set in a slab serif.
+- Pets theme 2.0: a full-width yellow lead band with a tilted, framed photo, round species photos that open their category, a "how old in human years" tool and a vet note box. Headings use a rounded typeface and every corner is soft.
+- Tech theme 4.0: a lead grid that mixes photo tiles with flat color tiles, a password strength checker block, wide headings and sharp corners.
+- Entertainment theme 2.0: a dark band with upright posters, condensed poster-style headlines, star rating and five reactions under each post, and a "pick one for me" block that draws a random post.
+- Minimalist theme 2.0: the site description opens the home page in large serif type, the lead story shows its text before its image, and posts follow as a quiet index with small images. Black and white with a single accent color, square corners.
+
+### Improved
+- The seven themes no longer share one look: each has its own heading typeface and its own corner shape, from square (Minimalist, Tech) to fully rounded (Pets). Card corner radius and both fonts can still be changed in the customizer.
+- Updating to the new versions keeps saved theme settings: colors, fonts, menu and sidebar choices and footer texts carry over.
+- When you pick a light primary color, buttons and links that use it now choose a readable text color on their own.
+
+### Fixed
+- Sidebar designs "boxed", "clean", "cards" and "dark": a theme's colored newsletter box lost its background and its text became hard to read.
+- Sidebar "pill" title style: the title text could blend into its background in some themes.
+
+---
+
 ## [3.10.0] - 2026-11-10  ·  _Minor_
 **New News Theme: A Newspaper Front Page**
 
