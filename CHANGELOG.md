@@ -8,6 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.14.0] - 2026-11-12  ·  _Minor_
+**Your Own Admin Sign-in Address, Pinterest Video Pins, Store Links on Five Networks, an Ad Label**
+
+### Added
+- Settings, Security: an admin sign-in address of your choice. While it is set, /admin/login.php and the forgot-password page answer "not found" unless the browser came through your address first; password reset links from email keep working. If you forget the address, an empty file named .open-admin-login in the config folder opens the usual sign-in again.
+- Social & Video: short videos can be sent to a connected Pinterest account as video pins, with the video's own cover.
+- Social & Video, Settings: an ad label (for example "Reklam | Amazon") written at the start of every post text and title. In Türkiye this is what the advertising regulation asks of anyone promoting products for a commission.
+- The "where a link click goes" choice (post or store) now also covers Facebook, Threads, Bluesky and Mastodon, not only Pinterest.
+
+### Improved
+- With store links on, a comparison or guide post that has no product of its own links to the first reviewed product mentioned in its text, and the share carries one link instead of two.
+- Connection steps for YouTube, Facebook, Instagram, Threads and Mastodon rewritten against the current Google and Meta screens.
+- YouTube connect always shows Google's account chooser, so the account open in the browser is not picked silently.
+- Instagram connect no longer asks for the app ID and secret again when both are saved.
+
+### Fixed
+- Facebook: a Page owned by a business portfolio could not be connected ("no managed Page found").
+- A space or slash pasted at the end of an app ID made Google and Meta reject the connection; IDs are now trimmed on save.
+- Video links sent to Instagram and Threads expired after three days, so a queue spread over a longer time failed.
+
+---
+
 ## [3.13.0] - 2026-11-11  ·  _Minor_
 **AdSense Readiness Measures Search Demand, a Weekly Backlink Assistant, a Clearer Affiliate Theme**
 
