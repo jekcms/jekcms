@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.15.0] - 2026-11-12  ·  _Minor_
+**Growth Assistant: Five Tasks a Week, Worked Out from Your Own Site**
+
+### Added
+- The admin dashboard opens with "This week's tasks": up to five tasks picked every Monday from your own site's records. Each one shows the numbers behind it, how long it takes and one button that opens the right screen.
+- With Search Console connected, the assistant finds searches where you rank just below page one and the post that shows for them, posts on page one that nobody clicks, posts whose search clicks are falling, and two posts competing for the same search.
+- It also watches the site itself: posts that link to no other post, categories with no new post for two months, how long since the last post, posts that got no search visit in 90 days, the week's backlink task and posts without a search description.
+- Mark a task done, say it is not for you, or undo. A task disappears by itself when its cause is gone. A finished task is not suggested again for eight weeks.
+- Suggestions next to a task, written with your own AI key: three titles and a search description for a post that is not getting clicks, what to check in a post that is losing visits, five topics for a quiet category.
+- "Coming up" shows the tasks waiting behind this week's list.
+- An optional email every Monday with the week's list. It is off until you switch it on under the card.
+
+### Improved
+- The five setup steps (site name and description, logo, first category, first post, password) are now assistant tasks; the separate setup card is gone.
+- The week's backlink task is part of the same list instead of a card of its own.
+- Free edition: the first task of the week is shown in full; the others show only their kind until you move to a paid plan.
+
+---
+
 ## [3.14.0] - 2026-11-12  ·  _Minor_
 **Your Own Admin Sign-in Address, Pinterest Video Pins, Store Links on Five Networks, an Ad Label**
 
