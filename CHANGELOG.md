@@ -8,6 +8,29 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.16.0] - 2026-11-12  ·  _Minor_
+**A Quieter Admin Panel: Less Text, the Same Tools**
+
+### Added
+- A new admin home screen: four number tiles, this week's tasks in three columns (to do, up next, done), a visit chart with a period switch and one activity card with tabs for recent posts, drafts, most read and comments.
+- Tasks move to "Done" with the tick or by dragging the card. The reason for a task, how long it takes, the AI suggestion and "Not for me" open from the question mark on the card.
+- Upkeep items (backup, broken links, missing search descriptions, drafts) sit in the "Up next" column as one-line cards that open the right screen.
+- Themes: "Preview" opens the theme inside the panel with your own content, with desktop, tablet and phone sizes. Your site does not change while you look; visitors and your other tabs keep seeing the active theme.
+- Themes: a "Demo" button on each card opens that theme's live demo site in a new tab.
+
+### Improved
+- Less text on every admin screen: the sentence under a page or section heading and the description beside a setting now open from a small question mark next to the name. Hover on a computer, tap on a phone.
+- Dashboard notices (update available, email not sending, last year in titles) are one line each: a short title, a question mark for the details and one button.
+- Traffic and Distribution: each automatic channel is a box with its name, last result and on/off switch; the check-up and the feed addresses sit side by side.
+- Indexing is now a step-by-step wizard: only the next unfinished step is open, the others are single lines with their state.
+- Backlink tasks of the week fold the same way: the first task is open, the rest are one line each.
+- Plugins: cards show the name, version and state; the description opens from the question mark.
+- AI Visibility: explanations moved behind question marks and empty cards say one short thing.
+- Activating a theme or going back to the previous one asks in a small window on the page instead of the browser's own alert.
+- Cloudflare setup folds into steps the same way, and buttons across the panel keep their label when you hover over them.
+
+---
+
 ## [3.15.0] - 2026-11-12  ·  _Minor_
 **Growth Assistant: Five Tasks a Week, Worked Out from Your Own Site**
 
