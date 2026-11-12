@@ -8,6 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.17.0] - 2026-11-12  ·  _Minor_
+**Content Studio, Reworked from Start to Finish**
+
+### Added
+- AI Draft: choose the tone, length and language for each draft on the form. Until now only the defaults under Settings were used.
+- AI Draft: while the draft is being written the panel shows a waiting state with the elapsed time; when it is ready you see the word count and a "Write again" button.
+- Content Queue > Import: connect a Google sheet right on the card. Paste the sheet's address, enter the API key and the tab name. There was no screen for these settings before.
+- Confirmations across the admin panel (delete, clear, activate and similar) now open in a small window on the page instead of the browser's own alert.
+
+### Improved
+- Content Studio home: four ways to create at the top (new post, AI draft, Content Wizard, Trend Content), then the next step, four numbers and the calendar. Three overlapping readiness lists became one list that shows only what is missing.
+- The studio menu is a row of tabs above the page instead of a side rail, so every studio screen has more room. Tab names now match the page titles.
+- Content Wizard: the notes under each field moved behind a question mark next to the field name.
+- Trend Content: the dense information line became four number tiles with the details one click away.
+- Bulk Plan: the n8n connection details fold away until you need them.
+
+### Fixed
+- With the Recipe Card plugin switched on, the wizard treated every site as a recipe site and could write recipe-style posts on a tech or personal blog. The content type now follows the theme; the plugin decides only on a general-purpose theme that already has recipes.
+- The reschedule window in Bulk Plan was English only; it now follows the panel language.
+
+---
+
 ## [3.16.0] - 2026-11-12  ·  _Minor_
 **A Quieter Admin Panel: Less Text, the Same Tools**
 
