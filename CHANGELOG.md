@@ -8,6 +8,26 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.18.0] - 2026-11-13  ·  _Minor_
+**ZeroTrack Analytics: Clearer Charts and Correct Social Numbers**
+
+### Added
+- ZeroTrack overview: a new chart with page views as a line and unique visitors as a dashed line. Hover it on a computer or touch it on a phone to read a day's numbers.
+- ZeroTrack settings: download the daily numbers (page views, unique visitors, sessions) as a CSV file.
+
+### Improved
+- Top pages show the post title instead of the raw address, and long lists show the first eight rows with the rest one click away.
+- Earning pages: each page's conversions are drawn as one segmented bar by kind, with the breakdown on hover, instead of a line of text.
+- Countries are written by name, and numbers follow the panel language (1.604 in Turkish, 1,604 in English).
+- The privacy note and the source cards became single lines with the details behind a question mark.
+
+### Fixed
+- Visits from Pinterest and Reddit were counted as X in "From social media", because their addresses contain the letters of X's short link domain. Sources are now matched by the whole domain name.
+- On a phone the "How posts are trending" rows ran past the edge of the card; they now stay inside it.
+- Links in the top pages list opened the wrong address on sites installed in a subfolder.
+
+---
+
 ## [3.17.0] - 2026-11-12  ·  _Minor_
 **Content Studio, Reworked from Start to Finish**
 
