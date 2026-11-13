@@ -8,6 +8,25 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.1] - 2026-11-13  ·  _Patch_
+**Trend Content: Accurate on English Sites, Faster When an AI Model Is Busy**
+
+### Improved
+- On English sites, question words are now added after the topic ("headphones how to", "headphones vs", "headphones for") and the title is put in reading order: "over ear headphones how to clean" becomes "How to Clean Over Ear Headphones".
+- Words that name a kind of post (review, guide, comparison, best) are removed from research topics, so a focus keyword such as "owala freesip review" is researched as "owala freesip".
+- One-word category names ("Home", "Audio") are no longer researched once your posts have given enough topics of their own.
+- If the AI does not answer for part of a research, the strongest topics of that part still reach the list, picked by rule.
+- A Gemini model that was busy or silent is skipped for 15 minutes, so the following requests go straight to the next model.
+- The notice shown without an AI key is one short line: "Connect an AI key for the best results".
+
+### Fixed
+- On English sites, searches unrelated to the site were listed as topics: a word such as "career" was read as "care", and a single ordinary word shared with some post title ("watch", "air") was enough for a trending search to count as a fit.
+- Google sometimes completed a topic into a different word ("cat care" into "cat career"); such completions are now dropped.
+- When a Gemini model accepted a request and never answered, the AI request failed after the full waiting time instead of moving to the next model. Research with an AI key could take minutes and return only a few topics.
+- In the subheading plan without AI, two nearly identical questions could both be listed.
+
+---
+
 ## [3.20.0] - 2026-11-13  ·  _Minor_
 **Trend Content: Long-Tail Topics From Your Own Niche, With or Without an AI Key**
 
