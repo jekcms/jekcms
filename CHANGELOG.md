@@ -8,6 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.19.0] - 2026-11-13  ·  _Minor_
+**ZeroTrack: Bot Traffic Found, Left Out of the Numbers and Blocked in One Click**
+
+### Added
+- ZeroTrack finds bot sources on its own. When every visit from a referring site is a single page, each from a different IP address, from one kind of device and without a single click, that site is treated as a bot source.
+- Bot visits are left out of every number on the overview and out of "Where visitors come from". They are listed in a new "Bot traffic" section with how many visits, how many IP addresses and over which days.
+- "Block on the site": requests arriving with those referrers are refused before a page is produced. It needs no extra service, does not affect visits without a referrer and can be removed at any time.
+- With Cloudflare connected, "Block at Cloudflare" sets a security rule in one click: visitors arriving with those referrers go through Cloudflare's challenge, so bots never reach your server. Your own rules are left alone.
+- Without Cloudflare, the section tells you what to do next: set Cloudflare up, or connect the account if your site already uses it.
+- "Not a bot" puts a source back into the numbers if it was marked by mistake.
+- Overview: a bar shows how sessions entered the site (search engines, social networks, direct, AI assistants, other sites), each session counted once.
+
+### Improved
+- ZeroTrack overview has a new layout: a large box with page views and the chart, three boxes beside it for unique visitors, sessions and bounce rate, then sources, most read posts, trends, devices, countries and social networks as cards.
+- Earning pages follows the same layout: total conversions with their split by kind in the main box, four number boxes beside it, and what is being measured in one row.
+- Percentages follow the panel language (%8,6 in Turkish, 8.6% in English).
+
+### Fixed
+- On Earning pages the AdSense source card broke when it carried a button: the text and the button wrapped into each other.
+
+---
+
 ## [3.18.0] - 2026-11-13  ·  _Minor_
 **ZeroTrack Analytics: Clearer Charts and Correct Social Numbers**
 
