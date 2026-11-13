@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.2] - 2026-11-13  ·  _Patch_
+**Trend Content: English Title Case, Shorter Angles, Steadier Competitor Search**
+
+### Improved
+- Titles and subheadings on English sites follow English title case: "Over-Ear and On-Ear Headphones vs. In-Ear".
+- The angle the AI writes for each topic is a short, concrete statement of what your post should bring, instead of a sentence beginning "This article will".
+- "Topics competitors cover that your plan lacks" no longer lists page furniture such as "Conclusion" or "Related posts".
+
+### Fixed
+- The competitor search sometimes came back empty and the report said no competitors were found; it now tries once more.
+
+---
+
 ## [3.20.1] - 2026-11-13  ·  _Patch_
 **Trend Content: Accurate on English Sites, Faster When an AI Model Is Busy**
 
