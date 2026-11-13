@@ -8,6 +8,31 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.0] - 2026-11-13  ·  _Minor_
+**Trend Content: Long-Tail Topics From Your Own Niche, With or Without an AI Key**
+
+### Added
+- Trend Content research now works without an AI key. Topics are picked, scored and titled by rule; the weekly automatic research runs without a key as well. With a key the AI still writes the title and an angle for your site.
+- Opportunity score (0 to 100) on every topic, built only from evidence: niche fit, how long the search is, whether it asks or compares, how early Google completes it, how many separate searches led to the same topic, and whether it shows in Search Console.
+- Subheading plan without an AI key: what people search on the topic, with repeats and noise removed, put in reading order (what it is, how, why, which one). Headings that ranking pages use fill the gaps.
+- Filter the topic list by intent: how-to, definition, comparison, list, buying, informational.
+- A box on the page shows which topics the research asks Google about, so you can see what your niche looks like to the system.
+
+### Improved
+- Research seeds come from what your site actually writes about: your focus keywords, tags used by several posts, word pairs that recur in post titles, and categories that have posts. Before, category names alone were asked to Google, which brought back unrelated searches.
+- Each seed is asked with more question words (how, what, why, best, which), so more long-tail searches come back.
+- Searches that are not post topics are dropped: local and for-sale searches, school homework and exam questions, downloads, spelling and lyrics. Searches outside your niche and broad two-word searches no longer reach the list.
+- One strong topic can no longer fill the whole list; topics from different seeds are mixed.
+- Trend Content has a new layout: a large box with the number of topics and their split by intent, four number boxes beside it, then topic cards with the score, the search phrase and where it comes from.
+- Your own subheading is typed into a field in the page instead of a browser prompt.
+
+### Fixed
+- Topics found through Google's completions showed a number such as "120+" that was not a search volume. Numbers are now shown only where they are measured: Search Console impressions and the daily trend list.
+- If Google's suggestion service cannot be reached, the research says so and can be repeated, instead of being recorded as finished with almost no topics.
+- Categories without posts were used as research topics.
+
+---
+
 ## [3.19.0] - 2026-11-13  ·  _Minor_
 **ZeroTrack: Bot Traffic Found, Left Out of the Numbers and Blocked in One Click**
 
