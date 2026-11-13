@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.3] - 2026-11-13  ·  _Patch_
+**Security: Private Folders Keep Their Own Lock**
+
+### Improved
+- The folders that hold logs, backups, cache files and database files now each carry their own access block. Until now they were protected by the site's main rules file alone; if that file was replaced or stopped being read, the files inside could be opened from outside.
+- Missing blocks are added by themselves the next time you open the panel. A rules file you placed in one of these folders yourself is left as it is.
+
+---
+
 ## [3.20.2] - 2026-11-13  ·  _Patch_
 **Trend Content: English Title Case, Shorter Angles, Steadier Competitor Search**
 
