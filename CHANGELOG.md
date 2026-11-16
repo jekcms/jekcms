@@ -8,6 +8,30 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.5] - 2026-11-16  ·  _Patch_
+**Social: Every Post Goes Out Once, Evenly Spaced, and Delays Show**
+
+### Improved
+- Spacing between two posts on the same network, each network's daily limit and the daily total limit now apply at the moment of sending. When a delayed queue opens, posts no longer go out to the same network seconds apart.
+- A new item gets the earliest suitable time instead of being placed after the last item in that network's queue. Before, a busy queue could plan a post for Instagram two weeks ahead without saying so.
+- The Queue screen has a new Queue health section: for each network, how many items are queued and late, how many can go out per day and how many come in per day. When more comes in than can go out, it says the queue grows every day and links to the limit setting.
+
+### Fixed
+- A post could be shared twice. When two background runs picked up the same queue item, one could put an already published item back in the queue; the same YouTube video could be uploaded twice. An item now changes state only from the state it was expected to be in, and a run reads the item afresh before it starts.
+- Videos for Instagram Reels, Threads and Pinterest no longer fail with "timed out" after waiting their turn. The time limit for a network to finish processing a video now starts when the upload starts, not when the item was first planned.
+- A video file kept on the site is no longer removed while its upload is still in progress.
+- An AI request now stays within its time limit when Gemini is slow. Each fallback model used to get the full time again, so writing one image's alt text in the SEO optimizer could take over 90 seconds; it now falls back to the file-name text in time.
+
+---
+
+## [3.20.4] - 2026-11-13  ·  _Patch_
+**Security: Pre-Update Backup Names Cannot Be Guessed**
+
+### Improved
+- The backup taken before each update used a file name made of the date and time only. The name now also carries a random part, so it cannot be guessed. Backups you create from the Backups page already worked this way.
+
+---
+
 ## [3.20.3] - 2026-11-13  ·  _Patch_
 **Security: Private Folders Keep Their Own Lock**
 
