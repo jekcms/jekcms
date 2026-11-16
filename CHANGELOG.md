@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.6] - 2026-11-16  ·  _Patch_
+**Social: Mastodon Posts Carry Images and Videos**
+
+### Improved
+- Mastodon posts now carry the post's image with alt text. They used to go out as plain text, and a link to a store such as Amazon showed no preview card either.
+- Short videos can now be sent to Mastodon from Social & Video → Video, by hand or automatically. The post waits while the server processes the video and goes out once it is ready.
+- A network now runs one upload at a time, so several videos that finish processing together no longer appear back to back.
+
+---
+
 ## [3.20.5] - 2026-11-16  ·  _Patch_
 **Social: Every Post Goes Out Once, Evenly Spaced, and Delays Show**
 
