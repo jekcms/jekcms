@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.7] - 2026-11-17  ·  _Patch_
+**Newsletter: A Cleaner Email Design and a Working Confirmation Link**
+
+### Improved
+- Subscription, welcome, unsubscribe and new-article emails have a new, plainer design: your site's logo at the top (or its name when the logo is an SVG, which mail apps do not show), a simple heading, a square button in your brand color and a short footer. The confirmation email also shows the link as text in case the button does not work.
+- Email footers now follow the site language; Turkish emails no longer end with an English footer. A reader without a name on file is greeted with a simple "Hi,".
+- Templates you have not edited update to the new design on their own; templates you edited stay as they are.
+
+### Fixed
+- Clicking the confirmation link in the subscription email showed a server error. The subscription was activated, but the welcome email was not sent and the reader saw an error page. The link now confirms, sends the welcome email and shows the thank-you page.
+
+---
+
 ## [3.20.6] - 2026-11-16  ·  _Patch_
 **Social: Mastodon Posts Carry Images and Videos**
 
