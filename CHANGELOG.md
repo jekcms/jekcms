@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.8] - 2026-11-17  ·  _Patch_
+**Newsletter: Your Logo in Every Email and a Richer Weekly or Monthly Digest**
+
+### Added
+- Newsletter → Settings has a new Email look section where you can upload an email logo (PNG or JPG). A square icon is shown with the site name next to it; a wide logo stands on its own.
+
+### Improved
+- Without an email logo, emails use the site logo. When the site logo is an SVG, which mail apps do not show, a PNG copy is made automatically.
+- The automatic weekly or monthly digest now has sections: featured articles, the most read articles of the period (from the site's own visit counts), new articles, and newly reviewed products when Product Reviews is active. An article appears in only one section, and nothing is sent when there is nothing new.
+- The Automatic digest item on the newsletter dashboard now opens the digest settings directly.
+
+---
+
 ## [3.20.7] - 2026-11-17  ·  _Patch_
 **Newsletter: A Cleaner Email Design and a Working Confirmation Link**
 
