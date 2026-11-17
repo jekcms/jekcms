@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.20.9] - 2026-11-17  ·  _Patch_
+**Newsletter: Images and a Lead Story in the Digest**
+
+### Improved
+- The first article of the digest is shown as a lead story with a large image, a longer summary and a read link; the rest are listed with a small image. Product photos are fitted on white instead of cropped.
+
+### Fixed
+- Article images did not appear in the weekly or monthly digest. The digest now uses an email-ready JPG copy of each featured image, made once and kept on the site, because mail apps such as Outlook and Gmail do not show the AVIF and WebP files the site uses.
+
+---
+
 ## [3.20.8] - 2026-11-17  ·  _Patch_
 **Newsletter: Your Logo in Every Email and a Richer Weekly or Monthly Digest**
 
