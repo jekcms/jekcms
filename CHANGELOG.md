@@ -8,6 +8,19 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.24.1] - 2026-11-18  ·  _Patch_
+**Page Builder: A Professional Control Set and a Proper Image Library**
+
+### Improved
+- Design choices are now tiles with a small drawing that shows what each one does: spacing, alignment, width, card style, button shape and style, image ratio, pattern, animation, heading size and weight.
+- On and off settings are switches. Number settings show the value with its unit above a filled slider, with one click back to automatic. Colours have a chip, a code field and a row of ready colours.
+- Tabs, groups and field labels carry icons. The image field is a large preview you click, with Change and Remove on it.
+
+### Fixed
+- The image picker showed empty grey boxes for library records whose file was no longer on the server. It is now a proper library: thumbnails with names, search, upload by button or by dragging a file in, and missing files are left out.
+
+---
+
 ## [3.24.0] - 2026-11-18  ·  _Minor_
 **Page Builder: A Simpler Editor, Saved Sections and Landing Pages without the Theme Header**
 
