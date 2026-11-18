@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.22.0] - 2026-11-18  ·  _Minor_
+**Page Builder: 38 Sections and Full Control over the Design**
+
+### Added
+- 26 new sections, 38 in total: page header, customer logos, free columns, timeline, single image, alternating image and text rows, image cards, pull quote, spacer and divider, announcement banner, button row, trust bar, certificates, latest posts, video, map panel, table, comparison, price list, opening hours, review score, call to action with image, newsletter signup, contact form, countdown and social profiles.
+- You decide how each section looks. Set the space above and below in pixels, pick your own background, text and accent colours, put a photo behind a section and choose how dark it gets, set the corner radius, the button shape (pill, rounded, square), style (filled, outline, soft) and size, the heading and text size, the content width, the alignment and a minimum height.
+- Page design: one panel sets the accent colour, corners, buttons, type sizes, spacing and content width for the whole page. Any section can still choose differently.
+- The contact form and newsletter sections use the forms your site already has, with the same spam protection and privacy notice. The latest posts section follows your categories.
+
+### Improved
+- A page loads only the styles of the sections it uses, so adding more section types does not slow pages down.
+- Sections you built earlier keep their look. Nothing changes until you change it.
+
+---
+
 ## [3.21.0] - 2026-11-18  ·  _Minor_
 **Page Builder: Build Pages from Ready Sections**
 
