@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.23.0] - 2026-11-18  ·  _Minor_
+**Page Builder: Ready Page Templates, Modern Sections and Undo**
+
+### Added
+- Ready page templates. Start a company home page, a landing page, an about page, a services page, a pricing page, a contact page, a restaurant page or a clinic page in one click, then change any section.
+- 12 new sections in a modern style, 50 in total: bento grid, moving logo strip, tabs, product showcase with a browser frame, testimonial wall, pricing with a monthly and yearly switch, connected steps, spotlight features, boxed call to action, number bento, questions with a side panel and an icon grid.
+- Undo and redo, with Ctrl+Z and Ctrl+Shift+Z. A toolbar on the selected section moves, duplicates or deletes it and adds a new section above or below it.
+- More control over the look: gradient backgrounds with two colours and an angle, background patterns (grid, dots, lines, glows), card style (outlined, filled, elevated, plain), image ratio, heading weight and letter case, heading and text font, separate spacing and alignment for phones, and an entrance animation as sections scroll into view.
+- Design presets set a whole page to a coherent style in one click: Balanced, Modern, Sharp, Soft, Editorial and Bold. Copy the look of one section onto another, or onto every section.
+
+### Improved
+- The space you type above or below a section is applied exactly on desktop.
+- All cards on a page follow the card style you choose, so a page stays consistent from the first section to the last.
+
+---
+
 ## [3.22.0] - 2026-11-18  ·  _Minor_
 **Page Builder: 38 Sections and Full Control over the Design**
 
