@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.21.0] - 2026-11-18  ·  _Minor_
+**Page Builder: Build Pages from Ready Sections**
+
+### Added
+- A visual page builder. Open any page, choose Open the builder, and put the page together from ready sections while you watch it in your own theme: intro, services, image and text, figures, customer reviews, pricing, team, gallery, questions and answers, call to action, contact details and plain text.
+- Each section has several designs and its own look settings: background, spacing, width, alignment, a link name for menu jumps, and hide on phones or on desktop. Sections can be dragged into a new order, duplicated or removed.
+- Changes are kept as a draft until you press Publish, so visitors never see a half-finished page. Desktop, tablet and phone previews are one click apart.
+- A page built this way can be set as the home page under Settings, Reading. That is how a company site or a landing page is made with any of the themes.
+
+### Improved
+- Pages that do not use the builder are unchanged. Turning the builder off returns a page to the theme layout and keeps its sections for later.
+
+---
+
 ## [3.20.9] - 2026-11-17  ·  _Patch_
 **Newsletter: Images and a Lead Story in the Digest**
 
