@@ -8,6 +8,22 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.24.0] - 2026-11-18  ·  _Minor_
+**Page Builder: A Simpler Editor, Saved Sections and Landing Pages without the Theme Header**
+
+### Added
+- A simpler editor. Each section now has three tabs: Content, Design and Advanced. Design shows the choices you reach for most as pictures and even buttons: background swatches, pattern, spacing from S to XL, alignment, width, cards, corners and button shape. Everything detailed lives in Advanced, in groups that stay closed until you open them.
+- The Add section window has a search box, categories and a small drawing of every section, so you can pick by looking. Ready templates show a live miniature of the real page before you choose.
+- Saved sections. Save any section with a name and reuse it on other pages from My saved sections.
+- Landing pages without the theme frame: hide the theme header, the footer or both for a single page, under Page design.
+- Make this the site default: one click turns the current page design into the starting design of every new builder page.
+
+### Improved
+- Section actions (move, duplicate, save, copy the look, delete) are gathered in one menu.
+- Undo keeps working after you reload the editor.
+
+---
+
 ## [3.23.0] - 2026-11-18  ·  _Minor_
 **Page Builder: Ready Page Templates, Modern Sections and Undo**
 
