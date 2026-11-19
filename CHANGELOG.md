@@ -8,6 +8,24 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.25.0] - 2026-11-19  ·  _Minor_
+**Page Builder: Drag and Drop on the Page, Version History and a Free Section**
+
+### Added
+- Work directly on the page. Drag a section by its handle to reorder it, right-click a section for its menu, press the plus button under a section to add one there. Keyboard shortcuts cover the rest: duplicate, delete, move, undo and redo. A shortcuts list is one click away.
+- Copy a section and paste it on another page of your site.
+- Version history. Every publish is kept as a version (the last 12). Restore any of them into the draft with one click, then publish when you are ready.
+- Free section: build your own layout by placing headings, text, images, buttons, lists, icon rows, big numbers and quotes into one to four columns. Each element shows only the settings that belong to it.
+- Eight new sections, 58 in total: integrations with connecting lines, announcement bar, a header and a footer for landing pages (the footer links your privacy, terms and cookie pages by itself), empty state for 404 and coming soon pages, careers, article section and the free section.
+- New designs on existing sections: a light that follows the pointer on feature cards and bento tiles, a moving border light on the featured price plan, numbers that count up as they scroll into view, a comparison table with highlighted column, and more layouts for posts, newsletter, team, logos and stats.
+- Two more ready templates: an app landing page with its own header and footer, and a coming soon page.
+
+### Improved
+- A button in the top bar hides the side panel so the page fills the screen.
+- The layouts of some new sections follow open-source designs under the MIT licence. Sources and licences are listed in THIRD-PARTY-NOTICES.md.
+
+---
+
 ## [3.24.1] - 2026-11-18  ·  _Patch_
 **Page Builder: A Professional Control Set and a Proper Image Library**
 
