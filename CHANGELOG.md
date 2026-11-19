@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.26.0] - 2026-11-19  ·  _Minor_
+**Page Builder: Add Buttons, Text and More to Any Section and Any Card**
+
+### Added
+- Free elements in every section. Add as many headings, texts, buttons, links, badges, images, bullet lists, icon rows, big numbers, quotes, divider lines and spaces as you like above or below the content of any section, and choose whether they sit left, centre or right.
+- Elements inside cards. In 20 sections with cards or rows (features, cards, bento, pricing, team, steps, FAQ, testimonials, timeline, tabs and others) each card takes its own elements: put a button in one service card, a list in another.
+- The "Add element" button shows the element types as drawings. The element you pick arrives with example content, so you see it on the page straight away.
+- The free section gains two element types: link and badge.
+
+---
+
 ## [3.25.0] - 2026-11-19  ·  _Minor_
 **Page Builder: Drag and Drop on the Page, Version History and a Free Section**
 
