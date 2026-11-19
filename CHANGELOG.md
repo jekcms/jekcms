@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.26.1] - 2026-11-19  ·  _Patch_
+**Page Builder: Add Elements Straight from the Page**
+
+### Improved
+- Select a section with cards and each card shows an "Add element" button. Press it, pick the type, and the button, text or list lands in that card.
+- The toolbar of the selected section has a new button that adds an element below the section.
+- In the side panel each card row has a plus button and shows how many elements were added to it.
+- Questions in the FAQ section now open and close in the editor preview, so you can reach what is inside the answers.
+
+---
+
 ## [3.26.0] - 2026-11-19  ·  _Minor_
 **Page Builder: Add Buttons, Text and More to Any Section and Any Card**
 
