@@ -8,6 +8,20 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.27.0] - 2026-11-20  ·  _Minor_
+**Page Builder: Phone-Only Settings and 8 New Page Templates**
+
+### Added
+- Each section can now look different on phones: heading size, text size, card gap and the number of columns have their own phone value. Leave one empty and the desktop choice stays.
+- A new switch makes the buttons of a section full width on phones, so they are easy to tap with a thumb.
+- Eight new ready page templates: design studio, personal portfolio, law firm, real estate office, hair and beauty salon, online course, product launch, and event or conference. The library now holds 18 templates.
+
+### Improved
+- Switch the preview to the phone view while a section is selected and the phone settings open on their own in the Design tab.
+- The toolbar of the selected section now stays above every part of the page, so it is never hidden behind a sticky header or an overlay.
+
+---
+
 ## [3.26.1] - 2026-11-19  ·  _Patch_
 **Page Builder: Add Elements Straight from the Page**
 
