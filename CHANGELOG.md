@@ -8,6 +8,17 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.29.1] - 2026-11-26  ·  _Patch_
+**A Read-Only Demo Account**
+
+### Added
+- A demo site can now run with a read-only account: every screen, setting and design opens, and when the visitor tries to save, delete, upload or install something nothing changes and a window explains that this is a demo, with links to install jekcms for free or see the plans. The operator account keeps full access.
+
+### Fixed
+- Demo mode settings were not read on sites whose settings file is the production one.
+
+---
+
 ## [3.29.0] - 2026-11-26  ·  _Minor_
 **21 Ready Business Sites, Photos on Every Landing Page and Your Own Videos**
 
