@@ -8,6 +8,43 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.29.0] - 2026-11-26  ·  _Minor_
+**21 Ready Business Sites, Photos on Every Landing Page and Your Own Videos**
+
+### Added
+- Twenty-one ready business sites, each with all its pages, menu, header, footer and photos: industrial manufacturer, construction and real estate, dental clinic, boutique hotel, beauty and spa, private school, counselling, logistics, interior design, accountancy, restaurant, sports centre, architecture office, car hire, landscaping, cleaning, travel agency, creative agency, aesthetic surgery, photography studio and product launch. The industrial manufacturer site is included in the free edition. Every site has its own footer design.
+- The Sites screen shows each site full screen before you install it. Install one, change anything, and if you install another site later, undo takes you back to the first one with your edits.
+- Every landing page template now comes with photos that fit its subject; they download only when you apply the template.
+- Upload your own video file (mp4, webm, mov) in the page builder's video, hero, hero slider and carousel sections, and in the post editor's video tab. Videos already in a post stay when you open it again.
+- The travel and trends themes get magazine covers for their sample content.
+- The page builder library grows to 105 sections and more than 800 designs, among them a history archive, location finder, project selection, downloads, glossary, menu list, booking and event lists.
+
+### Improved
+- Legal pages, posts and search results take on the look of the business site you installed.
+- The Menus screen tells you when the menu has more links than the header shows, and where to raise that number.
+- A page's own font choice now wins over the theme's font.
+- On phones, the landing page menu closes when you tap a link to a section, tap outside or press Esc.
+- Image fields appear only in the designs that show an image, so an uploaded image never goes unseen.
+- Screen reader labels, upload messages and a few buttons that were left in one language now follow the site and panel language.
+
+### Fixed
+- GIF and some PNG images could not be uploaded.
+- An image file with hidden code inside was accepted; it is now refused.
+- When an inline upload in the post editor was refused, the editor inserted a broken image instead of showing the reason.
+- Adding an image while another one was selected in the post editor replaced the first one.
+- Alt text written in the media library did not reach the featured image in most themes, and an alt edit took a while to show.
+- After replacing the sample content, menus could keep links to removed categories.
+- "Undo" on the Sites screen and "Remove sample content" did nothing after you confirmed.
+- Saving the footer editor cleared the site's footer description.
+- An uploaded video did not play on a site installed in a subfolder.
+- After activating a news theme you landed on a tab where that theme was not shown.
+- A few template buttons and links pointed nowhere; they now go to the right section of the page.
+- The about, contact and FAQ addresses showed a page built in the page builder without its sections.
+- In dark mode the logo stayed in its dark version on the ready business sites and could not be read; the header and footer now switch to the light version.
+- A WordPress import skipped a page when a page with the same name was sitting in the bin.
+
+---
+
 ## [3.28.0] - 2026-11-20  ·  _Minor_
 **Page Builder: Hero Slider, a New Gallery and 37 Elements You Can See Before You Add**
 
