@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.30.1] - 2026-11-27  ·  _Patch_
+**Distinct Headers and Site Icons for Business Sites**
+
+### Improved
+- Each of the new business sites now has its own header: different layouts (split, inset, centred, stacked, grid, drawer and more), backgrounds, menu styles and top strips, so no two sites look alike.
+- Every business site comes with its own site icon drawn from its logo mark.
+- The vertical guide lines around the content stay on one site only; card grids no longer leave a single card alone on the last row.
+
+---
+
 ## [3.30.0] - 2026-11-27  ·  _Minor_
 **New Business Sites for Schools, Clinics, Shops and Associations**
 
