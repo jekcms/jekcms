@@ -8,6 +8,21 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.33.0] - 2026-11-27  ·  _Minor_
+**Site Design: Change Buttons, Corners and Cards on Every Page at Once**
+
+### Added
+- Site design: on business and one-page sites, Customize opens with Site design. Button shape, corners, cards, section spacing, headings and motion set there apply to every page, with a live preview.
+- A page can still differ: in the page builder a choice made for one page is marked as specific to that page and can be reset to the site design with one click.
+- Make this page's design the site design, from the page builder.
+- Link pages to the site design: one click on existing sites moves the shared choices of the pages into the site design without changing how any page looks.
+
+### Improved
+- Installing a ready business site or landing page writes its design to the site design instead of copying it into every page; undo restores the previous site design.
+- On business and one-page sites, Customize shows shortcuts to the header, footer, menus and pages, and the blog home page sections move to the end as unused.
+
+---
+
 ## [3.32.4] - 2026-11-27  ·  _Patch_
 **Calmer Labels, Steadier Sections and Cleaner Copy on Business Sites**
 
