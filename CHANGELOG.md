@@ -8,6 +8,30 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.32.0] - 2026-11-27  ·  _Minor_
+**Ten New Business Sites, Including Three for Lawyers**
+
+### Added
+- Ten new business sites, each installed with all its pages: building restoration, infrastructure and roads, facade and roof insulation, office interior design, a housing project, a criminal and employment lawyer, a family law lawyer, a two-partner law firm, an estate agency and a company formation adviser.
+- The three law sites follow the Turkish Bar Association advertising rules: no client reviews, client names or logos, no claims of being the best, no promised results and no fees; each carries the standard notice that the site is general information and not legal advice.
+- Thirty more sample client logos for the client and partner sections.
+- New settings: which result is the large total on a receipt calculator, the width of a price list, the colour of the bars on the topic chooser, a light version of uploaded logos in dark mode, and an anchor for each feature row.
+
+### Improved
+- Every card and tile grid balances itself, not only a fixed list of designs, so no section ends with a single card on its own row.
+- Sample client logos take the text colour in every design and stay readable in dark mode and when the visitor switches modes.
+- Footer column text keeps its line breaks in every footer, and footers with a logo column show your description under the logo.
+- The first section of a page sits directly under the header, without an extra gap.
+
+### Fixed
+- On some themes the header or footer logo turned dark when the visitor switched to dark mode.
+- A heading that wrapped a product card showed the whole card as one line in the table of contents.
+- Business site menus could fold into the menu button on wide screens after scrolling.
+- The call-to-action with trust line showed five stars even when no rating was given.
+- Overlapping labels, cut captions and words broken in the middle in several sections (image hotspots, team cards, comparison tables, galleries, project lists, card decks).
+
+---
+
 ## [3.31.0] - 2026-11-27  ·  _Minor_
 **Light and Dark Mode on Every Site, Richer Footers, Reviews and Client Logos**
 
