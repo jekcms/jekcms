@@ -8,6 +8,15 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.30.2] - 2026-11-27  ·  _Patch_
+**Light Logo on Dark Headers**
+
+### Fixed
+- A header with a dark or brand-coloured background now shows the light version of the logo in light mode too, so the logo stays readable.
+- On four business sites the menu switched to the menu button on a standard laptop screen; their header spacing is tighter now and the full menu shows at 1280 and 1366 pixels.
+
+---
+
 ## [3.30.1] - 2026-11-27  ·  _Patch_
 **Distinct Headers and Site Icons for Business Sites**
 
