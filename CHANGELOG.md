@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.32.3] - 2026-11-27  ·  _Patch_
+**Before and After Gallery Styled Again**
+
+### Fixed
+- The gallery design of the before and after section lost its styling in 3.32.0 and showed plain images one under another; it is back to one large slider with thumbnails.
+
+---
+
 ## [3.32.2] - 2026-11-27  ·  _Patch_
 **Mode Switch Stays Clear of the Cookie Notice**
 
