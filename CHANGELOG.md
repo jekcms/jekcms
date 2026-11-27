@@ -8,6 +8,23 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.32.4] - 2026-11-27  ·  _Patch_
+**Calmer Labels, Steadier Sections and Cleaner Copy on Business Sites**
+
+### Improved
+- Small labels above headings are calmer by default: no mark, no capitals. A line or square mark and capitals are optional in the page design.
+- The texts of the ten newest business sites were rewritten in plain language.
+
+### Fixed
+- The first section of a page no longer sticks to the header, and the corner photo of the opening section fits the screen.
+- Sticky photos and lists stay below a tall sticky header instead of sliding under it.
+- Icon boxes in feature lists are square again, and comparison tables use one alignment.
+- Choosing an item in project lists, before and after toggles and similar sections no longer scrolls the page.
+- The letter animation on headings no longer flickers while scrolling.
+- Labels on image hotspots no longer overlap; on narrow screens they become a numbered list under the image.
+
+---
+
 ## [3.32.3] - 2026-11-27  ·  _Patch_
 **Before and After Gallery Styled Again**
 
