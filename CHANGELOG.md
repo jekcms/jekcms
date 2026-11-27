@@ -8,6 +8,16 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.33.2] - 2026-11-28  ·  _Patch_
+**Template Previews Show the Template's Own Brand**
+
+### Fixed
+- In the page builder, a template preview shows the template's own name and logo instead of your site's.
+- The header of a one-page site sits at the very top again, without an empty strip above it or extra space inside it.
+- Gallery pictures of all ready sites and templates show their new texts.
+
+---
+
 ## [3.33.1] - 2026-11-27  ·  _Patch_
 **Plain Language in Every Ready Site and Template**
 
