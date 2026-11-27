@@ -8,6 +8,18 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.33.1] - 2026-11-27  ·  _Patch_
+**Plain Language in Every Ready Site and Template**
+
+### Improved
+- The sample texts of all business sites and page templates were rewritten in plain language: no slogan pairs, fewer small labels, no promises of results in health and law.
+- Prices, delivery times and counts that disagreed between sections of a template now match.
+
+### Fixed
+- A full-screen slider as the first section no longer shows an empty dark strip above the photo.
+
+---
+
 ## [3.33.0] - 2026-11-27  ·  _Minor_
 **Site Design: Change Buttons, Corners and Cards on Every Page at Once**
 
