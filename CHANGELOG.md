@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.32.1] - 2026-11-27  ·  _Patch_
+**Light and Dark Switch on Every Business Site**
+
+### Fixed
+- Business sites whose header has no dark mode button now show the floating light and dark switch, so visitors can always change the mode.
+
+---
+
 ## [3.32.0] - 2026-11-27  ·  _Minor_
 **Ten New Business Sites, Including Three for Lawyers**
 
