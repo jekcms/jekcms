@@ -8,6 +8,33 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.30.0] - 2026-11-27  ·  _Minor_
+**New Business Sites for Schools, Clinics, Shops and Associations**
+
+### Added
+- Fifteen new ready business sites, each with all its pages, menu, header, footer and photos: kindergarten chain, pet grooming and shop, bakery, independent audit firm, modular homes, dietitian, florist, holding company, engineering office, adult training academy, coaching, medical supplies, steel buildings, association and foundation, and urban renewal.
+- Sector pages come ready: branches, weekly meal menu and bus routes for a kindergarten, cake orders for a bakery, a body mass index and energy calculator for a dietitian, a majority calculator for urban renewal, membership, dues and scholarship pages for an association.
+- Associations and foundations are a new site category.
+- Eight new footers for business sites: branch cards, an appointment strip with the week's hours, large phone and email rows, a company details table, newsletter with a social list, a photo band, quick link tiles, and donate and join buttons.
+- New page builder designs: question groups, tall cards with photo or silent video, an inset hero, site search hero, team cards that open on hover, arched pricing, glowing figures, shaped and offset cards, a lead hero, logo lanes, an expanding newsletter form and a night-price stay calendar.
+- Page-wide extras you can switch on: drag to scroll in sliders, four textures, a meteor pattern, four new section edges, two heading animations and a pulse or ripple on buttons. All are off until you choose them and stop when the visitor prefers reduced motion.
+- A text colour setting in the page design, and new form options: required phone, optional message, a separate thank-you text, choice tiles and number fields. Booking forms can ask extra questions.
+
+### Improved
+- A menu that does not fit on a narrower desktop switches to the menu button instead of running over the logo or the buttons.
+- Dark call-to-action bands take a deep shade of your site colour instead of a fixed black; with a light accent such as yellow they stay neutral dark.
+- Heading fonts that come in one weight (Anton, Bebas Neue) are no longer drawn with a fake bold.
+- An automatically filled image never repeats a photo that is already on the same page; when no new photo is left, the space stays empty.
+- Tabs take up to ten panels, documents without a file can show a 'Request it' button, tables show a scroll hint on phones, and many sections get new options such as photo focus, portrait size, card overlay strength and list order.
+
+### Fixed
+- A business site footer showed only the first four of its branches.
+- The capsule header could make the page scroll sideways when the menu had many links.
+- The thin-line footer left a tall empty area on phones.
+- The rail header drew the dark logo on its coloured brand block.
+
+---
+
 ## [3.29.1] - 2026-11-26  ·  _Patch_
 **A Read-Only Demo Account**
 
