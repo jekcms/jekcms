@@ -8,6 +8,14 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.32.2] - 2026-11-27  ·  _Patch_
+**Mode Switch Stays Clear of the Cookie Notice**
+
+### Fixed
+- The floating light and dark switch moves above the cookie notice while it is open, so it can be used on the first visit too.
+
+---
+
 ## [3.32.1] - 2026-11-27  ·  _Patch_
 **Light and Dark Switch on Every Business Site**
 
