@@ -8,6 +8,28 @@ _`php tools/gen-changelog-md.php` and commit._
 
 ---
 
+## [3.31.0] - 2026-11-27  ·  _Minor_
+**Light and Dark Mode on Every Site, Richer Footers, Reviews and Client Logos**
+
+### Added
+- Every site comes with light and dark mode: blog and news themes, business sites and landing pages. Choose the default (follow the device, light or dark) and whether visitors can switch in Settings, General, Brand, Colour mode.
+- Eight new review designs: a tilted 3D wall, photo and video cards, case cards, before and after rows, topic tabs, a swipeable card stack, a logo picker and a large portrait. None of them shows star ratings unless you add them.
+- Six new client logo designs (two-way strip, flip tiles, featured client, client index, logo with a quote, orbit) and a set of 44 sample client logos that take your text colour.
+- Eight new footers (slogan band, tiered, card grid, location card, proof strip, mega columns, split panel, getting started steps) and optional footer bands for highlights, steps, figures, badges and quick contact.
+- Business sites gain client and partner sections where they fit, and each has a fuller, sector-specific footer.
+
+### Improved
+- Card grids balance themselves: five cards sit in one row and seven in 2, 3 and 2 instead of leaving one or two cards alone on the last row. You can switch this off in the page design.
+- Centred sliders loop without a gap and start moving on their own; every auto-playing slider has a pause button and starts paused when the visitor prefers reduced motion.
+- The cookie bar, live search, reading mode and ad areas follow the site's colour mode instead of the device setting.
+- In the page builder, list items only show the fields the chosen design uses.
+
+### Fixed
+- Text in dark call-to-action boxes could not be read in dark mode.
+- Category badges in the travel theme had too little contrast in dark mode.
+
+---
+
 ## [3.30.2] - 2026-11-27  ·  _Patch_
 **Light Logo on Dark Headers**
 
